@@ -57,6 +57,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Handy\Components\PhysicsComponents.cs" />
     <Compile Include="ContentPathGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -67,6 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EnumEqualityComparerGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="Handy\Systems\KinematicSystem.cs" />
     <Compile Include="Orbsmash.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
