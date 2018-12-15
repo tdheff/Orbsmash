@@ -170,10 +170,6 @@
       <Project>{0bd6a274-3980-4f24-ab8b-b997e532cf03}</Project>
       <Name>Handy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Monocle\Monocle.csproj">
-      <Project>{25d1847c-bcb0-4d6f-bba5-cd1dc9b8d295}</Project>
-      <Name>Monocle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Nez.Portable\Nez.csproj">
       <Project>{60b7197d-d0d5-405c-90a2-a56903e9b039}</Project>
       <Name>Nez</Name>

@@ -13,7 +13,8 @@ namespace Handy.Animation
 	/// </summary>
 	public class Sprite<TEnum> : Nez.Sprites.Sprite where TEnum : struct, IComparable, IFormattable
 	{
-		public event Action<TEnum> onAnimationCompletedEvent;
+        // TODO - actions!
+		// public event Action<TEnum> onAnimationCompletedEvent;
 		public bool IsPlaying;
 		public int CurrentFrame;
 
