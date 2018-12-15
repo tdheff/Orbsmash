@@ -150,6 +150,7 @@ namespace Nez.TextureAtlasGenerator
 		/// locates the black pixels from a nine patch image and sets the splits for this image
 		/// </summary>
 		/// <param name="texture">Texture.</param>
+		/// <param name="spriteName">Sprite name.</param>
 		int[] processNinePatchTexture( TextureContent texture )
 		{
 			// left, right, top, bottom of nine patch splits

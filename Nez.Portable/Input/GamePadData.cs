@@ -16,8 +16,6 @@ namespace Nez
 		/// </summary>
 		public bool isRightStickVertcialInverted = false;
 
-		public GamePadDeadZone deadZone = GamePadDeadZone.IndependentAxes;
-
 		PlayerIndex _playerIndex;
 		GamePadState _previousState;
 		GamePadState _currentState;
@@ -35,7 +33,7 @@ namespace Nez
 		public void update()
 		{
 			_previousState = _currentState;
-			_currentState = GamePad.GetState( _playerIndex, deadZone );
+			_currentState = GamePad.GetState( _playerIndex );
 
 			// check for controller connects/disconnects
 			if( _previousState.IsConnected != _currentState.IsConnected )
