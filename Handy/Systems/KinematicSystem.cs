@@ -37,7 +37,7 @@ namespace Handy.Systems
 
                 var kinematicComponent = entity.getComponent<KinematicComponent>();
 
-                entity.transform.position += velocityComponent.velocity * Time.deltaTime;
+                entity.transform.position += velocityComponent.Velocity * Time.deltaTime;
 
                 CollisionResult collisionResult;
                 // fetch anything that we might collide with at our new position
@@ -53,7 +53,7 @@ namespace Handy.Systems
                     if (collider.collidesWith(neighbor, out collisionResult))
                     {
                         entity.transform.position -= collisionResult.minimumTranslationVector;
-                        var relativeVelocity = velocityComponent.velocity;
+                        var relativeVelocity = velocityComponent.Velocity;
                         if (kinematicComponent.CollisionType == KinematicComponent.ECollisionType.Slide)
                         {
                             calculateSlideResponseVelocity(ref relativeVelocity,
@@ -64,7 +64,7 @@ namespace Handy.Systems
                             calculateBounceResponseVelocity(ref relativeVelocity,
                                 ref collisionResult.minimumTranslationVector, out relativeVelocity);
                         }
-                        velocityComponent.velocity += relativeVelocity;
+                        velocityComponent.Velocity += relativeVelocity;
                     }
                 }
             }

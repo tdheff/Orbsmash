@@ -19,20 +19,13 @@ namespace Orbsmash.Game
             _settings = settings;
             CreateEntities();
         }
-
-        private void SetupRendering()
+        
+        protected void SetupRendering()
         {
-            var myRenderer = new RenderLayerRenderer(1, new int[] { 0, 1, 2 });
+            var gameRenderer = new RenderLayerRenderer(1, new int[] { 0 });
             clearColor = new Color(0.1f, 0.1f, 0.1f);
-            addRenderer(myRenderer);
-        }
-
-        private void InstallSystems()
-        {
-            addEntityProcessor(new PlayerInputSystem());
-            addEntityProcessor(new PlayerMovementSystem());
-            addEntityProcessor(new KinematicSystem());
-            addEntityProcessor(new AnimationSystem());
+            var uiRenderer = new ScreenSpaceRenderer(1, new [] { 1 });
+            addRenderer(gameRenderer);
         }
 
         protected override EntitySystem[] Systems()

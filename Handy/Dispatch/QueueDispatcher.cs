@@ -8,7 +8,7 @@ namespace Handy.Dispatch
 {
     public class QueueDispatcher : IDispatcher
     {
-        private List<IAction> _actions;
+        private readonly List<IAction> _actions;
         
         public QueueDispatcher()
         {

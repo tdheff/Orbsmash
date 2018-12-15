@@ -26,9 +26,9 @@ namespace Handy
             }
         }
         
-        protected void SetupRenderer()
+        protected virtual void SetupRenderer()
         {
-            var myRenderer = new RenderLayerRenderer(1, new int[] { 0, 1, 2 });
+            var myRenderer = new RenderLayerRenderer(1, new int[] { 0 });
             clearColor = new Color(0.3f, 0.3f, 0.3f);
             addRenderer(myRenderer);
         }

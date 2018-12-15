@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Handy.Components;
 using Nez;
 using Nez.Sprites;
 using Orbsmash.Animation;
@@ -8,7 +9,7 @@ namespace Handy.Systems
 {
     public class AnimationSystem : EntitySystem
     {
-	    public AnimationSystem() : base(new Matcher().all(typeof(SpriteComponent))) { }
+	    public AnimationSystem() : base(new Matcher().one(typeof(SpriteComponent))) { }
 	    
 	    protected override void process(List<Entity> entities)
 	    {

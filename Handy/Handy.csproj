@@ -49,8 +49,6 @@
   <ItemGroup>
     <Compile Include="Animation\SpriteT.cs" />
     <Compile Include="Animation\Util.cs" />
-    <Compile Include="Components\AnimatedSpriteComponent.cs" />
-    <Compile Include="Components\KinematicBodyComponent.cs" />
     <Compile Include="Components\KinematicComponent.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Dispatch\IAction.cs" />

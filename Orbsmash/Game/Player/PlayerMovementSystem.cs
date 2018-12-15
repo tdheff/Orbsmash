@@ -22,7 +22,7 @@ namespace Orbsmash.Player
                 var velocity = entity.getComponent<VelocityComponent>();
                 var state = entity.getComponent<PlayerStateComponent>();
 
-                velocity.velocity = input.MovementStick * state.Speed;
+                velocity.Velocity = input.MovementStick * state.Speed;
             }
             
         }
