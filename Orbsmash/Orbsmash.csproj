@@ -56,6 +56,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Orbsmash.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animation\AnimationSystem.cs" />
     <Compile Include="Animation\SpriteComponent.cs" />
