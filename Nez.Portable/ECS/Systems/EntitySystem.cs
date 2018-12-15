@@ -32,7 +32,7 @@ namespace Nez
 		}
 
 
-		public EntitySystem(Matcher matcher)
+		public EntitySystem( Matcher matcher )
 		{
 			_matcher = matcher;
 		}
