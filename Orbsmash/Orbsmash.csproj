@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;LINUX;WINDOWS</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -57,7 +57,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Handy\Components\PhysicsComponents.cs" />
+    <Compile Include="Animation\AnimationSystem.cs" />
+    <Compile Include="Animation\SpriteComponent.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="ContentPathGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,17 +70,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EnumEqualityComparerGenerator.tt</DependentUpon>
     </Compile>
-    <Compile Include="Handy\Systems\KinematicSystem.cs" />
+    <Compile Include="Game\Ball\Ball.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\GameSettings.cs" />
+    <Compile Include="Game\Player\Player.cs" />
+    <Compile Include="Game\Player\PlayerInputComponent.cs" />
+    <Compile Include="Game\Player\PlayerInputSystem.cs" />
+    <Compile Include="Game\Player\PlayerMovementSystem.cs" />
+    <Compile Include="MainMenu\MainMenu.cs" />
+    <Compile Include="MainMenu\MainMenuComponent.cs" />
+    <Compile Include="MainMenu\MainMenuSystem.cs" />
     <Compile Include="Orbsmash.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Nez, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nez.0.9.2\lib\Nez.dll</HintPath>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -156,8 +165,29 @@
       <LastGenOutput>EnumEqualityComparerGenerator.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Handy\Handy.csproj">
+      <Project>{0bd6a274-3980-4f24-ab8b-b997e532cf03}</Project>
+      <Name>Handy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monocle\Monocle.csproj">
+      <Project>{25d1847c-bcb0-4d6f-bba5-cd1dc9b8d295}</Project>
+      <Name>Monocle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nez.Portable\Nez.csproj">
+      <Project>{60b7197d-d0d5-405c-90a2-a56903e9b039}</Project>
+      <Name>Nez</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

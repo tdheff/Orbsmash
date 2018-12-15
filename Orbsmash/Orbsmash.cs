@@ -1,60 +1,62 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Runtime.InteropServices;
+using System.Xml.Serialization.Configuration;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Nez;
-using Nez.Sprites;
 using Handy.Systems;
 using Handy.Components;
+using Nez;
+using Nez.Sprites;
+using Orbsmash.Game;
+using Orbsmash.Player;
+using Collider = Nez.Collider;
+using Scene = Handy.Scene;
 
 namespace Orbsmash
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// The main class for the game of Orbsmash
     /// </summary>
     public class Orbsmash : Core
     {
-        public Orbsmash() : base(width: 2560, height: 1440, isFullScreen: true, enableEntitySystems: true)
-        { }
+        private Scene _scene;
+        private Scene Scene
+        {
+            get => _scene;
+            set {
+                _scene = value;
+                scene = value;
+            }
+        }
 
+        private static Orbsmash self;
+
+        public Orbsmash() : base(width: 2560, height: 1440, windowTitle: "Orbsmash")
+        {
+            self = this;
+        }
+
+        public static Orbsmash Get()
+        {
+            return self;
+        }
 
         protected override void Initialize()
         {
             base.Initialize();
             Window.AllowUserResizing = true;
-
             debugRenderEnabled = true;
 
-            // create our Scene with the DefaultRenderer and a clear color of CornflowerBlue
-            var myScene = new Scene();
-            var myRenderer = new RenderLayerRenderer(1, new int[] { 0, 1, 2 });
-            myScene.clearColor = new Color(0.1f, 0.1f, 0.1f);
-            myScene.addRenderer(myRenderer);
-
-            myScene.addEntityProcessor(new KinematicSystem());
-
-            // load a Texture. Note that the Texture is loaded via the scene.content class. This works just like the standard MonoGame Content class
-            // with the big difference being that it is tied to a Scene. When the Scene is unloaded so too is all the content loaded via myScene.content.
-            var texture = myScene.content.Load<Texture2D>(Nez.Content.player0);
-
-            // setup our Scene by adding some Entities
-            var entityOne = myScene.createEntity("entity-one");
-            entityOne.addComponent(new Sprite(texture));
-            entityOne.addComponent(new Sprite(texture));
-            entityOne.addComponent(new VelocityComponent());
-            entityOne.addComponent(new BoxCollider(10.0f, 10.0f));
-            entityOne.transform.position = new Vector2(100.0f, 100.0f);
-
-
-            var entityTwo = myScene.createEntity("entity-two");
-            entityTwo.addComponent(new Sprite(texture));
-            entityTwo.addComponent(new VelocityComponent(new Vector2(40.0f, 40.0f)));
-            entityTwo.addComponent(new BoxCollider(10.0f, 10.0f));
-
-            // move entityTwo to a new location so it isn't overlapping entityOne
-            //entityTwo.transform.position = new Vector2(200, 200);
+            var settings = new GameSettings(numPlayers: 1);
+            var gameScene = new Game.Game(settings);
 
             // set the scene so Nez can take over
-            scene = myScene;
+            Scene = new MainMenu.MainMenu();
+        }
+
+        public void ChangeScene(Scene scene)
+        {
+            Scene = scene;
         }
     }
 }
