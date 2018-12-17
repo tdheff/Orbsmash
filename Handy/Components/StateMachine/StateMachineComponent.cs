@@ -30,7 +30,7 @@ namespace Handy.Components
             set { _states.Pop(); _states.Push(value); }
         }
 
-        private readonly Stack<TState> _states = new Stack<TState>();
+        private readonly Stack<TState> _states;
         
         public TState PopState()
         {

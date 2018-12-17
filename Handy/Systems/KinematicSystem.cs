@@ -98,10 +98,14 @@ namespace Handy.Systems
         
         void calculateBounceResponseVelocity(ref Vector2 relativeVelocity, ref Vector2 minimumTranslationVector, out Vector2 responseVelocity)
         {
+            if (minimumTranslationVector.LengthSquared() < float.Epsilon)
+            {
+                responseVelocity = relativeVelocity;
+                return;
+            }
             // first, we get the normalized MTV in the opposite direction: the surface normal
-            var inverseMTV = minimumTranslationVector * -1f;
-            Vector2 normal;
-            Vector2.Normalize(ref inverseMTV, out normal);
+            var inverseMtv = minimumTranslationVector * -1f;
+            Vector2.Normalize(ref inverseMtv, out var normal);
             
             responseVelocity = (relativeVelocity - 2 * Vector2.Dot(relativeVelocity, normal) * normal) -
                                relativeVelocity;
