@@ -17,10 +17,11 @@ namespace Orbsmash.Ball
         
         public Ball(Texture2D texture)
         {
+            name = "Ball";
+            
             _velocity = new VelocityComponent(new Vector2(100, 100));
             _collider = new CircleCollider();
             _sprite = new Sprite<PlayerAnimations>(new Subtexture(texture, new Rectangle(0, 0, 32, 32), Vector2.Zero));
-            _sprite.renderLayer = 0;
             
             addComponent(_velocity);
             addComponent(_sprite);

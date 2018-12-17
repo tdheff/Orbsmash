@@ -15,23 +15,15 @@ namespace Orbsmash.Player
             foreach (var entity in entities)
             {
                 var input = entity.getComponent<PlayerInputComponent>();
-                // TODO - HACKY TEST
-                var sprite = entity.getComponent<SpriteComponent>();
+
+                // ditch if we don't have enough inputs
+                if (Input.gamePads.Length <= input.DeviceId) continue;
                 
-                if (Input.gamePads.Length > input.DeviceId)
-                {
-                    var gamePad = Input.gamePads[input.DeviceId];
-
-                    input.MovementStick = gamePad.getLeftStick();
-                    input.MovementStick.Y = -input.MovementStick.Y;
-                    input.DashPressed = gamePad.isButtonDown(Buttons.A);
-                    input.SwingPressed = gamePad.isButtonDown(Buttons.X);
-
-                    if (input.SwingPressed)
-                    {
-                        sprite.play(EAnimations.PlayerSwing);
-                    }
-                }
+                var gamePad = Input.gamePads[input.DeviceId];
+                input.MovementStick = gamePad.getLeftStick();
+                input.MovementStick.Y = -input.MovementStick.Y;
+                input.DashPressed = gamePad.isButtonDown(Buttons.A);
+                input.SwingPressed = gamePad.isButtonDown(Buttons.X);
             }
             
         }

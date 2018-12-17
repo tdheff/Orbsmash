@@ -22,9 +22,9 @@ namespace Orbsmash.Game
         
         protected void SetupRendering()
         {
-            var gameRenderer = new RenderLayerRenderer(1, new int[] { 0 });
+            //var gameRenderer = new RenderLayerRenderer(1, new int[] { 0, 1, 2, 3 });
+            var gameRenderer = new DefaultRenderer();
             clearColor = new Color(0.1f, 0.1f, 0.1f);
-            var uiRenderer = new ScreenSpaceRenderer(1, new [] { 1 });
             addRenderer(gameRenderer);
         }
 
@@ -33,6 +33,7 @@ namespace Orbsmash.Game
             return new EntitySystem[]
             {
                 new PlayerInputSystem(),
+                new PlayerStateMachineSystem(),
                 new PlayerMovementSystem(),
                 new KinematicSystem(),
                 new AnimationSystem()

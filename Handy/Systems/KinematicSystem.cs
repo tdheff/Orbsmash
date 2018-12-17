@@ -72,16 +72,19 @@ namespace Handy.Systems
 
         void calculateSlideResponseVelocity(ref Vector2 relativeVelocity, ref Vector2 minimumTranslationVector, out Vector2 responseVelocity)
         {
+            if (minimumTranslationVector.LengthSquared() < float.Epsilon)
+            {
+                responseVelocity = relativeVelocity;
+                return;
+            }
             // first, we get the normalized MTV in the opposite direction: the surface normal
-            var inverseMTV = minimumTranslationVector * -1f;
-            Vector2 normal;
-            Vector2.Normalize(ref inverseMTV, out normal);
+            var inverseMtv = minimumTranslationVector * -1f;
+            Vector2.Normalize(ref inverseMtv, out var normal);
 
             // the velocity is decomposed along the normal of the collision and the plane of collision.
             // The elasticity will affect the response along the normal (normalVelocityComponent) and the friction will affect
             // the tangential component of the velocity (tangentialVelocityComponent)
-            float n;
-            Vector2.Dot(ref relativeVelocity, ref normal, out n);
+            Vector2.Dot(ref relativeVelocity, ref normal, out var n);
 
             var normalVelocityComponent = normal * n;
             var tangentialVelocityComponent = relativeVelocity - normalVelocityComponent;
@@ -100,11 +103,6 @@ namespace Handy.Systems
             Vector2 normal;
             Vector2.Normalize(ref inverseMTV, out normal);
             
-            Console.WriteLine("######");
-            Console.WriteLine(relativeVelocity);
-            Console.WriteLine(normal);
-            Console.WriteLine(relativeVelocity - 2 * Vector2.Dot(relativeVelocity, normal) * normal);
-
             responseVelocity = (relativeVelocity - 2 * Vector2.Dot(relativeVelocity, normal) * normal) -
                                relativeVelocity;
         }

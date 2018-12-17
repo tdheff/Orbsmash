@@ -34,7 +34,6 @@
   <ItemGroup>
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Optional, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Optional.4.0.0\lib\net45\Optional.dll</HintPath>
@@ -50,6 +49,10 @@
     <Compile Include="Animation\SpriteT.cs" />
     <Compile Include="Animation\Util.cs" />
     <Compile Include="Components\KinematicComponent.cs" />
+    <Compile Include="Components\StateMachine\IStateMachineState.cs" />
+    <Compile Include="Components\StateMachine\StateMachineComponent.cs" />
+    <Compile Include="Components\StateMachine\StateMachineComponentInspector.cs" />
+    <Compile Include="Components\StateMachine\StateMachineTransition.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Dispatch\IAction.cs" />
     <Compile Include="Dispatch\IDispatcher.cs" />
@@ -57,7 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Systems\KinematicSystem.cs" />
+    <Compile Include="Systems\PushdownAutomatonSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
+    <Compile Include="Systems\StateMachineSystem.cs" />
     <Compile Include="UI\UIAction.cs" />
   </ItemGroup>
   <ItemGroup>
