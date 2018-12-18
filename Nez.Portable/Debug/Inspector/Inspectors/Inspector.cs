@@ -137,6 +137,12 @@ namespace Nez
 				return new EnumInspector();
 			if( valueType.GetTypeInfo().IsValueType )
 				return new StructInspector();
+			if (valueType.GetTypeInfo().IsClass)
+			{
+				var inspectableAttribute = memberInfo.GetCustomAttribute<InspectableClass>();
+				if (inspectableAttribute != null)
+					return new ClassInspector();
+			}
 
 			// check for custom inspectors before checking Nez types in case a subclass implemented one
 			var customInspectorType = valueType.GetTypeInfo().GetCustomAttribute<CustomInspectorAttribute>();

@@ -10,6 +10,7 @@ using Nez.Sprites;
 using Nez.Textures;
 using Handy;
 using Handy.Animation;
+using Nez.UI;
 using Orbsmash.Animation;
 
 namespace Orbsmash.Player
@@ -37,7 +38,7 @@ namespace Orbsmash.Player
     // </summary>
     public class Player : Entity
     {
-        private readonly PlayerStateComponent _state;
+        private readonly PlayerStateMachineComponent _state;
         private readonly PlayerInputComponent _input;
         private readonly VelocityComponent _velocity;
         private readonly BoxCollider _collider;
@@ -46,14 +47,16 @@ namespace Orbsmash.Player
 
         public Player(int playerId, Texture2D texture, Constants.Side side = Constants.Side.Left)
         {
+            name = $"Player_{playerId}";
+            
             // physics
-            _state = new PlayerStateComponent(playerId, playerId, side);
+            _state = new PlayerStateMachineComponent(new PlayerState(playerId, side));
             _velocity = new VelocityComponent(new Vector2(0, 0));
             _collider = new BoxCollider();
             
             // animation
             var subtextures = Util.ExtractSubtextures(texture, 19, 1);
-            _sprite = new SpriteComponent(subtextures[0]) {renderLayer = 0};
+            _sprite = new SpriteComponent(subtextures[0]);
 
             // IDLE
             var frames = subtextures.Take(2).ToList();
