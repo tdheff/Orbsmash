@@ -56,7 +56,7 @@ namespace Nez.Tiled
 		}
 
 
-		public override void draw( Batcher batcher, Vector2 position, float layerDepth, RectangleF cameraClipBounds )
+		public override void draw( Batcher batcher, Vector2 position, Vector2 scale, float layerDepth, RectangleF cameraClipBounds )
 		{
 			// offset render position by the layer offset, used for isometric layer depth
 			position += offset;
@@ -98,13 +98,13 @@ namespace Nez.Tiled
 							continue;
 					}
 
-					drawTile( batcher, position, layerDepth, x, y, 1 );
+					drawTile( batcher, position, layerDepth, (int)(x * scale.X), (int)(y * scale.Y), scale );
 				}
 			}
 		}
 
 
-		public void drawTile( Batcher batcher, Vector2 position, float layerDepth, int x, int y, float scale )
+		public void drawTile( Batcher batcher, Vector2 position, float layerDepth, int x, int y, Vector2 scale )
 		{
 			var tile = getTile( x, y );
 			if( tile == null )
@@ -158,7 +158,7 @@ namespace Nez.Tiled
 				t.Y += ( tiledMap.tileHeight - tileRegion.sourceRect.Height );
 
             // Scale the tile's relative position, but not the origin
-            t = t * new Vector2(scale) + position;
+            t = t * scale + position;
 
 			batcher.draw( tileRegion.texture2D, t, tileRegion.sourceRect, color, rotation, Vector2.Zero, scale, spriteEffects, layerDepth );
 		}

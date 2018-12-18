@@ -58,7 +58,7 @@ namespace Nez.Tiled
 		}
 
 
-		public override void draw( Batcher batcher, Vector2 position, float layerDepth, RectangleF cameraClipBounds )
+		public override void draw( Batcher batcher, Vector2 position, Vector2 scale, float layerDepth, RectangleF cameraClipBounds )
 		{
 			// offset it by the entity position since the tilemap will always expect positions in its own coordinate space
 			cameraClipBounds.location -= ( position + offset );
@@ -147,7 +147,7 @@ namespace Nez.Tiled
 					if( rotation == 0 )
 						ty += ( tiledMap.tileHeight - tileRegion.sourceRect.Height );
 
-					batcher.draw( tileRegion, new Vector2( tx, ty ) + offset, color, rotation, Vector2.Zero, 1, spriteEffects, layerDepth );
+					batcher.draw( tileRegion, scale * (new Vector2( tx , ty ) + offset), color, rotation, Vector2.Zero, scale, spriteEffects, layerDepth );
 				}
 			}
 		}

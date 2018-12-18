@@ -37,6 +37,8 @@ namespace Handy.Systems
 
                 var kinematicComponent = entity.getComponent<KinematicComponent>();
 
+                float initialVelocityLength = velocityComponent.Velocity.Length();
+
                 entity.transform.position += velocityComponent.Velocity * Time.deltaTime;
 
                 CollisionResult collisionResult;
@@ -58,14 +60,21 @@ namespace Handy.Systems
                         {
                             calculateSlideResponseVelocity(ref relativeVelocity,
                                 ref collisionResult.minimumTranslationVector, out relativeVelocity);
+                            velocityComponent.Velocity += relativeVelocity;
+
                         }
                         else
                         {
                             calculateBounceResponseVelocity(ref relativeVelocity,
                                 ref collisionResult.minimumTranslationVector, out relativeVelocity);
+                            velocityComponent.Velocity += relativeVelocity;
                         }
-                        velocityComponent.Velocity += relativeVelocity;
                     }
+                }
+
+                if (velocityComponent.Velocity.Length() > initialVelocityLength)
+                {
+                    velocityComponent.Velocity = Vector2.Normalize(velocityComponent.Velocity) * initialVelocityLength;
                 }
             }
         }
@@ -106,9 +115,9 @@ namespace Handy.Systems
             // first, we get the normalized MTV in the opposite direction: the surface normal
             var inverseMtv = minimumTranslationVector * -1f;
             Vector2.Normalize(ref inverseMtv, out var normal);
-            
-            responseVelocity = (relativeVelocity - 2 * Vector2.Dot(relativeVelocity, normal) * normal) -
-                               relativeVelocity;
+
+            var reflectedVector = (relativeVelocity - 2 * Vector2.Dot(relativeVelocity, normal) * normal);
+            responseVelocity = reflectedVector - relativeVelocity;
         }
 
     }
