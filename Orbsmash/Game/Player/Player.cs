@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Handy.Components;
 using Handy.Systems;
+using HandyScene = Handy.Scene;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
@@ -10,7 +12,7 @@ using Nez.Sprites;
 using Nez.Textures;
 using Handy;
 using Handy.Animation;
-using Orbsmash.Animation;
+using Orbsmash.Game;
 
 namespace Orbsmash.Player
 {
@@ -42,7 +44,8 @@ namespace Orbsmash.Player
         private readonly VelocityComponent _velocity;
         private readonly BoxCollider _collider;
         private readonly KinematicComponent _kinematic = new KinematicComponent();
-        private readonly SpriteComponent _sprite;
+        private readonly AnimationComponent<Constants.EAnimations> _mainBodyAnimation;
+        private readonly AnimatableSprite<Constants.EAnimations> _mainPlayerBodySprite;
 
         public Player(int playerId, Texture2D texture, Constants.Side side = Constants.Side.Left)
         {
@@ -50,47 +53,19 @@ namespace Orbsmash.Player
             _state = new PlayerStateComponent(playerId, playerId, side);
             _velocity = new VelocityComponent(new Vector2(0, 0));
             _collider = new BoxCollider();
-            
-            // animation
-            var subtextures = Util.ExtractSubtextures(texture, 19, 1);
-            _sprite = new SpriteComponent(subtextures[0]) {renderLayer = 0};
 
-            // IDLE
-            var frames = subtextures.Take(2).ToList();
-            _sprite.addAnimation(EAnimations.PlayerIdle, new SpriteAnimation(frames));
-            // WALK VERTICAL
-            frames = subtextures.Skip(2).Take(2).ToList();
-            _sprite.addAnimation(EAnimations.PlayerWalkVertical, new SpriteAnimation(frames));
-            // WALK HORIZONTAL
-            frames = subtextures.Skip(4).Take(2).ToList();
-            _sprite.addAnimation(EAnimations.PlayerWalkHorizontal, new SpriteAnimation(frames));
-            // CHARGE
-            frames = subtextures.Skip(6).Take(4).ToList();
-            var chargeAnimation = new SpriteAnimation(frames)
-            {
-                completionBehavior = AnimationCompletionBehavior.RemainOnFinalFrame
-            };
-            _sprite.addAnimation(EAnimations.PlayerCharge, chargeAnimation);
-            // SWING
-            frames = subtextures.Skip(10).Take(6).ToList();
-            _sprite.addAnimation(EAnimations.PlayerSwing, new SpriteAnimation(frames));
-            // DIE
-            frames = subtextures.Skip(16).Take(3).ToList();
-            var dieAnimation = new SpriteAnimation(frames)
-            {
-                completionBehavior = AnimationCompletionBehavior.RemainOnFinalFrame
-            };
-            _sprite.addAnimation(EAnimations.PlayerDie, dieAnimation);
-            
-            // Initialize
-            _sprite.play(EAnimations.PlayerIdle);
-            
+            var gameScene = (HandyScene) scene;
+            var mySpriteDef = gameScene.SpriteDefinitions["Player0"];
+            _mainPlayerBodySprite = new AnimatableSprite<Constants.EAnimations>(mySpriteDef.Subtextures);
+            _mainBodyAnimation = new AnimationComponent<Constants.EAnimations>(_mainPlayerBodySprite, "PlayerAnimations", Constants.EAnimations.PlayerIdle);
+
             // input
             _input = new PlayerInputComponent(playerId);
             
             addComponent(_state);
             addComponent(_velocity);
-            addComponent(_sprite);
+            addComponent(_mainPlayerBodySprite);
+            addComponent(_mainBodyAnimation);
             addComponent(_collider);
             addComponent(_input);
             addComponent(_kinematic);

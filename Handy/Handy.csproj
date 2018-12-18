@@ -36,6 +36,9 @@
       <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Optional, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Optional.4.0.0\lib\net45\Optional.dll</HintPath>
       <Private>True</Private>
@@ -47,6 +50,12 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\AnimatableSprite.cs" />
+    <Compile Include="Animation\IAnimatable.cs" />
+    <Compile Include="Components\AnimationComponent.cs" />
+    <Compile Include="Components\SpriteComponent.cs" />
+    <Compile Include="Systems\AnimationSystem.cs" />
+    <Compile Include="Animation\AnimationDefinition.cs" />
     <Compile Include="Animation\SpriteT.cs" />
     <Compile Include="Animation\Util.cs" />
     <Compile Include="Components\KinematicComponent.cs" />

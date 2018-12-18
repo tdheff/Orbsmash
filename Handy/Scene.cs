@@ -1,10 +1,15 @@
+using Handy.Animation;
 using Microsoft.Xna.Framework;
 using Nez;
+using System;
+using System.Collections.Generic;
 
 namespace Handy
 {
     public abstract class Scene : Nez.Scene
-    {   
+    {
+        public Dictionary<string, SpriteDefinition> SpriteDefinitions;
+
         protected Scene() : base()
         {
             _initialize();
