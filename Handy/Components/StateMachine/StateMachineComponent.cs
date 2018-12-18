@@ -14,7 +14,8 @@ namespace Handy.Components
     {
         public override void debugRender(Graphics graphics)
         {
-            if (_states.Count > 0) graphics.batcher.drawString(graphics.bitmapFont, $"{State.StateEnum}", entity.position, Color.OrangeRed, 0 , Vector2.Zero, new Vector2(4, 4), SpriteEffects.None, 0);
+            var scale = entity.scale;
+            if (_states.Count > 0) graphics.batcher.drawString(graphics.bitmapFont, $"{State.StateEnum}", entity.position, Color.OrangeRed, 0 , Vector2.Zero, scale, SpriteEffects.None, 0);
         }
 
         protected StateMachineComponent(TState initialState)

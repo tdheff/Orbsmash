@@ -18,7 +18,7 @@ namespace Orbsmash.Player
         public Constants.Side Side { get; private set; }
         
         // MOVEMENT
-        public float Speed = 300.0f;
+        public float Speed = 250.0f;
         public bool CanMove = true;
         public bool DashFinished = false;
         

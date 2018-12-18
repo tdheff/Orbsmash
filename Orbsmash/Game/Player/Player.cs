@@ -23,7 +23,7 @@ namespace Orbsmash.Player
     public class PlayerStateComponent : Component
     {
         public int PlayerId { get; private set; }
-        public float Speed { get; set; } = 300.0f;
+        public float Speed { get; set; } = 500.0f;
         public Constants.Side Side { get; private set; }
 
         public PlayerStateComponent(int playerId, int deviceId, Constants.Side side)
@@ -54,6 +54,7 @@ namespace Orbsmash.Player
             _velocity = new VelocityComponent(new Vector2(0, 0));
             _collider = new BoxCollider();
             
+            /*
             // animation
             var subtextures = Util.ExtractSubtextures(texture, 19, 1);
             _sprite = new SpriteComponent(subtextures[0]);
@@ -85,6 +86,14 @@ namespace Orbsmash.Player
             };
             _sprite.addAnimation(EAnimations.PlayerDie, dieAnimation);
             
+            */
+            
+            var subtextures = Util.ExtractSubtextures(texture, 1, 1);
+            _sprite = new SpriteComponent(subtextures[0]);
+
+            // IDLE
+            _sprite.addAnimation(EAnimations.PlayerIdle, new SpriteAnimation(subtextures));
+            
             // Initialize
             _sprite.play(EAnimations.PlayerIdle);
             
@@ -97,8 +106,6 @@ namespace Orbsmash.Player
             addComponent(_collider);
             addComponent(_input);
             addComponent(_kinematic);
-            
-            scale = new Vector2(8, 8);
         }
     }
 }

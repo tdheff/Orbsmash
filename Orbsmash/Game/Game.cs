@@ -2,7 +2,9 @@ using Handy.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using Nez.Tiled;
 using Orbsmash.Player;
+using TiledSharp;
 using Scene = Handy.Scene;
 
 namespace Orbsmash.Game
@@ -14,8 +16,9 @@ namespace Orbsmash.Game
     {
         private readonly GameSettings _settings;
         
-        public Game(GameSettings settings)
+        public Game(GameSettings settings) : base(4)
         {
+            setDesignResolution(1920, 1080, SceneResolutionPolicy.BestFit);
             _settings = settings;
             CreateEntities();
         }
@@ -42,7 +45,14 @@ namespace Orbsmash.Game
         
         private void CreateEntities()
         {
-            var texture = content.Load<Texture2D>(Nez.Content.player0);
+            var tiledMap = content.Load<TiledMap>("Tiles/DungeonMap");
+            var tiledMapComponent = new TiledMapComponent(tiledMap, "Colliders", true);
+            var entity = new Entity();
+            entity.name = "Map";
+            entity.addComponent(tiledMapComponent);
+            addEntity(entity);
+            
+            var texture = content.Load<Texture2D>("Sprites/Characters/Pirate/Pirate");
             for (var i = 0; i < _settings.NumPlayers; i++)
             {
                 var player = new Player.Player(i, texture, i % 2 == 0 ? Constants.Side.Left : Constants.Side.Right);
@@ -51,6 +61,13 @@ namespace Orbsmash.Game
             
             var ball = new Ball.Ball(texture);
             addEntity(ball);
+        }
+
+        public override void onStart()
+        {
+            findEntity("Map").transform.position = new Vector2(-32 * 4, 0);
+            findEntity("Player_0").transform.position = new Vector2(200, 200);
+            findEntity("Ball").transform.position = new Vector2(400, 400);
         }
     }
 }
