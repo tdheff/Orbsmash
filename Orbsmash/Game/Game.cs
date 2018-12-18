@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Tiled;
 using Orbsmash.Player;
-using TiledSharp;
 using Scene = Handy.Scene;
 
 namespace Orbsmash.Game
