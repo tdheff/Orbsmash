@@ -78,6 +78,9 @@
     <Compile Include="Game\Player\PlayerInputComponent.cs" />
     <Compile Include="Game\Player\PlayerInputSystem.cs" />
     <Compile Include="Game\Player\PlayerMovementSystem.cs" />
+    <Compile Include="Game\Player\PlayerState.cs" />
+    <Compile Include="Game\Player\PlayerStateMachineComponent.cs" />
+    <Compile Include="Game\Player\PlayerStateMachineSystem.cs" />
     <Compile Include="MainMenu\MainMenu.cs" />
     <Compile Include="MainMenu\MainMenuComponent.cs" />
     <Compile Include="MainMenu\MainMenuSystem.cs" />

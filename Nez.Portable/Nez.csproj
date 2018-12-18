@@ -34,13 +34,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\MonoGame.Framework.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Debug\Debug.cs" />
+    <Compile Include="Debug\Inspector\Attributes\InspectableClass.cs" />
+    <Compile Include="Debug\Inspector\Inspectors\ClassInspector.cs" />
     <Compile Include="ECS\Camera.cs" />
     <Compile Include="ECS\Component.cs" />
     <Compile Include="ECS\Entity.cs" />
@@ -529,4 +525,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.7.0.1708, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MonoGame.Framework.Portable.3.7.0.1708\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets'))" />
+  </Target>
 </Project>

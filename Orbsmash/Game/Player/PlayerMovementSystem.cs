@@ -11,7 +11,7 @@ namespace Orbsmash.Player
         public PlayerMovementSystem() : base(new Matcher().all(
             typeof(PlayerInputComponent),
             typeof(VelocityComponent),
-            typeof(PlayerStateComponent)
+            typeof(PlayerStateMachineComponent)
         )) { }
 
         protected override void process(List<Entity> entities)
@@ -20,9 +20,9 @@ namespace Orbsmash.Player
             {
                 var input = entity.getComponent<PlayerInputComponent>();
                 var velocity = entity.getComponent<VelocityComponent>();
-                var state = entity.getComponent<PlayerStateComponent>();
+                var state = entity.getComponent<PlayerStateMachineComponent>();
 
-                velocity.Velocity = input.MovementStick * state.Speed;
+                velocity.Velocity = input.MovementStick * state.State.Speed;
             }
             
         }

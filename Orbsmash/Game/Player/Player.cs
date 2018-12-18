@@ -1,18 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Handy.Components;
-using Handy.Systems;
 using HandyScene = Handy.Scene;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
-using Nez.Sprites;
-using Nez.Textures;
-using Handy;
 using Handy.Animation;
-using Orbsmash.Game;
 
 namespace Orbsmash.Player
 {
@@ -39,7 +31,7 @@ namespace Orbsmash.Player
     // </summary>
     public class Player : Entity
     {
-        private readonly PlayerStateComponent _state;
+        private readonly PlayerStateMachineComponent _state;
         private readonly PlayerInputComponent _input;
         private readonly VelocityComponent _velocity;
         private readonly BoxCollider _collider;
@@ -49,8 +41,10 @@ namespace Orbsmash.Player
 
         public Player(int playerId, Texture2D texture, Constants.Side side = Constants.Side.Left)
         {
+            name = $"Player_{playerId}";
+            
             // physics
-            _state = new PlayerStateComponent(playerId, playerId, side);
+            _state = new PlayerStateMachineComponent(new PlayerState(playerId, side));
             _velocity = new VelocityComponent(new Vector2(0, 0));
             _collider = new BoxCollider();
 
