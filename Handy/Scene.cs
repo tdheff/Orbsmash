@@ -29,7 +29,7 @@ namespace Handy
 
         public new Entity addEntity(Entity entity)
         {
-            entity.scale = _scale;
+            entity.scale *= _scale;
             return base.addEntity(entity);
         } 
         
