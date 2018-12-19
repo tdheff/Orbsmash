@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nez.PipelineImporter", "Nez
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Handy", "Handy\Handy.csproj", "{0BD6A274-3980-4F24-AB8B-B997E532CF03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spritely", "Spritely\Spritely.csproj", "{8779733d-9c93-4e99-891d-ef40c5701d84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0BD6A274-3980-4F24-AB8B-B997E532CF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BD6A274-3980-4F24-AB8B-B997E532CF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BD6A274-3980-4F24-AB8B-B997E532CF03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8779733d-9c93-4e99-891d-ef40c5701d84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8779733d-9c93-4e99-891d-ef40c5701d84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8779733d-9c93-4e99-891d-ef40c5701d84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8779733d-9c93-4e99-891d-ef40c5701d84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
