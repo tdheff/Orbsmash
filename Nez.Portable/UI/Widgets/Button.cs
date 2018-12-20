@@ -8,6 +8,7 @@ namespace Nez.UI
 	{
 		public event Action<bool> onChanged;
 		public event Action<Button> onClicked;
+		public event Action<Button, EventArgs> onClickedBetter;
 
 		public override float preferredWidth
 		{
@@ -143,6 +144,9 @@ namespace Nez.UI
 
 			if( onClicked != null )
 				onClicked( this );
+			
+			if( onClickedBetter != null )
+				onClickedBetter( this, EventArgs.Empty );
 		}
 
 
