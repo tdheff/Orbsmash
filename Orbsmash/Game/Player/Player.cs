@@ -16,7 +16,7 @@ namespace Orbsmash.Player
     public class PlayerStateComponent : Component
     {
         public int PlayerId { get; private set; }
-        public float Speed { get; set; } = 300.0f;
+        public float Speed { get; set; } = 500.0f;
         public Constants.Side Side { get; private set; }
 
         public PlayerStateComponent(int playerId, int deviceId, Constants.Side side)
@@ -47,12 +47,45 @@ namespace Orbsmash.Player
             _state = new PlayerStateMachineComponent(new PlayerState(playerId, side));
             _velocity = new VelocityComponent(new Vector2(0, 0));
             _collider = new BoxCollider();
-
             var gameScene = (HandyScene) scene;
             var mySpriteDef = gameScene.SpriteDefinitions["Player0"];
             _mainPlayerBodySprite = new AnimatableSprite<Constants.EAnimations>(mySpriteDef.Subtextures);
             _mainBodyAnimation = new AnimationComponent<Constants.EAnimations>(_mainPlayerBodySprite, "PlayerAnimations", Constants.EAnimations.PlayerIdle);
+            
+            /*
+            // animation
+            var subtextures = Util.ExtractSubtextures(texture, 19, 1);
+            _sprite = new SpriteComponent(subtextures[0]);
 
+            // IDLE
+            var frames = subtextures.Take(2).ToList();
+            _sprite.addAnimation(EAnimations.PlayerIdle, new SpriteAnimation(frames));
+            // WALK VERTICAL
+            frames = subtextures.Skip(2).Take(2).ToList();
+            _sprite.addAnimation(EAnimations.PlayerWalkVertical, new SpriteAnimation(frames));
+            // WALK HORIZONTAL
+            frames = subtextures.Skip(4).Take(2).ToList();
+            _sprite.addAnimation(EAnimations.PlayerWalkHorizontal, new SpriteAnimation(frames));
+            // CHARGE
+            frames = subtextures.Skip(6).Take(4).ToList();
+            var chargeAnimation = new SpriteAnimation(frames)
+            {
+                completionBehavior = AnimationCompletionBehavior.RemainOnFinalFrame
+            };
+            _sprite.addAnimation(EAnimations.PlayerCharge, chargeAnimation);
+            // SWING
+            frames = subtextures.Skip(10).Take(6).ToList();
+            _sprite.addAnimation(EAnimations.PlayerSwing, new SpriteAnimation(frames));
+            // DIE
+            frames = subtextures.Skip(16).Take(3).ToList();
+            var dieAnimation = new SpriteAnimation(frames)
+            {
+                completionBehavior = AnimationCompletionBehavior.RemainOnFinalFrame
+            };
+            _sprite.addAnimation(EAnimations.PlayerDie, dieAnimation);
+            
+            */
+            
             // input
             _input = new PlayerInputComponent(playerId);
             
@@ -63,8 +96,6 @@ namespace Orbsmash.Player
             addComponent(_collider);
             addComponent(_input);
             addComponent(_kinematic);
-            
-            scale = new Vector2(8, 8);
         }
     }
 }

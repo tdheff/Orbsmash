@@ -69,9 +69,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Systems\KinematicSystem.cs" />
+    <Compile Include="Systems\MapLoaderSystem.cs" />
     <Compile Include="Systems\PushdownAutomatonSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\StateMachineSystem.cs" />
+    <Compile Include="Tiled.cs" />
     <Compile Include="UI\UIAction.cs" />
   </ItemGroup>
   <ItemGroup>

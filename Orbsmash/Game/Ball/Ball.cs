@@ -19,7 +19,7 @@ namespace Orbsmash.Ball
         {
             name = "Ball";
             
-            _velocity = new VelocityComponent(new Vector2(100, 100));
+            _velocity = new VelocityComponent(new Vector2(300, 300));
             _collider = new CircleCollider();
             _sprite = new Sprite<PlayerAnimations>(new Subtexture(texture, new Rectangle(0, 0, 32, 32), Vector2.Zero));
             
@@ -28,8 +28,6 @@ namespace Orbsmash.Ball
             addComponent(_collider);
             _kinematic.CollisionType = KinematicComponent.ECollisionType.Bounce;
             addComponent(_kinematic);
-            
-            scale = new Vector2(8, 8);
         }
     }
 }

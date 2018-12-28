@@ -23,7 +23,7 @@ namespace Orbsmash
         private static Orbsmash self;
         public QueueDispatcher Dispatcher = new QueueDispatcher();
 
-        public Orbsmash() : base(width: 2560, height: 1440, windowTitle: "Orbsmash")
+        public Orbsmash() : base(windowTitle: "Orbsmash")
         {
             self = this;
         }

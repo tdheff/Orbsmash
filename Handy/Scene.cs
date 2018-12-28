@@ -9,11 +9,28 @@ namespace Handy
     public abstract class Scene : Nez.Scene
     {
         public Dictionary<string, SpriteDefinition> SpriteDefinitions;
-
+        private Vector2 _scale;
         protected Scene() : base()
         {
+            _scale = Vector2.One;
             _initialize();
         }
+        
+        /// <summary>
+        /// Constructs a scene with a scale factor
+        /// </summary>
+        /// <param name="scale">All entities added to the scene will be scaled by this amount</param>
+        protected Scene(int scale) : base()
+        {
+            _scale = new Vector2(scale);
+            _initialize();
+        }
+
+        public new Entity addEntity(Entity entity)
+        {
+            entity.scale = _scale;
+            return base.addEntity(entity);
+        } 
         
         private void _initialize()
         {
