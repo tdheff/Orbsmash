@@ -7,6 +7,8 @@ namespace Orbsmash
             Left,
             Right
         };
-        public enum EAnimations { PlayerIdle, PlayerWalkHorizontal, PlayerWalkVertical, PlayerCharge, PlayerSwing, PlayerDie }
+        public enum EAnimations { PlayerIdle, PlayerWalk, PlayerCharge, PlayerSwing, PlayerDie }
+
+        public enum AnimationContexts { PlayerSpriteAnimations }
     }
 }

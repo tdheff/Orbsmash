@@ -5,6 +5,7 @@ using Nez.Textures;
 using Newtonsoft.Json;
 using System.Reflection;
 using System;
+using System.Linq;
 
 namespace Handy.Animation
 {
@@ -27,15 +28,16 @@ namespace Handy.Animation
     {
         public static Dictionary<string, SpriteDefinition> LoadSprites(IList<AnimationDefinition> animDefs, Nez.Systems.NezContentManager content)
         {
-            var spriteTextureDict = new Dictionary<String, SpriteDefinition>();
-            foreach (var def in animDefs)
+            var spriteTextureDict = new Dictionary<string, SpriteDefinition>();
+            var spriteDescriptors = animDefs.Where(a => a.SpriteDescriptor != null).Select(a => a.SpriteDescriptor).Distinct();
+            foreach (var spr in spriteDescriptors)
             {
-                var texture = content.Load<Texture2D>(def.SpriteName);
-                spriteTextureDict.Add(def.SpriteName, new SpriteDefinition(texture, def.VFrames, def.HFrames));
+                var texture = content.Load<Texture2D>(spr.SpriteName);
+                spriteTextureDict.Add(spr.SpriteName, new SpriteDefinition(texture, spr.VFrames, spr.HFrames));
             }
             return spriteTextureDict;
         }
-        public static List<Subtexture> ExtractSubtextures(Texture2D texture, int hFrames, int vFrames)
+        public static List<Subtexture> ExtractSubtextures(Texture2D texture, int vFrames, int hFrames)
         {
             int xs = texture.Width / hFrames;
             int ys = texture.Height / vFrames;
@@ -65,9 +67,5 @@ namespace Handy.Animation
             }
             return animationDefs;
         }
-        
-
-        private Dictionary<String, SpriteDefinition> SpriteTextureDict;
-
     }
 }

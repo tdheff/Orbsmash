@@ -1,9 +1,12 @@
 ﻿{
-	"SpriteName": "Player0",
-	"VFrames": 1,
-	"HFrames": 19,
+	"Context": "PlayerSpriteAnimations",
+	"SpriteDescriptor": {
+		"SpriteName": "Player0",
+		"VFrames": 1,
+		"HFrames": 19
+	},
 	"Animations": [
-		{
+	{
 			"AnimationName": "PlayerIdle",
 			"Repeats": true,
 			"Frames": [
@@ -13,7 +16,38 @@
 				},
 				{
 					"FrameNumber": 1,
+					"Time": 100,
+				},
+				{
+					"FrameNumber": 2,
+					"Time": 200,
+					"LastFrameLength": 100
+				}
+			]
+		},
+		{
+			"AnimationName": "PlayerWalk",
+			"Repeats": false,
+			"NextAnimation": "PlayerIdle",
+			"Frames": [
+				{
+					"FrameNumber": 11,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 12,
+					"Time": 300,
+					"LastFrameLength": 300
+				}
+			],
+			"Events": [
+				{
+					"EventName": "PlayerSwingStart",
 					"Time": 100
+				},
+				{
+					"EventName": "PlayerSwingEnd",
+					"Time": 200
 				}
 			]
 		}

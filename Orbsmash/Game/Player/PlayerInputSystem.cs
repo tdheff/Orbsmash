@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Nez;
-using Orbsmash.Animation;
 
 namespace Orbsmash.Player
 {

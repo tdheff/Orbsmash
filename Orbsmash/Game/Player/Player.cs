@@ -34,10 +34,10 @@ namespace Orbsmash.Player
         private readonly PlayerStateMachineComponent _state;
         private readonly PlayerInputComponent _input;
         private readonly VelocityComponent _velocity;
-        private readonly BoxCollider _collider;
+        private BoxCollider _collider;
         private readonly KinematicComponent _kinematic = new KinematicComponent();
-        private readonly AnimationComponent<Constants.EAnimations> _mainBodyAnimation;
-        private readonly AnimatableSprite<Constants.EAnimations> _mainPlayerBodySprite;
+        private AnimationComponent<Constants.EAnimations> _mainBodyAnimation;
+        private AnimatableSprite<Constants.EAnimations> _mainPlayerBodySprite;
 
         public Player(int playerId, Texture2D texture, Constants.Side side = Constants.Side.Left)
         {
@@ -46,11 +46,6 @@ namespace Orbsmash.Player
             // physics
             _state = new PlayerStateMachineComponent(new PlayerState(playerId, side));
             _velocity = new VelocityComponent(new Vector2(0, 0));
-            _collider = new BoxCollider();
-            var gameScene = (HandyScene) scene;
-            var mySpriteDef = gameScene.SpriteDefinitions["Player0"];
-            _mainPlayerBodySprite = new AnimatableSprite<Constants.EAnimations>(mySpriteDef.Subtextures);
-            _mainBodyAnimation = new AnimationComponent<Constants.EAnimations>(_mainPlayerBodySprite, "PlayerAnimations", Constants.EAnimations.PlayerIdle);
             
             /*
             // animation
@@ -91,11 +86,23 @@ namespace Orbsmash.Player
             
             addComponent(_state);
             addComponent(_velocity);
+            
+            addComponent(_input);
+            addComponent(_kinematic);
+        }
+
+        public override void onAddedToScene()
+        {
+            var gameScene = (HandyScene)scene;
+            var mySpriteDef = gameScene.SpriteDefinitions["Player0"];
+            _mainPlayerBodySprite = new AnimatableSprite<Constants.EAnimations>(mySpriteDef.Subtextures);
+            _mainBodyAnimation = new AnimationComponent<Constants.EAnimations>(_mainPlayerBodySprite, Constants.AnimationContexts.PlayerSpriteAnimations.ToString(), Constants.EAnimations.PlayerIdle);
+            // must generate collider after we create the sprite,
+            // otherwise the collider doesn't know how big it is (that's how it default works)
+            _collider = new BoxCollider();
             addComponent(_mainPlayerBodySprite);
             addComponent(_mainBodyAnimation);
             addComponent(_collider);
-            addComponent(_input);
-            addComponent(_kinematic);
         }
     }
 }

@@ -15,15 +15,23 @@ namespace Handy.Components
     public class AnimationComponent<TEnum> : Component
     {
         public IAnimatable AnimationTarget;
-        public string AnimationTrackIdentifier = "";
+        public TEnum LastAnimation;
+        public string Context = "";
         public TEnum CurrentAnimation;
         public float ElapsedTime;
-        public AnimationComponent(IAnimatable animationTarget, string trackIdentifier, TEnum startingAnimation)
+        public int CurrentFrame;
+        public AnimationComponent(IAnimatable animationTarget, string context, TEnum startingAnimation)
         {
             AnimationTarget = animationTarget;
-            AnimationTrackIdentifier = trackIdentifier;
+            Context = context;
             CurrentAnimation = startingAnimation;
             ElapsedTime = 0;
         }
+
+        public void SetAnimation(TEnum newAnimation)
+        {
+            CurrentAnimation = newAnimation;
+        }
+
     }
 }
