@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Nez.Console;
 using Nez.PhysicsShapes;
-
-
 namespace Nez
 {
 	public class BoxCollider : Collider
@@ -68,7 +67,7 @@ namespace Nez
 		/// <param name="height">Height.</param>
 		public BoxCollider setSize( float width, float height )
 		{
-			_colliderRequiresAutoSizing = false;
+            _colliderRequiresAutoSizing = false;
 			var box = shape as Box;
 			if( width != box.width || height != box.height )
 			{

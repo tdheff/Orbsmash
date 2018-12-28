@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Handy.Components;
 using Handy.Systems;
 using Nez;
@@ -82,6 +83,40 @@ namespace Orbsmash.Player
             return StateMachineTransition<PlayerStates>.None();
         }
 
+        protected override void OnEnter(Entity entity, PlayerStateMachineComponent stateMachine)
+        {
+            var state = stateMachine.State;
+            var player = (Player)entity;
+
+            var playerAnimComponents = player.getComponents<AnimationComponent<Constants.EAnimations>>();
+
+            var mainBodyAnimation = playerAnimComponents.Where(a => a.Context == Constants.AnimationContexts.PlayerSpriteAnimations.ToString()).First();
+
+            switch (state.StateEnum)
+            {
+                case PlayerStates.Idle:
+                    mainBodyAnimation.SetAnimation(Constants.EAnimations.PlayerIdle);
+                    break;
+                case PlayerStates.Walk:
+                    mainBodyAnimation.SetAnimation(Constants.EAnimations.PlayerWalk);
+                    break;
+                case PlayerStates.Dash:
+                    state.DashFinished = false;
+                    break;
+                case PlayerStates.Charge:
+                    state.ChargeFinished = false;
+                    break;
+                case PlayerStates.Swing:
+
+                    state.SwingFinished = false;
+                    break;
+                case PlayerStates.Dead:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         protected override void OnExit(Entity entity, PlayerStateMachineComponent stateMachine)
         {
             var state = stateMachine.State;
@@ -107,5 +142,6 @@ namespace Orbsmash.Player
                     throw new ArgumentOutOfRangeException();
             }
         }
+
     }
 }

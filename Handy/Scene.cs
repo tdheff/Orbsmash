@@ -1,12 +1,15 @@
+using Handy.Animation;
 using Microsoft.Xna.Framework;
 using Nez;
+using System;
+using System.Collections.Generic;
 
 namespace Handy
 {
     public abstract class Scene : Nez.Scene
     {
+        public Dictionary<string, SpriteDefinition> SpriteDefinitions;
         private Vector2 _scale;
-        
         protected Scene() : base()
         {
             _scale = Vector2.One;

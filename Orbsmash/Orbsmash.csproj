@@ -60,8 +60,6 @@
     <StartupObject>Orbsmash.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Animation\AnimationSystem.cs" />
-    <Compile Include="Animation\SpriteComponent.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ContentPathGenerator.cs">
       <AutoGen>True</AutoGen>
@@ -152,6 +150,9 @@
       <Link>MonoGame.Framework.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Animation\AnimationDefinitions\PlayerAnimations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -189,6 +190,7 @@
       <Name>TiledSharp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />
