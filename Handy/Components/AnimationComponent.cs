@@ -12,15 +12,15 @@ namespace Handy.Components
     // <summary>
     // Component for a body that uses simple kinematic physics
     // </summary>
-    public class AnimationComponent<TEnum> : Component
+    public class AnimationComponent : Component
     {
         public IAnimatable AnimationTarget;
-        public TEnum LastAnimation;
+        public string LastAnimation;
         public string Context = "";
-        public TEnum CurrentAnimation;
+        public string CurrentAnimation;
         public float ElapsedTime;
         public int CurrentFrame;
-        public AnimationComponent(IAnimatable animationTarget, string context, TEnum startingAnimation)
+        public AnimationComponent(IAnimatable animationTarget, string context, string startingAnimation)
         {
             AnimationTarget = animationTarget;
             Context = context;
@@ -28,8 +28,12 @@ namespace Handy.Components
             ElapsedTime = 0;
         }
 
-        public void SetAnimation(TEnum newAnimation)
+        public void SetAnimation(string newAnimation)
         {
+            if(newAnimation != CurrentAnimation)
+            {
+                ElapsedTime = 0;
+            }
             CurrentAnimation = newAnimation;
         }
 

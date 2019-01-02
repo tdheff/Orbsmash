@@ -1,4 +1,6 @@
 using Handy.Components;
+using Orbsmash.Constants;
+using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Player
 {
@@ -15,29 +17,31 @@ namespace Orbsmash.Player
         
         // IDENTIFICATION
         public int PlayerId { get; private set; }
-        public Constants.Side Side { get; private set; }
+        public Gameplay.Side Side { get; private set; }
         
         // MOVEMENT
-        public float Speed = 250.0f;
+        public float Speed = 0;
         public bool CanMove = true;
         public bool DashFinished = false;
-        
+        public Vector2 LastVector = new Vector2();
+        public Gameplay.Direction LastDirection;
+
         // SWINGING
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
         
-        public PlayerState(int playerId, Constants.Side side)
+        public PlayerState(int playerId, Gameplay.Side side, float speed)
         {
             PlayerId = playerId;
             Side = side;
+            Speed = speed;
         }
 
         public IStateMachineState<PlayerStates> Clone()
         {
-            return new PlayerState(PlayerId, Side)
+            return new PlayerState(PlayerId, Side, Speed)
             {
                 StateEnum = StateEnum,
-                Speed = Speed,
                 CanMove = CanMove
             };
         }

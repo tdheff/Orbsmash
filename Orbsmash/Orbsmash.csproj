@@ -74,6 +74,7 @@
     <Compile Include="Game\Ball\Ball.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameSettings.cs" />
+    <Compile Include="Game\Player\PlayerAnimationSystem.cs" />
     <Compile Include="Game\Player\Player.cs" />
     <Compile Include="Game\Player\PlayerInputComponent.cs" />
     <Compile Include="Game\Player\PlayerInputSystem.cs" />
@@ -150,7 +151,10 @@
       <Link>MonoGame.Framework.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Animation\AnimationDefinitions\PlayerAnimations.json">
+    <Content Include="Animation\AnimationDefinitions\KnightAnimations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Animation\AnimationDefinitions\BallAnimations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.manifest" />

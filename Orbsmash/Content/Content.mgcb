@@ -29,6 +29,18 @@
 /processorParam:TextureFormat=Color
 /build:Player0.png
 
+#begin Sprites/Ball/Ball.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Ball/Ball.png
+
 #begin Sprites/Characters/Knight/Knight.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -40,6 +52,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Characters/Knight/Knight.png
+
+#begin Sprites/Characters/Knight/Knight_hitbox.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Characters/Knight/Knight_hitbox.png
 
 #begin Sprites/Characters/Pirate/Pirate.png
 /importer:TextureImporter
