@@ -2,8 +2,8 @@
 	"Context": "PLAYER_SPRITE_ANIMATIONS",
 	"SpriteDescriptor": {
 		"SpriteName": "Sprites/Characters/Knight/Knight",
-		"VFrames": 8,
-		"HFrames": 16
+		"VFrames": 7,
+		"HFrames": 12
 	},
 	"Animations": [
 		{
@@ -250,7 +250,7 @@
 		},
 		{
 			"AnimationName": "CHARGE",
-			"NextAnimation": "CHARGE_PULSE",
+			"NextAnimation": "CHARGE_IDLE",
 			"Frames": [
 				{
 					"FrameNumber": 50,
@@ -276,7 +276,7 @@
 			]
 		},
 		{
-			"AnimationName": "CHARGE_PULSE",
+			"AnimationName": "CHARGE_IDLE",
 			"Repeats": true,
 			"Frames": [
 				{
@@ -293,23 +293,30 @@
 				},
 				{
 					"FrameNumber": 58,
-					"Time": 150
-				},
+					"Time": 150,
+					"LastFrameLength": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "CHARGE_PULSE",
+			"Repeats": true,
+			"Frames": [
 				{
 					"FrameNumber": 59,
-					"Time": 200
+					"Time": 0
 				},
 				{
 					"FrameNumber": 60,
-					"Time": 250
+					"Time": 50
 				},
 				{
 					"FrameNumber": 61,
-					"Time": 300
+					"Time": 100
 				},
 				{
 					"FrameNumber": 62,
-					"Time": 350,
+					"Time": 150,
 					"LastFrameLength": 50
 				}
 			]
