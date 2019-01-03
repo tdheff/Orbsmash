@@ -14,7 +14,35 @@ namespace Orbsmash.Player
             typeof(PlayerInputComponent),
             typeof(EventComponent)
         )) { }
-        
+
+        protected override void Update(Entity entity, PlayerStateMachineComponent stateMachine)
+        {
+            var state = stateMachine.State;
+            switch (state.StateEnum)
+            {
+                case PlayerStates.Idle:
+                    break;
+                case PlayerStates.Walk:
+                    break;
+                case PlayerStates.Dash:
+                    break;
+                case PlayerStates.Charge:
+                    state.ChargeTime += Time.deltaTime;
+                    if (state.ChargeTime >= PlayerState.MaxChargeTime)
+                    {
+                        state.ChargeFinished = true;
+                    }
+                    break;
+                case PlayerStates.Swing:
+                    break;
+                case PlayerStates.Dead:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+//            stateMachine.UpdateState(state);
+        }
+
         protected override StateMachineTransition<PlayerStates> Transition(Entity entity, PlayerStateMachineComponent stateMachine)
         {
             var input = entity.getComponent<PlayerInputComponent>();
@@ -131,6 +159,7 @@ namespace Orbsmash.Player
                     state.DashFinished = false;
                     break;
                 case PlayerStates.Charge:
+                    state.ChargeTime = 0;
                     state.ChargeFinished = false;
                     break;
                 case PlayerStates.Swing:

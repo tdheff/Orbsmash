@@ -32,7 +32,7 @@ namespace Orbsmash.Player
         {
             name = $"Player_{settings.Id}";
             playerSprite = settings.Sprite;
-            scale = new Vector2(2);
+            //scale = new Vector2(2);
             
             // physics
             _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed));
