@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Handy.Animation
 {
-    public class AnimatableSprite<TEnum> :  Nez.Sprites.Sprite, IAnimatable where TEnum : struct, IComparable, IFormattable
+    public class AnimatableSprite :  Nez.Sprites.Sprite, IAnimatable
     {
         public List<Subtexture> frames;
         public AnimatableSprite(List<Subtexture> inputFrames)
@@ -20,6 +20,7 @@ namespace Handy.Animation
         {
             if(frames != null && frames.Count > frame)
             {
+                // Console.WriteLine($"###### Setting frame: {frame}");
                 setSubtexture(frames[frame]);
             }
         }

@@ -1,0 +1,21 @@
+﻿{
+	"Context": "BALL_SPRITE_ANIMATIONS",
+	"SpriteDescriptor": {
+		"SpriteName": "Sprites/Ball/Ball",
+		"VFrames": 1,
+		"HFrames": 1
+	},
+	"Animations": [
+	{
+			"AnimationName": "IDLE",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 0,
+					"Time": 0,
+					"LastFrameLength": 100000000
+				}
+			]
+		}
+	]
+}

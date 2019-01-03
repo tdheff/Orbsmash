@@ -39,7 +39,7 @@ namespace Orbsmash
             Window.AllowUserResizing = true;
             debugRenderEnabled = true;
 
-            var settings = new GameSettings(numPlayers: 1);
+            var settings = new GameSettings();
             var gameScene = new Game.Game(settings);
             scene = gameScene;
 

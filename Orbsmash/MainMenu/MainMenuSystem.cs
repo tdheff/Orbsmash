@@ -29,7 +29,7 @@ namespace Orbsmash.MainMenu
                             if (action.Data.Play)
                             {
                            
-                                Orbsmash.Get().ChangeScene(new Game.Game(new GameSettings(1)));
+                                Orbsmash.Get().ChangeScene(new Game.Game(new GameSettings()));
                                 break;
                             } else if (action.Data.Quit)
                             {

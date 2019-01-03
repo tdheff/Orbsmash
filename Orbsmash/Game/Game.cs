@@ -8,6 +8,7 @@ using Scene = Handy.Scene;
 using Handy.Animation;
 using System;
 using System.Collections.Generic;
+using Orbsmash.Constants;
 
 namespace Orbsmash.Game
 {
@@ -17,14 +18,14 @@ namespace Orbsmash.Game
     public class Game : Scene
     {
         private readonly GameSettings _settings;
-        private AnimationSystem<Constants.EAnimations> AnimationSystem;
+        private AnimationSystem AnimationSystem;
         
         public Game(GameSettings settings) : base(4)
         {
             Console.WriteLine("###### GAME START ######");
             setDesignResolution(1920, 1080, SceneResolutionPolicy.BestFit);
             _settings = settings;
-            LoadAnimations();
+            LoadContent();
             CreateEntities();
 
         }
@@ -39,45 +40,43 @@ namespace Orbsmash.Game
 
         protected override EntitySystem[] Systems()
         {
-            AnimationSystem = new AnimationSystem<Constants.EAnimations>();
+            AnimationSystem = new AnimationSystem();
             return new EntitySystem[]
             {
                 new PlayerInputSystem(),
                 new PlayerStateMachineSystem(),
                 new PlayerMovementSystem(),
                 new KinematicSystem(),
+                new PlayerAnimationSystem(),
                 AnimationSystem
             };
         }
 
-        private void LoadAnimations()
+        private void LoadContent()
         {
-            var animationDefs = Util.LoadAnimationDefinitions(@"Animation\AnimationDefinitions");
+            var animationDefs = Util.LoadAnimationDefinitions(@"Animation/AnimationDefinitions");
             SpriteDefinitions = Util.LoadSprites(animationDefs, content);
-            // this feels a bit hacky but easy enough to clean up at some point... essentialy the animation system needs to
-            // know about the "animation tracks/definitions" that are the json.. but the json is also currently defining like... vframes and hframes
-            // so maybe this is separated out but maybe not... anyways it'll do for now, can probably just redesign better json format now that I know more this was like
-            // the first thing I wrote
             AnimationSystem.SetAnimationDefinitions(animationDefs);
+            HitboxDefinitions = Util.LoadHitboxes(Hitboxes.HitboxesToLoad, content);
         }
         
         private void CreateEntities()
         {
-            var tiledMap = content.Load<TiledMap>("Tiles/DungeonMap");
-            var tiledMapComponent = new TiledMapComponent(tiledMap, "Colliders", true);
+            var tiledMap = content.Load<TiledMap>(_settings.MapTile);
+            var tiledMapComponent = new TiledMapComponent(tiledMap, CollisionLayers.COLLIDERS, true);
             var entity = new Entity();
             entity.name = "Map";
             entity.addComponent(tiledMapComponent);
             addEntity(entity);
             
-            var texture = content.Load<Texture2D>("Sprites/Characters/Pirate/Pirate");
             for (var i = 0; i < _settings.NumPlayers; i++)
             {
-                var player = new Player.Player(i, texture, i % 2 == 0 ? Constants.Side.Left : Constants.Side.Right);
+                var playerSettings = _settings.Players[i];
+                var player = new Player.Player(playerSettings);
                 addEntity(player);
             }
             
-            var ball = new Ball.Ball(texture);
+            var ball = new Ball.Ball(_settings.BallSprite);
             addEntity(ball);
         }
 

@@ -35,6 +35,9 @@
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="MonoGame.Framework.Content.Pipeline, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MonoGame.Framework.Content.Pipeline.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.Content.Pipeline.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -51,11 +54,15 @@
   <ItemGroup>
     <Compile Include="Components\AnimatableSprite.cs" />
     <Compile Include="Animation\IAnimatable.cs" />
+    <Compile Include="Components\EventComponent.cs" />
     <Compile Include="Components\AnimationComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
+    <Compile Include="Pipeline\PhysicsEditor\PolygonImporter.cs" />
+    <Compile Include="Pipeline\PhysicsEditor\PolygonProcessor.cs" />
+    <Compile Include="Pipeline\PhysicsEditor\PolygonReader.cs" />
+    <Compile Include="Pipeline\PhysicsEditor\PolygonWriter.cs" />
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Animation\AnimationDefinition.cs" />
-    <Compile Include="Animation\SpriteT.cs" />
     <Compile Include="Animation\Util.cs" />
     <Compile Include="Components\KinematicComponent.cs" />
     <Compile Include="Components\StateMachine\IStateMachineState.cs" />

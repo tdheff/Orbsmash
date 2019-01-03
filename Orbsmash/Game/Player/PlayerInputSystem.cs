@@ -7,13 +7,14 @@ namespace Orbsmash.Player
     public class PlayerInputSystem : EntitySystem
     {
         public PlayerInputSystem(Matcher matcher) : base(matcher) { }
-        public PlayerInputSystem() : base(new Matcher().all(typeof(PlayerInputComponent))) { }
+        public PlayerInputSystem() : base(new Matcher().all(typeof(PlayerInputComponent), typeof(PlayerStateMachineComponent))) { }
 
         protected override void process(List<Entity> entities)
         {
             foreach (var entity in entities)
             {
                 var input = entity.getComponent<PlayerInputComponent>();
+                var state = entity.getComponent<PlayerStateMachineComponent>().State;
 
                 // ditch if we don't have enough inputs
                 if (Input.gamePads.Length <= input.DeviceId) continue;

@@ -1,0 +1,378 @@
+﻿{
+	"Context": "PLAYER_SPRITE_ANIMATIONS",
+	"SpriteDescriptor": {
+		"SpriteName": "Sprites/Characters/Knight/Knight",
+		"VFrames": 8,
+		"HFrames": 16
+	},
+	"Animations": [
+		{
+			"AnimationName": "IDLE_VERTICAL",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 1,
+					"Time": 0,
+					"LastFrameLength": 100000000
+				}
+			]
+		},
+		{
+			"AnimationName": "IDLE_HORIZONTAL",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 0,
+					"Time": 0,
+					"LastFrameLength": 100000000
+				}
+			]
+		},
+		{
+			"AnimationName": "WALK_DOWN",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 2,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 3,
+					"Time": 50
+				},
+				{
+					"FrameNumber": 4,
+					"Time": 100
+				},
+				{
+					"FrameNumber": 5,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 6,
+					"Time": 200
+				},
+				{
+					"FrameNumber": 7,
+					"Time": 250
+				},
+				{
+					"FrameNumber": 8,
+					"Time": 300
+				},
+				{
+					"FrameNumber": 9,
+					"Time": 350
+				},
+				{
+					"FrameNumber": 10,
+					"Time": 400
+				},
+				{
+					"FrameNumber": 11,
+					"Time": 450
+				},
+				{
+					"FrameNumber": 12,
+					"Time": 500
+				},
+				{
+					"FrameNumber": 13,
+					"Time": 550,
+					"LastFrameLength": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "WALK_RIGHT",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 14,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 15,
+					"Time": 50
+				},
+				{
+					"FrameNumber": 16,
+					"Time": 100
+				},
+				{
+					"FrameNumber": 17,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 18,
+					"Time": 200
+				},
+				{
+					"FrameNumber": 19,
+					"Time": 250
+				},
+				{
+					"FrameNumber": 20,
+					"Time": 300
+				},
+				{
+					"FrameNumber": 21,
+					"Time": 350
+				},
+				{
+					"FrameNumber": 22,
+					"Time": 400
+				},
+				{
+					"FrameNumber": 23,
+					"Time": 450
+				},
+				{
+					"FrameNumber": 24,
+					"Time": 500
+				},
+				{
+					"FrameNumber": 25,
+					"Time": 550,
+					"LastFrameLength": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "WALK_LEFT",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 26,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 27,
+					"Time": 50
+				},
+				{
+					"FrameNumber": 28,
+					"Time": 100
+				},
+				{
+					"FrameNumber": 29,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 30,
+					"Time": 200
+				},
+				{
+					"FrameNumber": 31,
+					"Time": 250
+				},
+				{
+					"FrameNumber": 32,
+					"Time": 300
+				},
+				{
+					"FrameNumber": 33,
+					"Time": 350
+				},
+				{
+					"FrameNumber": 34,
+					"Time": 400
+				},
+				{
+					"FrameNumber": 35,
+					"Time": 450
+				},
+				{
+					"FrameNumber": 36,
+					"Time": 500
+				},
+				{
+					"FrameNumber": 37,
+					"Time": 550,
+					"LastFrameLength": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "WALK_UP",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 38,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 39,
+					"Time": 50
+				},
+				{
+					"FrameNumber": 40,
+					"Time": 100
+				},
+				{
+					"FrameNumber": 41,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 42,
+					"Time": 200
+				},
+				{
+					"FrameNumber": 43,
+					"Time": 250
+				},
+				{
+					"FrameNumber": 44,
+					"Time": 300
+				},
+				{
+					"FrameNumber": 45,
+					"Time": 350
+				},
+				{
+					"FrameNumber": 46,
+					"Time": 400
+				},
+				{
+					"FrameNumber": 47,
+					"Time": 450
+				},
+				{
+					"FrameNumber": 48,
+					"Time": 500
+				},
+				{
+					"FrameNumber": 49,
+					"Time": 550,
+					"LastFrameLength": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "CHARGE",
+			"NextAnimation": "CHARGE_PULSE",
+			"Frames": [
+				{
+					"FrameNumber": 50,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 51,
+					"Time": 50
+				},
+				{
+					"FrameNumber": 52,
+					"Time": 100
+				},
+				{
+					"FrameNumber": 53,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 54,
+					"Time": 200,
+					"LastFrameLength": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "CHARGE_PULSE",
+			"Repeats": true,
+			"Frames": [
+				{
+					"FrameNumber": 55,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 56,
+					"Time": 50
+				},
+				{
+					"FrameNumber": 57,
+					"Time": 100
+				},
+				{
+					"FrameNumber": 58,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 59,
+					"Time": 200
+				},
+				{
+					"FrameNumber": 60,
+					"Time": 250
+				},
+				{
+					"FrameNumber": 61,
+					"Time": 300
+				},
+				{
+					"FrameNumber": 62,
+					"Time": 350,
+					"LastFrameLength": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "SWING",
+			"Events": [
+				{
+					"EventName": "PLAYER_SWING_END",
+					"Time": 600
+				}
+			],
+			"Frames": [
+				{
+					"FrameNumber": 63,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 64,
+					"Time": 50
+				},
+				{
+					"FrameNumber": 65,
+					"Time": 100
+				},
+				{
+					"FrameNumber": 66,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 67,
+					"Time": 200
+				},
+				{
+					"FrameNumber": 68,
+					"Time": 250
+				},
+				{
+					"FrameNumber": 69,
+					"Time": 300
+				},
+				{
+					"FrameNumber": 70,
+					"Time": 350
+				},
+				{
+					"FrameNumber": 71,
+					"Time": 400
+				},
+				{
+					"FrameNumber": 72,
+					"Time": 450
+				},
+				{
+					"FrameNumber": 73,
+					"Time": 500
+				},
+				{
+					"FrameNumber": 74,
+					"Time": 550,
+					"LastFrameLength": 50
+				}
+			]
+		}
+	]
+}

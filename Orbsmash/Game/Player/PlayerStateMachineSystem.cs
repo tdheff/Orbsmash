@@ -3,6 +3,7 @@ using System.Linq;
 using Handy.Components;
 using Handy.Systems;
 using Nez;
+using Orbsmash.Constants;
 
 namespace Orbsmash.Player
 {
@@ -10,14 +11,19 @@ namespace Orbsmash.Player
     {
         public PlayerStateMachineSystem() : base(new Matcher().all(
             typeof(PlayerStateMachineComponent),
-            typeof(PlayerInputComponent)
+            typeof(PlayerInputComponent),
+            typeof(EventComponent)
         )) { }
         
         protected override StateMachineTransition<PlayerStates> Transition(Entity entity, PlayerStateMachineComponent stateMachine)
         {
             var input = entity.getComponent<PlayerInputComponent>();
+            var events = entity.getComponent<EventComponent>();
             var state = stateMachine.State;
-            
+            if (events.PeekEvents().Count > 0)
+            {
+                var eventsList = events.PeekEvents();
+            }
             if (state.StateEnum != PlayerStates.Dead && state.IsKilled)
             {
                 return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Dead);
@@ -40,7 +46,7 @@ namespace Orbsmash.Player
                 case PlayerStates.Walk:
                     if (input.SwingPressed)
                     {
-                        return StateMachineTransition<PlayerStates>.Push(PlayerStates.Swing);
+                        return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
                     } else if (input.DashPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Dash);
@@ -52,7 +58,7 @@ namespace Orbsmash.Player
                 case PlayerStates.Dash:
                     if (input.SwingPressed)
                     {
-                        return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Swing);
+                        return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
                     } else if (state.DashFinished)
                     {
                         return StateMachineTransition<PlayerStates>.Pop();
@@ -65,6 +71,7 @@ namespace Orbsmash.Player
                     }
                     break;
                 case PlayerStates.Swing:
+                    state.SwingFinished = events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_SWING_END);
                     if (state.SwingFinished)
                     {
                         return StateMachineTransition<PlayerStates>.Pop();
@@ -86,19 +93,12 @@ namespace Orbsmash.Player
         protected override void OnEnter(Entity entity, PlayerStateMachineComponent stateMachine)
         {
             var state = stateMachine.State;
-            var player = (Player)entity;
-
-            var playerAnimComponents = player.getComponents<AnimationComponent<Constants.EAnimations>>();
-
-            var mainBodyAnimation = playerAnimComponents.Where(a => a.Context == Constants.AnimationContexts.PlayerSpriteAnimations.ToString()).First();
-
+            Console.WriteLine($"new state: {state.StateEnum}");
             switch (state.StateEnum)
             {
                 case PlayerStates.Idle:
-                    mainBodyAnimation.SetAnimation(Constants.EAnimations.PlayerIdle);
                     break;
                 case PlayerStates.Walk:
-                    mainBodyAnimation.SetAnimation(Constants.EAnimations.PlayerWalk);
                     break;
                 case PlayerStates.Dash:
                     state.DashFinished = false;
