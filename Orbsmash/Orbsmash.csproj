@@ -189,10 +189,6 @@
       <Project>{60b7197d-d0d5-405c-90a2-a56903e9b039}</Project>
       <Name>Nez</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TiledSharp\TiledSharp.csproj">
-      <Project>{32f923ee-1ec7-446a-b050-abf6ce9b90d1}</Project>
-      <Name>TiledSharp</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

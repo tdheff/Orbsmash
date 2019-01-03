@@ -72,6 +72,7 @@ namespace Orbsmash.Constants
         public static readonly string WALK_LEFT = "WALK_LEFT";
         public static readonly string WALK_RIGHT = "WALK_RIGHT";
         public static readonly string CHARGE_PULSE = "CHARGE_PULSE";
+        public static readonly string CHARGE_IDLE = "CHARGE_IDLE";
         public static readonly string CHARGE = "CHARGE";
         public static readonly string SWING = "SWING";
     }

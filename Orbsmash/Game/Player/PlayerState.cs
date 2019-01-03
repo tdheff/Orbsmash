@@ -16,8 +16,8 @@ namespace Orbsmash.Player
         public bool IsKilled = false;
         
         // IDENTIFICATION
-        public int PlayerId { get; private set; }
-        public Gameplay.Side Side { get; private set; }
+        public int playerId { get; private set; }
+        public Gameplay.Side side { get; private set; }
         
         // MOVEMENT
         public float Speed;
@@ -27,22 +27,30 @@ namespace Orbsmash.Player
         public Gameplay.Direction LastDirection;
 
         // SWINGING
+        public float ChargeTime;
+        public const float MaxChargeTime = 2.0f;
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
         
         public PlayerState(int playerId, Gameplay.Side side, float speed)
         {
-            PlayerId = playerId;
-            Side = side;
+            this.playerId = playerId;
+            this.side = side;
             Speed = speed;
         }
 
         public IStateMachineState<PlayerStates> Clone()
         {
-            return new PlayerState(PlayerId, Side, Speed)
+            return new PlayerState(playerId, side, Speed)
             {
+                ChargeTime = ChargeTime,
                 StateEnum = StateEnum,
-                CanMove = CanMove
+                CanMove = CanMove,
+                ChargeFinished = ChargeFinished,
+                SwingFinished = SwingFinished,
+                DashFinished = DashFinished,
+                LastVector = LastVector,
+                LastDirection = LastDirection
             };
         }
     }

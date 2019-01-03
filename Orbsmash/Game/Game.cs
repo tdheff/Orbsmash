@@ -20,10 +20,10 @@ namespace Orbsmash.Game
         private readonly GameSettings _settings;
         private AnimationSystem AnimationSystem;
         
-        public Game(GameSettings settings) : base(4)
+        public Game(GameSettings settings) : base(5)
         {
             Console.WriteLine("###### GAME START ######");
-            setDesignResolution(1920, 1080, SceneResolutionPolicy.BestFit);
+            setDesignResolution(2560, 1440, SceneResolutionPolicy.BestFit);
             _settings = settings;
             LoadContent();
             CreateEntities();
@@ -69,6 +69,7 @@ namespace Orbsmash.Game
             entity.addComponent(tiledMapComponent);
             addEntity(entity);
             
+            var texture = content.Load<Texture2D>("Sprites/Characters/Knight/Knight");
             for (var i = 0; i < _settings.NumPlayers; i++)
             {
                 var playerSettings = _settings.Players[i];
@@ -82,7 +83,7 @@ namespace Orbsmash.Game
 
         public override void onStart()
         {
-            findEntity("Map").transform.position = new Vector2(-32 * 4, 0);
+            findEntity("Map").transform.position = new Vector2(-160, 0);
             findEntity("Player_0").transform.position = new Vector2(200, 200);
             findEntity("Ball").transform.position = new Vector2(400, 400);
         }
