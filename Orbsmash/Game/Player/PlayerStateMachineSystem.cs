@@ -93,7 +93,7 @@ namespace Orbsmash.Player
                     }
                     break;
                 case PlayerStates.Charge:
-                    if (state.ChargeFinished || !input.SwingPressed)
+                    if (!input.SwingPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Swing);
                     }
