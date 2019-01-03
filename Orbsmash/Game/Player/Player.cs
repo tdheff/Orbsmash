@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Handy.Animation;
+using Nez.PhysicsShapes;
 using Orbsmash.Constants;
 using Orbsmash.Game;
 
@@ -31,8 +32,9 @@ namespace Orbsmash.Player
         {
             name = $"Player_{settings.Id}";
             playerSprite = settings.Sprite;
+            scale = new Vector2(2);
             
-            // physicsw
+            // physics
             _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed));
             _velocity = new VelocityComponent(new Vector2(0, 0));
             
@@ -44,7 +46,7 @@ namespace Orbsmash.Player
             addComponent(_input);
             addComponent(_kinematic);
         }
-
+        
         public override void onAddedToScene()
         {
             var gameScene = (HandyScene)scene;
@@ -54,6 +56,7 @@ namespace Orbsmash.Player
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new BoxCollider(15, 10);
+            addComponent(new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points));
             // _hitbox = new PolygonCollider([]);
             addComponent(_mainPlayerBodySprite);
             addComponent(_mainBodyAnimation);

@@ -14,6 +14,7 @@
 /reference:../../Nez.PipelineImporter/bin/Debug/Newtonsoft.Json.dll
 /reference:../../Nez.PipelineImporter/bin/Debug/Nez.dll
 /reference:../../Nez.PipelineImporter/bin/Debug/Nez.PipelineImporter.dll
+/reference:../../Handy/bin/Debug/Handy.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -64,6 +65,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Characters/Knight/Knight_hitbox.png
+
+#begin Sprites/Characters/Knight/Knight_Hitbox.xml
+/importer:PolygonImporter
+/processor:PolygonProcessor
+/build:Sprites/Characters/Knight/Knight_Hitbox.xml
 
 #begin Sprites/Characters/Pirate/Pirate.png
 /importer:TextureImporter

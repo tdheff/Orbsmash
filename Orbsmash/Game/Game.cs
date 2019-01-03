@@ -54,7 +54,7 @@ namespace Orbsmash.Game
 
         private void LoadContent()
         {
-            var animationDefs = Util.LoadAnimationDefinitions(@"Animation\AnimationDefinitions");
+            var animationDefs = Util.LoadAnimationDefinitions(@"Animation/AnimationDefinitions");
             SpriteDefinitions = Util.LoadSprites(animationDefs, content);
             AnimationSystem.SetAnimationDefinitions(animationDefs);
             HitboxDefinitions = Util.LoadHitboxes(Hitboxes.HitboxesToLoad, content);

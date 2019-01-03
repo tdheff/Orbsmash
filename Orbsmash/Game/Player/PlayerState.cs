@@ -20,7 +20,7 @@ namespace Orbsmash.Player
         public Gameplay.Side Side { get; private set; }
         
         // MOVEMENT
-        public float Speed = 0;
+        public float Speed;
         public bool CanMove = true;
         public bool DashFinished = false;
         public Vector2 LastVector = new Vector2();

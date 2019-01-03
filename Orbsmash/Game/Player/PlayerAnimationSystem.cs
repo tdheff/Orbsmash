@@ -39,7 +39,14 @@ namespace Orbsmash.Player
                         mainBodyAnimation.SetAnimation($"WALK_{state.LastDirection}");
                         break;
                     case PlayerStates.Dash:
-                        
+                        if(state.LastDirection == Gameplay.Direction.UP || state.LastDirection == Gameplay.Direction.DOWN)
+                        {
+                            mainBodyAnimation.SetAnimation(PlayerAnimations.IDLE_VERTICAL);
+                        }
+                        else
+                        {
+                            mainBodyAnimation.SetAnimation(PlayerAnimations.IDLE_HORIZONTAL);
+                        }
                         break;
                     case PlayerStates.Charge:
                         if (mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE_PULSE && mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE)
