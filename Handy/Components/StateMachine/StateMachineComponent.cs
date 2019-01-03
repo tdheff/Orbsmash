@@ -32,6 +32,12 @@ namespace Handy.Components
         }
 
         private readonly Stack<TState> _states;
+
+        public void UpdateState(TState updatedState)
+        {
+            _states.Pop();
+            _states.Push(updatedState);
+        }
         
         public TState PopState()
         {

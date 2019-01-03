@@ -22,6 +22,7 @@ namespace Handy.Systems
             foreach(var entity in entities)
             {
                 var velocityComponent = entity.getComponent<VelocityComponent>();
+                var collisionScannerComponent = entity.getComponent<CollisionScannerComponent>();
                 
                 var boxCollider = entity.getComponent<BoxCollider>();
                 var circleCollider = entity.getComponent<CircleCollider>();
@@ -49,6 +50,15 @@ namespace Handy.Systems
                     // if the neighbor collider is of the same entity, ignore it
                     if (neighbor.entity == entity)
                     {
+                        continue;
+                    }
+
+                    if (neighbor.isTrigger)
+                    {
+                        if (collisionScannerComponent != null)
+                        {
+                            collisionScannerComponent.colliders.Add(neighbor);
+                        }
                         continue;
                     }
 

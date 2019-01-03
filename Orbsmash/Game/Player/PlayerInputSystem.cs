@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Nez;
@@ -14,7 +15,6 @@ namespace Orbsmash.Player
             foreach (var entity in entities)
             {
                 var input = entity.getComponent<PlayerInputComponent>();
-                var state = entity.getComponent<PlayerStateMachineComponent>().State;
 
                 // ditch if we don't have enough inputs
                 if (Input.gamePads.Length <= input.DeviceId) continue;

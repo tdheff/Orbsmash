@@ -49,9 +49,15 @@ namespace Orbsmash.Player
                         }
                         break;
                     case PlayerStates.Charge:
-                        if (mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE_PULSE && mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE)
+                        if (mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE_PULSE &&
+                            mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE_IDLE)
                         {
                             mainBodyAnimation.SetAnimation(PlayerAnimations.CHARGE);
+                        }
+
+                        if (state.ChargeFinished)
+                        {
+                            mainBodyAnimation.SetAnimation(PlayerAnimations.CHARGE_PULSE);
                         }
                         break;
                     case PlayerStates.Swing:

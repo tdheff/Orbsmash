@@ -17,6 +17,8 @@ namespace Handy.Systems
             {
                 var stateMachine = entity.getComponent<TStateMachineComponent>();
 
+                Update(entity, stateMachine);
+                
                 var transition = Transition(entity, stateMachine);
 
                 switch (transition.TransitionType)
@@ -43,6 +45,14 @@ namespace Handy.Systems
                 }
             }
         }
+        
+        ///  <summary>
+        ///  Updates character state. Called before transition.
+        /// 
+        ///  </summary>
+        /// <param name="entity">The entity that has this state</param>
+        /// <param name="stateMachine">The state machine being operated on</param>
+        protected abstract void Update(Entity entity, TStateMachineComponent stateMachine);
 
         ///  <summary>
         ///  Decides what state should be next, and returns the appropriate transition.
