@@ -121,7 +121,6 @@ namespace Orbsmash.Player
         protected override void OnEnter(Entity entity, PlayerStateMachineComponent stateMachine)
         {
             var state = stateMachine.State;
-            Console.WriteLine($"new state: {state.StateEnum}");
             switch (state.StateEnum)
             {
                 case PlayerStates.Idle:

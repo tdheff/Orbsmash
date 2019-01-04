@@ -19,6 +19,15 @@ namespace Orbsmash.Constants
         }
     }
 
+    public sealed class EntityNames
+    {
+        public static readonly string BALL = "BALL";
+    }
+    
+    public sealed class ComponentNames
+    {
+        public static readonly string HITBOX_COLLIDER = "HITBOX_COLLIDER";
+    }
 
     public sealed class AnimationContexts
     {
@@ -26,14 +35,26 @@ namespace Orbsmash.Constants
         public static readonly string BALL_SPRITE_ANIMATIONS = "BALL_SPRITE_ANIMATIONS";
     }
 
-    public sealed class CollisionLayers
+    public sealed class TiledImportCollisionLayers
     {
-        public static readonly string COLLIDERS = "Colliders";
+        public static readonly string WALLS = "WALLS";
+        public static readonly string ENVIRONMENT = "ENVIRONMENT";
+        public static readonly string NET = "NET";
     }
 
     public sealed class MapTiles
     {
         public static readonly string DUNGEON = "Tiles/DungeonMap";
+        public static readonly string MEDIEVAL = "Tiles/MedievalMap";
+    }
+    
+    public sealed class PhysicsLayers
+    {
+        public static readonly int ENVIRONMENT = 1;
+        public static readonly int WALLS = 2;
+        public static readonly int NET = 3;
+        public static readonly int PLAYER = 4;
+        public static readonly int BALL = 5;
     }
 
     public sealed class PlayerSprites

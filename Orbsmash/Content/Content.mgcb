@@ -127,3 +127,22 @@
 #begin Tiles/DungeonTileset.tsx
 /copy:Tiles/DungeonTileset.tsx
 
+#begin Tiles/MedievalMap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tiles/MedievalMap.tmx
+
+#begin Tiles/MedievalTiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiles/MedievalTiles.png
+
+#begin Tiles/MedievalTileset.tsx
+/copy:Tiles/MedievalTileset.tsx
