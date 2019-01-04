@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Nez;
 using Handy.Components;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,7 @@ namespace Handy.Systems
         public KinematicSystem() : this(new Matcher().all(
                 typeof(VelocityComponent),
                 typeof(KinematicComponent)
-            ).one(typeof(BoxCollider), typeof(CircleCollider)))
+            ).one(typeof(BoxCollider), typeof(CircleCollider), typeof(PolygonCollider)))
         { }
 
         public KinematicSystem(Matcher matcher) : base(matcher)
@@ -22,18 +23,25 @@ namespace Handy.Systems
             foreach(var entity in entities)
             {
                 var velocityComponent = entity.getComponent<VelocityComponent>();
-                var collisionScannerComponent = entity.getComponent<CollisionScannerComponent>();
                 
-                var boxCollider = entity.getComponent<BoxCollider>();
-                var circleCollider = entity.getComponent<CircleCollider>();
-                Collider collider;
-                if (boxCollider != null)
+                var boxColliders = entity.getComponents<BoxCollider>();
+                var circleColliders = entity.getComponents<CircleCollider>();
+                var polygonColliders = entity.getComponents<PolygonCollider>();
+                
+                Collider collider = null;
+                foreach (var colliderComponent in new List<Collider>().Concat(boxColliders).Concat(circleColliders).Concat(polygonColliders))
                 {
-                    collider = boxCollider;
-                }
-                else
-                {
-                    collider = circleCollider;
+                    if (!colliderComponent.isTrigger)
+                    {
+                        if (collider != null)
+                        {
+                            Debug.warn("Multiple suitable colliders found for this kinematic body, using: {}", collider);
+                        }
+                        else
+                        {
+                            collider = colliderComponent;
+                        }
+                    }
                 }
 
                 var kinematicComponent = entity.getComponent<KinematicComponent>();
@@ -43,6 +51,7 @@ namespace Handy.Systems
                 entity.transform.position += velocityComponent.Velocity * Time.deltaTime;
 
                 CollisionResult collisionResult;
+
                 // fetch anything that we might collide with at our new position
                 var neighbors = Physics.boxcastBroadphaseExcludingSelf(collider, collider.collidesWithLayers);
                 foreach (var neighbor in neighbors)
@@ -55,10 +64,7 @@ namespace Handy.Systems
 
                     if (neighbor.isTrigger)
                     {
-                        if (collisionScannerComponent != null)
-                        {
-                            collisionScannerComponent.colliders.Add(neighbor);
-                        }
+                        
                         continue;
                     }
 

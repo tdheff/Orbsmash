@@ -72,8 +72,10 @@
       <DependentUpon>EnumEqualityComparerGenerator.tt</DependentUpon>
     </Compile>
     <Compile Include="Game\Ball\Ball.cs" />
+    <Compile Include="Game\Ball\BallStateComponent.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameSettings.cs" />
+    <Compile Include="Game\Interactions\BallHitSystem.cs" />
     <Compile Include="Game\Player\PlayerAnimationSystem.cs" />
     <Compile Include="Game\Player\Player.cs" />
     <Compile Include="Game\Player\PlayerInputComponent.cs" />
@@ -190,7 +192,6 @@
       <Name>Nez</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />

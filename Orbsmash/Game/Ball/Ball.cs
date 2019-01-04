@@ -18,17 +18,17 @@ namespace Orbsmash.Ball
         private readonly KinematicComponent _kinematic = new KinematicComponent();
         private AnimatableSprite _sprite;
         private AnimationComponent _ballAnimation;
+        private BallStateComponent _ballStateComponent;
         private string ballSprite;
         
         public Ball(string sprite)
         {
             ballSprite = sprite;
-            name = "Ball";
+            name = EntityNames.BALL;
             
             _velocity = new VelocityComponent(new Vector2(300, 300));
             
             addComponent(_velocity);
-           
         }
 
         public override void onAddedToScene()
@@ -40,11 +40,15 @@ namespace Orbsmash.Ball
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new CircleCollider(9);
+            Flags.setFlagExclusive(ref _collider.collidesWithLayers, PhysicsLayers.WALLS);
+            //Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.WALLS);
             _kinematic.CollisionType = KinematicComponent.ECollisionType.Bounce;
+            _ballStateComponent = new BallStateComponent();
             addComponent(_kinematic);
             addComponent(_sprite);
             addComponent(_ballAnimation);
             addComponent(_collider);
+            addComponent(_ballStateComponent);
         }
     }
 }

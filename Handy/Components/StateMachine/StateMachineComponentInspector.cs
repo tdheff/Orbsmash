@@ -13,7 +13,6 @@ namespace Handy.Components
 
         public override void update()
         {
-            Console.WriteLine(getValue<object>());
         }
     }
 }

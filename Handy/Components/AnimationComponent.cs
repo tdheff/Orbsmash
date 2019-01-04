@@ -32,7 +32,6 @@ namespace Handy.Components
         {
             if(newAnimation != CurrentAnimation)
             {
-            Console.WriteLine(newAnimation);
                 ElapsedTime = 0;
             }
             CurrentAnimation = newAnimation;

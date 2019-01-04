@@ -20,6 +20,11 @@ namespace Nez
 		/// the Entity this Component is attached to
 		/// </summary>
 		public Entity entity;
+		
+		/// <summary>
+		/// the Entity this Component is attached to
+		/// </summary>
+		public string name;
 
 		/// <summary>
 		/// shortcut to entity.transform

@@ -9,6 +9,7 @@ using Handy.Animation;
 using System;
 using System.Collections.Generic;
 using Orbsmash.Constants;
+using Orbsmash.Game.Interactions;
 
 namespace Orbsmash.Game
 {
@@ -45,6 +46,7 @@ namespace Orbsmash.Game
             {
                 new PlayerInputSystem(),
                 new PlayerStateMachineSystem(),
+                new BallHitSystem(),
                 new PlayerMovementSystem(),
                 new KinematicSystem(),
                 new PlayerAnimationSystem(),
@@ -63,7 +65,15 @@ namespace Orbsmash.Game
         private void CreateEntities()
         {
             var tiledMap = content.Load<TiledMap>(_settings.MapTile);
-            var tiledMapComponent = new TiledMapComponent(tiledMap, CollisionLayers.COLLIDERS, true);
+            String[] tiledMapLayers = new[]
+            {
+                TiledImportCollisionLayers.WALLS, TiledImportCollisionLayers.NET
+            };
+            int[] tiledMapPhysicsLayers = new[]
+            {
+                PhysicsLayers.WALLS, PhysicsLayers.NET
+            };
+            var tiledMapComponent = new Handy.Components.TiledMapComponent(tiledMap, tiledMapLayers, tiledMapPhysicsLayers, true);
             var entity = new Entity();
             entity.name = "Map";
             entity.addComponent(tiledMapComponent);
@@ -83,9 +93,9 @@ namespace Orbsmash.Game
 
         public override void onStart()
         {
-            findEntity("Map").transform.position = new Vector2(-160, 0);
+            findEntity("Map").transform.position = new Vector2(0, 0);
             findEntity("Player_0").transform.position = new Vector2(200, 200);
-            findEntity("Ball").transform.position = new Vector2(400, 400);
+            findEntity(EntityNames.BALL).transform.position = new Vector2(400, 400);
         }
     }
 }

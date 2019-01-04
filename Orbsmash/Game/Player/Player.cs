@@ -17,12 +17,12 @@ namespace Orbsmash.Player
     // </summary>
     public class Player : Entity
     {
-        private readonly PlayerStateMachineComponent _state;
-        private readonly PlayerInputComponent _input;
-        private readonly VelocityComponent _velocity;
+        private PlayerStateMachineComponent _state;
+        private PlayerInputComponent _input;
+        private VelocityComponent _velocity;
         private BoxCollider _collider;
         private PolygonCollider _hitbox;
-        private readonly KinematicComponent _kinematic = new KinematicComponent();
+        private KinematicComponent _kinematic = new KinematicComponent();
         private AnimationComponent _mainBodyAnimation;
         private AnimatableSprite _mainPlayerBodySprite;
         private EventComponent _events = new EventComponent();
@@ -32,7 +32,7 @@ namespace Orbsmash.Player
         {
             name = $"Player_{settings.Id}";
             playerSprite = settings.Sprite;
-            //scale = new Vector2(2);
+            scale = new Vector2(2);
             
             // physics
             _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed));
@@ -58,6 +58,7 @@ namespace Orbsmash.Player
             _collider = new BoxCollider(15, 10);
             _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
             _hitbox.isTrigger = true;
+            _hitbox.name = ComponentNames.HITBOX_COLLIDER;
             addComponent(_hitbox);
             // _hitbox = new PolygonCollider([]);
             addComponent(_mainPlayerBodySprite);

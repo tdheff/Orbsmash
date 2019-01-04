@@ -51,7 +51,7 @@ namespace Handy.Systems
                     {
                         var overhang = anim.ElapsedTime - nextFrame.LastFrameLength.Value - nextFrame.Time;
                         anim.ElapsedTime = overhang;
-                        Console.WriteLine($"###### Animation over: {anim.CurrentAnimation} and next is: {currentAnimationTrack.NextAnimation} ######");
+//                        Console.WriteLine($"###### Animation over: {anim.CurrentAnimation} and next is: {currentAnimationTrack.NextAnimation} ######");
                         if (currentAnimationTrack.NextAnimation != null)
                         {
                             anim.CurrentAnimation = currentAnimationTrack.NextAnimation;

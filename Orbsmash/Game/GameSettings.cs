@@ -22,9 +22,9 @@ namespace Orbsmash.Game
         {
             if(testing)
             {
-                Players.Add(new PlayerSettings() { Id = 0, Sprite = PlayerSprites.KNIGHT, Side = Gameplay.Side.LEFT, Speed = 350f, Hitbox = Hitboxes.KNIGHT_HITBOX });
+                Players.Add(new PlayerSettings() { Id = 0, Sprite = PlayerSprites.KNIGHT, Side = Gameplay.Side.LEFT, Speed = 500f, Hitbox = Hitboxes.KNIGHT_HITBOX });
                 BallSprite = BallSprites.DEFAULT;
-                MapTile = MapTiles.DUNGEON;
+                MapTile = MapTiles.MEDIEVAL;
             }
         }
     }
