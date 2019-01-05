@@ -53,16 +53,16 @@ namespace Orbsmash.Game.Interactions
                     }
 
                     var ballVelocityComponent = neighbor.entity.getComponent<VelocityComponent>();
-                    Console.WriteLine("Setting ball speed to {0}", Vector2.Normalize(playerStateMachineComponent.State.LastVector) * ballVelocityComponent.Velocity.Length());
-                    if (playerStateMachineComponent.State.LastVector.LengthSquared() < float.Epsilon)
-                    {
-                        ballVelocityComponent.Velocity = new Vector2(1, 0) * ballVelocityComponent.Velocity.Length();
-                    }
-                    else
-                    {
-                        ballVelocityComponent.Velocity = Vector2.Normalize(playerStateMachineComponent.State.LastVector) * ballVelocityComponent.Velocity.Length();
-                    }
+                    ballStateComponent.BaseSpeed *= 1.05f;
+                    // TODO - HIT BOOST
+                    var velocityNormalized =
+                        playerStateMachineComponent.State.LastVector.LengthSquared() < float.Epsilon
+                            ? new Vector2(1, 0)
+                            : Vector2.Normalize(playerStateMachineComponent.State.LastVector);
+                    ballVelocityComponent.Velocity = velocityNormalized * ballStateComponent.BaseSpeed;
+                    
                     ballStateComponent.LastHitPlayerId = playerStateMachineComponent.State.playerId;
+
                 }
             }
         }
