@@ -41,6 +41,18 @@ namespace Nez.PhysicsShapes
 			return MemberwiseClone() as Shape;
 		}
 
+		/// <summary>
+		/// Returns a copy of the shape flipped along the X-axis
+		/// </summary>
+		/// <returns>Shape flipped along the X-axis</returns>
+		public abstract Shape CloneFlipX();
+		
+		/// <summary>
+		/// Returns a copy of the shape flipped along the Y-axis
+		/// </summary>
+		/// <returns>Shape flipped along the Y-axis</returns>
+		public abstract Shape CloneFlipY();
+
 	}
 }
 

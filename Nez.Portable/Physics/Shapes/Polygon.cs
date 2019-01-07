@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 
 
@@ -250,6 +251,16 @@ namespace Nez.PhysicsShapes
 
 
 		#region Shape abstract methods
+
+		public override Shape CloneFlipX()
+		{
+			return new Polygon(points.Reverse().Select(point => new Vector2(-point.X, point.Y)).ToArray());
+		}
+
+		public override Shape CloneFlipY()
+		{
+			return new Polygon(points.Reverse().Select(point => new Vector2(point.X, -point.Y)).ToArray());
+		}
 
 		internal override void recalculateBounds( Collider collider )
 		{

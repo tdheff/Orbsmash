@@ -228,7 +228,6 @@ namespace Handy.Components
 					collider.entity = entity;
 					_colliders[i] = collider;
 
-					Console.WriteLine(collider.physicsLayer);
 					Physics.addCollider(collider);
 					i++;
 				}

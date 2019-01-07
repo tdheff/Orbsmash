@@ -19,6 +19,16 @@ namespace Nez.PhysicsShapes
 
 		#region Shape abstract methods
 
+		public override Shape CloneFlipX()
+		{
+			return clone();
+		}
+
+		public override Shape CloneFlipY()
+		{
+			return clone();
+		}
+
 		/// <summary>
 		/// internal hack used by Particles so they can reuse a Circle for all collision checks
 		/// </summary>

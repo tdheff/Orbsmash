@@ -44,6 +44,32 @@ namespace Nez
 				return 0;
 			}
 		}
+		
+		/// <summary>
+		/// is component flipped on the X-axis
+		/// </summary>
+		public bool FlipX
+		{
+			get => _flipX; set { setFlipX(value);  }
+		}
+		
+		/// <summary>
+		/// is component flipped on the Y-axis
+		/// </summary>
+		public bool FlipY
+		{
+			get => _flipY; set { setFlipY(value);  }
+		}
+		
+		/// <summary>
+		/// is component flipped on the X-axis
+		/// </summary>
+		protected bool _flipX;
+		
+		/// <summary>
+		/// is component flipped on the Y-axis
+		/// </summary>
+		protected bool _flipY;
 
 		/// <summary>
 		/// if this collider is a trigger it will not cause collisions but it will still trigger events
@@ -78,7 +104,7 @@ namespace Nez
 				return shape.bounds;
 			}
 		}
-
+		
 		/// <summary>
 		/// the bounds of this Collider when it was registered with the Physics system. Storing this allows us to always be able to
 		/// safely remove the Collider from the Physics system even if it was moved before attempting to remove it.
@@ -134,6 +160,24 @@ namespace Nez
 			this.shouldColliderScaleAndRotateWithTransform = shouldColliderScaleAndRotateWithTransform;
 			_isPositionDirty = _isRotationDirty = true;
 			return this;
+		}
+
+		private void setFlipX(bool flipX)
+		{
+			if (flipX != _flipX)
+			{
+				shape = shape.CloneFlipX();
+				_localOffset = new Vector2(-_localOffset.X, _localOffset.Y);
+			}
+		}
+		
+		private void setFlipY(bool flipY)
+		{
+			if (flipY != _flipY)
+			{
+				shape = shape.CloneFlipY();
+				_localOffset = new Vector2(_localOffset.X, -_localOffset.Y);
+			}
 		}
 
 		#endregion

@@ -1,3 +1,4 @@
+using System;
 using Handy.Components;
 using HandyScene = Handy.Scene;
 
@@ -37,6 +38,8 @@ namespace Orbsmash.Player
             // physics
             _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed));
             _velocity = new VelocityComponent(new Vector2(0, 0));
+            Console.WriteLine(settings.StartingPosition);
+            transform.position = settings.StartingPosition;
             
             // input
             _input = new PlayerInputComponent(settings.Id);
@@ -59,11 +62,19 @@ namespace Orbsmash.Player
             _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
             _hitbox.isTrigger = true;
             _hitbox.name = ComponentNames.HITBOX_COLLIDER;
+            
             addComponent(_hitbox);
             // _hitbox = new PolygonCollider([]);
             addComponent(_mainPlayerBodySprite);
             addComponent(_mainBodyAnimation);
             addComponent(_collider);
+            
+            if (_state.State.side == Gameplay.Side.RIGHT)
+            {
+                _mainPlayerBodySprite.flipX = true;
+                _collider.FlipX = true;
+                _hitbox.FlipX = true;
+            }
         }
     }
 }

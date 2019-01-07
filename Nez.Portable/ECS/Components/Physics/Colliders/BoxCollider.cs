@@ -142,7 +142,6 @@ namespace Nez
 		{
 			return string.Format( "[BoxCollider: bounds: {0}", bounds );
 		}
-
 	}
 }
 
