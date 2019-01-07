@@ -94,7 +94,6 @@ namespace Orbsmash.Game
         public override void onStart()
         {
             findEntity("Map").transform.position = new Vector2(0, 0);
-            findEntity("Player_0").transform.position = new Vector2(200, 200);
             findEntity(EntityNames.BALL).transform.position = new Vector2(400, 400);
         }
     }

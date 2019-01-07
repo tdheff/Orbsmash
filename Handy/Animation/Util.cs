@@ -17,11 +17,9 @@ namespace Handy.Animation
             var hitboxDict = new Dictionary<string, HitboxDefinition>();
             foreach(var path in paths)
             {
-                Console.WriteLine($"getting data for {path}");
                 var texture = content.Load<Texture2D>(path);
                 var myDataArray = new Color[texture.Height * texture.Width];
                 texture.GetData(myDataArray);
-                Console.WriteLine($"got... data?? {myDataArray[0]}");
             }
             return hitboxDict;
         }

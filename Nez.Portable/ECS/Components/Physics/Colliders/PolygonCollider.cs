@@ -28,7 +28,6 @@ namespace Nez
 			shape = new Polygon( points );
 		}
 
-
 		public PolygonCollider( int vertCount, float radius )
 		{
 			shape = new Polygon( vertCount, radius );
@@ -58,7 +57,6 @@ namespace Nez
 			//	graphics.batcher.drawLine( mp, mp + perp * 10, Color.White );
 			//}
 		}
-
 	}
 }
 

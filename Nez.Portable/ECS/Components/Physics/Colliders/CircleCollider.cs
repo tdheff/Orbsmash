@@ -81,7 +81,6 @@ namespace Nez
 		{
 			return string.Format( "[CircleCollider: bounds: {0}, radius: {1}", bounds, ( (Circle)shape ).radius );
 		}
-
 	}
 }
 
