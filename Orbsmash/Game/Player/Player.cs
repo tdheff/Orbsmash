@@ -36,7 +36,7 @@ namespace Orbsmash.Player
             scale = new Vector2(2);
             
             // physics
-            _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed));
+            _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed, settings.StartingPosition));
             _velocity = new VelocityComponent(new Vector2(0, 0));
             Console.WriteLine(settings.StartingPosition);
             transform.position = settings.StartingPosition;
@@ -59,6 +59,7 @@ namespace Orbsmash.Player
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new BoxCollider(15, 10);
+            _collider.name = ComponentNames.PLAYER_COLLIDER;
             _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
             _hitbox.isTrigger = true;
             _hitbox.name = ComponentNames.HITBOX_COLLIDER;

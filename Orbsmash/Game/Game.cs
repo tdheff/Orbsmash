@@ -48,6 +48,7 @@ namespace Orbsmash.Game
                 new PlayerStateMachineSystem(),
                 new BallHitSystem(),
                 new PlayerMovementSystem(),
+                new KnockoutSystem(),
                 new KinematicSystem(),
                 new PlayerAnimationSystem(),
                 AnimationSystem

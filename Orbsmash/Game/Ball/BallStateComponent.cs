@@ -7,7 +7,7 @@ namespace Orbsmash.Ball
     public class BallStateComponent : Component
     {
         public int LastHitPlayerId = -1;
-        public Gameplay.Side LastHitSide = Gameplay.Side.RIGHT;
+        public Gameplay.Side LastHitSide = Gameplay.Side.NONE;
 
         public float BaseSpeed = 700.0f;
         public float HitBoost = 1;
