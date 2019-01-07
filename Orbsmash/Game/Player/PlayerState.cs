@@ -25,6 +25,7 @@ namespace Orbsmash.Player
         public bool DashFinished = false;
         public Vector2 LastVector = new Vector2();
         public Gameplay.Direction LastDirection;
+        public Vector2 ResetPosition;
 
         // SWINGING
         public float ChargeTime;
@@ -32,26 +33,20 @@ namespace Orbsmash.Player
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
         
-        public PlayerState(int playerId, Gameplay.Side side, float speed)
+        // OTHER
+        public bool IsInvulnerable = false;
+        
+        public PlayerState(int playerId, Gameplay.Side side, float speed, Vector2 resetPosition)
         {
             this.playerId = playerId;
             this.side = side;
             Speed = speed;
+            ResetPosition = resetPosition;
         }
 
         public IStateMachineState<PlayerStates> Clone()
         {
-            return new PlayerState(playerId, side, Speed)
-            {
-                ChargeTime = ChargeTime,
-                StateEnum = StateEnum,
-                CanMove = CanMove,
-                ChargeFinished = ChargeFinished,
-                SwingFinished = SwingFinished,
-                DashFinished = DashFinished,
-                LastVector = LastVector,
-                LastDirection = LastDirection
-            };
+            return MemberwiseClone() as IStateMachineState<PlayerStates>;
         }
     }
 }

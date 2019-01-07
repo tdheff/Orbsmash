@@ -7,7 +7,8 @@ namespace Orbsmash.Constants
         public enum Side
         {
             LEFT,
-            RIGHT
+            RIGHT,
+            NONE
         };
 
         public enum Direction
@@ -27,6 +28,7 @@ namespace Orbsmash.Constants
     public sealed class ComponentNames
     {
         public static readonly string HITBOX_COLLIDER = "HITBOX_COLLIDER";
+        public static readonly string PLAYER_COLLIDER = "PLAYER_COLLIDER";
     }
 
     public sealed class AnimationContexts

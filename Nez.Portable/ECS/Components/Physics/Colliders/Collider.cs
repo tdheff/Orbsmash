@@ -64,12 +64,12 @@ namespace Nez
 		/// <summary>
 		/// is component flipped on the X-axis
 		/// </summary>
-		protected bool _flipX;
+		protected bool _flipX = false;
 		
 		/// <summary>
 		/// is component flipped on the Y-axis
 		/// </summary>
-		protected bool _flipY;
+		protected bool _flipY = false;
 
 		/// <summary>
 		/// if this collider is a trigger it will not cause collisions but it will still trigger events
