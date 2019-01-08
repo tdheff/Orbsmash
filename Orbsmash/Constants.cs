@@ -83,7 +83,7 @@ namespace Orbsmash.Constants
 
     public sealed class Hitboxes
     {
-        public static readonly string KNIGHT_HITBOX = "Sprites/Characters/Knight/Knight_hitbox";
+        public static readonly string KNIGHT_HITBOX = "Sprites/Characters/Knight/Knight_Hitbox";
         public static readonly string KNIGHT_SWING_HITBOX = "Sprites/Characters/Knight/Knight_Hitbox";
         public static readonly List<string> HitboxesToLoad;
         static Hitboxes()

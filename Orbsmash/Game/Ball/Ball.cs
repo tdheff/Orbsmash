@@ -41,7 +41,6 @@ namespace Orbsmash.Ball
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new CircleCollider(9);
             Flags.setFlagExclusive(ref _collider.collidesWithLayers, PhysicsLayers.WALLS);
-            //Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.WALLS);
             _kinematic.CollisionType = KinematicComponent.ECollisionType.Bounce;
             _ballStateComponent = new BallStateComponent();
             addComponent(_kinematic);
