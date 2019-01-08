@@ -60,6 +60,11 @@ namespace Orbsmash.Player
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new BoxCollider(15, 10);
             _collider.name = ComponentNames.PLAYER_COLLIDER;
+            Flags.setFlagExclusive(ref _collider.physicsLayer, PhysicsLayers.PLAYER);
+            _collider.collidesWithLayers = 0;
+            Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.WALLS);
+            Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.ENVIRONMENT);
+            Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.NET);
             _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
             _hitbox.isTrigger = true;
             _hitbox.name = ComponentNames.HITBOX_COLLIDER;
