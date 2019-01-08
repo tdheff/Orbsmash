@@ -1,37 +1,32 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-
 namespace Nez.BitmapFontImporter
 {
-	// ---- AngelCode BmFont XML serializer ----------------------
-	// ---- By DeadlyDan @ deadlydan@gmail.com -------------------
-	// ---- There's no license restrictions, use as you will. ----
-	// ---- Credits to http://www.angelcode.com/ -----------------
-	[XmlRoot( "font" )]
-	public class BitmapFontFile
-	{
-		/// <summary>
-		/// the full path to the fnt font
-		/// </summary>
-		public string file;
+    // ---- AngelCode BmFont XML serializer ----------------------
+    // ---- By DeadlyDan @ deadlydan@gmail.com -------------------
+    // ---- There's no license restrictions, use as you will. ----
+    // ---- Credits to http://www.angelcode.com/ -----------------
+    [XmlRoot("font")]
+    public class BitmapFontFile
+    {
+        [XmlArray("chars")] [XmlArrayItem("char")]
+        public List<BitmapFontChar> chars;
 
-		[XmlElement( "info" )]
-		public BitmapFontInfo info;
-		
-		[XmlElement( "common" )]
-		public BitmapFontCommon common;
+        [XmlElement("info")] public BitmapFontInfo info;
 
-		[XmlArray( "pages" )]
-		[XmlArrayItem( "page" )]
-		public List<BitmapFontPage> pages;
+        [XmlElement("common")] public BitmapFontCommon common;
 
-		[XmlArray( "chars" )]
-		[XmlArrayItem( "char" )]
-		public List<BitmapFontChar> chars;
-		
-		[XmlArray( "kernings" )]
-		[XmlArrayItem( "kerning" )]
-		public List<BitmapFontKerning> kernings;
-	}
+        /// <summary>
+        ///     the full path to the fnt font
+        /// </summary>
+        public string file;
+
+
+        [XmlArray("kernings")] [XmlArrayItem("kerning")]
+        public List<BitmapFontKerning> kernings;
+
+        [XmlArray("pages")] [XmlArrayItem("page")]
+        public List<BitmapFontPage> pages;
+    }
 }

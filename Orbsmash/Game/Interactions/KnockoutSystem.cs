@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Handy.Components;
-using Microsoft.Xna.Framework;
 using Nez;
 using Orbsmash.Ball;
 using Orbsmash.Constants;
@@ -11,7 +9,10 @@ namespace Orbsmash.Game.Interactions
 {
     public class KnockoutSystem : EntitySystem
     {
-        public KnockoutSystem() : base(new Matcher().all(typeof(PlayerStateMachineComponent))) { }
+        public KnockoutSystem() : base(new Matcher().all(typeof(PlayerStateMachineComponent)))
+        {
+        }
+
         protected override void process(List<Entity> entities)
         {
             foreach (var entity in entities)
@@ -32,28 +33,19 @@ namespace Orbsmash.Game.Interactions
                     throw new Exception();
                 }
 
-                if (playerStateMachineComponent.State.IsInvulnerable)
-                {
-                    continue;
-                }
+                if (playerStateMachineComponent.State.IsInvulnerable) continue;
 
                 var neighbors = Physics.boxcastBroadphaseExcludingSelf(collider);
                 foreach (var neighbor in neighbors)
                 {
-                    if (neighbor.entity.name != EntityNames.BALL)
-                    {
-                        continue;
-                    }
+                    if (neighbor.entity.name != EntityNames.BALL) continue;
 
                     var ballStateComponent = neighbor.entity.getComponent<BallStateComponent>();
                     if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId ||
                         ballStateComponent.LastHitSide == playerStateMachineComponent.State.side)
-                    {
                         continue;
-                    }
 
                     playerStateMachineComponent.State.IsKilled = true;
-
                 }
             }
         }

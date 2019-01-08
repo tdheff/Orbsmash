@@ -1,43 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Handy.Animation
 {
     public class AnimationFrame
     {
         public int FrameNumber;
-        public int Time;
         public int? LastFrameLength;
+        public int Time;
     }
+
     public class EventFrame
     {
         public string EventName;
         public int Time;
     }
+
     public class AnimationDetail
     {
         public string AnimationName;
-        public bool Repeats;
-        public string NextAnimation;
-        public IList<AnimationFrame> Frames;
         public IList<EventFrame> Events;
+        public IList<AnimationFrame> Frames;
+        public string NextAnimation;
+        public bool Repeats;
     }
 
     public class SpriteDescriptor
     {
+        public int HFrames;
         public string SpriteName;
         public int VFrames;
-        public int HFrames;
     }
 
     public class AnimationDefinition
     {
+        public IList<AnimationDetail> Animations;
         public string Context;
         public SpriteDescriptor SpriteDescriptor;
-        public IList<AnimationDetail> Animations;
     }
 }
 

@@ -1,18 +1,10 @@
-﻿using System;
-
-
-namespace Nez.LibGdxAtlases
+﻿namespace Nez.LibGdxAtlases
 {
-	public class LibGdxAtlasRect
-	{
-		public int x;
-		public int y;
-		public int w;
-		public int h;
-
-
-		public LibGdxAtlasRect()
-		{}
-	}
+    public class LibGdxAtlasRect
+    {
+        public int h;
+        public int w;
+        public int x;
+        public int y;
+    }
 }
-

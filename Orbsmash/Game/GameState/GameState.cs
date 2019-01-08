@@ -1,8 +1,4 @@
 using Handy.Components;
-using System.Collections.Generic;
-using System.Linq;
-using Orbsmash.Constants;
-using Orbsmash.Player;
 
 namespace Orbsmash.Game
 {
@@ -14,18 +10,18 @@ namespace Orbsmash.Game
         PointScoredRight,
         PointScoredLeft
     }
-    
+
     public class GameState : IStateMachineState<GameStates>
     {
-        public GameStates StateEnum { get; set; }
-
-        public bool Served = false;
+        public Ball.Ball Ball;
+        public int LeftPoints = 0;
 
         public Player.Player[] Players;
-        public Ball.Ball Ball;
         public int RightPoints = 0;
-        public int LeftPoints = 0;
-        
+
+        public bool Served = false;
+        public GameStates StateEnum { get; set; }
+
         public IStateMachineState<GameStates> Clone()
         {
             return MemberwiseClone() as IStateMachineState<GameStates>;

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nez.AI.UtilityAI;
 using Optional;
 
 namespace Handy.Dispatch
@@ -9,7 +7,7 @@ namespace Handy.Dispatch
     public class QueueDispatcher : IDispatcher
     {
         private readonly List<IAction> _actions;
-        
+
         public QueueDispatcher()
         {
             _actions = new List<IAction>();
@@ -27,9 +25,9 @@ namespace Handy.Dispatch
                 var action = _actions.First();
                 _actions.RemoveAt(0);
                 return Option.Some(action);
-            } else {
-                return Option.None<IAction>();
             }
+
+            return Option.None<IAction>();
         }
 
         public Option<T> Peek<T>() where T : IAction

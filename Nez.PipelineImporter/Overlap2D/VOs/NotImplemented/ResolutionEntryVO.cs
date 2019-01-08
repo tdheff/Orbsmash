@@ -21,34 +21,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class ResolutionEntryVO
-	{
-		public String name = "";
+    public class ResolutionEntryVO
+    {
+        public int baseResolution;
+        public int height;
+        public string name = "";
 
-		public int width;
-		public int height;
-		public int baseResolution;
+        public int width;
 
 
-		public float getMultiplier( ResolutionEntryVO originalResolution )
-		{
-			float mul;
-			if( baseResolution == 0 )
-			{
-				mul = (float)originalResolution.width / width;
-			}
-			else
-			{
-				mul = (float)originalResolution.height / height;
-			}
-			return mul;
-		}
-
-	}
+        public float getMultiplier(ResolutionEntryVO originalResolution)
+        {
+            float mul;
+            if (baseResolution == 0)
+                mul = (float) originalResolution.width / width;
+            else
+                mul = (float) originalResolution.height / height;
+            return mul;
+        }
+    }
 }
-

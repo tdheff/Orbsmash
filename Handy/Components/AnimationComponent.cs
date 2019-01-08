@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Handy.Animation;
-using Microsoft.Xna.Framework;
+﻿using Handy.Animation;
 using Nez;
 
 namespace Handy.Components
@@ -15,11 +9,12 @@ namespace Handy.Components
     public class AnimationComponent : Component
     {
         public IAnimatable AnimationTarget;
-        public string LastAnimation;
         public string Context = "";
         public string CurrentAnimation;
-        public float ElapsedTime;
         public int CurrentFrame;
+        public float ElapsedTime;
+        public string LastAnimation;
+
         public AnimationComponent(IAnimatable animationTarget, string context, string startingAnimation)
         {
             AnimationTarget = animationTarget;
@@ -30,12 +25,8 @@ namespace Handy.Components
 
         public void SetAnimation(string newAnimation)
         {
-            if(newAnimation != CurrentAnimation)
-            {
-                ElapsedTime = 0;
-            }
+            if (newAnimation != CurrentAnimation) ElapsedTime = 0;
             CurrentAnimation = newAnimation;
         }
-
     }
 }

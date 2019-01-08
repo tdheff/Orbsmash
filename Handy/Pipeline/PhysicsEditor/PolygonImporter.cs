@@ -9,9 +9,9 @@ namespace Handy.Pipeline.PhysicsEditor
         public override XDocument Import(string filename, ContentImporterContext context)
         {
             context.Logger.LogMessage("Importing VPNC file: {0}", filename);
- 
+
             var doc = XDocument.Load(filename);
- 
+
             return doc;
         }
     }

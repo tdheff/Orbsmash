@@ -1,36 +1,27 @@
 using Newtonsoft.Json;
 
-
 namespace Nez.TexturePackerImporter
 {
-	public class TexturePackerMeta
-	{
-		[JsonProperty( "app" )]
-		public string app;
+    public class TexturePackerMeta
+    {
+        [JsonProperty("app")] public string app;
 
-		[JsonProperty( "version" )]
-		public string version;
+        [JsonProperty("format")] public string format;
 
-		[JsonProperty( "image" )]
-		public string image;
+        [JsonProperty("image")] public string image;
 
-		[JsonProperty( "format" )]
-		public string format;
+        [JsonProperty("scale")] public float scale;
 
-		[JsonProperty( "size" )]
-		public TexturePackerSize size;
+        [JsonProperty("size")] public TexturePackerSize size;
 
-		[JsonProperty( "scale" )]
-		public float scale;
+        [JsonProperty("smartupdate")] public string smartUpdate;
 
-		[JsonProperty( "smartupdate" )]
-		public string smartUpdate;
+        [JsonProperty("version")] public string version;
 
 
-		public override string ToString()
-		{
-			return image;
-		}
-
-	}
+        public override string ToString()
+        {
+            return image;
+        }
+    }
 }

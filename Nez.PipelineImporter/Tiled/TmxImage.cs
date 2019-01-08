@@ -1,32 +1,30 @@
 using System.Xml.Serialization;
 
-
 namespace Nez.TiledMaps
 {
-	public class TmxImage
-	{
-		[XmlAttribute( AttributeName = "source" )]
-		public string source;
+    public class TmxImage
+    {
+        [XmlElement(ElementName = "data")] public TmxData data;
 
-		[XmlAttribute( AttributeName = "width" )]
-		public int width;
+        [XmlAttribute(AttributeName = "format")]
+        public string format;
 
-		[XmlAttribute( AttributeName = "height" )]
-		public int height;
+        [XmlAttribute(AttributeName = "height")]
+        public int height;
 
-		[XmlAttribute( AttributeName = "format" )]
-		public string format;
+        [XmlAttribute(AttributeName = "source")]
+        public string source;
 
-		[XmlAttribute( AttributeName = "trans" )]
-		public string trans;
+        [XmlAttribute(AttributeName = "trans")]
+        public string trans;
 
-		[XmlElement( ElementName = "data" )]
-		public TmxData data;
+        [XmlAttribute(AttributeName = "width")]
+        public int width;
 
 
-		public override string ToString()
-		{
-			return source;
-		}
-	}
+        public override string ToString()
+        {
+            return source;
+        }
+    }
 }

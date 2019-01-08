@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Nez;
+﻿using Nez;
 
 namespace Handy.Components
 {
@@ -17,9 +11,10 @@ namespace Handy.Components
         {
             Slide,
             Bounce
-        };
+        }
+
+        public float BounceDampening = 1.0f;
 
         public ECollisionType CollisionType = ECollisionType.Slide;
-        public float BounceDampening = 1.0f;
     }
 }

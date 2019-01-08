@@ -1,33 +1,29 @@
-using Handy.Components;
-using HandyScene = Handy.Scene;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Nez;
-using Nez.Sprites;
-using Nez.Textures;
-using Orbsmash.Player;
 using Handy.Animation;
+using Handy.Components;
+using Microsoft.Xna.Framework;
+using Nez;
 using Orbsmash.Constants;
+using HandyScene = Handy.Scene;
 
 namespace Orbsmash.Ball
 {
     public class Ball : Entity
     {
-        private readonly VelocityComponent _velocity;
-        private CircleCollider _collider;
         private readonly KinematicComponent _kinematic = new KinematicComponent();
-        private AnimatableSprite _sprite;
+        private readonly VelocityComponent _velocity;
         private AnimationComponent _ballAnimation;
         private BallStateComponent _ballStateComponent;
-        private string ballSprite;
-        
+        private CircleCollider _collider;
+        private AnimatableSprite _sprite;
+        private readonly string ballSprite;
+
         public Ball(string sprite)
         {
             ballSprite = sprite;
             name = EntityNames.BALL;
-            
+
             _velocity = new VelocityComponent(new Vector2(300, 300));
-            
+
             addComponent(_velocity);
         }
 
@@ -36,7 +32,8 @@ namespace Orbsmash.Ball
             var gameScene = (HandyScene) scene;
             var mySpriteDef = gameScene.SpriteDefinitions[ballSprite];
             _sprite = new AnimatableSprite(mySpriteDef.Subtextures);
-            _ballAnimation = new AnimationComponent(_sprite, AnimationContexts.BALL_SPRITE_ANIMATIONS, BallAnimations.IDLE);
+            _ballAnimation =
+                new AnimationComponent(_sprite, AnimationContexts.BALL_SPRITE_ANIMATIONS, BallAnimations.IDLE);
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new CircleCollider(9);

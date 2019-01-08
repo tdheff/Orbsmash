@@ -21,14 +21,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class SpineVO : MainItemVO
-	{
-		public String animationName = "";
-		public String currentAnimationName = "";
-	}
+    public class SpineVO : MainItemVO
+    {
+        public string animationName = "";
+        public string currentAnimationName = "";
+    }
 }
-

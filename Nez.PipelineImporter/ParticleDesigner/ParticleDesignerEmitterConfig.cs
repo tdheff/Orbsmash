@@ -1,121 +1,89 @@
-﻿using System;
-using System.Xml.Serialization;
-
+﻿using System.Xml.Serialization;
 
 namespace Nez.ParticleDesignerImporter
 {
-	[XmlRoot( "particleEmitterConfig" )]
-	public class ParticleDesignerEmitterConfig
-	{
-		[XmlElement]
-		public ParticleDesignerVector2 sourcePosition;
+    [XmlRoot("particleEmitterConfig")]
+    public class ParticleDesignerEmitterConfig
+    {
+        [XmlElement] public ParticleDesignerFloatValue particleLifeSpan;
 
-		[XmlElement]
-		public ParticleDesignerVector2 sourcePositionVariance;
+        [XmlElement] public ParticleDesignerFloatValue particleLifespanVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue speed;
+        [XmlElement] public ParticleDesignerFloatValue angle;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue speedVariance;
+        [XmlElement] public ParticleDesignerFloatValue angleVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue particleLifeSpan;
+        [XmlElement] public ParticleDesignerFloatValue rotatePerSecond;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue particleLifespanVariance;
+        [XmlElement] public ParticleDesignerFloatValue rotatePerSecondVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue angle;
+        [XmlElement] public ParticleDesignerIntValue blendFuncSource;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue angleVariance;
+        [XmlElement] public ParticleDesignerIntValue blendFuncDestination;
 
-		[XmlElement]
-		public ParticleDesignerVector2 gravity;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue radialAcceleration;
+        [XmlElement] public ParticleDesignerFloatValue finishParticleSize;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue tangentialAcceleration;
+        [XmlElement] public ParticleDesignerFloatValue finishParticleSizeVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue radialAccelVariance;
+        [XmlElement] public ParticleDesignerFloatValue duration;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue tangentialAccelVariance;
+        [XmlElement] public ParticleDesignerIntValue emitterType;
 
-		[XmlElement]
-		public ParticleDesignerColor startColor;
+        [XmlElement] public ParticleDesignerColor startColor;
 
-		[XmlElement]
-		public ParticleDesignerColor startColorVariance;
+        [XmlElement] public ParticleDesignerColor startColorVariance;
 
-		[XmlElement]
-		public ParticleDesignerColor finishColor;
+        [XmlElement] public ParticleDesignerColor finishColor;
 
-		[XmlElement]
-		public ParticleDesignerColor finishColorVariance;
+        [XmlElement] public ParticleDesignerColor finishColorVariance;
 
-		[XmlElement]
-		public ParticleDesignerIntValue maxParticles;
+        [XmlElement] public ParticleDesignerFloatValue startParticleSize;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue startParticleSize;
+        [XmlElement] public ParticleDesignerFloatValue startParticleSizeVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue startParticleSizeVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue finishParticleSize;
+        [XmlElement] public ParticleDesignerVector2 gravity;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue finishParticleSizeVariance;
+        [XmlElement] public ParticleDesignerIntValue maxParticles;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue duration;
+        [XmlElement] public ParticleDesignerFloatValue maxRadius;
 
-		[XmlElement]
-		public ParticleDesignerIntValue emitterType;
+        [XmlElement] public ParticleDesignerFloatValue maxRadiusVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue maxRadius;
+        [XmlElement] public ParticleDesignerFloatValue minRadius;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue maxRadiusVariance;
+        [XmlElement] public ParticleDesignerFloatValue minRadiusVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue minRadius;
+        [XmlElement] public ParticleDesignerFloatValue speed;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue minRadiusVariance;
+        [XmlElement] public ParticleDesignerFloatValue speedVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue rotatePerSecond;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue rotatePerSecondVariance;
+        [XmlElement] public ParticleDesignerFloatValue radialAcceleration;
 
-		[XmlElement]
-		public ParticleDesignerIntValue blendFuncSource;
+        [XmlElement] public ParticleDesignerFloatValue tangentialAcceleration;
 
-		[XmlElement]
-		public ParticleDesignerIntValue blendFuncDestination;
+        [XmlElement] public ParticleDesignerFloatValue radialAccelVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue rotationStart;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue rotationStartVariance;
+        [XmlElement] public ParticleDesignerFloatValue rotationStart;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue rotationEnd;
+        [XmlElement] public ParticleDesignerFloatValue rotationStartVariance;
 
-		[XmlElement]
-		public ParticleDesignerFloatValue rotationEndVariance;
+        [XmlElement] public ParticleDesignerFloatValue rotationEnd;
 
-		[XmlElement]
-		public ParticleDesignerTexture texture;
-	}
+        [XmlElement] public ParticleDesignerFloatValue rotationEndVariance;
+
+
+        [XmlElement] public ParticleDesignerVector2 sourcePosition;
+
+        [XmlElement] public ParticleDesignerVector2 sourcePositionVariance;
+
+
+        [XmlElement] public ParticleDesignerFloatValue tangentialAccelVariance;
+
+
+        [XmlElement] public ParticleDesignerTexture texture;
+    }
 }

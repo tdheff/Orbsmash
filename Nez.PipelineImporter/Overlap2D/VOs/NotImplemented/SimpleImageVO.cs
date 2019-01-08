@@ -21,16 +21,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class SimpleImageVO : MainItemVO
-	{
-		public String imageName;
-		public bool isRepeat = false;
-		public bool isPolygon = false;
-	}
+    public class SimpleImageVO : MainItemVO
+    {
+        public string imageName;
+        public bool isPolygon = false;
+        public bool isRepeat = false;
+    }
 }
-

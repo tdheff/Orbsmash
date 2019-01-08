@@ -4,13 +4,6 @@ namespace Orbsmash.Constants
 {
     public sealed class Gameplay
     {
-        public enum Side
-        {
-            LEFT,
-            RIGHT,
-            NONE
-        };
-
         public enum Direction
         {
             UP,
@@ -18,8 +11,15 @@ namespace Orbsmash.Constants
             LEFT,
             RIGHT
         }
+
+        public enum Side
+        {
+            LEFT,
+            RIGHT,
+            NONE
+        }
     }
-    
+
     public sealed class Timers
     {
         public static readonly float POINT_SCORED_TIMER = 1.5f;
@@ -29,7 +29,7 @@ namespace Orbsmash.Constants
     {
         public static readonly string BALL = "BALL";
     }
-    
+
     public sealed class ComponentNames
     {
         public static readonly string HITBOX_COLLIDER = "HITBOX_COLLIDER";
@@ -54,7 +54,7 @@ namespace Orbsmash.Constants
         public static readonly string DUNGEON = "Tiles/DungeonMap";
         public static readonly string MEDIEVAL = "Tiles/MedievalMap";
     }
-    
+
     public sealed class PhysicsLayers
     {
         public static readonly int ENVIRONMENT = 1;
@@ -79,9 +79,10 @@ namespace Orbsmash.Constants
         public static readonly string KNIGHT_HITBOX = "Sprites/Characters/Knight/Knight_hitbox";
         public static readonly string KNIGHT_SWING_HITBOX = "Sprites/Characters/Knight/Knight_Hitbox";
         public static readonly List<string> HitboxesToLoad;
+
         static Hitboxes()
         {
-            HitboxesToLoad = new List<string>() { KNIGHT_HITBOX };
+            HitboxesToLoad = new List<string> {KNIGHT_HITBOX};
         }
     }
 
@@ -112,6 +113,4 @@ namespace Orbsmash.Constants
         public static readonly string PLAYER_SWING_END = "PLAYER_SWING_END";
         public static readonly string PLAYER_DASH_END = "PLAYER_DASH_END";
     }
-
-    
 }

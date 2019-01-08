@@ -21,15 +21,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class CoreActorData
-	{
-		public String id = null;
-		public String[] tags = null;
-		public int layerIndex = 0;
-	}
+    public class CoreActorData
+    {
+        public string id = null;
+        public int layerIndex = 0;
+        public string[] tags = null;
+    }
 }

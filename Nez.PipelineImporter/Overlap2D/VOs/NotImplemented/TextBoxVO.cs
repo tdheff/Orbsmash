@@ -21,17 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class TextBoxVO : MainItemVO
-	{
-		public String defaultText = string.Empty;
-		public float width = 0;
-		public float height = 0;
-		public String style	= string.Empty;
-	}
+    public class TextBoxVO : MainItemVO
+    {
+        public string defaultText = string.Empty;
+        public float height = 0;
+        public string style = string.Empty;
+        public float width = 0;
+    }
 }
-

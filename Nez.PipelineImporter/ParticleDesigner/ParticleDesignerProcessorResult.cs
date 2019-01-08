@@ -1,19 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
-using Nez.Particles;
-
+﻿using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 
 namespace Nez.ParticleDesignerImporter
 {
-	public class ParticleDesignerProcessorResult
-	{
-		public ParticleDesignerEmitterConfig particleEmitterConfig;
-		public Texture2DContent texture;
-		public byte[] textureTiffData;
-
-
-		public ParticleDesignerProcessorResult()
-		{}
-	}
+    public class ParticleDesignerProcessorResult
+    {
+        public ParticleDesignerEmitterConfig particleEmitterConfig;
+        public Texture2DContent texture;
+        public byte[] textureTiffData;
+    }
 }
-

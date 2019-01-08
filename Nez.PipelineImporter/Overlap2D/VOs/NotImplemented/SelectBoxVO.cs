@@ -21,18 +21,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class SelectBoxVO : MainItemVO
-	{
-		public List<String>	list;
-		public String style;
-		public float width = 0;
-		public float height = 0;
-	}
+    public class SelectBoxVO : MainItemVO
+    {
+        public float height = 0;
+        public List<string> list;
+        public string style;
+        public float width = 0;
+    }
 }
-

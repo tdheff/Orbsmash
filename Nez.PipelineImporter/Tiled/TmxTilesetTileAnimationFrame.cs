@@ -1,23 +1,20 @@
-﻿using System;
-using System.Xml.Serialization;
-
+﻿using System.Xml.Serialization;
 
 namespace Nez.TiledMaps
 {
-	[XmlRoot( ElementName = "frame" )]
-	public class TmxTilesetTileAnimationFrame
-	{
-		[XmlAttribute( AttributeName = "tileid" )]
-		public int tileId;
+    [XmlRoot(ElementName = "frame")]
+    public class TmxTilesetTileAnimationFrame
+    {
+        [XmlAttribute(AttributeName = "duration")]
+        public float duration;
 
-		[XmlAttribute( AttributeName = "duration" )]
-		public float duration;
+        [XmlAttribute(AttributeName = "tileid")]
+        public int tileId;
 
 
-		public override string ToString()
-		{
-			return string.Format( "[TmxTilesetTileAnimationFrame] tileId: {0}, duration: {1}", tileId, duration );
-		}
-	}
+        public override string ToString()
+        {
+            return string.Format("[TmxTilesetTileAnimationFrame] tileId: {0}, duration: {1}", tileId, duration);
+        }
+    }
 }
-

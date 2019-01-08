@@ -21,28 +21,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-
 namespace Nez.Overlap2D.Runtime
 {
-	public class ProjectInfoVO
-	{
-		public int pixelToWorld = 1;
-		public ResolutionEntryVO originalResolution;
-		public List<ResolutionEntryVO> resolutions;
-		public List<SceneInfoVO> scenes;
-		public Dictionary<String, CompositeItemVO> libraryItems;
+    public class ProjectInfoVO
+    {
+        public Dictionary<string, CompositeItemVO> libraryItems;
+        public ResolutionEntryVO originalResolution;
+        public int pixelToWorld = 1;
+        public List<ResolutionEntryVO> resolutions;
+        public List<SceneInfoVO> scenes;
 
 
-		public override string ToString()
-		{
-			return Newtonsoft.Json.JsonConvert.SerializeObject( this );
-		}
-
-	}
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+    }
 }
-

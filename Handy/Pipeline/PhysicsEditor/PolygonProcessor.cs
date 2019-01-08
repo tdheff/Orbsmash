@@ -3,8 +3,6 @@ using System.Linq;
 using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline;
-using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
-using Nez;
 using Nez.PhysicsShapes;
 
 namespace Handy.Pipeline.PhysicsEditor
@@ -17,24 +15,19 @@ namespace Handy.Pipeline.PhysicsEditor
             try
             {
                 var numBodies = input.Document.Root.Descendants("body").Count();
-                if (numBodies > 1)
-                {
-                    throw new NotImplementedException("Cannot process more than one body currently");
-                }
+                if (numBodies > 1) throw new NotImplementedException("Cannot process more than one body currently");
 
                 var body = input.Document.Root.Descendants("body").First();
                 var fixture = body.Element("fixture");
                 var numPolygons = fixture.Attribute("numPolygons");
                 if (numPolygons.Value != "1")
-                {
                     throw new NotImplementedException("Cannot process more than one polygon currently");
-                }
 
                 var polygon = fixture.Element("polygon");
-                var numVertexes = Int32.Parse(polygon.Attribute("numVertexes").Value);
+                var numVertexes = int.Parse(polygon.Attribute("numVertexes").Value);
                 var vertexes = new Vector2[numVertexes];
-                
-                int i = 0;
+
+                var i = 0;
                 foreach (var vertex in polygon.Elements("vertex"))
                 {
                     var x = float.Parse(vertex.Attribute("x").Value);

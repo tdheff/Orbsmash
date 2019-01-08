@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Handy.Components;
 using Handy.Systems;
 using Nez;
@@ -7,13 +6,16 @@ using Orbsmash.Constants;
 
 namespace Orbsmash.Player
 {
-    public class PlayerStateMachineSystem : PushdownAutomatonSystem<PlayerStates, PlayerState, PlayerStateMachineComponent>
+    public class
+        PlayerStateMachineSystem : PushdownAutomatonSystem<PlayerStates, PlayerState, PlayerStateMachineComponent>
     {
         public PlayerStateMachineSystem() : base(new Matcher().all(
             typeof(PlayerStateMachineComponent),
             typeof(PlayerInputComponent),
             typeof(EventComponent)
-        )) { }
+        ))
+        {
+        }
 
         protected override void Update(Entity entity, PlayerStateMachineComponent stateMachine)
         {
@@ -28,10 +30,7 @@ namespace Orbsmash.Player
                     break;
                 case PlayerStates.Charge:
                     state.ChargeTime += Time.deltaTime;
-                    if (state.ChargeTime >= PlayerState.MaxChargeTime)
-                    {
-                        state.ChargeFinished = true;
-                    }
+                    if (state.ChargeTime >= PlayerState.MaxChargeTime) state.ChargeFinished = true;
                     break;
                 case PlayerStates.Swing:
                     break;
@@ -40,10 +39,12 @@ namespace Orbsmash.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
 //            stateMachine.UpdateState(state);
         }
 
-        protected override StateMachineTransition<PlayerStates> Transition(Entity entity, PlayerStateMachineComponent stateMachine)
+        protected override StateMachineTransition<PlayerStates> Transition(Entity entity,
+            PlayerStateMachineComponent stateMachine)
         {
             var input = entity.getComponent<PlayerInputComponent>();
             var events = entity.getComponent<EventComponent>();
@@ -52,68 +53,47 @@ namespace Orbsmash.Player
             {
                 var eventsList = events.PeekEvents();
             }
+
             if (state.StateEnum != PlayerStates.Dead && state.IsKilled)
-            {
                 return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Dead);
-            }
-            
+
             switch (state.StateEnum)
             {
                 case PlayerStates.Idle:
                     if (input.SwingPressed)
-                    {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
-                    } else if (input.DashPressed)
-                    {
+                    else if (input.DashPressed)
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Dash);
-                    } else if (input.MovementStick.LengthSquared() > PlayerState.MovementThresholdSquared)
-                    {
+                    else if (input.MovementStick.LengthSquared() > PlayerState.MovementThresholdSquared)
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Walk);
-                    }
                     break;
                 case PlayerStates.Walk:
                     if (input.SwingPressed)
-                    {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
-                    } else if (input.DashPressed)
-                    {
+                    else if (input.DashPressed)
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Dash);
-                    } else if (input.MovementStick.LengthSquared() < PlayerState.MovementThresholdSquared)
-                    {
+                    else if (input.MovementStick.LengthSquared() < PlayerState.MovementThresholdSquared)
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Idle);
-                    }
                     break;
                 case PlayerStates.Dash:
                     if (input.SwingPressed)
-                    {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
-                    } else if (state.DashFinished)
-                    {
-                        return StateMachineTransition<PlayerStates>.Pop();
-                    }
+                    else if (state.DashFinished) return StateMachineTransition<PlayerStates>.Pop();
                     break;
                 case PlayerStates.Charge:
-                    if (!input.SwingPressed)
-                    {
-                        return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Swing);
-                    }
+                    if (!input.SwingPressed) return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Swing);
                     break;
                 case PlayerStates.Swing:
                     state.SwingFinished = events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_SWING_END);
-                    if (state.SwingFinished)
-                    {
-                        return StateMachineTransition<PlayerStates>.Pop();
-                    }
+                    if (state.SwingFinished) return StateMachineTransition<PlayerStates>.Pop();
                     break;
                 case PlayerStates.Dead:
-                    if (!state.IsKilled)
-                    {
-                        return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Idle);
-                    }
+                    if (!state.IsKilled) return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Idle);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             return StateMachineTransition<PlayerStates>.None();
         }
 
@@ -169,6 +149,5 @@ namespace Orbsmash.Player
                     throw new ArgumentOutOfRangeException();
             }
         }
-
     }
 }

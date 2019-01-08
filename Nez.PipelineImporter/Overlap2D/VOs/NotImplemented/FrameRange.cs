@@ -21,28 +21,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class FrameRange
-	{
-		public String name;
-		public int startFrame;
-		public int endFrame;
+    public class FrameRange
+    {
+        public int endFrame;
+        public string name;
+        public int startFrame;
 
-		public FrameRange()
-		{
+        public FrameRange()
+        {
+        }
 
-		}
-
-		public FrameRange( String name, int startFrame, int endFrame )
-		{
-			this.name = name;
-			this.startFrame = startFrame;
-			this.endFrame = endFrame;
-		}
-	}
+        public FrameRange(string name, int startFrame, int endFrame)
+        {
+            this.name = name;
+            this.startFrame = startFrame;
+            this.endFrame = endFrame;
+        }
+    }
 }
-

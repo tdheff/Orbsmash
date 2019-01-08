@@ -1,20 +1,15 @@
-﻿using System;
-
-
-namespace Nez.Overlap2D.Runtime
+﻿namespace Nez.Overlap2D.Runtime
 {
-	public class LabelVO : MainItemVO
-	{
-		public String text = "Label";
-		public String	style	= "";
-		public int size;
-		public int align;
+    public class LabelVO : MainItemVO
+    {
+        public int align;
+        public float height = 0;
 
-		public float width = 0;
-		public float height = 0;
+        public bool multiline = false;
+        public int size;
+        public string style = "";
+        public string text = "Label";
 
-		public bool multiline = false;
-	}
-		
+        public float width = 0;
+    }
 }
-

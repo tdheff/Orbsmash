@@ -1,4 +1,3 @@
-using System;
 using Nez;
 using Nez.UI;
 
@@ -8,7 +7,6 @@ namespace Handy.Components
     {
         public override void initialize(Table table, Skin skin, float leftCellWidth)
         {
-            
         }
 
         public override void update()

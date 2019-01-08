@@ -21,28 +21,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class Circle
-	{
-		public float x;
-		public float y;
-		public float radius;
+    public class Circle
+    {
+        public float radius;
+        public float x;
+        public float y;
 
 
-		public Circle()
-		{}
+        public Circle()
+        {
+        }
 
 
-		public Circle( float x, float y, float radius )
-		{
-			this.x = x;
-			this.y = y;
-			this.radius = radius;
-		}
-
-	}
+        public Circle(float x, float y, float radius)
+        {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+        }
+    }
 }

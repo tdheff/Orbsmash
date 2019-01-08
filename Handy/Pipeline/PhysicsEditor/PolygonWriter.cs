@@ -15,10 +15,7 @@ namespace Handy.Pipeline.PhysicsEditor
         protected override void Write(ContentWriter output, Polygon value)
         {
             output.Write(value.points.Length);
-            foreach (var point in value.points)
-            {
-                output.Write(point);
-            }
+            foreach (var point in value.points) output.Write(point);
         }
     }
 }

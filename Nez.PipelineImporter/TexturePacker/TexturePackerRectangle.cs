@@ -1,27 +1,21 @@
 using Newtonsoft.Json;
 
-
 namespace Nez.TexturePackerImporter
 {
-	public class TexturePackerRectangle
-	{
-		[JsonProperty( "x" )]
-		public int x;
+    public class TexturePackerRectangle
+    {
+        [JsonProperty("h")] public int height;
 
-		[JsonProperty( "y" )]
-		public int y;
+        [JsonProperty("w")] public int width;
 
-		[JsonProperty( "w" )]
-		public int width;
+        [JsonProperty("x")] public int x;
 
-		[JsonProperty( "h" )]
-		public int height;
+        [JsonProperty("y")] public int y;
 
 
-		public override string ToString()
-		{
-			return string.Format( "{0} {1} {2} {3}", x, y, width, height );
-		}
-
-	}
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2} {3}", x, y, width, height);
+        }
+    }
 }

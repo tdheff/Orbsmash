@@ -1,89 +1,83 @@
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using System.IO;
-using System;
+using System.Xml.Serialization;
 using Nez.PipelineImporter;
-
 
 namespace Nez.TiledMaps
 {
-	[XmlRoot( ElementName = "tileset" )]
-	public class TmxTileset
-	{
-		// we need this for tilesets that have no image. they use image collections and we need the path to save the new atlas we generate.
-		public string mapFolder;
-		public bool isStandardTileset = true;
+    [XmlRoot(ElementName = "tileset")]
+    public class TmxTileset
+    {
+        [XmlAttribute(AttributeName = "columns")]
+        public int columns;
 
-		[XmlAttribute( AttributeName = "firstgid" )]
-		public int firstGid;
+        [XmlAttribute(AttributeName = "firstgid")]
+        public int firstGid;
 
-		[XmlAttribute( AttributeName = "source" )]
-		public string source;
+        [XmlElement(ElementName = "tileoffset")]
+        public TmxTileOffset tileOffset;
 
-		[XmlAttribute( AttributeName = "name" )]
-		public string name;
+        [XmlElement(ElementName = "tile")] public List<TmxTilesetTile> tiles;
 
-		[XmlAttribute( AttributeName = "tilewidth" )]
-		public int tileWidth;
+        [XmlElement(ElementName = "image")] public TmxImage image;
 
-		[XmlAttribute( AttributeName = "tileheight" )]
-		public int tileHeight;
+        public bool isStandardTileset = true;
 
-		[XmlAttribute( AttributeName = "spacing" )]
-		public int spacing;
+        // we need this for tilesets that have no image. they use image collections and we need the path to save the new atlas we generate.
+        public string mapFolder;
 
-		[XmlAttribute( AttributeName = "margin" )]
-		public int margin;
+        [XmlAttribute(AttributeName = "margin")]
+        public int margin;
 
-		[XmlAttribute( AttributeName = "tilecount" )]
-		public int tileCount;
+        [XmlAttribute(AttributeName = "name")] public string name;
 
-		[XmlAttribute( AttributeName = "columns" )]
-		public int columns;
+        [XmlArray("properties")] [XmlArrayItem("property")]
+        public List<TmxProperty> properties;
 
-		[XmlElement( ElementName = "tileoffset" )]
-		public TmxTileOffset tileOffset;
+        [XmlAttribute(AttributeName = "source")]
+        public string source;
 
-		[XmlElement( ElementName = "tile" )]
-		public List<TmxTilesetTile> tiles;
+        [XmlAttribute(AttributeName = "spacing")]
+        public int spacing;
 
-		[XmlArray( "properties" )]
-		[XmlArrayItem( "property" )]
-		public List<TmxProperty> properties;
+        [XmlArray("terraintypes")] [XmlArrayItem("terrain")]
+        public List<TmxTerrain> terrainTypes;
 
-		[XmlElement( ElementName = "image" )]
-		public TmxImage image;
+        [XmlAttribute(AttributeName = "tilecount")]
+        public int tileCount;
 
-		[XmlArray( "terraintypes" )]
-		[XmlArrayItem( "terrain" )]
-		public List<TmxTerrain> terrainTypes;
+        [XmlAttribute(AttributeName = "tileheight")]
+        public int tileHeight;
 
 
-		public TmxTileset()
-		{
-			tileOffset = new TmxTileOffset();
-			tiles = new List<TmxTilesetTile>();
-			properties = new List<TmxProperty>();
-			terrainTypes = new List<TmxTerrain>();
-		}
+        [XmlAttribute(AttributeName = "tilewidth")]
+        public int tileWidth;
 
 
-		public void fixImagePath( string mapPath, string tilesetSource )
-		{
-			var mapDirectory = Path.GetDirectoryName( mapPath );
-			var tilesetDirectory = Path.GetDirectoryName( tilesetSource );
-			var imageDirectory = Path.GetDirectoryName( this.image.source );
-			var imageFile = Path.GetFileName( this.image.source );
-            
-			var newPath = Path.GetFullPath( Path.Combine( mapDirectory, tilesetDirectory, imageDirectory, imageFile ) );                        
-			image.source = Path.Combine( PathHelper.makeRelativePath( mapPath, newPath ) );
-		}
+        public TmxTileset()
+        {
+            tileOffset = new TmxTileOffset();
+            tiles = new List<TmxTilesetTile>();
+            properties = new List<TmxProperty>();
+            terrainTypes = new List<TmxTerrain>();
+        }
 
 
-		public override string ToString()
-		{
-			return string.Format( "{0}: {1}", name, image );
-		}
+        public void fixImagePath(string mapPath, string tilesetSource)
+        {
+            var mapDirectory = Path.GetDirectoryName(mapPath);
+            var tilesetDirectory = Path.GetDirectoryName(tilesetSource);
+            var imageDirectory = Path.GetDirectoryName(image.source);
+            var imageFile = Path.GetFileName(image.source);
 
-	}
+            var newPath = Path.GetFullPath(Path.Combine(mapDirectory, tilesetDirectory, imageDirectory, imageFile));
+            image.source = Path.Combine(PathHelper.makeRelativePath(mapPath, newPath));
+        }
+
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", name, image);
+        }
+    }
 }

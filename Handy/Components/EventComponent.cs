@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Handy.Animation;
-using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
 using Nez;
 
 namespace Handy.Components
@@ -14,21 +8,15 @@ namespace Handy.Components
     // </summary>
     public class EventComponent : Component
     {
-        private float repeatEventFireDelay = 0.1f;
         public HashSet<string> Events = new HashSet<string>();
-        private string LastEvent = "";
+        private readonly string LastEvent = "";
         private float LastEventTime;
-        public EventComponent()
-        {
-        }
+        private readonly float repeatEventFireDelay = 0.1f;
 
         private bool IsRepeatEvent(string eventName)
         {
             var time = Time.time;
-            if(eventName == LastEvent && LastEventTime + repeatEventFireDelay > time)
-            {
-                return true;
-            }
+            if (eventName == LastEvent && LastEventTime + repeatEventFireDelay > time) return true;
             return false;
         }
 
@@ -36,7 +24,7 @@ namespace Handy.Components
         {
             // this prevents events from just refiring across frames!
             var LastEvent = $"{e}";
-            if(!IsRepeatEvent(e))
+            if (!IsRepeatEvent(e))
             {
                 Events.Add(e);
                 LastEvent = e;
@@ -59,12 +47,8 @@ namespace Handy.Components
         public bool ConsumeEventAndReturnIfPresent(string e)
         {
             var isPresent = Events.Contains(e);
-            if(isPresent)
-            {
-                Events.Remove(e);
-            }
+            if (isPresent) Events.Remove(e);
             return isPresent;
         }
-
     }
 }

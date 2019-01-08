@@ -1,62 +1,60 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-
 namespace Nez.TiledMaps
 {
-	[XmlRoot( ElementName = "map" )]
-	public class TmxMap
-	{
-		public TmxMap()
-		{
-			properties = new List<TmxProperty>();
-			tilesets = new List<TmxTileset>();
-			layers = new List<TmxLayer>();
-			objectGroups = new List<TmxObjectGroup>();
-		}
+    [XmlRoot(ElementName = "map")]
+    public class TmxMap
+    {
+        [XmlAttribute(AttributeName = "backgroundcolor")]
+        public string backgroundColor;
 
-		[XmlAttribute( AttributeName = "version" )]
-		public string version;
+        [XmlAttribute(AttributeName = "firstgid")]
+        public int firstGid;
 
-		[XmlAttribute( AttributeName = "orientation" )]
-		public TmxOrientation orientation;
+        [XmlAttribute(AttributeName = "height")]
+        public int height;
 
-		[XmlAttribute( AttributeName = "renderorder" )]
-		public TmxRenderOrder renderOrder;
+        [XmlElement(ElementName = "tileset")] public List<TmxTileset> tilesets;
 
-		[XmlAttribute( AttributeName = "backgroundcolor" )]
-		public string backgroundColor;
+        [XmlElement(ElementName = "objectgroup")]
+        public List<TmxObjectGroup> objectGroups;
 
-		[XmlAttribute( AttributeName = "firstgid" )]
-		public int firstGid;
+        [XmlElement(ElementName = "layer", Type = typeof(TmxTileLayer))]
+        [XmlElement(ElementName = "imagelayer", Type = typeof(TmxImageLayer))]
+        public List<TmxLayer> layers;
 
-		[XmlAttribute( AttributeName = "width" )]
-		public int width;
+        [XmlAttribute("nextobjectid")] public int nextObjectId;
 
-		[XmlAttribute( AttributeName = "height" )]
-		public int height;
 
-		[XmlAttribute( AttributeName = "tilewidth" )]
-		public int tileWidth;
+        [XmlAttribute(AttributeName = "orientation")]
+        public TmxOrientation orientation;
 
-		[XmlAttribute( AttributeName = "tileheight" )]
-		public int tileHeight;
+        [XmlArray("properties")] [XmlArrayItem("property")]
+        public List<TmxProperty> properties;
 
-		[XmlAttribute( "nextobjectid" )]
-		public int nextObjectId;
+        [XmlAttribute(AttributeName = "renderorder")]
+        public TmxRenderOrder renderOrder;
 
-		[XmlElement( ElementName = "tileset" )]
-		public List<TmxTileset> tilesets;
+        [XmlAttribute(AttributeName = "tileheight")]
+        public int tileHeight;
 
-		[XmlElement( ElementName = "objectgroup" )]
-		public List<TmxObjectGroup> objectGroups;
 
-		[XmlElement( ElementName = "layer", Type = typeof( TmxTileLayer ) )]
-		[XmlElement( ElementName = "imagelayer", Type = typeof( TmxImageLayer ) )]
-		public List<TmxLayer> layers;
+        [XmlAttribute(AttributeName = "tilewidth")]
+        public int tileWidth;
 
-		[XmlArray( "properties" )]
-		[XmlArrayItem( "property" )]
-		public List<TmxProperty> properties;
-	}
+        [XmlAttribute(AttributeName = "version")]
+        public string version;
+
+        [XmlAttribute(AttributeName = "width")]
+        public int width;
+
+        public TmxMap()
+        {
+            properties = new List<TmxProperty>();
+            tilesets = new List<TmxTileset>();
+            layers = new List<TmxLayer>();
+            objectGroups = new List<TmxObjectGroup>();
+        }
+    }
 }

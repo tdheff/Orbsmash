@@ -12,8 +12,10 @@ namespace Orbsmash.Game
 {
     public class GameStateMachineSystem : StateMachineSystem<GameStates, GameState, GameStateComponent>
     {
-        public GameStateMachineSystem() : base(new Matcher().all(typeof(GameStateComponent))) { }
-        
+        public GameStateMachineSystem() : base(new Matcher().all(typeof(GameStateComponent)))
+        {
+        }
+
         protected override void Update(Entity entity, GameStateComponent stateMachine)
         {
         }
@@ -27,10 +29,7 @@ namespace Orbsmash.Game
                 case GameStates.Ready:
                     return StateMachineTransition<GameStates>.Replace(GameStates.Play);
                 case GameStates.Service:
-                    if (state.Served)
-                    {
-                        return StateMachineTransition<GameStates>.Replace(GameStates.Play);
-                    }
+                    if (state.Served) return StateMachineTransition<GameStates>.Replace(GameStates.Play);
                     break;
                 case GameStates.Play:
                     var knockedOutTeam = isOneTeamKnockedOut(state.Players);
@@ -45,17 +44,16 @@ namespace Orbsmash.Game
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
+
                     break;
                 case GameStates.PointScoredRight:
                 case GameStates.PointScoredLeft:
-                    if (gameStateTimer.Finished)
-                    {
-                        return StateMachineTransition<GameStates>.Replace(GameStates.Service);
-                    }
+                    if (gameStateTimer.Finished) return StateMachineTransition<GameStates>.Replace(GameStates.Service);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             return StateMachineTransition<GameStates>.None();
         }
 
@@ -74,20 +72,16 @@ namespace Orbsmash.Game
             var ballState = ball.getComponent<BallStateComponent>();
             ballState.BaseSpeed = 0;
             if (side == Gameplay.Side.LEFT ||
-                (side == Gameplay.Side.NONE && Random.chance(0.5f)))
-            {
+                side == Gameplay.Side.NONE && Random.chance(0.5f))
                 ball.position = new Vector2(400, 400);
-            }
             else
-            {
                 ball.position = new Vector2(1400, 400);
-            }
         }
-        
+
         private Gameplay.Side isOneTeamKnockedOut(Player.Player[] players)
         {
-            int rightAlive = 0;
-            int leftAlive = 0;
+            var rightAlive = 0;
+            var leftAlive = 0;
 
             foreach (var player in players)
             {
@@ -95,25 +89,15 @@ namespace Orbsmash.Game
                 if (state.StateEnum != PlayerStates.Dead)
                 {
                     if (state.side == Gameplay.Side.LEFT)
-                    {
                         leftAlive++;
-                    }
                     else
-                    {
                         rightAlive++;
-                    }
                 }
             }
-            
-            if (rightAlive == 0)
-            {
-                return Gameplay.Side.RIGHT;
-            }
 
-            if (leftAlive == 0)
-            {
-                return Gameplay.Side.LEFT;
-            }
+            if (rightAlive == 0) return Gameplay.Side.RIGHT;
+
+            if (leftAlive == 0) return Gameplay.Side.LEFT;
             return Gameplay.Side.NONE;
         }
 

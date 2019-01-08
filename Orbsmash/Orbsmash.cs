@@ -1,22 +1,12 @@
-﻿using System.Runtime.InteropServices;
-using System.Xml.Serialization.Configuration;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Handy.Systems;
-using Handy.Components;
-using Handy.Dispatch;
+﻿using Handy.Dispatch;
 using Nez;
-using Nez.Sprites;
 using Orbsmash.Game;
-using Orbsmash.Player;
-using Collider = Nez.Collider;
 using Scene = Handy.Scene;
 
 namespace Orbsmash
 {
     /// <summary>
-    /// The main class for the game of Orbsmash
+    ///     The main class for the game of Orbsmash
     /// </summary>
     public class Orbsmash : Core
     {
@@ -32,7 +22,7 @@ namespace Orbsmash
         {
             return self;
         }
-        
+
         protected override void Initialize()
         {
             base.Initialize();

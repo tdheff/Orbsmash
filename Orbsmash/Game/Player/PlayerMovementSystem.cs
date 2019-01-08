@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Handy.Components;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Nez;
 using Orbsmash.Constants;
@@ -10,12 +9,17 @@ namespace Orbsmash.Player
 {
     public class PlayerMovementSystem : EntitySystem
     {
-        public PlayerMovementSystem(Matcher matcher) : base(matcher) { }
+        public PlayerMovementSystem(Matcher matcher) : base(matcher)
+        {
+        }
+
         public PlayerMovementSystem() : base(new Matcher().all(
             typeof(PlayerInputComponent),
             typeof(VelocityComponent),
             typeof(PlayerStateMachineComponent)
-        )) { }
+        ))
+        {
+        }
 
         protected override void process(List<Entity> entities)
         {
@@ -47,45 +51,29 @@ namespace Orbsmash.Player
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+
                 if (allowMovement)
                 {
                     velocity.Velocity = input.MovementStick * state.Speed;
                     if (input.MovementStick.LengthSquared() >= PlayerState.MovementThresholdSquared)
-                    {
                         state.LastVector = Vector2.Normalize(input.MovementStick);
-                    }
                     else
-                    {
                         state.LastVector = Vector2.Zero;
-                    }
 
                     var up = new Vector2(0, 1);
                     var down = new Vector2(0, -1);
                     var left = new Vector2(-1, 0);
                     var right = new Vector2(1, 0);
-                    if (Vector2.Dot(up, state.LastVector) > 0.707)
-                    {
-                        state.LastDirection = Gameplay.Direction.UP;
-                    }
-                    if (Vector2.Dot(down, state.LastVector) > 0.707)
-                    {
-                        state.LastDirection = Gameplay.Direction.DOWN;
-                    }
-                    if (Vector2.Dot(left, state.LastVector) > 0.707)
-                    {
-                        state.LastDirection = Gameplay.Direction.LEFT;
-                    }
-                    if (Vector2.Dot(right, state.LastVector) > 0.707)
-                    {
-                        state.LastDirection = Gameplay.Direction.RIGHT;
-                    }
+                    if (Vector2.Dot(up, state.LastVector) > 0.707) state.LastDirection = Gameplay.Direction.UP;
+                    if (Vector2.Dot(down, state.LastVector) > 0.707) state.LastDirection = Gameplay.Direction.DOWN;
+                    if (Vector2.Dot(left, state.LastVector) > 0.707) state.LastDirection = Gameplay.Direction.LEFT;
+                    if (Vector2.Dot(right, state.LastVector) > 0.707) state.LastDirection = Gameplay.Direction.RIGHT;
                 }
                 else
                 {
                     velocity.Velocity = new Vector2(0, 0);
                 }
             }
-
         }
     }
 }

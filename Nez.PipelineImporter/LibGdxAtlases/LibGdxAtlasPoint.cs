@@ -1,23 +1,20 @@
-﻿using System;
-
-
-namespace Nez.LibGdxAtlases
+﻿namespace Nez.LibGdxAtlases
 {
-	public class LibGdxAtlasPoint
-	{
-		public float x;
-		public float y;
+    public class LibGdxAtlasPoint
+    {
+        public float x;
+        public float y;
 
 
-		public LibGdxAtlasPoint()
-		{}
+        public LibGdxAtlasPoint()
+        {
+        }
 
 
-		public LibGdxAtlasPoint( float x, float y )
-		{
-			this.x = x;
-			this.y = y;
-		}
-	}
+        public LibGdxAtlasPoint(float x, float y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
 }
-

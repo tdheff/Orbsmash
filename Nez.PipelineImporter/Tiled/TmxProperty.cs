@@ -1,19 +1,13 @@
 using System.Xml.Serialization;
 
-
 namespace Nez.TiledMaps
 {
     public class TmxProperty
     {
-		public TmxProperty()
-		{}
-			
+        [XmlAttribute(AttributeName = "name")] public string name;
 
-		[XmlAttribute(AttributeName = "name")]
-		public string name;
-
-		[XmlAttribute(AttributeName = "value")]
-		public string value;
+        [XmlAttribute(AttributeName = "value")]
+        public string value;
 
 
         public override string ToString()

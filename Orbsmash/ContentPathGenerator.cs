@@ -1,14 +1,7 @@
-﻿
-
-
-namespace Nez
+﻿namespace Nez
 {
-    class Content
+    internal class Content
     {
-		public const string player0 = @"Player0";
-
+        public const string player0 = @"Player0";
     }
 }
-
-
-

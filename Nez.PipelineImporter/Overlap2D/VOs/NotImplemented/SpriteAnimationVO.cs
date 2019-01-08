@@ -21,19 +21,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class SpriteAnimationVO : MainItemVO
-	{
-		public String animationName = "";
-		public int fps = 24;
-		public String currentAnimation;
-		public List<FrameRange> frameRangeMap = new List<FrameRange>();
-		public int playMode = 0;
-	}
+    public class SpriteAnimationVO : MainItemVO
+    {
+        public string animationName = "";
+        public string currentAnimation;
+        public int fps = 24;
+        public List<FrameRange> frameRangeMap = new List<FrameRange>();
+        public int playMode = 0;
+    }
 }
-

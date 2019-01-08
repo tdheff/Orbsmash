@@ -1,35 +1,27 @@
 ﻿using Newtonsoft.Json;
 
-
 namespace Nez.TexturePackerImporter
 {
-	public class TexturePackerRegion
-	{
-		[JsonProperty( "filename" )]
-		public string filename;
+    public class TexturePackerRegion
+    {
+        [JsonProperty("filename")] public string filename;
 
-		[JsonProperty( "frame" )]
-		public TexturePackerRectangle frame;
+        [JsonProperty("frame")] public TexturePackerRectangle frame;
 
-		[JsonProperty( "rotated" )]
-		public bool isRotated;
+        [JsonProperty("rotated")] public bool isRotated;
 
-		[JsonProperty( "trimmed" )]
-		public bool isTrimmed;
+        [JsonProperty("trimmed")] public bool isTrimmed;
 
-		[JsonProperty( "spriteSourceSize" )]
-		public TexturePackerRectangle sourceRectangle;
+        [JsonProperty("pivot")] public TexturePackerPoint pivotPoint;
 
-		[JsonProperty( "sourceSize" )]
-		public TexturePackerSize sourceSize;
+        [JsonProperty("spriteSourceSize")] public TexturePackerRectangle sourceRectangle;
 
-		[JsonProperty( "pivot" )]
-		public TexturePackerPoint pivotPoint;
+        [JsonProperty("sourceSize")] public TexturePackerSize sourceSize;
 
 
-		public override string ToString()
-		{
-			return string.Format( "{0} {1}", filename, frame );
-		}
-	}
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", filename, frame);
+        }
+    }
 }

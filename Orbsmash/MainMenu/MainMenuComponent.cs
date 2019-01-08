@@ -5,7 +5,10 @@ using Nez.UI;
 
 namespace Orbsmash.MainMenu
 {
-    public enum EMainMenuActionType { ButtonPress }
+    public enum EMainMenuActionType
+    {
+        ButtonPress
+    }
 
     public class MainMenuData
     {
@@ -22,25 +25,25 @@ namespace Orbsmash.MainMenu
         public MainMenuAction(EMainMenuActionType type) : base(type)
         {
         }
-        
+
         public static MainMenuAction ButtonClicked(MainMenuData data)
         {
             return new MainMenuAction(EMainMenuActionType.ButtonPress, data);
         }
     }
-    
+
     public class MainMenuComponent : Component
     {
+        public readonly Queue<MainMenuAction> Actions = new Queue<MainMenuAction>();
+
         public void ClickPlay(Button button)
         {
-            Actions.Enqueue(MainMenuAction.ButtonClicked(new MainMenuData() { Play = true }));
+            Actions.Enqueue(MainMenuAction.ButtonClicked(new MainMenuData {Play = true}));
         }
-        
+
         public void ClickQuit(Button button)
         {
-            Actions.Enqueue(MainMenuAction.ButtonClicked(new MainMenuData() { Quit = true }));
+            Actions.Enqueue(MainMenuAction.ButtonClicked(new MainMenuData {Quit = true}));
         }
-        
-        public readonly Queue<MainMenuAction> Actions = new Queue<MainMenuAction>();
     }
 }

@@ -1,28 +1,28 @@
+using System;
+using Handy.Animation;
+using Handy.Components;
 using Handy.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Tiled;
-using Orbsmash.Player;
-using Scene = Handy.Scene;
-using Handy.Animation;
-using System;
-using System.Collections.Generic;
-using Handy.Components;
 using Orbsmash.Constants;
 using Orbsmash.Game.Interactions;
+using Orbsmash.Player;
+using Scene = Handy.Scene;
+using TiledMapComponent = Handy.Components.TiledMapComponent;
 
 namespace Orbsmash.Game
 {
     /// <summary>
-    /// A scene representing an actual instance of the game, once play has been selected in the menu
+    ///     A scene representing an actual instance of the game, once play has been selected in the menu
     /// </summary>
     public class Game : Scene
     {
         private readonly GameSettings _settings;
         private AnimationSystem AnimationSystem;
         public Entity GameStateEntity;
-        
+
         public Game(GameSettings settings) : base(5)
         {
             Console.WriteLine("###### GAME START ######");
@@ -31,7 +31,7 @@ namespace Orbsmash.Game
             LoadContent();
             CreateEntities();
         }
-        
+
         protected void SetupRendering()
         {
             //var gameRenderer = new RenderLayerRenderer(1, new int[] { 0, 1, 2, 3 });
@@ -66,29 +66,29 @@ namespace Orbsmash.Game
             AnimationSystem.SetAnimationDefinitions(animationDefs);
             HitboxDefinitions = Util.LoadHitboxes(Hitboxes.HitboxesToLoad, content);
         }
-        
+
         private void CreateEntities()
-        {   
-            
-            
+        {
             var tiledMap = content.Load<TiledMap>(_settings.MapTile);
-            String[] tiledMapLayers = new[]
+            var tiledMapLayers = new[]
             {
                 TiledImportCollisionLayers.WALLS, TiledImportCollisionLayers.NET
             };
-            int[] tiledMapPhysicsLayers = new[]
+            var tiledMapPhysicsLayers = new[]
             {
                 PhysicsLayers.WALLS, PhysicsLayers.NET
             };
-            var tiledMapComponent = new Handy.Components.TiledMapComponent(tiledMap, tiledMapLayers, tiledMapPhysicsLayers, true);
+            var tiledMapComponent = new TiledMapComponent(tiledMap, tiledMapLayers, tiledMapPhysicsLayers, true);
             var entity = new Entity();
             entity.name = "Map";
             entity.addComponent(tiledMapComponent);
             addEntity(entity);
-            
-            var gameState = new GameState();
-            gameState.Players = new Player.Player[_settings.NumPlayers];
-            var texture = content.Load<Texture2D>("Sprites/Characters/Knight/Knight");
+
+            var gameState = new GameState
+            {
+                Players = new Player.Player[_settings.NumPlayers]
+            };
+            content.Load<Texture2D>("Sprites/Characters/Knight/Knight");
             for (var i = 0; i < _settings.NumPlayers; i++)
             {
                 var playerSettings = _settings.Players[i];
@@ -96,11 +96,11 @@ namespace Orbsmash.Game
                 addEntity(player);
                 gameState.Players[i] = player;
             }
-            
+
             var ball = new Ball.Ball(_settings.BallSprite);
             addEntity(ball);
             gameState.Ball = ball;
-            
+
             GameStateEntity = new Entity();
             GameStateEntity.addComponent(new GameStateComponent(gameState));
             GameStateEntity.addComponent(new TimerComponent());

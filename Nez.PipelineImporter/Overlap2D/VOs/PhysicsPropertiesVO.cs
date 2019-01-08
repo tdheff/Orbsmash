@@ -21,17 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 
 namespace Nez.Overlap2D.Runtime
 {
-	public class PhysicsPropertiesVO
-	{
-		public float gravityX;
-		public float gravityY;
-		public float sleepVelocity;
-		public bool enabled;
-	}
+    public class PhysicsPropertiesVO
+    {
+        public bool enabled;
+        public float gravityX;
+        public float gravityY;
+        public float sleepVelocity;
+    }
 }
-

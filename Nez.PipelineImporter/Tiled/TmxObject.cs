@@ -1,98 +1,94 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-
 
 namespace Nez.TiledMaps
 {
-	public class TmxObject
-	{
-		[XmlAttribute( DataType = "int", AttributeName = "id" )]
-		public int id;
+    public class TmxObject
+    {
+        [XmlElement(ElementName = "image")] public TmxImage image;
 
-		[XmlAttribute( DataType = "string", AttributeName = "name" )]
-		public string name;
+        [XmlElement(ElementName = "ellipse")] public TmxEllipse ellipse;
 
-		[XmlAttribute( DataType = "string", AttributeName = "type" )]
-		public string type;
+        [XmlAttribute(DataType = "int", AttributeName = "gid")]
+        public int gid;
 
-		[XmlAttribute( DataType = "float", AttributeName = "x" )]
-		public float x;
+        [XmlAttribute(DataType = "float", AttributeName = "height")]
+        public float height;
 
-		[XmlAttribute( DataType = "float", AttributeName = "y" )]
-		public float y;
-
-		[XmlAttribute( DataType = "float", AttributeName = "width" )]
-		public float width;
-
-		[XmlAttribute( DataType = "float", AttributeName = "height" )]
-		public float height;
-
-		[XmlAttribute( DataType = "int", AttributeName = "rotation" )]
-		public int rotation;
-
-	    [XmlAttribute( DataType = "int", AttributeName = "gid" )]
-	    public int gid;
-
-		[XmlAttribute( DataType = "boolean", AttributeName = "visible" )]
-		public bool visible = true;
-
-		[XmlElement( ElementName = "image" )]
-		public TmxImage image;
-
-		[XmlElement( ElementName = "ellipse" )]
-		public TmxEllipse ellipse;
-
-		[XmlElement( ElementName = "polygon" )]
-		public TmxPolygon polygon;
-
-		[XmlElement( ElementName = "polyline" )]
-		public TmxPolyline polyline;
-
-		[XmlArray( "properties" )]
-		[XmlArrayItem( "property" )]
-		public List<TmxProperty> properties;
-	}
+        [XmlAttribute(DataType = "int", AttributeName = "id")]
+        public int id;
 
 
-	public class TmxEllipse
-	{}
+        [XmlAttribute(DataType = "string", AttributeName = "name")]
+        public string name;
+
+        [XmlElement(ElementName = "polygon")] public TmxPolygon polygon;
+
+        [XmlElement(ElementName = "polyline")] public TmxPolyline polyline;
+
+        [XmlArray("properties")] [XmlArrayItem("property")]
+        public List<TmxProperty> properties;
+
+        [XmlAttribute(DataType = "int", AttributeName = "rotation")]
+        public int rotation;
+
+        [XmlAttribute(DataType = "string", AttributeName = "type")]
+        public string type;
+
+        [XmlAttribute(DataType = "boolean", AttributeName = "visible")]
+        public bool visible = true;
+
+        [XmlAttribute(DataType = "float", AttributeName = "width")]
+        public float width;
+
+        [XmlAttribute(DataType = "float", AttributeName = "x")]
+        public float x;
+
+        [XmlAttribute(DataType = "float", AttributeName = "y")]
+        public float y;
+    }
 
 
-	public class TmxPolygon
-	{
-		[XmlAttribute( DataType = "string", AttributeName = "points" )]
-		public string tempPoints
-		{
-			get
-			{
-				return string.Empty;
-			}
-			set
-			{
-				var parts = value.Split( new char[]{ ' ' } );
-				foreach( var p in parts )
-				{
-					var pair = p.Split( new char[]{ ',' } );
-					points.Add( new Vector2( float.Parse( pair[0], System.Globalization.CultureInfo.InvariantCulture ), float.Parse( pair[1], System.Globalization.CultureInfo.InvariantCulture ) ) );
-				}
-			}
-		}
-		public List<Vector2> points = new List<Vector2>();
+    public class TmxEllipse
+    {
+    }
 
 
-		public override string ToString()
-		{
-			return string.Format("[TmxPolygon] point count: {0}", points.Count );
-		}
-	}
+    public class TmxPolygon
+    {
+        public List<Vector2> points = new List<Vector2>();
+
+        [XmlAttribute(DataType = "string", AttributeName = "points")]
+        public string tempPoints
+        {
+            get => string.Empty;
+            set
+            {
+                var parts = value.Split(' ');
+                foreach (var p in parts)
+                {
+                    var pair = p.Split(',');
+                    points.Add(new Vector2(float.Parse(pair[0], CultureInfo.InvariantCulture),
+                        float.Parse(pair[1], CultureInfo.InvariantCulture)));
+                }
+            }
+        }
 
 
-	public class TmxPolyline : TmxPolygon
-	{
-		public override string ToString()
-		{
-			return string.Format("[TmxPolyline] point count: {0}", points.Count );
-		}
-	}
+        public override string ToString()
+        {
+            return string.Format("[TmxPolygon] point count: {0}", points.Count);
+        }
+    }
+
+
+    public class TmxPolyline : TmxPolygon
+    {
+        public override string ToString()
+        {
+            return string.Format("[TmxPolyline] point count: {0}", points.Count);
+        }
+    }
 }

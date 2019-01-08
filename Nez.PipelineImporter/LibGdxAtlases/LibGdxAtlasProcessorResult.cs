@@ -1,10 +1,7 @@
-﻿using System;
-
-
-namespace Nez.LibGdxAtlases
+﻿namespace Nez.LibGdxAtlases
 {
-	public class LibGdxAtlasProcessorResult
-	{
-		public LibGdxAtlasFile data;
-	}
+    public class LibGdxAtlasProcessorResult
+    {
+        public LibGdxAtlasFile data;
+    }
 }

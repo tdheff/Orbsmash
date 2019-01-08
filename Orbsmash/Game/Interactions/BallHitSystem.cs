@@ -11,7 +11,10 @@ namespace Orbsmash.Game.Interactions
 {
     public class BallHitSystem : EntitySystem
     {
-        public BallHitSystem() : base(new Matcher().all(typeof(PlayerStateMachineComponent))) { }
+        public BallHitSystem() : base(new Matcher().all(typeof(PlayerStateMachineComponent)))
+        {
+        }
+
         protected override void process(List<Entity> entities)
         {
             foreach (var entity in entities)
@@ -33,24 +36,15 @@ namespace Orbsmash.Game.Interactions
                 }
 
                 // TODO - actually turn the hitbox on and off, this is a bandaid. that should be done with anim tags
-                if (playerStateMachineComponent.State.StateEnum != PlayerStates.Swing)
-                {
-                    continue;
-                }
+                if (playerStateMachineComponent.State.StateEnum != PlayerStates.Swing) continue;
 
                 var neighbors = Physics.boxcastBroadphaseExcludingSelf(collider);
                 foreach (var neighbor in neighbors)
                 {
-                    if (neighbor.entity.name != EntityNames.BALL)
-                    {
-                        continue;
-                    }
+                    if (neighbor.entity.name != EntityNames.BALL) continue;
 
                     var ballStateComponent = neighbor.entity.getComponent<BallStateComponent>();
-                    if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId)
-                    {
-                        continue;
-                    }
+                    if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId) continue;
 
                     var ballVelocityComponent = neighbor.entity.getComponent<VelocityComponent>();
                     ballStateComponent.BaseSpeed *= 1.05f;
@@ -60,9 +54,8 @@ namespace Orbsmash.Game.Interactions
                             ? new Vector2(1, 0)
                             : Vector2.Normalize(playerStateMachineComponent.State.LastVector);
                     ballVelocityComponent.Velocity = velocityNormalized * ballStateComponent.BaseSpeed;
-                    
-                    ballStateComponent.LastHitPlayerId = playerStateMachineComponent.State.playerId;
 
+                    ballStateComponent.LastHitPlayerId = playerStateMachineComponent.State.playerId;
                 }
             }
         }

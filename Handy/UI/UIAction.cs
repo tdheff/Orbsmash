@@ -2,9 +2,6 @@ namespace Handy.UI
 {
     public class UIAction<TType, TData>
     {
-        public TType Type { get; }
-        public TData Data { get; }
-        
         public UIAction(TType type, TData data)
         {
             Type = type;
@@ -15,5 +12,8 @@ namespace Handy.UI
         {
             Type = type;
         }
+
+        public TType Type { get; }
+        public TData Data { get; }
     }
 }
