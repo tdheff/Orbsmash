@@ -60,6 +60,7 @@
     <Compile Include="Components\Physics\VelocityComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TiledMapComponent.cs" />
+    <Compile Include="Components\TimerComponent.cs" />
     <Compile Include="Pipeline\PhysicsEditor\PolygonImporter.cs" />
     <Compile Include="Pipeline\PhysicsEditor\PolygonProcessor.cs" />
     <Compile Include="Pipeline\PhysicsEditor\PolygonReader.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Systems\PushdownAutomatonSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\StateMachineSystem.cs" />
+    <Compile Include="Systems\TimerSystem.cs" />
     <Compile Include="Tiled.cs" />
     <Compile Include="UI\UIAction.cs" />
   </ItemGroup>
