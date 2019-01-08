@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Constants
 {
@@ -18,6 +19,12 @@ namespace Orbsmash.Constants
             LEFT,
             RIGHT
         }
+    }
+
+    public sealed class BallResetPositions
+    {
+        public static readonly Vector2 LEFT_RESET = new Vector2(800, 800);
+        public static readonly Vector2 RIGHT_RESET = new Vector2(1760, 800);
     }
     
     public sealed class Timers

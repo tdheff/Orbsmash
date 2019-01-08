@@ -52,7 +52,10 @@ namespace Orbsmash.Game.Interactions
                         continue;
                     }
 
+                    ballStateComponent.IsDeadly = true;
+
                     var ballVelocityComponent = neighbor.entity.getComponent<VelocityComponent>();
+                    ballVelocityComponent.Freeze = false;
                     ballStateComponent.BaseSpeed *= 1.05f;
                     // TODO - HIT BOOST
                     var velocityNormalized =

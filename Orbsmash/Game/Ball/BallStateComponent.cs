@@ -8,7 +8,9 @@ namespace Orbsmash.Ball
     {
         public int LastHitPlayerId = -1;
         public Gameplay.Side LastHitSide = Gameplay.Side.NONE;
+        public bool IsDeadly = false;
 
+        public float BaseSpeedInitial = 700.0f;
         public float BaseSpeed = 700.0f;
         public float HitBoost = 1;
         
