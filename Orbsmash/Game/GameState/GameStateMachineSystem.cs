@@ -25,9 +25,9 @@ namespace Orbsmash.Game
             switch (state.StateEnum)
             {
                 case GameStates.Ready:
-                    return StateMachineTransition<GameStates>.Replace(GameStates.Play);
+                    return StateMachineTransition<GameStates>.Replace(GameStates.Service);
                 case GameStates.Service:
-                    if (state.Served)
+                    if (!state.Ball.getComponent<VelocityComponent>().Freeze)
                     {
                         return StateMachineTransition<GameStates>.Replace(GameStates.Play);
                     }
@@ -72,16 +72,19 @@ namespace Orbsmash.Game
         private void ResetBall(Ball.Ball ball, Gameplay.Side side)
         {
             var ballState = ball.getComponent<BallStateComponent>();
-            ballState.BaseSpeed = 0;
+            ballState.IsDeadly = false;
+            ballState.BaseSpeed = ballState.BaseSpeedInitial;
             if (side == Gameplay.Side.LEFT ||
                 (side == Gameplay.Side.NONE && Random.chance(0.5f)))
             {
-                ball.position = new Vector2(400, 400);
+                ball.position = BallResetPositions.LEFT_RESET;
             }
             else
             {
-                ball.position = new Vector2(1400, 400);
+                ball.position = BallResetPositions.RIGHT_RESET;
             }
+
+            ball.getComponent<VelocityComponent>().Freeze = true;
         }
         
         private Gameplay.Side isOneTeamKnockedOut(Player.Player[] players)
@@ -124,6 +127,7 @@ namespace Orbsmash.Game
             switch (state.StateEnum)
             {
                 case GameStates.Ready:
+                    ResetBall(state.Ball, Gameplay.Side.NONE);
                     break;
                 case GameStates.Service:
                     break;

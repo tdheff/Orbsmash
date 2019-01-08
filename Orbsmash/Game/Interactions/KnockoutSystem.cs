@@ -47,7 +47,8 @@ namespace Orbsmash.Game.Interactions
 
                     var ballStateComponent = neighbor.entity.getComponent<BallStateComponent>();
                     if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId ||
-                        ballStateComponent.LastHitSide == playerStateMachineComponent.State.side)
+                        ballStateComponent.LastHitSide == playerStateMachineComponent.State.side ||
+                        !ballStateComponent.IsDeadly)
                     {
                         continue;
                     }

@@ -87,6 +87,7 @@ namespace Orbsmash.Game
             addEntity(entity);
             
             var gameState = new GameState();
+            gameState.StateEnum = GameStates.Ready;
             gameState.Players = new Player.Player[_settings.NumPlayers];
             var texture = content.Load<Texture2D>("Sprites/Characters/Knight/Knight");
             for (var i = 0; i < _settings.NumPlayers; i++)
