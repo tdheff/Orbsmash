@@ -8,6 +8,7 @@ using Scene = Handy.Scene;
 using Handy.Animation;
 using System;
 using System.Collections.Generic;
+using Handy.Components;
 using Orbsmash.Constants;
 using Orbsmash.Game.Interactions;
 
@@ -20,6 +21,7 @@ namespace Orbsmash.Game
     {
         private readonly GameSettings _settings;
         private AnimationSystem AnimationSystem;
+        public Entity GameStateEntity;
         
         public Game(GameSettings settings) : base(5)
         {
@@ -28,7 +30,6 @@ namespace Orbsmash.Game
             _settings = settings;
             LoadContent();
             CreateEntities();
-
         }
         
         protected void SetupRendering()
@@ -44,11 +45,14 @@ namespace Orbsmash.Game
             AnimationSystem = new AnimationSystem();
             return new EntitySystem[]
             {
+                new TimerSystem(),
                 new PlayerInputSystem(),
                 new PlayerStateMachineSystem(),
+                new GameStateMachineSystem(),
                 new BallHitSystem(),
                 new PlayerMovementSystem(),
                 new KnockoutSystem(),
+                new KinematicSystem(),
                 new KinematicSystem(),
                 new PlayerAnimationSystem(),
                 AnimationSystem
@@ -64,7 +68,9 @@ namespace Orbsmash.Game
         }
         
         private void CreateEntities()
-        {
+        {   
+            
+            
             var tiledMap = content.Load<TiledMap>(_settings.MapTile);
             String[] tiledMapLayers = new[]
             {
@@ -80,16 +86,25 @@ namespace Orbsmash.Game
             entity.addComponent(tiledMapComponent);
             addEntity(entity);
             
+            var gameState = new GameState();
+            gameState.Players = new Player.Player[_settings.NumPlayers];
             var texture = content.Load<Texture2D>("Sprites/Characters/Knight/Knight");
             for (var i = 0; i < _settings.NumPlayers; i++)
             {
                 var playerSettings = _settings.Players[i];
                 var player = new Player.Player(playerSettings);
                 addEntity(player);
+                gameState.Players[i] = player;
             }
             
             var ball = new Ball.Ball(_settings.BallSprite);
             addEntity(ball);
+            gameState.Ball = ball;
+            
+            GameStateEntity = new Entity();
+            GameStateEntity.addComponent(new GameStateComponent(gameState));
+            GameStateEntity.addComponent(new TimerComponent());
+            addEntity(GameStateEntity);
         }
 
         public override void onStart()

@@ -75,6 +75,9 @@
     <Compile Include="Game\Ball\BallStateComponent.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameSettings.cs" />
+    <Compile Include="Game\GameState\GameState.cs" />
+    <Compile Include="Game\GameState\GameStateComponent.cs" />
+    <Compile Include="Game\GameState\GameStateMachineSystem.cs" />
     <Compile Include="Game\Interactions\BallHitSystem.cs" />
     <Compile Include="Game\Interactions\KnockoutSystem.cs" />
     <Compile Include="Game\Player\PlayerAnimationSystem.cs" />

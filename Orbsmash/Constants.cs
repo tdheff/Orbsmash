@@ -19,6 +19,11 @@ namespace Orbsmash.Constants
             RIGHT
         }
     }
+    
+    public sealed class Timers
+    {
+        public static readonly float POINT_SCORED_TIMER = 1.5f;
+    }
 
     public sealed class EntityNames
     {

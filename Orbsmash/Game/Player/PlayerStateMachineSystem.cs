@@ -110,7 +110,6 @@ namespace Orbsmash.Player
                     {
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Idle);
                     }
-
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
