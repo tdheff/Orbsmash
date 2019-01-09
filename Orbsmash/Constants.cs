@@ -71,6 +71,13 @@ namespace Orbsmash.Constants
         public static readonly int BALL = 5;
     }
 
+    public sealed class RenderLayers
+    {
+        public static readonly int BACKGROUND = 3;
+        public static readonly int PRIMARY = 2;
+        public static readonly int FOREGROUND = 1;
+    }
+
     public sealed class PlayerSprites
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/Knight";

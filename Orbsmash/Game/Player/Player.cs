@@ -55,6 +55,7 @@ namespace Orbsmash.Player
             var gameScene = (HandyScene)scene;
             var mySpriteDef = gameScene.SpriteDefinitions[playerSprite];
             _mainPlayerBodySprite = new AnimatableSprite(mySpriteDef.Subtextures);
+            _mainPlayerBodySprite.renderLayer = RenderLayers.PRIMARY;
             _mainBodyAnimation = new AnimationComponent(_mainPlayerBodySprite, AnimationContexts.PLAYER_SPRITE_ANIMATIONS, PlayerAnimations.IDLE_HORIZONTAL);
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)

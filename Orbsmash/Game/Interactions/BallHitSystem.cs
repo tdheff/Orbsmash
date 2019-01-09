@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Handy.Animation;
 using Handy.Components;
 using Microsoft.Xna.Framework;
 using Nez;
@@ -47,7 +48,8 @@ namespace Orbsmash.Game.Interactions
                     }
 
                     var ballStateComponent = neighbor.entity.getComponent<BallStateComponent>();
-                    if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId)
+                    if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId &&
+                        ballStateComponent.LastHitSide == playerStateMachineComponent.State.side)
                     {
                         continue;
                     }
@@ -58,13 +60,48 @@ namespace Orbsmash.Game.Interactions
                     ballVelocityComponent.Freeze = false;
                     ballStateComponent.BaseSpeed *= 1.05f;
                     // TODO - HIT BOOST
-                    var velocityNormalized =
-                        playerStateMachineComponent.State.LastVector.LengthSquared() < float.Epsilon
+                    var velocity =
+                        playerStateMachineComponent.State.LastVector.LengthSquared();
+                    Vector2 velocityNormalized;
+                    if (velocity < float.Epsilon)
+                    {
+                        velocityNormalized = playerStateMachineComponent.State.side == Gameplay.Side.LEFT
                             ? new Vector2(1, 0)
-                            : Vector2.Normalize(playerStateMachineComponent.State.LastVector);
+                            : new Vector2(-1, 0);
+                    }
+                    else
+                    {
+                        velocityNormalized = Vector2.Normalize(playerStateMachineComponent.State.LastVector);
+                        if (Math.Abs(velocityNormalized.X) < Math.Abs(velocityNormalized.Y))
+                        {
+                            var xComponent = playerStateMachineComponent.State.side == Gameplay.Side.LEFT ? 0.70710678118f : -0.70710678118f;
+                            var yComponent = Math.Sign(velocityNormalized.Y) * 0.70710678118f;
+                            velocityNormalized = new Vector2(xComponent, yComponent);
+                        }
+                        if (playerStateMachineComponent.State.side == Gameplay.Side.LEFT)
+                        {
+                            if (velocityNormalized.X < 0)
+                                velocityNormalized.X = -velocityNormalized.X;
+                        }
+                        else
+                        {
+                            if (velocityNormalized.X > 0)
+                                velocityNormalized.X = -velocityNormalized.X;
+                        }
+                    }
+
                     ballVelocityComponent.Velocity = velocityNormalized * ballStateComponent.BaseSpeed;
+                    if (!(velocityNormalized.X <= 1.0f && velocityNormalized.X >= -1.0f))
+                    {
+                        Console.WriteLine(velocityNormalized);
+                    }
+                    if (!(velocityNormalized.Y <= 1.0f && velocityNormalized.Y >= -1.0f))
+                    {
+                        Console.WriteLine(velocityNormalized);
+                    }
                     
                     ballStateComponent.LastHitPlayerId = playerStateMachineComponent.State.playerId;
+                    ballStateComponent.LastHitSide = playerStateMachineComponent.State.side;
 
                 }
             }
