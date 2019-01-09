@@ -31,11 +31,10 @@ namespace Orbsmash.Game
             LoadContent();
             CreateEntities();
         }
-        
-        protected void SetupRendering()
+
+        protected override void SetupRenderer()
         {
-            //var gameRenderer = new RenderLayerRenderer(1, new int[] { 0, 1, 2, 3 });
-            var gameRenderer = new DefaultRenderer();
+            var gameRenderer = new RenderLayerRenderer(-1, new[] { 1, 2, 3 });
             clearColor = new Color(0.1f, 0.1f, 0.1f);
             addRenderer(gameRenderer);
         }
@@ -46,6 +45,7 @@ namespace Orbsmash.Game
             return new EntitySystem[]
             {
                 new TimerSystem(),
+                new ParticleEmitterSystem(),
                 new PlayerInputSystem(),
                 new PlayerStateMachineSystem(),
                 new GameStateMachineSystem(),
@@ -83,6 +83,7 @@ namespace Orbsmash.Game
             var tiledMapComponent = new Handy.Components.TiledMapComponent(tiledMap, tiledMapLayers, tiledMapPhysicsLayers, true);
             var entity = new Entity();
             entity.name = "Map";
+            tiledMapComponent.renderLayer = RenderLayers.BACKGROUND;
             entity.addComponent(tiledMapComponent);
             addEntity(entity);
             

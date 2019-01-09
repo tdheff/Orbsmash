@@ -18,6 +18,11 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Particles/Test_Particles.pex
+/importer:ParticleDesignerImporter
+/processor:ParticleDesignerProcessor
+/build:Particles/Test_Particles.pex
+
 #begin Player0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -95,18 +100,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Characters/Spaceman/Spaceman.png
 
-#begin Sprites/Ball/Ball.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Ball/Ball.png
-
 #begin Tiles/DungeonMap.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -146,3 +139,4 @@
 
 #begin Tiles/MedievalTileset.tsx
 /copy:Tiles/MedievalTileset.tsx
+
