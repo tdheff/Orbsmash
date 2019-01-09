@@ -117,6 +117,8 @@ namespace Orbsmash.Constants
         public static readonly string CHARGE_IDLE = "CHARGE_IDLE";
         public static readonly string CHARGE = "CHARGE";
         public static readonly string SWING = "SWING";
+        public static readonly string BLOCK = "BLOCK";
+        public static readonly string BLOCK_HIT = "BLOCK_HIT";
     }
 
     public sealed class PlayerEvents
