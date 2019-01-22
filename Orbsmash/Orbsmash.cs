@@ -1,16 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using System.Xml.Serialization.Configuration;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Handy.Systems;
-using Handy.Components;
-using Handy.Dispatch;
+﻿using Handy.Dispatch;
 using Nez;
-using Nez.Sprites;
 using Orbsmash.Game;
-using Orbsmash.Player;
-using Collider = Nez.Collider;
 using Scene = Handy.Scene;
 
 namespace Orbsmash
@@ -36,7 +26,7 @@ namespace Orbsmash
         protected override void Initialize()
         {
             base.Initialize();
-            Window.AllowUserResizing = true;
+            //Window.AllowUserResizing = true;
             debugRenderEnabled = true;
 
             var settings = new GameSettings();

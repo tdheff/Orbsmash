@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Handy.Animation;
 using Handy.Components;
 using Microsoft.Xna.Framework;
@@ -13,6 +14,12 @@ namespace Orbsmash.Game.Interactions
     public class BallHitSystem : EntitySystem
     {
         public BallHitSystem() : base(new Matcher().all(typeof(PlayerStateMachineComponent))) { }
+
+        private bool checkBallVelocity(Gameplay.Side side, Vector2 ballVelocity)
+        {
+            return side == Gameplay.Side.LEFT ? ballVelocity.X <= 0 : ballVelocity.X >= 0;
+        }
+        
         protected override void process(List<Entity> entities)
         {
             foreach (var entity in entities)
@@ -48,15 +55,22 @@ namespace Orbsmash.Game.Interactions
                     }
 
                     var ballStateComponent = neighbor.entity.getComponent<BallStateComponent>();
-                    if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId &&
-                        ballStateComponent.LastHitSide == playerStateMachineComponent.State.side)
+                    var ballVelocityComponent = neighbor.entity.getComponent<VelocityComponent>();
+
+                    var wasLastToHit =
+                        ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId &&
+                        ballStateComponent.LastHitSide == playerStateMachineComponent.State.side;
+
+                    var ballMovingTowards = checkBallVelocity(playerStateMachineComponent.State.side,
+                        ballVelocityComponent.Velocity);
+                    
+                    if (wasLastToHit && !ballMovingTowards)
                     {
                         continue;
                     }
 
                     ballStateComponent.IsDeadly = true;
 
-                    var ballVelocityComponent = neighbor.entity.getComponent<VelocityComponent>();
                     ballVelocityComponent.Freeze = false;
                     ballStateComponent.BaseSpeed *= 1.05f;
                     // TODO - HIT BOOST
