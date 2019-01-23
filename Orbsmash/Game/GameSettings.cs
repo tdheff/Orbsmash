@@ -1,18 +1,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Orbsmash.Constants;
+using Orbsmash.Player;
+
 namespace Orbsmash.Game
 {
 
-    public class PlayerSettings
-    {
-        public int Id;
-        public float Speed;
-        public string Sprite;
-        public string Hitbox;
-        public Gameplay.Side Side;
-        public Vector2 StartingPosition;
-    }
     public class GameSettings
     {
         public List<PlayerSettings> Players = new List<PlayerSettings>();

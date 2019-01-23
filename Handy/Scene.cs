@@ -1,15 +1,18 @@
 using Handy.Animation;
 using Microsoft.Xna.Framework;
-using Nez;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography;
+using Microsoft.Xna.Framework.Graphics;
+using Nez;
 
 namespace Handy
 {
     public abstract class Scene : Nez.Scene
     {
-        public Dictionary<string, SpriteDefinition> SpriteDefinitions;
-        public Dictionary<string, HitboxDefinition> HitboxDefinitions;
+        public Dictionary<string, Texture2D> Textures = new Dictionary<string, Texture2D>();
+        public Dictionary<string, AnimationDefinition> AnimationDefinitions = new Dictionary<string, AnimationDefinition>();
         private Vector2 _scale;
         protected Scene() : base()
         {
@@ -54,6 +57,29 @@ namespace Handy
             var myRenderer = new RenderLayerRenderer(1, new int[] { 0 });
             clearColor = new Color(0.3f, 0.3f, 0.3f);
             addRenderer(myRenderer);
+        }
+
+        public void LoadTextures(string[] texturePaths)
+        {
+            for (int i = 0; i < texturePaths.Length; i++)
+            {
+                Textures.Add(texturePaths[i], content.Load<Texture2D>(texturePaths[i]));
+            }
+        }
+
+        public void LoadAnimationDefinitions(string[] jsonPaths)
+        {
+            for (int i = 0; i < jsonPaths.Length; i++)
+            {
+                var asepriteJson = content.Load<AsepriteJson>(jsonPaths[i]);
+                var spriteFileName = Path.GetFileNameWithoutExtension(asepriteJson.Meta.Image);
+                var splitPath = jsonPaths[i].Split('/');
+                splitPath[splitPath.Length - 1] = spriteFileName;
+                var texturePath = string.Join("/", splitPath);
+                var texture = Textures[texturePath];
+                var animationDef = AnimationDefinition.FromAsepriteJson(asepriteJson, texture);
+                AnimationDefinitions.Add(jsonPaths[i], animationDef);
+            }
         }
 
     }

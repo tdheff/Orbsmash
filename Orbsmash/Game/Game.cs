@@ -61,15 +61,19 @@ namespace Orbsmash.Game
 
         private void LoadContent()
         {
-            var animationDefs = Util.LoadAnimationDefinitions(@"Animation/AnimationDefinitions");
-            SpriteDefinitions = Util.LoadSprites(animationDefs, content);
-            AnimationSystem.SetAnimationDefinitions(animationDefs);
-            //HitboxDefinitions = Util.LoadHitboxes(Hitboxes.HitboxesToLoad, content);
+            LoadTextures(new []
+            {
+                BallSprites.DEFAULT,
+                PlayerSprites.KNIGHT
+            });
+            LoadAnimationDefinitions(new []
+            {
+                PlayerAsepriteFiles.KNIGHT
+            });
         }
         
         private void CreateEntities()
-        {   
-            
+        {
             
             var tiledMap = content.Load<TiledMap>(_settings.MapTile);
             String[] tiledMapLayers = new[]
@@ -90,7 +94,6 @@ namespace Orbsmash.Game
             var gameState = new GameState();
             gameState.StateEnum = GameStates.Ready;
             gameState.Players = new Player.Player[_settings.NumPlayers];
-            var texture = content.Load<Texture2D>("Sprites/Characters/Knight/Knight");
             for (var i = 0; i < _settings.NumPlayers; i++)
             {
                 var playerSettings = _settings.Players[i];
@@ -99,7 +102,7 @@ namespace Orbsmash.Game
                 gameState.Players[i] = player;
             }
             
-            var ball = new Ball.Ball(_settings.BallSprite);
+            var ball = new Ball.Ball();
             addEntity(ball);
             gameState.Ball = ball;
             

@@ -18,6 +18,7 @@ namespace Orbsmash.Player
     // </summary>
     public class Player : Entity
     {
+        private PlayerSettings _settings;
         private PlayerStateMachineComponent _state;
         private PlayerInputComponent _input;
         private VelocityComponent _velocity;
@@ -34,6 +35,7 @@ namespace Orbsmash.Player
             name = $"Player_{settings.Id}";
             playerSprite = settings.Sprite;
             scale = new Vector2(2);
+            _settings = settings;
             
             // physics
             _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed, settings.StartingPosition));
@@ -53,10 +55,28 @@ namespace Orbsmash.Player
         public override void onAddedToScene()
         {
             var gameScene = (HandyScene)scene;
-            var mySpriteDef = gameScene.SpriteDefinitions[playerSprite];
-            _mainPlayerBodySprite = new AnimatableSprite(mySpriteDef.Subtextures);
+            AnimationDefinition animationDefinition;
+            switch (_settings.Character)
+            {
+                case Gameplay.Character.KNIGHT:
+                    animationDefinition = gameScene.AnimationDefinitions[PlayerAsepriteFiles.KNIGHT];;
+                    break;
+                case Gameplay.Character.WIZARD:
+                    throw new NotImplementedException();
+                case Gameplay.Character.SPACEMAN:
+                    throw new NotImplementedException();
+                case Gameplay.Character.ALIEN:
+                    throw new NotImplementedException();
+                case Gameplay.Character.PIRATE:
+                    throw new NotImplementedException();
+                case Gameplay.Character.SKELETON:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            _mainPlayerBodySprite = new AnimatableSprite(animationDefinition.SpriteDefinition.Subtextures);
             _mainPlayerBodySprite.renderLayer = RenderLayers.PRIMARY;
-            _mainBodyAnimation = new AnimationComponent(_mainPlayerBodySprite, AnimationContexts.PLAYER_SPRITE_ANIMATIONS, PlayerAnimations.IDLE_HORIZONTAL);
+            _mainBodyAnimation = new AnimationComponent(_mainPlayerBodySprite, animationDefinition, PlayerAnimations.IDLE_HORIZONTAL);
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new BoxCollider(15, 10);

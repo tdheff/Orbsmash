@@ -73,11 +73,11 @@ namespace Orbsmash.Player
                     }
                     if (Vector2.Dot(left, state.LastVector) > 0.707)
                     {
-                        state.LastDirection = Gameplay.Direction.LEFT;
+                        state.LastDirection = state.side == Gameplay.Side.RIGHT ? Gameplay.Direction.FORWARD : Gameplay.Direction.BACKWARD;
                     }
                     if (Vector2.Dot(right, state.LastVector) > 0.707)
                     {
-                        state.LastDirection = Gameplay.Direction.RIGHT;
+                        state.LastDirection = state.side == Gameplay.Side.RIGHT ? Gameplay.Direction.BACKWARD : Gameplay.Direction.FORWARD;
                     }
                 }
                 else

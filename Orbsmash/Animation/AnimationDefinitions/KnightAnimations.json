@@ -84,7 +84,7 @@
 			]
 		},
 		{
-			"AnimationName": "WALK_RIGHT",
+			"AnimationName": "WALK_FORWARD",
 			"Repeats": true,
 			"Frames": [
 				{
@@ -139,7 +139,7 @@
 			]
 		},
 		{
-			"AnimationName": "WALK_LEFT",
+			"AnimationName": "WALK_BACKWARD",
 			"Repeats": true,
 			"Frames": [
 				{
@@ -250,7 +250,7 @@
 		},
 		{
 			"AnimationName": "CHARGE",
-			"NextAnimation": "CHARGE_IDLE",
+			"NextAnimation": "CHARGE_FULL",
 			"Frames": [
 				{
 					"FrameNumber": 50,
@@ -276,7 +276,7 @@
 			]
 		},
 		{
-			"AnimationName": "CHARGE_IDLE",
+			"AnimationName": "CHARGE_FULL",
 			"Repeats": true,
 			"Frames": [
 				{

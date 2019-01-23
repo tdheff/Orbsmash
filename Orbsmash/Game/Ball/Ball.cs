@@ -22,11 +22,9 @@ namespace Orbsmash.Ball
         private AnimationComponent _ballAnimation;
         private BallStateComponent _ballStateComponent;
         private ParticleEmitterComponent _particleEmitter;
-        private string ballSprite;
         
-        public Ball(string sprite)
+        public Ball()
         {
-            ballSprite = sprite;
             name = EntityNames.BALL;
             
             _velocity = new VelocityComponent(new Vector2(300, 300));
@@ -37,14 +35,13 @@ namespace Orbsmash.Ball
         public override void onAddedToScene()
         {
             var gameScene = (HandyScene) scene;
-            var mySpriteDef = gameScene.SpriteDefinitions[ballSprite];
             
             /*
              * SPRITE AND ANIMATION
              */
-            _sprite = new AnimatableSprite(mySpriteDef.Subtextures);
+            var subtextures = Util.ExtractSubtextures(gameScene.Textures[Constants.BallSprites.DEFAULT], 1, 1);
+            _sprite = new AnimatableSprite(subtextures);
             _sprite.renderLayer = RenderLayers.PRIMARY;
-            _ballAnimation = new AnimationComponent(_sprite, AnimationContexts.BALL_SPRITE_ANIMATIONS, BallAnimations.IDLE);
             
             /*
              * COLLISIONS AND KINEMATICS
@@ -64,19 +61,18 @@ namespace Orbsmash.Ball
              * PARTICLES
              */
             
-            _particleEmitter = new ParticleEmitterComponent(generateParticleEmitterConfig(mySpriteDef.Subtextures[0]));
+            _particleEmitter = new ParticleEmitterComponent(generateParticleEmitterConfig());
             _particleEmitter._active = true;
             _particleEmitter.renderLayer = RenderLayers.PRIMARY;
             
             addComponent(_kinematic);
             addComponent(_sprite);
-            addComponent(_ballAnimation);
             addComponent(_collider);
             addComponent(_ballStateComponent);
             addComponent(_particleEmitter);
         }
 
-        private ParticleEmitterConfig generateParticleEmitterConfig(Subtexture tex)
+        private ParticleEmitterConfig generateParticleEmitterConfig()
         {
             var config = scene.content.Load<ParticleEmitterConfig>("Particles/Test_Particles");
             config.subtexture = null;
