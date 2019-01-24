@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using Handy.Animation;
 using Handy.Components;
@@ -52,13 +53,11 @@ namespace Handy.Systems
                     // also need the "old" elapsed time to catch things at the end of animations
                     if(eventComp != null)
                     {
-                        if(currentAnimationTrack.Events != null && currentAnimationTrack.Events.Count > 0)
+                        var eventTriggers = eventComp.GetEventTriggers(currentAnimationTrack.AnimationName,
+                            anim.CurrentAnimationFrame);
+                        foreach (var ev in eventTriggers)
                         {
-                            var latestEvent = currentAnimationTrack.Events.LastOrDefault(x => x.Time <= anim.CurrentAnimationElapsedTime);
-                            if(latestEvent != null)
-                            {
-                                eventComp.FireEvent(latestEvent.EventName);
-                            }
+                            eventComp.FireEvent(ev);
                         }
                     }
 

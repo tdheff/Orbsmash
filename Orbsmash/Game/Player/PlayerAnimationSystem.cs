@@ -21,6 +21,7 @@ namespace Orbsmash.Player
                 var state = entity.getComponent<PlayerStateMachineComponent>().State;
                 var player = (Player)entity;
                 var mainBodyAnimation = player.getComponent<AnimationComponent>();
+                var eventComponent = player.getComponent<EventComponent>();
 
                 switch (state.StateEnum)
                 {
@@ -48,15 +49,20 @@ namespace Orbsmash.Player
                         }
                         break;
                     case PlayerStates.Charge:
-                        if (mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE_PULSE &&
+                        if (mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE_IDLE &&
                             mainBodyAnimation.CurrentAnimation != PlayerAnimations.CHARGE_FULL)
                         {
                             mainBodyAnimation.SetAnimation(PlayerAnimations.CHARGE);
                         }
 
+                        if (eventComponent.ConsumeEventAndReturnIfPresent(PlayerEvents.CHARGE_WINDUP_END))
+                        {
+                            mainBodyAnimation.SetAnimation(PlayerAnimations.CHARGE_IDLE);
+                        }
+
                         if (state.ChargeFinished)
                         {
-                            mainBodyAnimation.SetAnimation(PlayerAnimations.CHARGE_PULSE);
+                            mainBodyAnimation.SetAnimation(PlayerAnimations.CHARGE_FULL);
                         }
                         break;
                     case PlayerStates.Swing:

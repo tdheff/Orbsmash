@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Handy.Components;
 using HandyScene = Handy.Scene;
 
@@ -18,6 +19,15 @@ namespace Orbsmash.Player
     // </summary>
     public class Player : Entity
     {
+        private static Dictionary<string, HashSet<string>> _eventTriggers = new Dictionary<string, HashSet<string>>
+        {
+            { EventComponent.BuildKey(PlayerAnimations.SWING, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(PlayerAnimations.SWING, 2 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(PlayerAnimations.SWING, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            { EventComponent.BuildKey(PlayerAnimations.CHARGE, 4 ), new HashSet<string> { PlayerEvents.CHARGE_WINDUP_END }},
+        };
+
+        
         private PlayerSettings _settings;
         private PlayerStateMachineComponent _state;
         private PlayerInputComponent _input;
@@ -27,7 +37,7 @@ namespace Orbsmash.Player
         private KinematicComponent _kinematic = new KinematicComponent();
         private AnimationComponent _mainBodyAnimation;
         private AnimatableSprite _mainPlayerBodySprite;
-        private EventComponent _events = new EventComponent();
+        private EventComponent _events = new EventComponent(_eventTriggers);
         private string playerSprite;
 
         public Player(PlayerSettings settings)

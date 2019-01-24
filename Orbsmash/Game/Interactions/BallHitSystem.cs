@@ -69,6 +69,11 @@ namespace Orbsmash.Game.Interactions
                         continue;
                     }
 
+                    if (playerStateMachineComponent.State.HitActive == false)
+                    {
+                        continue;
+                    }
+
                     ballStateComponent.IsDeadly = true;
 
                     ballVelocityComponent.Freeze = false;

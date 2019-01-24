@@ -26,7 +26,7 @@ namespace Handy.Animation
         public bool Repeats;
         public string NextAnimation;
         public IList<AnimationFrame> Frames;
-        public IList<EventFrame> Events;
+        //public IList<EventFrame> Events;
     }
 
     public class AnimationDefinition

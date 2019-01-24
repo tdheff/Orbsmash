@@ -66,7 +66,7 @@ namespace Orbsmash.Player
                     } else if (input.DashPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Dash);
-                    } else if (input.MovementStick.LengthSquared() > PlayerState.MovementThresholdSquared)
+                    } else if (input.MovementStick.LengthSquared() > PlayerState.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Walk);
                     }
@@ -78,7 +78,7 @@ namespace Orbsmash.Player
                     } else if (input.DashPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Dash);
-                    } else if (input.MovementStick.LengthSquared() < PlayerState.MovementThresholdSquared)
+                    } else if (input.MovementStick.LengthSquared() < PlayerState.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Idle);
                     }
@@ -103,6 +103,14 @@ namespace Orbsmash.Player
                     if (state.SwingFinished)
                     {
                         return StateMachineTransition<PlayerStates>.Pop();
+                    }
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_HIT_START))
+                    {
+                        state.HitActive = true;
+                    }
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_HIT_END))
+                    {
+                        state.HitActive = false;
                     }
                     break;
                 case PlayerStates.Dead:
