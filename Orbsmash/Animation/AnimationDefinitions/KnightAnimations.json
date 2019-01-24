@@ -380,6 +380,54 @@
 					"LastFrameLength": 50
 				}
 			]
+		},
+		{
+			"AnimationName": "BLOCK",
+			"Frames": [
+				{
+					"FrameNumber": 75,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 76,
+					"Time": 50
+				}
+			]
+		},
+		{
+			"AnimationName": "BLOCK_HIT",
+			"Events": [
+				{
+					"EventName": "PLAYER_SWING_END",
+					"Time": 400
+				}
+			],
+			"Frames": [
+				{
+					"FrameNumber": 77,
+					"Time": 0
+				},
+				{
+					"FrameNumber": 78,
+					"Time": 150
+				},
+				{
+					"FrameNumber": 79,
+					"Time": 200
+				},
+				{
+					"FrameNumber": 80,
+					"Time": 250
+				},
+				{
+					"FrameNumber": 81,
+					"Time": 300
+				},
+				{
+					"FrameNumber": 82,
+					"Time": 350
+				}
+			]
 		}
 	]
 }
