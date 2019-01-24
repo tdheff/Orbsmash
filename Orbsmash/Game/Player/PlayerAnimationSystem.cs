@@ -66,7 +66,10 @@ namespace Orbsmash.Player
                         }
                         break;
                     case PlayerStates.Swing:
-                        mainBodyAnimation.SetAnimation(PlayerAnimations.BLOCK_HIT);
+                        mainBodyAnimation.SetAnimation(PlayerAnimations.SWING);
+                        break;
+                    case PlayerStates.Block:
+                        mainBodyAnimation.SetAnimation(PlayerAnimations.BLOCK);
                         break;
                     case PlayerStates.Dead:
                        

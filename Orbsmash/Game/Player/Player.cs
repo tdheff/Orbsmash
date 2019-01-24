@@ -25,6 +25,7 @@ namespace Orbsmash.Player
             { EventComponent.BuildKey(PlayerAnimations.SWING, 2 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
             { EventComponent.BuildKey(PlayerAnimations.SWING, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
             { EventComponent.BuildKey(PlayerAnimations.CHARGE, 4 ), new HashSet<string> { PlayerEvents.CHARGE_WINDUP_END }},
+            { EventComponent.BuildKey(PlayerAnimations.BLOCK, 5 ), new HashSet<string> { PlayerEvents.BLOCK_END }}
         };
 
         
@@ -38,12 +39,10 @@ namespace Orbsmash.Player
         private AnimationComponent _mainBodyAnimation;
         private AnimatableSprite _mainPlayerBodySprite;
         private EventComponent _events = new EventComponent(_eventTriggers);
-        private string playerSprite;
 
         public Player(PlayerSettings settings)
         {
             name = $"Player_{settings.Id}";
-            playerSprite = settings.Sprite;
             scale = new Vector2(2);
             _settings = settings;
             

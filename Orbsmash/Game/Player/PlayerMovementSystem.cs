@@ -44,6 +44,8 @@ namespace Orbsmash.Player
                         break;
                     case PlayerStates.Dead:
                         break;
+                    case PlayerStates.Block:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

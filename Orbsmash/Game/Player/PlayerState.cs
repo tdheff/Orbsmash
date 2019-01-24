@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Player
 {
-    public enum PlayerStates { Idle, Walk, Dash, Charge, Swing, Dead }
+    public enum PlayerStates { Idle, Walk, Dash, Charge, Swing, Dead, Block }
     
     public class PlayerState : IStateMachineState<PlayerStates>
     {

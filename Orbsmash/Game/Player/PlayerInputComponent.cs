@@ -10,7 +10,8 @@ namespace Orbsmash.Player
         
         public Vector2 MovementStick = new Vector2();
         public bool DashPressed = false;
-        public bool SwingPressed = false;
+        public bool AttackPressed = false;
+        public bool DefensePressed = false;
         
         public PlayerInputComponent(int deviceId) : base()
         {

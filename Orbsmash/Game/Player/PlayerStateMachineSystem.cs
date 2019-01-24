@@ -37,6 +37,8 @@ namespace Orbsmash.Player
                     break;
                 case PlayerStates.Dead:
                     break;
+                case PlayerStates.Block:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -48,10 +50,6 @@ namespace Orbsmash.Player
             var input = entity.getComponent<PlayerInputComponent>();
             var events = entity.getComponent<EventComponent>();
             var state = stateMachine.State;
-            if (events.PeekEvents().Count > 0)
-            {
-                var eventsList = events.PeekEvents();
-            }
             if (state.StateEnum != PlayerStates.Dead && state.IsKilled)
             {
                 return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Dead);
@@ -60,9 +58,12 @@ namespace Orbsmash.Player
             switch (state.StateEnum)
             {
                 case PlayerStates.Idle:
-                    if (input.SwingPressed)
+                    if (input.AttackPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
+                    } else if (input.DefensePressed)
+                    {
+                        return StateMachineTransition<PlayerStates>.Push(PlayerStates.Block);
                     } else if (input.DashPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Dash);
@@ -72,9 +73,12 @@ namespace Orbsmash.Player
                     }
                     break;
                 case PlayerStates.Walk:
-                    if (input.SwingPressed)
+                    if (input.AttackPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
+                    } else if (input.DefensePressed)
+                    {
+                        return StateMachineTransition<PlayerStates>.Push(PlayerStates.Block);
                     } else if (input.DashPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Dash);
@@ -84,16 +88,19 @@ namespace Orbsmash.Player
                     }
                     break;
                 case PlayerStates.Dash:
-                    if (input.SwingPressed)
+                    if (input.AttackPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Push(PlayerStates.Charge);
+                    } else if (input.DefensePressed)
+                    {
+                        return StateMachineTransition<PlayerStates>.Push(PlayerStates.Block);
                     } else if (state.DashFinished)
                     {
                         return StateMachineTransition<PlayerStates>.Pop();
                     }
                     break;
                 case PlayerStates.Charge:
-                    if (!input.SwingPressed)
+                    if (!input.AttackPressed)
                     {
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Swing);
                     }
@@ -118,6 +125,13 @@ namespace Orbsmash.Player
                     {
                         return StateMachineTransition<PlayerStates>.Replace(PlayerStates.Idle);
                     }
+                    break;
+                case PlayerStates.Block:
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_END))
+                    {
+                        return StateMachineTransition<PlayerStates>.Pop();
+                    }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -146,6 +160,8 @@ namespace Orbsmash.Player
                     break;
                 case PlayerStates.Dead:
                     break;
+                case PlayerStates.Block:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -172,6 +188,8 @@ namespace Orbsmash.Player
                     state.SwingFinished = false;
                     break;
                 case PlayerStates.Dead:
+                    break;
+                case PlayerStates.Block:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
