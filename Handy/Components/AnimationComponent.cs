@@ -15,25 +15,26 @@ namespace Handy.Components
     public class AnimationComponent : Component
     {
         public IAnimatable AnimationTarget;
+        public AnimationDefinition AnimationDefinition;
         public string LastAnimation;
-        public string Context = "";
         public string CurrentAnimation;
-        public float ElapsedTime;
-        public int CurrentFrame;
-        public AnimationComponent(IAnimatable animationTarget, string context, string startingAnimation)
+        public float CurrentAnimationElapsedTime;
+        public float CurrentFrameElapsedTime;
+        public int CurrentAnimationFrame = 0;
+        public AnimationComponent(IAnimatable animationTarget, AnimationDefinition animationDefinition, string startingAnimation)
         {
+            AnimationDefinition = animationDefinition;
             AnimationTarget = animationTarget;
-            Context = context;
             CurrentAnimation = startingAnimation;
-            ElapsedTime = 0;
+            CurrentAnimationElapsedTime = 0;
         }
 
         public void SetAnimation(string newAnimation)
         {
-            if(newAnimation != CurrentAnimation)
-            {
-                ElapsedTime = 0;
-            }
+            if (newAnimation == CurrentAnimation) return;
+            CurrentAnimationElapsedTime = 0;
+            CurrentFrameElapsedTime = 0;
+            CurrentAnimationFrame = 0;
             CurrentAnimation = newAnimation;
         }
 

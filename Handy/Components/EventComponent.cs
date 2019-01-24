@@ -15,11 +15,52 @@ namespace Handy.Components
     public class EventComponent : Component
     {
         private float repeatEventFireDelay = 0.1f;
+        private Dictionary<string, HashSet<string>> _eventTriggers = new Dictionary<string, HashSet<string>>();
         public HashSet<string> Events = new HashSet<string>();
         private string LastEvent = "";
         private float LastEventTime;
         public EventComponent()
         {
+        }
+        
+        public EventComponent(Dictionary<string, HashSet<string>> eventTriggers)
+        {
+            _eventTriggers = eventTriggers;
+        }
+
+        public static string BuildKey(string animationName, int frame)
+        {
+            return $"{animationName}##{frame}";
+        }
+
+        public HashSet<string> GetEventTriggers(string animationName, int frame)
+        {
+            if (!_eventTriggers.ContainsKey(BuildKey(animationName, frame)))
+            {
+                return new HashSet<string>();
+            }
+
+            return _eventTriggers[BuildKey(animationName, frame)];
+        }
+        
+        public void AddEvent(string animationName, int frame, string eventName)
+        {
+            if (!_eventTriggers.ContainsKey(BuildKey(animationName, frame)))
+            {
+                _eventTriggers[BuildKey(animationName, frame)] = new HashSet<string>();
+            }
+
+            _eventTriggers[BuildKey(animationName, frame)].Add(eventName);
+        }
+
+        public void DeleteEvent(string animationName, int frame, string eventName)
+        {
+            if (!_eventTriggers.ContainsKey(BuildKey(animationName, frame)))
+            {
+                return;
+            }
+
+            _eventTriggers[BuildKey(animationName, frame)].Remove(eventName);
         }
 
         private bool IsRepeatEvent(string eventName)

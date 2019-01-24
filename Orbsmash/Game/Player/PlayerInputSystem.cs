@@ -23,7 +23,8 @@ namespace Orbsmash.Player
                 input.MovementStick = gamePad.getLeftStick();
                 input.MovementStick.Y = -input.MovementStick.Y;
                 input.DashPressed = gamePad.isButtonDown(Buttons.A);
-                input.SwingPressed = gamePad.isButtonDown(Buttons.X);
+                input.AttackPressed = gamePad.isButtonDown(Buttons.X);
+                input.DefensePressed = gamePad.isButtonDown(Buttons.B);
             }
             
         }

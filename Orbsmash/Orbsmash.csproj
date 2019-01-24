@@ -85,6 +85,7 @@
     <Compile Include="Game\Player\PlayerInputComponent.cs" />
     <Compile Include="Game\Player\PlayerInputSystem.cs" />
     <Compile Include="Game\Player\PlayerMovementSystem.cs" />
+    <Compile Include="Game\Player\PlayerSettings.cs" />
     <Compile Include="Game\Player\PlayerState.cs" />
     <Compile Include="Game\Player\PlayerStateMachineComponent.cs" />
     <Compile Include="Game\Player\PlayerStateMachineSystem.cs" />

@@ -44,13 +44,15 @@ namespace Orbsmash.Player
                         break;
                     case PlayerStates.Dead:
                         break;
+                    case PlayerStates.Block:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
                 if (allowMovement)
                 {
                     velocity.Velocity = input.MovementStick * state.Speed;
-                    if (input.MovementStick.LengthSquared() >= PlayerState.MovementThresholdSquared)
+                    if (input.MovementStick.LengthSquared() >= PlayerState.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         state.LastVector = Vector2.Normalize(input.MovementStick);
                     }
@@ -73,11 +75,11 @@ namespace Orbsmash.Player
                     }
                     if (Vector2.Dot(left, state.LastVector) > 0.707)
                     {
-                        state.LastDirection = Gameplay.Direction.LEFT;
+                        state.LastDirection = state.side == Gameplay.Side.RIGHT ? Gameplay.Direction.FORWARD : Gameplay.Direction.BACKWARD;
                     }
                     if (Vector2.Dot(right, state.LastVector) > 0.707)
                     {
-                        state.LastDirection = Gameplay.Direction.RIGHT;
+                        state.LastDirection = state.side == Gameplay.Side.RIGHT ? Gameplay.Direction.BACKWARD : Gameplay.Direction.FORWARD;
                     }
                 }
                 else

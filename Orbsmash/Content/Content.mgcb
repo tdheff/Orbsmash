@@ -47,6 +47,11 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Ball/Ball.png
 
+#begin Sprites/Characters/Knight/KnightJson.json
+/importer:AsepriteImporter
+/processor:AsepriteProcessor
+/build:Sprites/Characters/Knight/KnightJson.json
+
 #begin Sprites/Characters/Knight/Knight.png
 /importer:TextureImporter
 /processor:TextureProcessor

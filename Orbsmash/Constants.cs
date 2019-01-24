@@ -16,8 +16,18 @@ namespace Orbsmash.Constants
         {
             UP,
             DOWN,
-            LEFT,
-            RIGHT
+            FORWARD,
+            BACKWARD
+        }
+
+        public enum Character
+        {
+            KNIGHT,
+            WIZARD,
+            SPACEMAN,
+            ALIEN,
+            PIRATE,
+            SKELETON
         }
     }
 
@@ -82,6 +92,11 @@ namespace Orbsmash.Constants
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/Knight";
     }
+    
+    public sealed class PlayerAsepriteFiles
+    {
+        public static readonly string KNIGHT = "Sprites/Characters/Knight/KnightJson";
+    }
 
     public sealed class BallSprites
     {
@@ -111,10 +126,10 @@ namespace Orbsmash.Constants
         public static readonly string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
         public static readonly string WALK_UP = "WALK_UP";
         public static readonly string WALK_DOWN = "WALK_DOWN";
-        public static readonly string WALK_LEFT = "WALK_LEFT";
-        public static readonly string WALK_RIGHT = "WALK_RIGHT";
-        public static readonly string CHARGE_PULSE = "CHARGE_PULSE";
+        public static readonly string WALK_BACKWARD = "WALK_BACKWARD";
+        public static readonly string WALK_FORWARD = "WALK_FORWARD";
         public static readonly string CHARGE_IDLE = "CHARGE_IDLE";
+        public static readonly string CHARGE_FULL = "CHARGE_FULL";
         public static readonly string CHARGE = "CHARGE";
         public static readonly string SWING = "SWING";
         public static readonly string BLOCK = "BLOCK";
@@ -127,6 +142,8 @@ namespace Orbsmash.Constants
         public static readonly string PLAYER_HIT_END = "PLAYER_HIT_END";
         public static readonly string PLAYER_SWING_END = "PLAYER_SWING_END";
         public static readonly string PLAYER_DASH_END = "PLAYER_DASH_END";
+        public static readonly string CHARGE_WINDUP_END = "CHARGE_WINDUP_END";
+        public static readonly string BLOCK_END = "BLOCK_END";
     }
 
     

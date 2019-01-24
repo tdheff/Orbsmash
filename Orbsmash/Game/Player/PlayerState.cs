@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Player
 {
-    public enum PlayerStates { Idle, Walk, Dash, Charge, Swing, Dead }
+    public enum PlayerStates { Idle, Walk, Dash, Charge, Swing, Dead, Block }
     
     public class PlayerState : IStateMachineState<PlayerStates>
     {
         // CONSTANTS
-        public const float MovementThresholdSquared = 0.01f;
+        public const float MOVEMENT_THRESHOLD_SQUARED = 0.01f;
         
         // STATE
         public PlayerStates StateEnum { get; set; } = PlayerStates.Idle;
@@ -32,6 +32,7 @@ namespace Orbsmash.Player
         public const float MaxChargeTime = 2.0f;
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
+        public bool HitActive = false;
         
         // OTHER
         public bool IsInvulnerable = false;
