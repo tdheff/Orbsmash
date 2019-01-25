@@ -21,6 +21,7 @@ namespace Handy.Components
         public float CurrentAnimationElapsedTime;
         public float CurrentFrameElapsedTime;
         public int CurrentAnimationFrame = 0;
+        public float PlaybackSpeed = 1.0f;
         public AnimationComponent(IAnimatable animationTarget, AnimationDefinition animationDefinition, string startingAnimation)
         {
             AnimationDefinition = animationDefinition;
@@ -29,13 +30,14 @@ namespace Handy.Components
             CurrentAnimationElapsedTime = 0;
         }
 
-        public void SetAnimation(string newAnimation)
+        public void SetAnimation(string newAnimation, float playbackSpeed = 1.0f)
         {
             if (newAnimation == CurrentAnimation) return;
             CurrentAnimationElapsedTime = 0;
             CurrentFrameElapsedTime = 0;
             CurrentAnimationFrame = 0;
             CurrentAnimation = newAnimation;
+            PlaybackSpeed = playbackSpeed;
         }
 
     }

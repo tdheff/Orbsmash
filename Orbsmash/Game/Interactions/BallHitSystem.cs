@@ -13,7 +13,7 @@ namespace Orbsmash.Game.Interactions
 {
     public class BallHitSystem : EntitySystem
     {
-        public BallHitSystem() : base(new Matcher().all(typeof(PlayerStateMachineComponent))) { }
+        public BallHitSystem() : base(new Matcher().all(typeof(PlayerStateComponent))) { }
 
         private bool checkBallVelocity(Gameplay.Side side, Vector2 ballVelocity)
         {
@@ -24,7 +24,7 @@ namespace Orbsmash.Game.Interactions
         {
             foreach (var entity in entities)
             {
-                var playerStateMachineComponent = entity.getComponent<PlayerStateMachineComponent>();
+                var playerStateMachineComponent = entity.getComponent<PlayerStateComponent>();
                 var colliders = entity.getComponents<PolygonCollider>();
                 Collider collider = null;
                 foreach (var polygonCollider in colliders)
@@ -36,12 +36,12 @@ namespace Orbsmash.Game.Interactions
 
                 if (collider == null)
                 {
-                    Debug.error("No hitbox collider found for player {}", playerStateMachineComponent.State.playerId);
+                    Debug.error("No hitbox collider found for player {}", playerStateMachineComponent.playerId);
                     throw new Exception();
                 }
 
                 // TODO - actually turn the hitbox on and off, this is a bandaid. that should be done with anim tags
-                if (playerStateMachineComponent.State.StateEnum != PlayerStates.Swing)
+                if (playerStateMachineComponent.StateEnum != KnightStates.Swing)
                 {
                     continue;
                 }
@@ -58,10 +58,10 @@ namespace Orbsmash.Game.Interactions
                     var ballVelocityComponent = neighbor.entity.getComponent<VelocityComponent>();
 
                     var wasLastToHit =
-                        ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId &&
-                        ballStateComponent.LastHitSide == playerStateMachineComponent.State.side;
+                        ballStateComponent.LastHitPlayerId == playerStateMachineComponent.playerId &&
+                        ballStateComponent.LastHitSide == playerStateMachineComponent.side;
 
-                    var ballMovingTowards = checkBallVelocity(playerStateMachineComponent.State.side,
+                    var ballMovingTowards = checkBallVelocity(playerStateMachineComponent.side,
                         ballVelocityComponent.Velocity);
                     
                     if (wasLastToHit && !ballMovingTowards)
@@ -69,7 +69,7 @@ namespace Orbsmash.Game.Interactions
                         continue;
                     }
 
-                    if (playerStateMachineComponent.State.HitActive == false)
+                    if (playerStateMachineComponent.HitActive == false)
                     {
                         continue;
                     }
@@ -80,24 +80,24 @@ namespace Orbsmash.Game.Interactions
                     ballStateComponent.BaseSpeed *= 1.05f;
                     // TODO - HIT BOOST
                     var velocity =
-                        playerStateMachineComponent.State.LastVector.LengthSquared();
+                        playerStateMachineComponent.LastVector.LengthSquared();
                     Vector2 velocityNormalized;
                     if (velocity < float.Epsilon)
                     {
-                        velocityNormalized = playerStateMachineComponent.State.side == Gameplay.Side.LEFT
+                        velocityNormalized = playerStateMachineComponent.side == Gameplay.Side.LEFT
                             ? new Vector2(1, 0)
                             : new Vector2(-1, 0);
                     }
                     else
                     {
-                        velocityNormalized = Vector2.Normalize(playerStateMachineComponent.State.LastVector);
+                        velocityNormalized = Vector2.Normalize(playerStateMachineComponent.LastVector);
                         if (Math.Abs(velocityNormalized.X) < Math.Abs(velocityNormalized.Y))
                         {
-                            var xComponent = playerStateMachineComponent.State.side == Gameplay.Side.LEFT ? 0.70710678118f : -0.70710678118f;
+                            var xComponent = playerStateMachineComponent.side == Gameplay.Side.LEFT ? 0.70710678118f : -0.70710678118f;
                             var yComponent = Math.Sign(velocityNormalized.Y) * 0.70710678118f;
                             velocityNormalized = new Vector2(xComponent, yComponent);
                         }
-                        if (playerStateMachineComponent.State.side == Gameplay.Side.LEFT)
+                        if (playerStateMachineComponent.side == Gameplay.Side.LEFT)
                         {
                             if (velocityNormalized.X < 0)
                                 velocityNormalized.X = -velocityNormalized.X;
@@ -119,8 +119,8 @@ namespace Orbsmash.Game.Interactions
                         Console.WriteLine(velocityNormalized);
                     }
                     
-                    ballStateComponent.LastHitPlayerId = playerStateMachineComponent.State.playerId;
-                    ballStateComponent.LastHitSide = playerStateMachineComponent.State.side;
+                    ballStateComponent.LastHitPlayerId = playerStateMachineComponent.playerId;
+                    ballStateComponent.LastHitSide = playerStateMachineComponent.side;
 
                 }
             }

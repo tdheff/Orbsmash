@@ -17,8 +17,22 @@ namespace Orbsmash.Game
         {
             if(testing)
             {
-                Players.Add(new PlayerSettings() { Id = 0, Sprite = PlayerSprites.KNIGHT, Side = Gameplay.Side.LEFT, Speed = 500f, Hitbox = Hitboxes.KNIGHT_HITBOX, StartingPosition = new Vector2(700, 700)});
-                Players.Add(new PlayerSettings() { Id = 0, Sprite = PlayerSprites.KNIGHT, Side = Gameplay.Side.RIGHT, Speed = 500f, Hitbox = Hitboxes.KNIGHT_HITBOX, StartingPosition = new Vector2(1400, 700)});
+                Players.Add(new PlayerSettings
+                {
+                    Id = 1,
+                    Side = Gameplay.Side.LEFT,
+                    Speed = 500f,
+                    StartingPosition = new Vector2(700, 700),
+                    Character = Gameplay.Character.KNIGHT
+                });
+                Players.Add(new PlayerSettings
+                {
+                    Id = 0,
+                    Side = Gameplay.Side.LEFT,
+                    Speed = 500f,
+                    StartingPosition = new Vector2(1400, 700),
+                    Character = Gameplay.Character.WIZARD
+                });
                 BallSprite = BallSprites.DEFAULT;
                 MapTile = MapTiles.MEDIEVAL;
             }

@@ -1,18 +1,16 @@
-using Handy.Components;
-using Orbsmash.Constants;
 using Microsoft.Xna.Framework;
+using Nez;
+using Orbsmash.Constants;
 
 namespace Orbsmash.Player
 {
-    public enum PlayerStates { Idle, Walk, Dash, Charge, Swing, Dead, Block }
-    
-    public class PlayerState : IStateMachineState<PlayerStates>
+    public class PlayerStateComponent : Component
     {
         // CONSTANTS
         public const float MOVEMENT_THRESHOLD_SQUARED = 0.01f;
         
         // STATE
-        public PlayerStates StateEnum { get; set; } = PlayerStates.Idle;
+        public KnightStates StateEnum { get; set; } = KnightStates.Idle;
         public bool IsKilled = false;
         
         // IDENTIFICATION
@@ -29,7 +27,7 @@ namespace Orbsmash.Player
 
         // SWINGING
         public float ChargeTime;
-        public const float MaxChargeTime = 2.0f;
+        public const float MAX_CHARGE_TIME = 2.0f;
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
         public bool HitActive = false;
@@ -37,17 +35,12 @@ namespace Orbsmash.Player
         // OTHER
         public bool IsInvulnerable = false;
         
-        public PlayerState(int playerId, Gameplay.Side side, float speed, Vector2 resetPosition)
+        public PlayerStateComponent(int playerId, Gameplay.Side side, float speed, Vector2 resetPosition)
         {
             this.playerId = playerId;
             this.side = side;
             Speed = speed;
             ResetPosition = resetPosition;
-        }
-
-        public IStateMachineState<PlayerStates> Clone()
-        {
-            return MemberwiseClone() as IStateMachineState<PlayerStates>;
         }
     }
 }

@@ -91,11 +91,13 @@ namespace Orbsmash.Constants
     public sealed class PlayerSprites
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/Knight";
+        public static readonly string WIZARD = "Sprites/Characters/Wizard/Wizard";
     }
     
     public sealed class PlayerAsepriteFiles
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/KnightJson";
+        public static readonly string WIZARD = "Sprites/Characters/Wizard/WizardJson";
     }
 
     public sealed class BallSprites
@@ -120,7 +122,7 @@ namespace Orbsmash.Constants
         public static readonly string IDLE = "IDLE";
     }
 
-    public sealed class PlayerAnimations
+    public sealed class KnightAnimations
     {
         public static readonly string IDLE_VERTICAL = "IDLE_VERTICAL";
         public static readonly string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
@@ -131,9 +133,18 @@ namespace Orbsmash.Constants
         public static readonly string CHARGE_IDLE = "CHARGE_IDLE";
         public static readonly string CHARGE_FULL = "CHARGE_FULL";
         public static readonly string CHARGE = "CHARGE";
-        public static readonly string SWING = "SWING";
+        public static readonly string ATTACK = "ATTACK";
         public static readonly string BLOCK = "BLOCK";
         public static readonly string BLOCK_HIT = "BLOCK_HIT";
+    }
+    
+    public sealed class WizardAnimations
+    {
+        public static readonly string IDLE_VERTICAL = "IDLE_VERTICAL";
+        public static readonly string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
+        public static readonly string WALK_DOWN = "WALK_DOWN";
+        public static readonly string WALK_FORWARD = "WALK_FORWARD";
+        public static readonly string ATTACK = "ATTACK";
     }
 
     public sealed class PlayerEvents

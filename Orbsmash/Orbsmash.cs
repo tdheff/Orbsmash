@@ -26,7 +26,7 @@ namespace Orbsmash
         protected override void Initialize()
         {
             base.Initialize();
-            //Window.AllowUserResizing = true;
+            Window.AllowUserResizing = true;
             debugRenderEnabled = true;
 
             var settings = new GameSettings();

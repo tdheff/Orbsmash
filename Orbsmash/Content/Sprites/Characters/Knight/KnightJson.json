@@ -800,7 +800,7 @@
    { "name": "CHARGE", "from": 50, "to": 54, "direction": "forward" },
    { "name": "CHARGE_IDLE", "from": 55, "to": 58, "direction": "forward" },
    { "name": "CHARGE_FULL", "from": 59, "to": 62, "direction": "forward" },
-   { "name": "SWING", "from": 63, "to": 74, "direction": "forward" },
+   { "name": "ATTACK", "from": 63, "to": 74, "direction": "forward" },
    { "name": "BLOCK", "from": 75, "to": 80, "direction": "forward" },
    { "name": "BLOCK_HIT", "from": 81, "to": 86, "direction": "forward" }
   ],

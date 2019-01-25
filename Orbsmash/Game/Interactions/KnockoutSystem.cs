@@ -11,12 +11,12 @@ namespace Orbsmash.Game.Interactions
 {
     public class KnockoutSystem : EntitySystem
     {
-        public KnockoutSystem() : base(new Matcher().all(typeof(PlayerStateMachineComponent))) { }
+        public KnockoutSystem() : base(new Matcher().all(typeof(PlayerStateComponent))) { }
         protected override void process(List<Entity> entities)
         {
             foreach (var entity in entities)
             {
-                var playerStateMachineComponent = entity.getComponent<PlayerStateMachineComponent>();
+                var playerStateMachineComponent = entity.getComponent<PlayerStateComponent>();
                 var colliders = entity.getComponents<BoxCollider>();
                 Collider collider = null;
                 foreach (var polygonCollider in colliders)
@@ -28,11 +28,11 @@ namespace Orbsmash.Game.Interactions
 
                 if (collider == null)
                 {
-                    Debug.error("No hitbox collider found for player {0}", playerStateMachineComponent.State.playerId);
+                    Debug.error("No hitbox collider found for player {0}", playerStateMachineComponent.playerId);
                     throw new Exception();
                 }
 
-                if (playerStateMachineComponent.State.IsInvulnerable)
+                if (playerStateMachineComponent.IsInvulnerable)
                 {
                     continue;
                 }
@@ -46,14 +46,14 @@ namespace Orbsmash.Game.Interactions
                     }
 
                     var ballStateComponent = neighbor.entity.getComponent<BallStateComponent>();
-                    if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.State.playerId ||
-                        ballStateComponent.LastHitSide == playerStateMachineComponent.State.side ||
+                    if (ballStateComponent.LastHitPlayerId == playerStateMachineComponent.playerId ||
+                        ballStateComponent.LastHitSide == playerStateMachineComponent.side ||
                         !ballStateComponent.IsDeadly)
                     {
                         continue;
                     }
 
-                    playerStateMachineComponent.State.IsKilled = true;
+                    playerStateMachineComponent.IsKilled = true;
 
                 }
             }

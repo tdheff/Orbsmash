@@ -19,18 +19,25 @@ namespace Orbsmash.Player
     // </summary>
     public class Player : Entity
     {
-        private static Dictionary<string, HashSet<string>> _eventTriggers = new Dictionary<string, HashSet<string>>
+        private static Dictionary<string, HashSet<string>> _knightEventTriggers = new Dictionary<string, HashSet<string>>
         {
-            { EventComponent.BuildKey(PlayerAnimations.SWING, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
-            { EventComponent.BuildKey(PlayerAnimations.SWING, 2 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
-            { EventComponent.BuildKey(PlayerAnimations.SWING, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
-            { EventComponent.BuildKey(PlayerAnimations.CHARGE, 4 ), new HashSet<string> { PlayerEvents.CHARGE_WINDUP_END }},
-            { EventComponent.BuildKey(PlayerAnimations.BLOCK, 5 ), new HashSet<string> { PlayerEvents.BLOCK_END }}
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 2 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            { EventComponent.BuildKey(KnightAnimations.CHARGE, 4 ), new HashSet<string> { PlayerEvents.CHARGE_WINDUP_END }},
+            { EventComponent.BuildKey(KnightAnimations.BLOCK, 5 ), new HashSet<string> { PlayerEvents.BLOCK_END }}
         };
-
+        
+        private static Dictionary<string, HashSet<string>> _wizardEventTriggers = new Dictionary<string, HashSet<string>>
+        {
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 8 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 1 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+        };
         
         private PlayerSettings _settings;
-        private PlayerStateMachineComponent _state;
+        private PlayerStateComponent _stateComponent;
+        private Component _state;
         private PlayerInputComponent _input;
         private VelocityComponent _velocity;
         private BoxCollider _collider;
@@ -38,7 +45,7 @@ namespace Orbsmash.Player
         private KinematicComponent _kinematic = new KinematicComponent();
         private AnimationComponent _mainBodyAnimation;
         private AnimatableSprite _mainPlayerBodySprite;
-        private EventComponent _events = new EventComponent(_eventTriggers);
+        private EventComponent _events = new EventComponent();
 
         public Player(PlayerSettings settings)
         {
@@ -47,7 +54,7 @@ namespace Orbsmash.Player
             _settings = settings;
             
             // physics
-            _state = new PlayerStateMachineComponent(new PlayerState(settings.Id, settings.Side, settings.Speed, settings.StartingPosition));
+            _stateComponent = new PlayerStateComponent(settings.Id, settings.Side, settings.Speed, settings.StartingPosition); 
             _velocity = new VelocityComponent(new Vector2(0, 0));
             Console.WriteLine(settings.StartingPosition);
             transform.position = settings.StartingPosition;
@@ -55,7 +62,7 @@ namespace Orbsmash.Player
             // input
             _input = new PlayerInputComponent(settings.Id);
             addComponent(_events);
-            addComponent(_state);
+            addComponent(_stateComponent);
             addComponent(_velocity);
             addComponent(_input);
             addComponent(_kinematic);
@@ -68,10 +75,15 @@ namespace Orbsmash.Player
             switch (_settings.Character)
             {
                 case Gameplay.Character.KNIGHT:
-                    animationDefinition = gameScene.AnimationDefinitions[PlayerAsepriteFiles.KNIGHT];;
+                    _state = new KnightStateMachineComponent(new KnightState());
+                    _events.SetTriggers(_knightEventTriggers);
+                    animationDefinition = gameScene.AnimationDefinitions[PlayerAsepriteFiles.KNIGHT];
                     break;
                 case Gameplay.Character.WIZARD:
-                    throw new NotImplementedException();
+                    _state = new WizardStateMachineComponent(new WizardState());
+                    _events.SetTriggers(_wizardEventTriggers);
+                    animationDefinition = gameScene.AnimationDefinitions[PlayerAsepriteFiles.WIZARD];
+                    break;
                 case Gameplay.Character.SPACEMAN:
                     throw new NotImplementedException();
                 case Gameplay.Character.ALIEN:
@@ -85,7 +97,7 @@ namespace Orbsmash.Player
             }
             _mainPlayerBodySprite = new AnimatableSprite(animationDefinition.SpriteDefinition.Subtextures);
             _mainPlayerBodySprite.renderLayer = RenderLayers.PRIMARY;
-            _mainBodyAnimation = new AnimationComponent(_mainPlayerBodySprite, animationDefinition, PlayerAnimations.IDLE_HORIZONTAL);
+            _mainBodyAnimation = new AnimationComponent(_mainPlayerBodySprite, animationDefinition, KnightAnimations.IDLE_HORIZONTAL);
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new BoxCollider(15, 10);
@@ -99,13 +111,14 @@ namespace Orbsmash.Player
             _hitbox.isTrigger = true;
             _hitbox.name = ComponentNames.HITBOX_COLLIDER;
             
+            addComponent(_state);
             addComponent(_hitbox);
             // _hitbox = new PolygonCollider([]);
             addComponent(_mainPlayerBodySprite);
             addComponent(_mainBodyAnimation);
             addComponent(_collider);
             
-            if (_state.State.side == Gameplay.Side.RIGHT)
+            if (_stateComponent.side == Gameplay.Side.RIGHT)
             {
                 _mainPlayerBodySprite.flipX = true;
                 _collider.FlipX = true;
