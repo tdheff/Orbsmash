@@ -40,12 +40,6 @@ namespace Orbsmash.Game.Interactions
                     throw new Exception();
                 }
 
-                // TODO - actually turn the hitbox on and off, this is a bandaid. that should be done with anim tags
-                if (playerStateMachineComponent.StateEnum != KnightStates.Swing)
-                {
-                    continue;
-                }
-
                 var neighbors = Physics.boxcastBroadphaseExcludingSelf(collider);
                 foreach (var neighbor in neighbors)
                 {
