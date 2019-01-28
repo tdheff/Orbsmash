@@ -23,7 +23,7 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.LEFT,
                     Speed = 500f,
                     StartingPosition = new Vector2(700, 700),
-                    Character = Gameplay.Character.KNIGHT
+                    Character = Gameplay.Character.WIZARD
                 });
                 Players.Add(new PlayerSettings
                 {
@@ -31,7 +31,7 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.RIGHT,
                     Speed = 500f,
                     StartingPosition = new Vector2(1400, 700),
-                    Character = Gameplay.Character.KNIGHT
+                    Character = Gameplay.Character.WIZARD
                 });
                 BallSprite = BallSprites.DEFAULT;
                 MapTile = MapTiles.MEDIEVAL;

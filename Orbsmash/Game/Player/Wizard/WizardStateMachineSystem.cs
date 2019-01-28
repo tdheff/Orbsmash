@@ -17,7 +17,11 @@ namespace Orbsmash.Player
 
         protected override void Update(Entity entity, WizardStateMachineComponent stateMachine)
         {
+            var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
+            var input = entity.getComponent<PlayerInputComponent>();
+            playerState.BallHitBoost = 1.0f;
+            playerState.BallHitVector = Player.calculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
             {
                 case WizardStates.Idle:

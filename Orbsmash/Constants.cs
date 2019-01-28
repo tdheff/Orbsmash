@@ -3,6 +3,11 @@ using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Constants
 {
+    public sealed class MathUtil
+    {
+        public const float SQRT_ONE_HALF = 0.70710678118f;
+    }
+    
     public sealed class Gameplay
     {
         public enum Side

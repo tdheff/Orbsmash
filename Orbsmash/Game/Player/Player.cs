@@ -125,5 +125,38 @@ namespace Orbsmash.Player
                 _hitbox.FlipX = true;
             }
         }
+        
+        public static Vector2 calculateHitVector(Gameplay.Side side, Vector2 input)
+        {
+            if (input.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+            {
+                return side == Gameplay.Side.LEFT ? new Vector2(1, 0) : new Vector2(-1, 0);
+            }
+
+            var hitVector = new Vector2(input.X, input.Y);
+            if (side == Gameplay.Side.LEFT)
+            {
+                if (hitVector.X < 0)
+                {
+                    hitVector.X *= -1;
+                }
+            }
+            else
+            {
+                if (hitVector.X > 0)
+                {
+                    hitVector.X *= -1;
+                }
+            }
+
+            if (Math.Abs(hitVector.Y) > Math.Abs(hitVector.X))
+            {
+                var x = Math.Sign(hitVector.X) * MathUtil.SQRT_ONE_HALF;
+                var y = Math.Sign(hitVector.Y) * MathUtil.SQRT_ONE_HALF;
+                hitVector = new Vector2(x, y);
+            }
+            hitVector.Normalize();
+            return hitVector;
+        }
     }
 }
