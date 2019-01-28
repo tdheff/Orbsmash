@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Handy.Components;
 using Handy.Systems;
+using Microsoft.Xna.Framework;
 using Nez;
 using Orbsmash.Constants;
 
@@ -19,7 +20,9 @@ namespace Orbsmash.Player
         protected override void Update(Entity entity, KnightStateMachineComponent stateMachine)
         {
             var playerState = entity.getComponent<PlayerStateComponent>();
+            var input = entity.getComponent<PlayerInputComponent>();
             var state = stateMachine.State;
+            playerState.BallHitVector = calculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
             {
                 case KnightStates.Idle:
@@ -34,6 +37,8 @@ namespace Orbsmash.Player
                     {
                         playerState.ChargeFinished = true;
                     }
+
+                    playerState.BallHitBoost = 1.0f + playerState.ChargeTime / PlayerStateComponent.MAX_CHARGE_TIME;
                     break;
                 case KnightStates.Swing:
                     break;
@@ -45,6 +50,40 @@ namespace Orbsmash.Player
                     throw new ArgumentOutOfRangeException();
             }
 //            stateMachine.UpdateState(state);
+        }
+
+        private const float SQRT_ONE_HALF = 0.70710678118f;
+        private static Vector2 calculateHitVector(Gameplay.Side side, Vector2 input)
+        {
+            if (input.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+            {
+                return side == Gameplay.Side.LEFT ? new Vector2(1, 0) : new Vector2(-1, 0);
+            }
+
+            var hitVector = new Vector2(input.X, input.Y);
+            if (side == Gameplay.Side.LEFT)
+            {
+                if (hitVector.X < 0)
+                {
+                    hitVector.X *= -1;
+                }
+            }
+            else
+            {
+                if (hitVector.X > 0)
+                {
+                    hitVector.X *= -1;
+                }
+            }
+
+            if (Math.Abs(hitVector.Y) > Math.Abs(hitVector.X))
+            {
+                var x = Math.Sign(hitVector.X) * SQRT_ONE_HALF;
+                var y = Math.Sign(hitVector.Y) * SQRT_ONE_HALF;
+                hitVector = new Vector2(x, y);
+            }
+            hitVector.Normalize();
+            return hitVector;
         }
 
         protected override StateMachineTransition<KnightStates> Transition(Entity entity, KnightStateMachineComponent stateMachine)

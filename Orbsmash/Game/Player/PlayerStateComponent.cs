@@ -31,6 +31,8 @@ namespace Orbsmash.Player
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
         public bool HitActive = false;
+        public Vector2 BallHitVector = new Vector2(0, 0);
+        public float BallHitBoost = 1.0f;
         
         // OTHER
         public bool IsInvulnerable = false;
