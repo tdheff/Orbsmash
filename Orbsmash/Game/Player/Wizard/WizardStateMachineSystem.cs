@@ -20,6 +20,8 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
+            state.GlideCooldown -= Time.deltaTime;
+            state.ImmaterialCooldown -= Time.deltaTime;
             playerState.BallHitBoost = 1.0f;
             playerState.BallHitVector = Player.calculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
@@ -29,6 +31,12 @@ namespace Orbsmash.Player
                 case WizardStates.Walk:
                     break;
                 case WizardStates.Attack:
+                    break;
+                case WizardStates.Glide:
+                    state.GlideTime += Time.deltaTime;
+                    break;
+                case WizardStates.Immaterial:
+                    state.ImmaterialTime += Time.deltaTime;
                     break;
                 case WizardStates.Dead:
                     break;
@@ -55,6 +63,12 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
+                    } else if (input.DefensePressed && state.ImmaterialCooldown < 0)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
+                    } else if (input.DashPressed && state.GlideCooldown < 0)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
                     } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Walk);
@@ -64,6 +78,12 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
+                    } else if (input.DefensePressed && state.ImmaterialCooldown < 0)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
+                    } else if (input.DashPressed && state.GlideCooldown < 0)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
                     } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
@@ -84,6 +104,26 @@ namespace Orbsmash.Player
                         playerState.HitActive = false;
                     }
                     break;
+                case WizardStates.Glide:
+                    if (input.AttackPressed)
+                    {
+                        return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
+                    } else if (input.DefensePressed && state.ImmaterialCooldown < 0)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
+                    } else if (!input.DashPressed || state.GlideTime >= WizardState.MAX_GLIDE_TIME)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
+                    }
+
+                    break;
+                case WizardStates.Immaterial:
+                    if (state.ImmaterialTime >= WizardState.IMMATERIAL_TIME)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
+                    }
+
+                    break;
                 case WizardStates.Dead:
                     if (!playerState.IsKilled)
                     {
@@ -100,6 +140,7 @@ namespace Orbsmash.Player
         {
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
+            var input = entity.getComponent<PlayerInputComponent>();
             switch (state.StateEnum)
             {
                 case WizardStates.Idle:
@@ -109,7 +150,14 @@ namespace Orbsmash.Player
                 case WizardStates.Attack:
                     playerState.SwingFinished = false;
                     break;
+                case WizardStates.Glide:
+                    state.GlideDirection = input.MovementStick;
+                    break;
                 case WizardStates.Dead:
+                    break;
+                case WizardStates.Immaterial:
+                    playerState.BallHitBoost = WizardState.IMMATERIAL_HIT_BOOST;
+                    playerState.HitActive = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -130,7 +178,17 @@ namespace Orbsmash.Player
                 case WizardStates.Attack:
                     playerState.SwingFinished = false;
                     break;
+                case WizardStates.Glide:
+                    state.GlideTime = 0;
+                    state.GlideCooldown = WizardState.GLIDE_COOLDOWN;
+                    break;
                 case WizardStates.Dead:
+                    break;
+                case WizardStates.Immaterial:
+                    playerState.HitActive = false;
+                    playerState.BallHitBoost = 1.0f;
+                    state.ImmaterialTime = 0;
+                    state.ImmaterialCooldown = WizardState.IMMATERIAL_COOLDOWN;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

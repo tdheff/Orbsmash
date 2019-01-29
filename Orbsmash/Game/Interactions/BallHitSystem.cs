@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Handy.Animation;
 using Handy.Components;
 using Microsoft.Xna.Framework;
 using Nez;
 using Orbsmash.Ball;
 using Orbsmash.Constants;
+using Orbsmash.Game.Effects;
 using Orbsmash.Player;
 
 namespace Orbsmash.Game.Interactions
@@ -79,6 +78,10 @@ namespace Orbsmash.Game.Interactions
                     ballState.LastHitPlayerId = playerState.playerId;
                     ballState.LastHitSide = playerState.side;
 
+                    var hitEffect = new HitEffect();
+                    hitEffect.transform.position = neighbor.transform.position;
+                    Handy.Scene handyScene = scene as Handy.Scene;
+                    handyScene.addEntity(hitEffect);
                 }
             }
         }

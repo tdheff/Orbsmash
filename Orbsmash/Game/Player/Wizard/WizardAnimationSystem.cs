@@ -42,8 +42,13 @@ namespace Orbsmash.Player
                     case WizardStates.Attack:
                         mainBodyAnimation.SetAnimation(WizardAnimations.ATTACK);
                         break;
+                    case WizardStates.Glide:
+                        mainBodyAnimation.SetAnimation(WizardAnimations.GLIDE);
+                        break;
                     case WizardStates.Dead:
-                       
+                        break;
+                    case WizardStates.Immaterial:
+                        mainBodyAnimation.SetAnimation(WizardAnimations.IMMATERIAL);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

@@ -30,7 +30,7 @@ namespace Handy
             _initialize();
         }
 
-        public new Entity addEntity(Entity entity)
+        public new T addEntity<T>( T entity ) where T : Entity
         {
             entity.scale *= _scale;
             return base.addEntity(entity);

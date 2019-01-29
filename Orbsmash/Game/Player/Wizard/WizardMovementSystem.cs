@@ -28,24 +28,33 @@ namespace Orbsmash.Player
                 var playerState = entity.getComponent<PlayerStateComponent>();
 
                 velocity.Velocity = input.MovementStick * playerState.Speed;
-                var allowMovement = false;
+                var freeMovement = false;
+                var lockMovement = false;
                 var movementMultipler = 1.0f;
                 switch (wizardState.StateEnum)
                 {
                     case WizardStates.Idle:
-                        allowMovement = true; // like if they're just starting to press it i guess we allow it
+                        freeMovement = true; // like if they're just starting to press it i guess we allow it
                         break;
                     case WizardStates.Walk:
-                        allowMovement = true;
+                        freeMovement = true;
                         break;
                     case WizardStates.Attack:
+                        lockMovement = true;
+                        break;
+                    case WizardStates.Glide:
+                        velocity.Velocity = wizardState.GlideDirection * WizardState.GLIDE_SPEED;
                         break;
                     case WizardStates.Dead:
+                        lockMovement = true;
+                        break;
+                    case WizardStates.Immaterial:
+                        lockMovement = true;
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
-                if (allowMovement)
+                if (freeMovement)
                 {
                     velocity.Velocity = input.MovementStick * playerState.Speed * movementMultipler;
                     if (input.MovementStick.LengthSquared() >= PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
@@ -78,7 +87,7 @@ namespace Orbsmash.Player
                         playerState.LastDirection = playerState.side == Gameplay.Side.RIGHT ? Gameplay.Direction.BACKWARD : Gameplay.Direction.FORWARD;
                     }
                 }
-                else
+                if (lockMovement)
                 {
                     velocity.Velocity = new Vector2(0, 0);
                 }

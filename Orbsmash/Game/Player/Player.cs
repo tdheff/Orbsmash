@@ -56,7 +56,6 @@ namespace Orbsmash.Player
             // physics
             _stateComponent = new PlayerStateComponent(settings.Id, settings.Side, settings.Speed, settings.StartingPosition); 
             _velocity = new VelocityComponent(new Vector2(0, 0));
-            Console.WriteLine(settings.StartingPosition);
             transform.position = settings.StartingPosition;
             
             // input
@@ -77,12 +76,12 @@ namespace Orbsmash.Player
                 case Gameplay.Character.KNIGHT:
                     _state = new KnightStateMachineComponent(new KnightState());
                     _events.SetTriggers(_knightEventTriggers);
-                    animationDefinition = gameScene.AnimationDefinitions[PlayerAsepriteFiles.KNIGHT];
+                    animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.KNIGHT];
                     break;
                 case Gameplay.Character.WIZARD:
                     _state = new WizardStateMachineComponent(new WizardState());
                     _events.SetTriggers(_wizardEventTriggers);
-                    animationDefinition = gameScene.AnimationDefinitions[PlayerAsepriteFiles.WIZARD];
+                    animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.WIZARD];
                     break;
                 case Gameplay.Character.SPACEMAN:
                     throw new NotImplementedException();

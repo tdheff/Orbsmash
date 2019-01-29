@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
 
@@ -21,10 +22,10 @@ namespace Orbsmash.Player
                 
                 var gamePad = Input.gamePads[input.DeviceId];
                 input.MovementStick = gamePad.getLeftStick();
-                input.MovementStick.Y = -input.MovementStick.Y;
+                input.MovementStick = new Vector2(input.MovementStick.X, -input.MovementStick.Y);
                 input.DashPressed = gamePad.isButtonDown(Buttons.A);
-                input.AttackPressed = gamePad.isButtonDown(Buttons.X);
-                input.DefensePressed = gamePad.isButtonDown(Buttons.B);
+                input.AttackPressed = gamePad.isButtonDown(Buttons.X) || gamePad.isRightTriggerDown() || gamePad.isButtonDown(Buttons.RightShoulder);
+                input.DefensePressed = gamePad.isButtonDown(Buttons.B)|| gamePad.isLeftTriggerDown() || gamePad.isButtonDown(Buttons.LeftShoulder);
             }
             
         }

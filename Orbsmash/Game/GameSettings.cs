@@ -21,17 +21,17 @@ namespace Orbsmash.Game
                 {
                     Id = 0,
                     Side = Gameplay.Side.LEFT,
-                    Speed = 500f,
+                    Speed = 300f,
                     StartingPosition = new Vector2(700, 700),
-                    Character = Gameplay.Character.WIZARD
+                    Character = Gameplay.Character.KNIGHT
                 });
                 Players.Add(new PlayerSettings
                 {
                     Id = 0,
                     Side = Gameplay.Side.RIGHT,
-                    Speed = 500f,
+                    Speed = 300f,
                     StartingPosition = new Vector2(1400, 700),
-                    Character = Gameplay.Character.WIZARD
+                    Character = Gameplay.Character.KNIGHT
                 });
                 BallSprite = BallSprites.DEFAULT;
                 MapTile = MapTiles.MEDIEVAL;
