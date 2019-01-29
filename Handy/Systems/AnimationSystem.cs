@@ -37,8 +37,8 @@ namespace Handy.Systems
                     }
                     var currentAnimationTrack = animationDef.Animations.First(x => x.AnimationName == anim.CurrentAnimation.ToString());
                     // let's first elapse the time that has passed
-                    anim.CurrentAnimationElapsedTime += Time.deltaTime * 1000; // ms
-                    anim.CurrentFrameElapsedTime += Time.deltaTime * 1000; // ms
+                    anim.CurrentAnimationElapsedTime += Time.deltaTime * 1000 * anim.PlaybackSpeed; // ms
+                    anim.CurrentFrameElapsedTime += Time.deltaTime * 1000 * anim.PlaybackSpeed; // ms
 
                     if (anim.CurrentFrameElapsedTime >= currentAnimationTrack.Frames[anim.CurrentAnimationFrame].Duration)
                     {

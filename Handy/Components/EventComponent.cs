@@ -28,6 +28,11 @@ namespace Handy.Components
             _eventTriggers = eventTriggers;
         }
 
+        public void SetTriggers(Dictionary<string, HashSet<string>> eventTriggers)
+        {
+            _eventTriggers = eventTriggers;
+        }
+
         public static string BuildKey(string animationName, int frame)
         {
             return $"{animationName}##{frame}";

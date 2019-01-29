@@ -47,14 +47,19 @@ namespace Orbsmash.Game
                 new TimerSystem(),
                 new ParticleEmitterSystem(),
                 new PlayerInputSystem(),
-                new PlayerStateMachineSystem(),
                 new GameStateMachineSystem(),
                 new BallHitSystem(),
-                new PlayerMovementSystem(),
                 new KnockoutSystem(),
                 new KinematicSystem(),
                 new KinematicSystem(),
-                new PlayerAnimationSystem(),
+                // KNIGHT
+                new KnightMovementSystem(),
+                new KnightStateMachineSystem(),
+                new KnightAnimationSystem(),
+                // WIZARD
+                new WizardMovementSystem(),
+                new WizardStateMachineSystem(),
+                new WizardAnimationSystem(), 
                 AnimationSystem
             };
         }
@@ -64,11 +69,13 @@ namespace Orbsmash.Game
             LoadTextures(new []
             {
                 BallSprites.DEFAULT,
-                PlayerSprites.KNIGHT
+                PlayerSprites.KNIGHT,
+                PlayerSprites.WIZARD
             });
             LoadAnimationDefinitions(new []
             {
-                PlayerAsepriteFiles.KNIGHT
+                PlayerAsepriteFiles.KNIGHT,
+                PlayerAsepriteFiles.WIZARD
             });
         }
         

@@ -47,11 +47,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Ball/Ball.png
 
-#begin Sprites/Characters/Knight/KnightJson.json
-/importer:AsepriteImporter
-/processor:AsepriteProcessor
-/build:Sprites/Characters/Knight/KnightJson.json
-
 #begin Sprites/Characters/Knight/Knight.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -81,6 +76,11 @@
 /processor:PolygonProcessor
 /build:Sprites/Characters/Knight/Knight_Hitbox.xml
 
+#begin Sprites/Characters/Knight/KnightJson.json
+/importer:AsepriteImporter
+/processor:AsepriteProcessor
+/build:Sprites/Characters/Knight/KnightJson.json
+
 #begin Sprites/Characters/Pirate/Pirate.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -104,6 +104,23 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Characters/Spaceman/Spaceman.png
+
+#begin Sprites/Characters/Wizard/Wizard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Characters/Wizard/Wizard.png
+
+#begin Sprites/Characters/Wizard/WizardJson.json
+/importer:AsepriteImporter
+/processor:AsepriteProcessor
+/build:Sprites/Characters/Wizard/WizardJson.json
 
 #begin Tiles/DungeonMap.tmx
 /importer:TiledMapImporter

@@ -63,7 +63,7 @@ namespace Orbsmash.Game
         {
             foreach (var player in players)
             {
-                var state = player.getComponent<PlayerStateMachineComponent>().State;
+                var state = player.getComponent<PlayerStateComponent>();
                 state.IsKilled = false;
                 player.position = state.ResetPosition;
             }
@@ -94,8 +94,8 @@ namespace Orbsmash.Game
 
             foreach (var player in players)
             {
-                var state = player.getComponent<PlayerStateMachineComponent>().State;
-                if (state.StateEnum != PlayerStates.Dead)
+                var state = player.getComponent<PlayerStateComponent>();
+                if (state.StateEnum != KnightStates.Dead)
                 {
                     if (state.side == Gameplay.Side.LEFT)
                     {

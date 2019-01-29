@@ -8,7 +8,7 @@ namespace Orbsmash.Player
     public class PlayerInputSystem : EntitySystem
     {
         public PlayerInputSystem(Matcher matcher) : base(matcher) { }
-        public PlayerInputSystem() : base(new Matcher().all(typeof(PlayerInputComponent), typeof(PlayerStateMachineComponent))) { }
+        public PlayerInputSystem() : base(new Matcher().all(typeof(PlayerInputComponent))) { }
 
         protected override void process(List<Entity> entities)
         {
