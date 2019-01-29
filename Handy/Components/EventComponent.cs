@@ -17,8 +17,8 @@ namespace Handy.Components
         private float repeatEventFireDelay = 0.1f;
         private Dictionary<string, HashSet<string>> _eventTriggers = new Dictionary<string, HashSet<string>>();
         public HashSet<string> Events = new HashSet<string>();
-        private string LastEvent = "";
-        private float LastEventTime;
+        private string _lastEvent = "";
+        private float _lastEventTime;
         public EventComponent()
         {
         }
@@ -52,10 +52,12 @@ namespace Handy.Components
         {
             if (!_eventTriggers.ContainsKey(BuildKey(animationName, frame)))
             {
-                _eventTriggers[BuildKey(animationName, frame)] = new HashSet<string>();
+                _eventTriggers[BuildKey(animationName, frame)] = new HashSet<string> { eventName };
             }
-
-            _eventTriggers[BuildKey(animationName, frame)].Add(eventName);
+            else
+            {
+                _eventTriggers[BuildKey(animationName, frame)].Add(eventName);
+            }
         }
 
         public void DeleteEvent(string animationName, int frame, string eventName)
@@ -71,7 +73,7 @@ namespace Handy.Components
         private bool IsRepeatEvent(string eventName)
         {
             var time = Time.time;
-            if(eventName == LastEvent && LastEventTime + repeatEventFireDelay > time)
+            if(eventName == _lastEvent && _lastEventTime + repeatEventFireDelay > time)
             {
                 return true;
             }
@@ -86,7 +88,7 @@ namespace Handy.Components
             {
                 Events.Add(e);
                 LastEvent = e;
-                LastEventTime = Time.time;
+                _lastEventTime = Time.time;
             }
         }
 

@@ -673,14 +673,95 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
     "sourceSize": { "w": 64, "h": 48 },
     "duration": 50
+   },
+   {
+    "filename": "Wizard 75.aseprite",
+    "frame": { "x": 4800, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 76.aseprite",
+    "frame": { "x": 4864, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 77.aseprite",
+    "frame": { "x": 4928, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 78.aseprite",
+    "frame": { "x": 4992, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 79.aseprite",
+    "frame": { "x": 5056, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 80.aseprite",
+    "frame": { "x": 5120, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 81.aseprite",
+    "frame": { "x": 5184, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 82.aseprite",
+    "frame": { "x": 5248, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 83.aseprite",
+    "frame": { "x": 5312, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
    }
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.10-beta2-x64",
   "image": "/home/tommy/dev/Orbsmash/Orbsmash/Content/Sprites/Characters/Wizard/Wizard.png",
-  "format": "I8",
-  "size": { "w": 4800, "h": 48 },
+  "format": "RGBA8888",
+  "size": { "w": 5376, "h": 48 },
   "scale": "1",
   "frameTags": [
    { "name": "IDLE_HORIZONTAL", "from": 0, "to": 0, "direction": "forward" },
@@ -689,7 +770,9 @@
    { "name": "WALK_BACKWARD", "from": 18, "to": 33, "direction": "forward" },
    { "name": "WALK_DOWN", "from": 34, "to": 49, "direction": "forward" },
    { "name": "WALK_UP", "from": 50, "to": 65, "direction": "forward" },
-   { "name": "ATTACK", "from": 66, "to": 74, "direction": "forward" }
+   { "name": "ATTACK", "from": 66, "to": 74, "direction": "forward" },
+   { "name": "GLIDE", "from": 75, "to": 79, "direction": "forward" },
+   { "name": "IMMATERIAL", "from": 80, "to": 83, "direction": "forward" }
   ],
   "layers": [
    { "name": "legs", "opacity": 255, "blendMode": "normal" },

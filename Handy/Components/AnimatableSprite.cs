@@ -20,7 +20,6 @@ namespace Handy.Animation
         {
             if(frames != null && frames.Count > frame)
             {
-                // Console.WriteLine($"###### Setting frame: {frame}");
                 setSubtexture(frames[frame]);
             }
         }

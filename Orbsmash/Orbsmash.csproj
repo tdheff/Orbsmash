@@ -73,6 +73,8 @@
     </Compile>
     <Compile Include="Game\Ball\Ball.cs" />
     <Compile Include="Game\Ball\BallStateComponent.cs" />
+    <Compile Include="Game\Effects\HitEffect.cs" />
+    <Compile Include="Game\Effects\HitEffectSystem.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameSettings.cs" />
     <Compile Include="Game\GameState\GameState.cs" />

@@ -93,17 +93,24 @@ namespace Orbsmash.Constants
         public static readonly int FOREGROUND = 1;
     }
 
+    public sealed class Sprites
+    {
+        public static readonly string HitEffect = "Sprites/Effects/HitEffect";
+    }
+
     public sealed class PlayerSprites
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/Knight";
         public static readonly string WIZARD = "Sprites/Characters/Wizard/Wizard";
     }
     
-    public sealed class PlayerAsepriteFiles
+    public sealed class AsepriteFiles
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/KnightJson";
         public static readonly string WIZARD = "Sprites/Characters/Wizard/WizardJson";
+        public static readonly string HIT_EFFECT = "Sprites/Effects/HitEffectJson";
     }
+    
 
     public sealed class BallSprites
     {
@@ -150,6 +157,8 @@ namespace Orbsmash.Constants
         public static readonly string WALK_DOWN = "WALK_DOWN";
         public static readonly string WALK_FORWARD = "WALK_FORWARD";
         public static readonly string ATTACK = "ATTACK";
+        public static readonly string GLIDE = "GLIDE";
+        public static readonly string IMMATERIAL = "IMMATERIAL";
     }
 
     public sealed class PlayerEvents

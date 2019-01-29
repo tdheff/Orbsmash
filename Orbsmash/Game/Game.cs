@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using Handy.Components;
 using Orbsmash.Constants;
+using Orbsmash.Game.Effects;
 using Orbsmash.Game.Interactions;
 
 namespace Orbsmash.Game
@@ -59,7 +60,9 @@ namespace Orbsmash.Game
                 // WIZARD
                 new WizardMovementSystem(),
                 new WizardStateMachineSystem(),
-                new WizardAnimationSystem(), 
+                new WizardAnimationSystem(),
+                // EFFECTS
+                new HitEffectSystem(),
                 AnimationSystem
             };
         }
@@ -70,12 +73,14 @@ namespace Orbsmash.Game
             {
                 BallSprites.DEFAULT,
                 PlayerSprites.KNIGHT,
-                PlayerSprites.WIZARD
+                PlayerSprites.WIZARD,
+                Sprites.HitEffect
             });
             LoadAnimationDefinitions(new []
             {
-                PlayerAsepriteFiles.KNIGHT,
-                PlayerAsepriteFiles.WIZARD
+                AsepriteFiles.KNIGHT,
+                AsepriteFiles.WIZARD,
+                AsepriteFiles.HIT_EFFECT
             });
         }
         
