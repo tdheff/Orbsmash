@@ -34,7 +34,7 @@ namespace Orbsmash.Game
                     Character = Gameplay.Character.KNIGHT
                 });
                 BallSprite = BallSprites.DEFAULT;
-                MapTile = MapTiles.MEDIEVAL;
+                MapTile = MapTiles.MEDIEVAL2;
             }
         }
     }

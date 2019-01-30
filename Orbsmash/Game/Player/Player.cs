@@ -50,7 +50,6 @@ namespace Orbsmash.Player
         public Player(PlayerSettings settings)
         {
             name = $"Player_{settings.Id}";
-            scale = new Vector2(2);
             _settings = settings;
             
             // physics
