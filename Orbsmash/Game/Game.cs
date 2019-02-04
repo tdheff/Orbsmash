@@ -29,7 +29,7 @@ namespace Orbsmash.Game
         public Game(GameSettings settings) : base(5)
         {
             Console.WriteLine("###### GAME START ######");
-            setDesignResolution(2560, 1440, SceneResolutionPolicy.BestFit);
+            setDesignResolution(1920, 1080, SceneResolutionPolicy.BestFit);
             _settings = settings;
             LoadContent();
             SetupAudio();
@@ -144,7 +144,7 @@ namespace Orbsmash.Game
 
         public override void onStart()
         {
-            findEntity("Map").transform.position = new Vector2(0, 0);
+            findEntity("Map").transform.position = new Vector2(-80, -40);
             findEntity(EntityNames.BALL).transform.position = new Vector2(400, 400);
         }
     }

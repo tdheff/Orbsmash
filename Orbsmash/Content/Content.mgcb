@@ -151,6 +151,23 @@
 /processor:AsepriteProcessor
 /build:Sprites/Effects/HitEffectJson.json
 
+#begin Sprites/Maps/Medeival.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Maps/Medeival.png
+
+#begin Tiles/DungeonMap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tiles/DungeonMap.tmx
+
 #begin Tiles/DungeonMap.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -168,13 +185,37 @@
 /processorParam:TextureFormat=Color
 /build:Tiles/DungeonTiles.png
 
-#begin Tiles/DungeonTileset.tsx
-/copy:Tiles/DungeonTileset.tsx
+#begin Tiles/DungeonTiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiles/DungeonTiles.png
 
 #begin Tiles/MedievalMap.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:Tiles/MedievalMap.tmx
+
+#begin Tiles/MedievalMap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tiles/MedievalMap.tmx
+
+#begin Tiles/MedievalMap2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tiles/MedievalMap2.tmx
+
+#begin Tiles/MedievalMap2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tiles/MedievalMap2.tmx
 
 #begin Tiles/MedievalTiles.png
 /importer:TextureImporter
@@ -188,6 +229,14 @@
 /processorParam:TextureFormat=Color
 /build:Tiles/MedievalTiles.png
 
-#begin Tiles/MedievalTileset.tsx
-/copy:Tiles/MedievalTileset.tsx
-
+#begin Tiles/MedievalTiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiles/MedievalTiles.png

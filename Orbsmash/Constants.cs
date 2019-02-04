@@ -75,6 +75,7 @@ namespace Orbsmash.Constants
     {
         public static readonly string DUNGEON = "Tiles/DungeonMap";
         public static readonly string MEDIEVAL = "Tiles/MedievalMap";
+        public static readonly string MEDIEVAL2 = "Tiles/MedievalMap2";
     }
     
     public sealed class PhysicsLayers
