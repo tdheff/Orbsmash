@@ -82,6 +82,7 @@
     <Compile Include="Game\GameState\GameStateMachineSystem.cs" />
     <Compile Include="Game\Interactions\BallHitSystem.cs" />
     <Compile Include="Game\Interactions\KnockoutSystem.cs" />
+    <Compile Include="Game\Player\Knight\KnightSoundSystem.cs" />
     <Compile Include="Game\Player\Knight\KnightState.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineComponent.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineSystem.cs" />

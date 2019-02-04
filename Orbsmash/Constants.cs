@@ -110,7 +110,13 @@ namespace Orbsmash.Constants
         public static readonly string WIZARD = "Sprites/Characters/Wizard/WizardJson";
         public static readonly string HIT_EFFECT = "Sprites/Effects/HitEffectJson";
     }
-    
+
+    public sealed class SoundEffects
+    {
+        public static readonly string MENU_MUSIC = "audio/music/bumpin_eighties";
+        public static readonly string FOOTSTEPS_1 = "audio/character/footsteps_1";
+    }
+
 
     public sealed class BallSprites
     {

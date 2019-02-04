@@ -1,6 +1,7 @@
 using Handy.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using Nez;
 using Nez.Tiled;
 using Orbsmash.Player;
@@ -23,6 +24,7 @@ namespace Orbsmash.Game
         private readonly GameSettings _settings;
         private AnimationSystem AnimationSystem;
         public Entity GameStateEntity;
+        private Song song;
         
         public Game(GameSettings settings) : base(5)
         {
@@ -30,6 +32,7 @@ namespace Orbsmash.Game
             setDesignResolution(2560, 1440, SceneResolutionPolicy.BestFit);
             _settings = settings;
             LoadContent();
+            SetupAudio();
             CreateEntities();
         }
 
@@ -57,6 +60,7 @@ namespace Orbsmash.Game
                 new KnightMovementSystem(),
                 new KnightStateMachineSystem(),
                 new KnightAnimationSystem(),
+                new KnightSoundSystem(),
                 // WIZARD
                 new WizardMovementSystem(),
                 new WizardStateMachineSystem(),
@@ -82,6 +86,20 @@ namespace Orbsmash.Game
                 AsepriteFiles.WIZARD,
                 AsepriteFiles.HIT_EFFECT
             });
+
+            LoadSounds(new[]
+            {
+                SoundEffects.FOOTSTEPS_1,
+            });
+        }
+
+        private void SetupAudio()
+        {
+            this.song = content.Load<Song>(Constants.SoundEffects.MENU_MUSIC);
+            // MediaPlayer.Play(song);
+            MediaPlayer.Volume = 0.4f;
+            //  Uncomment the following line will also loop the song
+            //  MediaPlayer.IsRepeating = true;
         }
         
         private void CreateEntities()

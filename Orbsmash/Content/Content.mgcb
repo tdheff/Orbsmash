@@ -18,6 +18,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin audio/character/footsteps_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/footsteps_1.wav
+
+#begin audio/music/bumpin_eighties.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/music/bumpin_eighties.wav
+
 #begin Particles/Test_Particles.pex
 /importer:ParticleDesignerImporter
 /processor:ParticleDesignerProcessor
