@@ -154,6 +154,7 @@ namespace Orbsmash.Player
         protected override void OnEnter(Entity entity, KnightStateMachineComponent stateMachine)
         {
             var playerState = entity.getComponent<PlayerStateComponent>();
+            var soundState = entity.getComponent<KnightSoundStateComponent>();
             var state = stateMachine.State;
             switch (state.StateEnum)
             {
@@ -168,7 +169,7 @@ namespace Orbsmash.Player
                     playerState.ChargeFinished = false;
                     break;
                 case KnightStates.Swing:
-
+                    soundState.PlaySwingWeapon1 = true;
                     playerState.SwingFinished = false;
                     break;
                 case KnightStates.Dead:

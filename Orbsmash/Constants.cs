@@ -118,6 +118,22 @@ namespace Orbsmash.Constants
         public static readonly string FOOTSTEPS_1 = "audio/character/footsteps_1";
     }
 
+    public sealed class KnightSoundEffects
+    {
+        public static readonly string BOOT_1 = "audio/character/knight/footsteps/boot_1";
+        public static readonly string BOOT_2 = "audio/character/knight/footsteps/boot_2";
+        public static readonly string BOOT_3 = "audio/character/knight/footsteps/boot_3";
+        public static readonly string BOOT_4 = "audio/character/knight/footsteps/boot_4";
+        public static readonly string BOOT_5 = "audio/character/knight/footsteps/boot_5";
+        public static readonly string BOOT_6 = "audio/character/knight/footsteps/boot_6";
+        public static readonly string SWIPE_1 = "audio/character/knight/sword/swipe_1";
+        public static readonly string SWIPE_2 = "audio/character/knight/sword/swipe_2";
+        public static readonly string SWIPE_3 = "audio/character/knight/sword/swipe_3";
+        public static readonly string SWIPE_4 = "audio/character/knight/sword/swipe_4";
+        public static readonly string HIT_1 = "audio/character/knight/sword/hit_1";
+        public static List<string> AllEffects = new List<string>() { BOOT_1, BOOT_2, BOOT_3, BOOT_4, BOOT_5, BOOT_6, SWIPE_1, SWIPE_2, SWIPE_3, SWIPE_4, HIT_1 };
+    }
+
 
     public sealed class BallSprites
     {

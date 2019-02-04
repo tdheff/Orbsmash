@@ -75,6 +75,8 @@
     <Compile Include="Pipeline\PhysicsEditor\PolygonProcessor.cs" />
     <Compile Include="Pipeline\PhysicsEditor\PolygonReader.cs" />
     <Compile Include="Pipeline\PhysicsEditor\PolygonWriter.cs" />
+    <Compile Include="Sound\HandySoundEffect.cs" />
+    <Compile Include="Sound\HandySoundEffectGroup.cs" />
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Animation\AnimationDefinition.cs" />
     <Compile Include="Animation\Util.cs" />

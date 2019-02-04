@@ -38,6 +38,7 @@ namespace Orbsmash.Player
         private PlayerSettings _settings;
         private PlayerStateComponent _stateComponent;
         private Component _state;
+        private Component _soundState;
         private PlayerInputComponent _input;
         private VelocityComponent _velocity;
         private BoxCollider _collider;
@@ -74,11 +75,13 @@ namespace Orbsmash.Player
             {
                 case Gameplay.Character.KNIGHT:
                     _state = new KnightStateMachineComponent(new KnightState());
+                    _soundState = new KnightSoundStateComponent();
                     _events.SetTriggers(_knightEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.KNIGHT];
                     break;
                 case Gameplay.Character.WIZARD:
                     _state = new WizardStateMachineComponent(new WizardState());
+                    _soundState = new PlayerSoundStateComponent();
                     _events.SetTriggers(_wizardEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.WIZARD];
                     break;
@@ -110,6 +113,7 @@ namespace Orbsmash.Player
             _hitbox.name = ComponentNames.HITBOX_COLLIDER;
             
             addComponent(_state);
+            addComponent(_soundState);
             addComponent(_hitbox);
             // _hitbox = new PolygonCollider([]);
             addComponent(_mainPlayerBodySprite);

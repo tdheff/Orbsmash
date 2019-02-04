@@ -24,6 +24,7 @@ namespace Orbsmash.Game.Interactions
             foreach (var entity in entities)
             {
                 var playerState = entity.getComponent<PlayerStateComponent>();
+                var soundState = entity.getComponent<PlayerSoundStateComponent>();
                 var colliders = entity.getComponents<PolygonCollider>();
                 Collider collider = null;
                 foreach (var polygonCollider in colliders)
@@ -35,8 +36,12 @@ namespace Orbsmash.Game.Interactions
 
                 if (collider == null)
                 {
-                    Debug.error("No hitbox collider found for player {}", playerState.playerId);
+                    Debug.error($"No hitbox collider found for player {playerState.playerId}");
                     throw new Exception();
+                }
+                if(soundState == null)
+                {
+                    Debug.error($"No sound state found for player {playerState.playerId}");
                 }
 
                 var neighbors = Physics.boxcastBroadphaseExcludingSelf(collider);
@@ -82,6 +87,9 @@ namespace Orbsmash.Game.Interactions
                     hitEffect.transform.position = neighbor.transform.position;
                     Handy.Scene handyScene = scene as Handy.Scene;
                     handyScene.addEntity(hitEffect);
+
+                    // sound
+                    soundState.PlayBallHit = true;
                 }
             }
         }

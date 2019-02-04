@@ -87,21 +87,38 @@ namespace Orbsmash.Game
                 AsepriteFiles.HIT_EFFECT
             });
 
-            LoadSounds(new[]
+            var soundsToLoad = new List<string>()
             {
                 SoundEffects.FOOTSTEPS_1,
-            });
+            };
+            soundsToLoad.AddRange(KnightSoundEffects.AllEffects);
+            LoadSounds(soundsToLoad.ToArray());
         }
 
+
+        // plan to add complexity here in terms of picking the correct song, etc once I have a better
+        // system in place for starting this scene from  amenu scene
         private void SetupAudio()
         {
             this.song = content.Load<Song>(Constants.SoundEffects.MENU_MUSIC);
-            // MediaPlayer.Play(song);
-            MediaPlayer.Volume = 0.4f;
-            //  Uncomment the following line will also loop the song
-            //  MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(song);
+            SetMusicVolume();
+            MediaPlayer.IsRepeating = true;
+            SetVolumeLevels(_settings.SfxVolume);
         }
-        
+
+        private void RefreshAfterSettingsChange()
+        {
+            SetMusicVolume();
+            SetVolumeLevels(_settings.SfxVolume);
+        }
+
+        private void SetMusicVolume()
+        {
+            MediaPlayer.Volume = _settings.MasterVolume * _settings.MusicVolume;
+
+        }
+
         private void CreateEntities()
         {
             

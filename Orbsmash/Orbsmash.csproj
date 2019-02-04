@@ -84,6 +84,7 @@
     <Compile Include="Game\Interactions\KnockoutSystem.cs" />
     <Compile Include="Game\Player\Knight\KnightSoundSystem.cs" />
     <Compile Include="Game\Player\Knight\KnightState.cs" />
+    <Compile Include="Game\Player\Knight\KnightSoundStateComponent.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineComponent.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineSystem.cs" />
     <Compile Include="Game\Player\Knight\KnightAnimationSystem.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Game\Player\PlayerInputComponent.cs" />
     <Compile Include="Game\Player\PlayerInputSystem.cs" />
     <Compile Include="Game\Player\PlayerSettings.cs" />
+    <Compile Include="Game\Player\PlayerSoundStateComponent.cs" />
     <Compile Include="Game\Player\PlayerStateComponent.cs" />
     <Compile Include="Game\Player\Wizard\WizardAnimationSystem.cs" />
     <Compile Include="Game\Player\Wizard\WizardMovementSystem.cs" />

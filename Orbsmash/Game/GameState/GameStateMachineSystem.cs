@@ -75,7 +75,7 @@ namespace Orbsmash.Game
             ballState.IsDeadly = false;
             ballState.BaseSpeed = ballState.BaseSpeedInitial;
             if (side == Gameplay.Side.LEFT ||
-                (side == Gameplay.Side.NONE && Random.chance(0.5f)))
+                (side == Gameplay.Side.NONE )) // && Random.chance(0.5f)
             {
                 ball.position = BallResetPositions.LEFT_RESET;
             }
