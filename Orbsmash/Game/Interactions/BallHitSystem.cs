@@ -79,8 +79,15 @@ namespace Orbsmash.Game.Interactions
 
                     var hitEffect = new HitEffect();
                     hitEffect.transform.position = neighbor.transform.position;
-                    Handy.Scene handyScene = scene as Handy.Scene;
-                    handyScene.addEntity(hitEffect);
+                    var handyScene = scene as Handy.Scene;
+                    if (handyScene != null)
+                    {
+                        handyScene.addEntity(hitEffect);
+                    }
+                    else
+                    {
+                        Debug.warn("Entity {} has no scene", this);
+                    }
                 }
             }
         }
