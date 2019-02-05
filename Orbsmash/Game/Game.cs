@@ -9,6 +9,7 @@ using Handy.Animation;
 using System;
 using System.Collections.Generic;
 using Handy.Components;
+using Orbsmash.Ball;
 using Orbsmash.Constants;
 using Orbsmash.Game.Effects;
 using Orbsmash.Game.Interactions;
@@ -53,6 +54,8 @@ namespace Orbsmash.Game
                 new KnockoutSystem(),
                 new KinematicSystem(),
                 new KinematicSystem(),
+                // BALL
+                new BallStateSystem(),
                 // KNIGHT
                 new KnightMovementSystem(),
                 new KnightStateMachineSystem(),
@@ -90,11 +93,11 @@ namespace Orbsmash.Game
             var tiledMap = content.Load<TiledMap>(_settings.MapTile);
             String[] tiledMapLayers = new[]
             {
-                TiledImportCollisionLayers.WALLS, TiledImportCollisionLayers.NET
+                TiledImportCollisionLayers.BACK_WALLS, TiledImportCollisionLayers.SIDE_WALLS, TiledImportCollisionLayers.NET
             };
             int[] tiledMapPhysicsLayers = new[]
             {
-                PhysicsLayers.WALLS, PhysicsLayers.NET
+                PhysicsLayers.BACK_WALLS, PhysicsLayers.SIDE_WALLS, PhysicsLayers.NET
             };
             var tiledMapComponent = new Handy.Components.TiledMapComponent(tiledMap, tiledMapLayers, tiledMapPhysicsLayers, true);
             var entity = new Entity();

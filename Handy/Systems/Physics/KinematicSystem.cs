@@ -85,6 +85,8 @@ namespace Handy.Systems
                                 ref collisionResult.minimumTranslationVector, out relativeVelocity);
                             velocityComponent.Velocity += relativeVelocity;
                         }
+
+                        kinematicComponent.LastCollision = neighbor;
                     }
                 }
 
