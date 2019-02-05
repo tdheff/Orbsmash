@@ -88,6 +88,20 @@ namespace Orbsmash.Game.Interactions
                     {
                         Debug.warn("Entity {} has no scene", this);
                     }
+
+                    var camera = handyScene.findEntity("Camera");
+                    var shake = camera.getComponent<CameraShakeComponent>();
+                    if (ballState.HitBoost > 1.5f)
+                    {
+                        shake.Shake(0.3f, ballState.HitBoost * 15);
+                    }
+                    
+                    var gameState = handyScene.findEntity("Game");
+                    var hitStop = gameState.getComponent<HitStopComponent>();
+                    if (ballState.HitBoost > 1.5f)
+                    {
+                        hitStop.Freeze(ballState.HitBoost / 8.0f);
+                    }
                 }
             }
         }

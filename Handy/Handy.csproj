@@ -60,7 +60,9 @@
     <Compile Include="Components\AnimatableSprite.cs" />
     <Compile Include="Animation\IAnimatable.cs" />
     <Compile Include="Components\AnimationComponent.cs" />
+    <Compile Include="Components\CameraShakeComponent.cs" />
     <Compile Include="Components\EventComponent.cs" />
+    <Compile Include="Components\HitStopComponent.cs" />
     <Compile Include="Components\ParticleEmitterComponent.cs" />
     <Compile Include="Components\Physics\KinematicComponent.cs" />
     <Compile Include="Components\Physics\VelocityComponent.cs" />
@@ -87,6 +89,8 @@
     <Compile Include="Dispatch\QueueDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
+    <Compile Include="Systems\CameraShakeSystem.cs" />
+    <Compile Include="Systems\HitStopSystem.cs" />
     <Compile Include="Systems\MapLoaderSystem.cs" />
     <Compile Include="Systems\ParticleEmitterSystem.cs" />
     <Compile Include="Systems\Physics\KinematicSystem.cs" />

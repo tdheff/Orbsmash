@@ -32,7 +32,7 @@ namespace Orbsmash
             var settings = new GameSettings();
             var gameScene = new Game.Game(settings);
             scene = gameScene;
-
+            
             // set the scene so Nez can take over
             // scene = new MainMenu.MainMenu();
         }

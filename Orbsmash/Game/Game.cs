@@ -24,6 +24,7 @@ namespace Orbsmash.Game
         private readonly GameSettings _settings;
         private AnimationSystem AnimationSystem;
         public Entity GameStateEntity;
+        public Entity CameraEntity = new Entity();
         
         public Game(GameSettings settings) : base(5)
         {
@@ -46,7 +47,9 @@ namespace Orbsmash.Game
             AnimationSystem = new AnimationSystem();
             return new EntitySystem[]
             {
+                new HitStopSystem(),
                 new TimerSystem(),
+                new CameraShakeSystem(),
                 new ParticleEmitterSystem(),
                 new PlayerInputSystem(),
                 new GameStateMachineSystem(),
@@ -122,15 +125,26 @@ namespace Orbsmash.Game
             gameState.Ball = ball;
             
             GameStateEntity = new Entity();
+            GameStateEntity.name = "Game";
             GameStateEntity.addComponent(new GameStateComponent(gameState));
             GameStateEntity.addComponent(new TimerComponent());
+            GameStateEntity.addComponent(new HitStopComponent());
             addEntity(GameStateEntity);
+            
+            // add camera
+            var cam = new Camera();
+            var cameraShake = new CameraShakeComponent();
+            CameraEntity.addComponent(cam);
+            CameraEntity.addComponent(cameraShake);
+            CameraEntity.name = "Camera";
+            addEntity(CameraEntity);
         }
 
         public override void onStart()
         {
             findEntity("Map").transform.position = new Vector2(-80, -40);
             findEntity(EntityNames.BALL).transform.position = new Vector2(400, 400);
+            camera = CameraEntity.getComponent<Camera>();
         }
     }
 }
