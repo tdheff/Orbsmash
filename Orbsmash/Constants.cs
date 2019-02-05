@@ -38,8 +38,8 @@ namespace Orbsmash.Constants
 
     public sealed class BallResetPositions
     {
-        public static readonly Vector2 LEFT_RESET = new Vector2(800, 800);
-        public static readonly Vector2 RIGHT_RESET = new Vector2(1760, 800);
+        public static readonly Vector2 LEFT_RESET = new Vector2(800, 500);
+        public static readonly Vector2 RIGHT_RESET = new Vector2(1200, 500);
     }
     
     public sealed class Timers
@@ -66,7 +66,8 @@ namespace Orbsmash.Constants
 
     public sealed class TiledImportCollisionLayers
     {
-        public static readonly string WALLS = "WALLS";
+        public static readonly string BACK_WALLS = "BACK_WALLS";
+        public static readonly string SIDE_WALLS = "SIDE_WALLS";
         public static readonly string ENVIRONMENT = "ENVIRONMENT";
         public static readonly string NET = "NET";
     }
@@ -81,10 +82,11 @@ namespace Orbsmash.Constants
     public sealed class PhysicsLayers
     {
         public static readonly int ENVIRONMENT = 1;
-        public static readonly int WALLS = 2;
-        public static readonly int NET = 3;
-        public static readonly int PLAYER = 4;
-        public static readonly int BALL = 5;
+        public static readonly int BACK_WALLS = 2;
+        public static readonly int SIDE_WALLS = 3;
+        public static readonly int NET = 4;
+        public static readonly int PLAYER = 5;
+        public static readonly int BALL = 6;
     }
 
     public sealed class RenderLayers
