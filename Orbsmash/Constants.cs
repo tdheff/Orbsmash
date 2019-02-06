@@ -201,6 +201,8 @@ namespace Orbsmash.Constants
         public static readonly string PLAYER_DASH_END = "PLAYER_DASH_END";
         public static readonly string CHARGE_WINDUP_END = "CHARGE_WINDUP_END";
         public static readonly string BLOCK_END = "BLOCK_END";
+        public static readonly string BLOCK_HIT = "BLOCK_HIT";
+        public static readonly string BLOCK_HIT_END = "BLOCK_HIT_END";
     }
 
     

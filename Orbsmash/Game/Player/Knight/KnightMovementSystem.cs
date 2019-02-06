@@ -50,6 +50,8 @@ namespace Orbsmash.Player
                         break;
                     case KnightStates.Block:
                         break;
+                    case KnightStates.BlockHit:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

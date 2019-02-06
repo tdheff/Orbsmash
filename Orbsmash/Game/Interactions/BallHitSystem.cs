@@ -84,9 +84,6 @@ namespace Orbsmash.Game.Interactions
                     var hitEffect = new HitEffect();
                     hitEffect.transform.position = neighbor.transform.position;
 
-                    // sound
-                    hits.Play();
-
                     var handyScene = scene as Handy.Scene;
                     if (handyScene != null)
                     {
@@ -104,6 +101,34 @@ namespace Orbsmash.Game.Interactions
                         shake.Shake(0.3f, ballState.HitBoost * 15);
                     }
                     
+                    // sound
+                    hits.Play();
+                    
+                    //
+                    // CHARACTER SPECIFIC HIT ELEMENTS
+                    //
+                    
+                    // KNIGHT
+                    var player = (Player.Player)entity;
+                    switch (player.Settings.Character)
+                    {
+                        case Gameplay.Character.KNIGHT:
+                            knightHit(player, ballVelocityComponent);
+                            break;
+                        case Gameplay.Character.WIZARD:
+                            break;
+                        case Gameplay.Character.SPACEMAN:
+                            break;
+                        case Gameplay.Character.ALIEN:
+                            break;
+                        case Gameplay.Character.PIRATE:
+                            break;
+                        case Gameplay.Character.SKELETON:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    
                     var gameState = handyScene.findEntity("Game");
                     var hitStop = gameState.getComponent<HitStopComponent>();
                     if (ballState.HitBoost > 1.5f)
@@ -111,6 +136,18 @@ namespace Orbsmash.Game.Interactions
                         hitStop.Freeze(ballState.HitBoost / 8.0f);
                     }
                 }
+            }
+        }
+
+        private void knightHit(Player.Player player, VelocityComponent ballVelocity)
+        {
+            var events = player.getComponent<EventComponent>();
+            var knightState = player.getComponent<KnightStateMachineComponent>();
+
+            if (knightState.State.StateEnum == KnightStates.Block)
+            {
+                events.FireEvent(PlayerEvents.BLOCK_HIT);
+                knightState.State.BlockHitVector = -ballVelocity.Velocity / 2;
             }
         }
     }
