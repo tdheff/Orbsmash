@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Handy.Components;
+using Handy.Sound;
 using Handy.Systems;
 using Microsoft.Xna.Framework;
 using Nez;
@@ -22,12 +23,15 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var input = entity.getComponent<PlayerInputComponent>();
             var state = stateMachine.State;
+            var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
+            var steps = soundEffects.First(x => x.Name == KnightSoundEffectGroups.STEPS);
             playerState.BallHitVector = Player.calculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
             {
                 case KnightStates.Idle:
                     break;
                 case KnightStates.Walk:
+                    steps.Play();
                     break;
                 case KnightStates.Dash:
                     break;
@@ -153,7 +157,8 @@ namespace Orbsmash.Player
         protected override void OnEnter(Entity entity, KnightStateMachineComponent stateMachine)
         {
             var playerState = entity.getComponent<PlayerStateComponent>();
-            var soundState = entity.getComponent<KnightSoundStateComponent>();
+            var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
+            var swipes = soundEffects.First(x => x.Name == KnightSoundEffectGroups.SWIPES);
             var state = stateMachine.State;
             switch (state.StateEnum)
             {
@@ -168,7 +173,7 @@ namespace Orbsmash.Player
                     playerState.ChargeFinished = false;
                     break;
                 case KnightStates.Swing:
-                    soundState.PlaySwingWeapon1 = true;
+                    swipes.Play();
                     playerState.SwingFinished = false;
                     break;
                 case KnightStates.Dead:

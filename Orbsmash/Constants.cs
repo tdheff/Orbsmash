@@ -136,6 +136,13 @@ namespace Orbsmash.Constants
         public static List<string> AllEffects = new List<string>() { BOOT_1, BOOT_2, BOOT_3, BOOT_4, BOOT_5, BOOT_6, SWIPE_1, SWIPE_2, SWIPE_3, SWIPE_4, HIT_1 };
     }
 
+    public sealed class KnightSoundEffectGroups
+    {
+        public static readonly string STEPS = "STEPS";
+        public static readonly string HITS = "HITS";
+        public static readonly string SWIPES = "SWIPES";
+    }
+
 
     public sealed class BallSprites
     {

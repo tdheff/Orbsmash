@@ -8,7 +8,7 @@ using Nez;
 
 namespace Handy.Sound
 {
-    public class HandySoundEffectGroup
+    public class SoundEffectGroupComponent: Component
     {
         private List<HandySoundEffect> Effects;
         private System.Random Rand;
@@ -19,18 +19,15 @@ namespace Handy.Sound
         private bool HardRetrigger;
         private int Index = 0;
         public float TimeLastPlayed = 0f;
-        public HandySoundEffectGroup(List<HandySoundEffect> effects, float maxDuration, float volume, bool hardRetrigger = false)
+        public string Name;
+        public SoundEffectGroupComponent(string name, List<HandySoundEffect> effects, float maxDuration, float volume, bool hardRetrigger = false) : base()
         {
+            Name = name;
             Effects = effects;
             Effects.shuffle();
             SetGroupVolume(volume);
             SetMaxDuration(maxDuration);
             HardRetrigger = hardRetrigger;
-        }
-        public HandySoundEffectGroup(List<HandySoundEffect> effects)
-        {
-            Effects = effects;
-            Effects.shuffle();
         }
 
         public void SetMaxDuration(float max)

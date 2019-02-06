@@ -66,7 +66,6 @@ namespace Orbsmash.Game
                 new KnightMovementSystem(),
                 new KnightStateMachineSystem(),
                 new KnightAnimationSystem(),
-                new KnightSoundSystem(),
                 // WIZARD
                 new WizardMovementSystem(),
                 new WizardStateMachineSystem(),
@@ -121,7 +120,7 @@ namespace Orbsmash.Game
 
         private void SetMusicVolume()
         {
-            MediaPlayer.Volume = _settings.MasterVolume * _settings.MusicVolume;
+            MediaPlayer.Volume = _settings.MusicVolume;
 
         }
 

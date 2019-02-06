@@ -13,8 +13,30 @@ namespace Orbsmash.Game
         public string MapTile;
         public int NumPlayers => Players.Count;
         public float MasterVolume;
-        public float MusicVolume;
-        public float SfxVolume;
+        private float _MusicVolume;
+        public float MusicVolume
+        {
+            get
+            {
+                return _MusicVolume;
+            }
+            set
+            {
+                _MusicVolume = MasterVolume * value;
+            }
+        }
+        private float _SfxVolume;
+        public float SfxVolume
+        {
+            get
+            {
+                return _SfxVolume;
+            }
+            set
+            {
+                _SfxVolume = MasterVolume * value;
+            }
+        }
 
         public GameSettings(bool testing = true)
         {
