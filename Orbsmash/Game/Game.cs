@@ -1,6 +1,7 @@
 using Handy.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using Nez;
 using Nez.Tiled;
 using Orbsmash.Player;
@@ -24,6 +25,7 @@ namespace Orbsmash.Game
         private readonly GameSettings _settings;
         private AnimationSystem AnimationSystem;
         public Entity GameStateEntity;
+        private Song song;
         public Entity CameraEntity = new Entity();
         
         public Game(GameSettings settings) : base(5)
@@ -32,6 +34,7 @@ namespace Orbsmash.Game
             setDesignResolution(1920, 1080, SceneResolutionPolicy.BestFit);
             _settings = settings;
             LoadContent();
+            SetupAudio();
             CreateEntities();
         }
 
@@ -88,8 +91,39 @@ namespace Orbsmash.Game
                 AsepriteFiles.WIZARD,
                 AsepriteFiles.HIT_EFFECT
             });
+
+            var soundsToLoad = new List<string>()
+            {
+                SoundEffects.FOOTSTEPS_1,
+            };
+            soundsToLoad.AddRange(KnightSoundEffects.AllEffects);
+            LoadSounds(soundsToLoad.ToArray());
         }
-        
+
+
+        // plan to add complexity here in terms of picking the correct song, etc once I have a better
+        // system in place for starting this scene from  amenu scene
+        private void SetupAudio()
+        {
+            this.song = content.Load<Song>(Constants.SoundEffects.MENU_MUSIC);
+            MediaPlayer.Play(song);
+            SetMusicVolume();
+            MediaPlayer.IsRepeating = true;
+            SetVolumeLevels(_settings.SfxVolume);
+        }
+
+        private void RefreshAfterSettingsChange()
+        {
+            SetMusicVolume();
+            SetVolumeLevels(_settings.SfxVolume);
+        }
+
+        private void SetMusicVolume()
+        {
+            MediaPlayer.Volume = _settings.MusicVolume;
+
+        }
+
         private void CreateEntities()
         {
             

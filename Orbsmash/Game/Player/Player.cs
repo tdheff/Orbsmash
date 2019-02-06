@@ -10,6 +10,7 @@ using Handy.Animation;
 using Nez.PhysicsShapes;
 using Orbsmash.Constants;
 using Orbsmash.Game;
+using Handy.Sound;
 
 namespace Orbsmash.Player
 {
@@ -46,6 +47,9 @@ namespace Orbsmash.Player
         private AnimationComponent _mainBodyAnimation;
         private AnimatableSprite _mainPlayerBodySprite;
         private EventComponent _events = new EventComponent();
+        private SoundEffectGroupComponent _swipes;
+        private SoundEffectGroupComponent _hits;
+        private SoundEffectGroupComponent _steps;
 
         public Player(PlayerSettings settings)
         {
@@ -109,7 +113,7 @@ namespace Orbsmash.Player
             _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
             _hitbox.isTrigger = true;
             _hitbox.name = ComponentNames.HITBOX_COLLIDER;
-            
+
             addComponent(_state);
             addComponent(_hitbox);
             // _hitbox = new PolygonCollider([]);
@@ -123,6 +127,41 @@ namespace Orbsmash.Player
                 _collider.FlipX = true;
                 _hitbox.FlipX = true;
             }
+
+            SetupSound();
+        }
+
+        private void SetupSound()
+        {
+            // at this point mostly for knight, will make a switch statement at some point
+            var gameScene = (HandyScene)scene;
+            var sounds = gameScene.Sounds;
+            var stepEffects = new List<HandySoundEffect>()
+            {
+                sounds[KnightSoundEffects.BOOT_1],
+                sounds[KnightSoundEffects.BOOT_2],
+                sounds[KnightSoundEffects.BOOT_3],
+                sounds[KnightSoundEffects.BOOT_4],
+                sounds[KnightSoundEffects.BOOT_5],
+                sounds[KnightSoundEffects.BOOT_6],
+            };
+            _steps = new SoundEffectGroupComponent(KnightSoundEffectGroups.STEPS, stepEffects, 0.3f, 0.5f * gameScene.SfxVolume);
+            var swipeEffects = new List<HandySoundEffect>()
+            {
+                sounds[KnightSoundEffects.SWIPE_1],
+                sounds[KnightSoundEffects.SWIPE_2],
+                sounds[KnightSoundEffects.SWIPE_3],
+                sounds[KnightSoundEffects.SWIPE_4],
+            };
+            _swipes = new SoundEffectGroupComponent(KnightSoundEffectGroups.SWIPES, swipeEffects, 2f, 0.5f * gameScene.SfxVolume, true);
+            var hitEffects = new List<HandySoundEffect>()
+            {
+                sounds[KnightSoundEffects.HIT_1],
+            };
+            _hits = new SoundEffectGroupComponent(KnightSoundEffectGroups.HITS, hitEffects, 2f, 0.5f * gameScene.SfxVolume, true);
+            addComponent(_steps);
+            addComponent(_swipes);
+            addComponent(_hits);
         }
 
         public static Vector2 calculateHitVector(Gameplay.Side side, Vector2 input)

@@ -18,6 +18,84 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin audio/character/footsteps_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/footsteps_1.wav
+
+#begin audio/character/knight/footsteps/boot_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/footsteps/boot_1.wav
+
+#begin audio/character/knight/footsteps/boot_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/footsteps/boot_2.wav
+
+#begin audio/character/knight/footsteps/boot_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/footsteps/boot_3.wav
+
+#begin audio/character/knight/footsteps/boot_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/footsteps/boot_4.wav
+
+#begin audio/character/knight/footsteps/boot_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/footsteps/boot_5.wav
+
+#begin audio/character/knight/footsteps/boot_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/footsteps/boot_6.wav
+
+#begin audio/character/knight/sword/hit_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/sword/hit_1.wav
+
+#begin audio/character/knight/sword/swipe_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/sword/swipe_1.wav
+
+#begin audio/character/knight/sword/swipe_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/sword/swipe_2.wav
+
+#begin audio/character/knight/sword/swipe_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/sword/swipe_3.wav
+
+#begin audio/character/knight/sword/swipe_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/knight/sword/swipe_4.wav
+
+#begin audio/music/bumpin_eighties.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/music/bumpin_eighties.wav
+
 #begin Particles/Test_Particles.pex
 /importer:ParticleDesignerImporter
 /processor:ParticleDesignerProcessor
@@ -156,23 +234,6 @@
 /processor:TiledMapProcessor
 /build:Tiles/DungeonMap.tmx
 
-#begin Tiles/DungeonMap.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:Tiles/DungeonMap.tmx
-
-#begin Tiles/DungeonTiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tiles/DungeonTiles.png
-
 #begin Tiles/DungeonTiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -189,16 +250,6 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:Tiles/MedievalMap.tmx
-
-#begin Tiles/MedievalMap.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:Tiles/MedievalMap.tmx
-
-#begin Tiles/MedievalMap2.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:Tiles/MedievalMap2.tmx
 
 #begin Tiles/MedievalMap2.tmx
 /importer:TiledMapImporter
@@ -217,14 +268,3 @@
 /processorParam:TextureFormat=Color
 /build:Tiles/MedievalTiles.png
 
-#begin Tiles/MedievalTiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tiles/MedievalTiles.png

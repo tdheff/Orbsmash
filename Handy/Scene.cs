@@ -6,13 +6,17 @@ using System.IO;
 using System.Security.Cryptography;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using Microsoft.Xna.Framework.Audio;
+using Handy.Sound;
 
 namespace Handy
 {
     public abstract class Scene : Nez.Scene
     {
         public Dictionary<string, Texture2D> Textures = new Dictionary<string, Texture2D>();
+        public Dictionary<string, HandySoundEffect> Sounds = new Dictionary<string, HandySoundEffect>();
         public Dictionary<string, AnimationDefinition> AnimationDefinitions = new Dictionary<string, AnimationDefinition>();
+        public float SfxVolume = 1f;
         private Vector2 _scale;
         protected Scene() : base()
         {
@@ -80,6 +84,19 @@ namespace Handy
                 var animationDef = AnimationDefinition.FromAsepriteJson(asepriteJson, texture);
                 AnimationDefinitions.Add(jsonPaths[i], animationDef);
             }
+        }
+
+        public void LoadSounds(string[] paths)
+        {
+            for (int i = 0; i < paths.Length; i++)
+            {
+                Sounds.Add(paths[i], new HandySoundEffect(content.Load<SoundEffect>(paths[i])));
+            }
+        }
+
+        public void SetVolumeLevels(float sfxVolume)
+        {
+            SfxVolume = sfxVolume;
         }
 
     }

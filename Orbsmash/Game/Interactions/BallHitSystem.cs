@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Handy.Components;
+using Handy.Sound;
 using Microsoft.Xna.Framework;
 using Nez;
 using Orbsmash.Ball;
@@ -24,6 +26,8 @@ namespace Orbsmash.Game.Interactions
             foreach (var entity in entities)
             {
                 var playerState = entity.getComponent<PlayerStateComponent>();
+                var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
+                var hits = soundEffects.First(x => x.Name == KnightSoundEffectGroups.HITS);
                 var colliders = entity.getComponents<PolygonCollider>();
                 Collider collider = null;
                 foreach (var polygonCollider in colliders)
@@ -35,7 +39,7 @@ namespace Orbsmash.Game.Interactions
 
                 if (collider == null)
                 {
-                    Debug.error("No hitbox collider found for player {}", playerState.playerId);
+                    Debug.error($"No hitbox collider found for player {playerState.playerId}");
                     throw new Exception();
                 }
 
@@ -79,6 +83,10 @@ namespace Orbsmash.Game.Interactions
 
                     var hitEffect = new HitEffect();
                     hitEffect.transform.position = neighbor.transform.position;
+
+                    // sound
+                    hits.Play();
+
                     var handyScene = scene as Handy.Scene;
                     if (handyScene != null)
                     {
