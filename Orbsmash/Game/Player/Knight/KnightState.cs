@@ -4,12 +4,13 @@ using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Player
 {
-    public enum KnightStates { Idle, Walk, Dash, Charge, Swing, Dead, Block }
+    public enum KnightStates { Idle, Walk, Dash, Charge, Swing, Dead, Block, BlockHit }
     
     public class KnightState : IStateMachineState<KnightStates>
     {
-        // STATE
         public KnightStates StateEnum { get; set; } = KnightStates.Idle;
+        public Vector2 BlockHitVector = new Vector2();
+        public float BlockHitTimeRemaining = 0;
 
         public IStateMachineState<KnightStates> Clone()
         {

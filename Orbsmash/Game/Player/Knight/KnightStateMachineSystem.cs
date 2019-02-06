@@ -49,6 +49,13 @@ namespace Orbsmash.Player
                 case KnightStates.Dead:
                     break;
                 case KnightStates.Block:
+                    playerState.BallHitVector = new Vector2(1, 0);
+                    playerState.BallHitBoost = 1.0f;
+                    break;
+                case KnightStates.BlockHit:
+                    var velocity = entity.getComponent<VelocityComponent>();
+                    velocity.Velocity = state.BlockHitVector * (state.BlockHitTimeRemaining / 0.3f);
+                    state.BlockHitTimeRemaining -= Time.deltaTime;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -142,11 +149,20 @@ namespace Orbsmash.Player
                     }
                     break;
                 case KnightStates.Block:
-                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_END))
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_HIT))
+                    {
+                        return StateMachineTransition<KnightStates>.Replace(KnightStates.BlockHit);
+                    }
+                    else if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_END))
                     {
                         return StateMachineTransition<KnightStates>.Pop();
                     }
-
+                    break;
+                case KnightStates.BlockHit:
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_HIT_END))
+                    {
+                        return StateMachineTransition<KnightStates>.Pop();
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -179,6 +195,10 @@ namespace Orbsmash.Player
                 case KnightStates.Dead:
                     break;
                 case KnightStates.Block:
+                    playerState.HitActive = true;
+                    break;
+                case KnightStates.BlockHit:
+                    state.BlockHitTimeRemaining = 0.3f;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -209,6 +229,9 @@ namespace Orbsmash.Player
                 case KnightStates.Dead:
                     break;
                 case KnightStates.Block:
+                    playerState.HitActive = false;
+                    break;
+                case KnightStates.BlockHit:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
