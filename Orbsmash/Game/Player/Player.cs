@@ -105,7 +105,8 @@ namespace Orbsmash.Player
             _collider.name = ComponentNames.PLAYER_COLLIDER;
             Flags.setFlagExclusive(ref _collider.physicsLayer, PhysicsLayers.PLAYER);
             _collider.collidesWithLayers = 0;
-            Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.WALLS);
+            Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.BACK_WALLS);
+            Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.SIDE_WALLS);
             Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.ENVIRONMENT);
             Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.NET);
             _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
@@ -127,7 +128,7 @@ namespace Orbsmash.Player
                 _hitbox.FlipX = true;
             }
         }
-        
+
         public static Vector2 calculateHitVector(Gameplay.Side side, Vector2 input)
         {
             if (input.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)

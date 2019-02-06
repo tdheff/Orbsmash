@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Nez;
+using Optional;
 
 namespace Handy.Components
 {
@@ -21,5 +22,6 @@ namespace Handy.Components
 
         public ECollisionType CollisionType = ECollisionType.Slide;
         public float BounceDampening = 1.0f;
+        public Collider LastCollision;
     }
 }

@@ -139,6 +139,11 @@ namespace Nez
 		public int pixelPerfectScale = 1;
 
 		/// <summary>
+		/// Pauses the scene's systems from executing
+		/// </summary>
+		public bool Paused = false;
+
+		/// <summary>
 		/// the final render to the screen can be deferred to this delegate if set. This is really only useful for cases where the final render
 		/// might need a full screen size effect even though a small back buffer is used.
 		/// </summary>

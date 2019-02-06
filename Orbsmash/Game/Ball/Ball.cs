@@ -49,7 +49,8 @@ namespace Orbsmash.Ball
             // must generate collider after we create the sprite,
             // otherwise the collider doesn't know how big it is (that's how it default works)
             _collider = new CircleCollider(9);
-            Flags.setFlagExclusive(ref _collider.collidesWithLayers, PhysicsLayers.WALLS);
+            Flags.setFlagExclusive(ref _collider.collidesWithLayers, PhysicsLayers.BACK_WALLS);
+            Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.SIDE_WALLS);
             _kinematic.CollisionType = KinematicComponent.ECollisionType.Bounce;
             
             /*

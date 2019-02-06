@@ -25,7 +25,7 @@ namespace Orbsmash.Game
                     Id = 0,
                     Side = Gameplay.Side.LEFT,
                     Speed = 300f,
-                    StartingPosition = new Vector2(700, 700),
+                    StartingPosition = new Vector2(575, 450),
                     Character = Gameplay.Character.KNIGHT
                 });
                 
@@ -34,7 +34,7 @@ namespace Orbsmash.Game
                     Id = 1,
                     Side = Gameplay.Side.RIGHT,
                     Speed = 300f,
-                    StartingPosition = new Vector2(1400, 700),
+                    StartingPosition = new Vector2(1345, 450),
                     Character = Gameplay.Character.KNIGHT
                 });
                 

@@ -22,7 +22,6 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var input = entity.getComponent<PlayerInputComponent>();
             var state = stateMachine.State;
-            playerState.BallHitBoost = 1.0f;
             playerState.BallHitVector = Player.calculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
             {
@@ -39,7 +38,7 @@ namespace Orbsmash.Player
                         playerState.ChargeFinished = true;
                     }
 
-                    playerState.BallHitBoost = 1.0f + playerState.ChargeTime / PlayerStateComponent.MAX_CHARGE_TIME;
+                     playerState.BallHitBoost = 1.0f + playerState.ChargeTime / PlayerStateComponent.MAX_CHARGE_TIME;
                     break;
                 case KnightStates.Swing:
                     break;

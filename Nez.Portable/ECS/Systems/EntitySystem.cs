@@ -6,6 +6,8 @@ namespace Nez
 {
 	public class EntitySystem
 	{
+		public bool Pausable = true;
+		
 		public Matcher matcher
 		{
 			get { return _matcher; }
@@ -86,6 +88,7 @@ namespace Nez
 
 		public void update()
 		{
+			if (scene.Paused && Pausable) return;
 			begin();
 			process( _entities );
 		}
@@ -93,6 +96,7 @@ namespace Nez
 
         public void lateUpdate()
         {
+	        if (scene.Paused && Pausable) return;
             lateProcess( _entities );
             end();
         }

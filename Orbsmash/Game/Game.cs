@@ -10,6 +10,7 @@ using Handy.Animation;
 using System;
 using System.Collections.Generic;
 using Handy.Components;
+using Orbsmash.Ball;
 using Orbsmash.Constants;
 using Orbsmash.Game.Effects;
 using Orbsmash.Game.Interactions;
@@ -25,6 +26,7 @@ namespace Orbsmash.Game
         private AnimationSystem AnimationSystem;
         public Entity GameStateEntity;
         private Song song;
+        public Entity CameraEntity = new Entity();
         
         public Game(GameSettings settings) : base(5)
         {
@@ -48,7 +50,9 @@ namespace Orbsmash.Game
             AnimationSystem = new AnimationSystem();
             return new EntitySystem[]
             {
+                new HitStopSystem(),
                 new TimerSystem(),
+                new CameraShakeSystem(),
                 new ParticleEmitterSystem(),
                 new PlayerInputSystem(),
                 new GameStateMachineSystem(),
@@ -56,6 +60,8 @@ namespace Orbsmash.Game
                 new KnockoutSystem(),
                 new KinematicSystem(),
                 new KinematicSystem(),
+                // BALL
+                new BallStateSystem(),
                 // KNIGHT
                 new KnightMovementSystem(),
                 new KnightStateMachineSystem(),
@@ -125,11 +131,11 @@ namespace Orbsmash.Game
             var tiledMap = content.Load<TiledMap>(_settings.MapTile);
             String[] tiledMapLayers = new[]
             {
-                TiledImportCollisionLayers.WALLS, TiledImportCollisionLayers.NET
+                TiledImportCollisionLayers.BACK_WALLS, TiledImportCollisionLayers.SIDE_WALLS, TiledImportCollisionLayers.NET
             };
             int[] tiledMapPhysicsLayers = new[]
             {
-                PhysicsLayers.WALLS, PhysicsLayers.NET
+                PhysicsLayers.BACK_WALLS, PhysicsLayers.SIDE_WALLS, PhysicsLayers.NET
             };
             var tiledMapComponent = new Handy.Components.TiledMapComponent(tiledMap, tiledMapLayers, tiledMapPhysicsLayers, true);
             var entity = new Entity();
@@ -154,15 +160,26 @@ namespace Orbsmash.Game
             gameState.Ball = ball;
             
             GameStateEntity = new Entity();
+            GameStateEntity.name = "Game";
             GameStateEntity.addComponent(new GameStateComponent(gameState));
             GameStateEntity.addComponent(new TimerComponent());
+            GameStateEntity.addComponent(new HitStopComponent());
             addEntity(GameStateEntity);
+            
+            // add camera
+            var cam = new Camera();
+            var cameraShake = new CameraShakeComponent();
+            CameraEntity.addComponent(cam);
+            CameraEntity.addComponent(cameraShake);
+            CameraEntity.name = "Camera";
+            addEntity(CameraEntity);
         }
 
         public override void onStart()
         {
             findEntity("Map").transform.position = new Vector2(-80, -40);
             findEntity(EntityNames.BALL).transform.position = new Vector2(400, 400);
+            camera = CameraEntity.getComponent<Camera>();
         }
     }
 }
