@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EnumEqualityComparerGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="Game\ArenaScene.cs" />
     <Compile Include="Game\Ball\Ball.cs" />
     <Compile Include="Game\Ball\BallStateComponent.cs" />
     <Compile Include="Game\Ball\BallStateSystem.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Game\Player\Wizard\WizardState.cs" />
     <Compile Include="Game\Player\Wizard\WizardStateMachineComponent.cs" />
     <Compile Include="Game\Player\Wizard\WizardStateMachineSystem.cs" />
+    <Compile Include="Game\PracticeGame.cs" />
     <Compile Include="MainMenu\MainMenu.cs" />
     <Compile Include="MainMenu\MainMenuComponent.cs" />
     <Compile Include="MainMenu\MainMenuSystem.cs" />
