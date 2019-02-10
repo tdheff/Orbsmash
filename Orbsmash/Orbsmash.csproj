@@ -80,10 +80,14 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameSettings.cs" />
     <Compile Include="Game\GameState\GameState.cs" />
+    <Compile Include="Game\GameState\PracticeGameStateMachineSystem.cs" />
+    <Compile Include="Game\GameState\PracticeGameStateComponent.cs" />
     <Compile Include="Game\GameState\GameStateComponent.cs" />
     <Compile Include="Game\GameState\GameStateMachineSystem.cs" />
+    <Compile Include="Game\GameState\PracticeGameState.cs" />
     <Compile Include="Game\Interactions\BallHitSystem.cs" />
     <Compile Include="Game\Interactions\KnockoutSystem.cs" />
+    <Compile Include="Game\Player\CharacterChoice.cs" />
     <Compile Include="Game\Player\Knight\KnightState.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineComponent.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineSystem.cs" />
@@ -93,7 +97,10 @@
     <Compile Include="Game\Player\PlayerInputComponent.cs" />
     <Compile Include="Game\Player\PlayerInputSystem.cs" />
     <Compile Include="Game\Player\PlayerSettings.cs" />
+    <Compile Include="Game\Player\CharacterChoiceState.cs" />
     <Compile Include="Game\Player\PlayerStateComponent.cs" />
+    <Compile Include="Game\Player\CharacterChoiceStateMachineSystem.cs" />
+    <Compile Include="Game\Player\CharacterChoiceStateMachineComponent.cs" />
     <Compile Include="Game\Player\Wizard\WizardAnimationSystem.cs" />
     <Compile Include="Game\Player\Wizard\WizardMovementSystem.cs" />
     <Compile Include="Game\Player\Wizard\WizardState.cs" />

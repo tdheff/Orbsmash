@@ -15,6 +15,7 @@ namespace Orbsmash.Game
 {
     public class PracticeGame : ArenaScene
     {
+        public Entity GameStateEntity;
         private Song song;
         public PracticeGame(): base()
         {
@@ -32,70 +33,42 @@ namespace Orbsmash.Game
         {
             return new EntitySystem[]
             {
-                new HitStopSystem(),
-                new TimerSystem(),
-                new CameraShakeSystem(),
-                new ParticleEmitterSystem(),
+                //new HitStopSystem(),
+                //new TimerSystem(),
+                //new CameraShakeSystem(),
+                //new ParticleEmitterSystem(),
                 new PlayerInputSystem(),
-                new GameStateMachineSystem(),
-                new BallHitSystem(),
-                new KnockoutSystem(),
-                new KinematicSystem(),
-                new KinematicSystem(),
-                // BALL
-                new BallStateSystem(),
-                // KNIGHT
-                new KnightMovementSystem(),
-                new KnightStateMachineSystem(),
-                new KnightAnimationSystem(),
-                // WIZARD
-                new WizardMovementSystem(),
-                new WizardStateMachineSystem(),
-                new WizardAnimationSystem(),
-                // EFFECTS
-                new HitEffectSystem(),
-                new AnimationSystem()
+                new PracticeGameStateMachineSystem(),
+                new CharacterChoiceStateMachineSystem(),
+                //new BallHitSystem(),
+                //new KnockoutSystem(),
+                //new KinematicSystem(),
+                //new KinematicSystem(),
+                //// BALL
+                //new BallStateSystem(),
+                //// KNIGHT
+                //new KnightMovementSystem(),
+                //new KnightStateMachineSystem(),
+                //new KnightAnimationSystem(),
+                //// WIZARD
+                //new WizardMovementSystem(),
+                //new WizardStateMachineSystem(),
+                //new WizardAnimationSystem(),
+                //// EFFECTS
+                //new HitEffectSystem(),
+                //new AnimationSystem()
             };
         }
 
         private void CreateEntities()
         {
-            var tiledMap = content.Load<TiledMap>(_settings.MapTile);
-            String[] tiledMapLayers = new[]
-            {
-                TiledImportCollisionLayers.BACK_WALLS, TiledImportCollisionLayers.SIDE_WALLS, TiledImportCollisionLayers.NET
-            };
-            int[] tiledMapPhysicsLayers = new[]
-            {
-                PhysicsLayers.BACK_WALLS, PhysicsLayers.SIDE_WALLS, PhysicsLayers.NET
-            };
-            var tiledMapComponent = new Handy.Components.TiledMapComponent(tiledMap, tiledMapLayers, tiledMapPhysicsLayers, true);
-            var entity = new Entity();
-            entity.name = "Map";
-            tiledMapComponent.renderLayer = RenderLayers.BACKGROUND;
-            entity.addComponent(tiledMapComponent);
-            addEntity(entity);
-
-            var gameState = new GameState();
-            gameState.StateEnum = GameStates.Ready;
-            gameState.Players = new Player.Player[_settings.NumPlayers];
-            for (var i = 0; i < _settings.NumPlayers; i++)
-            {
-                var playerSettings = _settings.Players[i];
-                var player = new Player.Player(playerSettings);
-                addEntity(player);
-                gameState.Players[i] = player;
-            }
-
-            var ball = new Ball.Ball();
-            addEntity(ball);
-            gameState.Ball = ball;
-
+            
+            var gameState = new PracticeGameState();
+            gameState.StateEnum = PracticeGameStates.WaitingForPlayersToJoin;
+            // to start we don't have any choosers or players!
             GameStateEntity = new Entity();
-            GameStateEntity.name = "Game";
-            GameStateEntity.addComponent(new GameStateComponent(gameState));
-            GameStateEntity.addComponent(new TimerComponent());
-            GameStateEntity.addComponent(new HitStopComponent());
+            GameStateEntity.name = "PracticeGame";
+            GameStateEntity.addComponent(new PracticeGameStateComponent(gameState));
             addEntity(GameStateEntity);
 
             // add camera

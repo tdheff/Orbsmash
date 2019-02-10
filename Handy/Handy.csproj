@@ -69,6 +69,7 @@
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TiledMapComponent.cs" />
     <Compile Include="Components\TimerComponent.cs" />
+    <Compile Include="Math\HandyMath.cs" />
     <Compile Include="Pipeline\Aseprite\AsepriteImporter.cs" />
     <Compile Include="Pipeline\Aseprite\AsepriteProcessor.cs" />
     <Compile Include="Pipeline\Aseprite\AsepriteReader.cs" />
