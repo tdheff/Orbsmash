@@ -781,6 +781,105 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
     "sourceSize": { "w": 64, "h": 34 },
     "duration": 50
+   },
+   {
+    "filename": "Knight 87.aseprite",
+    "frame": { "x": 5568, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 88.aseprite",
+    "frame": { "x": 5632, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 89.aseprite",
+    "frame": { "x": 5696, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 90.aseprite",
+    "frame": { "x": 5760, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 91.aseprite",
+    "frame": { "x": 5824, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 92.aseprite",
+    "frame": { "x": 5888, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 93.aseprite",
+    "frame": { "x": 5952, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 94.aseprite",
+    "frame": { "x": 6016, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 95.aseprite",
+    "frame": { "x": 6080, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 96.aseprite",
+    "frame": { "x": 6144, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 97.aseprite",
+    "frame": { "x": 6208, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
    }
  ],
  "meta": {
@@ -788,7 +887,7 @@
   "version": "1.2.10-beta2-x64",
   "image": "/home/tommy/dev/Orbsmash/Orbsmash/Content/Sprites/Characters/Knight/Knight.png",
   "format": "RGBA8888",
-  "size": { "w": 5568, "h": 34 },
+  "size": { "w": 6272, "h": 34 },
   "scale": "1",
   "frameTags": [
    { "name": "IDLE_HORIZONTAL", "from": 0, "to": 0, "direction": "forward" },
@@ -802,7 +901,8 @@
    { "name": "CHARGE_FULL", "from": 59, "to": 62, "direction": "forward" },
    { "name": "ATTACK", "from": 63, "to": 74, "direction": "forward" },
    { "name": "BLOCK", "from": 75, "to": 80, "direction": "forward" },
-   { "name": "BLOCK_HIT", "from": 81, "to": 86, "direction": "forward" }
+   { "name": "BLOCK_HIT", "from": 81, "to": 86, "direction": "forward" },
+   { "name": "KO", "from": 87, "to": 97, "direction": "forward" }
   ],
   "layers": [
    { "name": "Flattened", "opacity": 255, "blendMode": "normal" },

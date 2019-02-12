@@ -28,6 +28,8 @@ namespace Handy.Systems
                 var eventComp = entity.getComponent<EventComponent>();
                 foreach(var anim in animations)
                 {
+                    if (anim.Paused) continue;
+                    
                     var animationTarget = anim.AnimationTarget;
                     var animationDef = anim.AnimationDefinition;
                     if (animationDef == null)

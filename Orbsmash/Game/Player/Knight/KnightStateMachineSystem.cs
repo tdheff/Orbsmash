@@ -23,9 +23,10 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var input = entity.getComponent<PlayerInputComponent>();
             var state = stateMachine.State;
+            var events = entity.getComponent<EventComponent>();
             var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
             var steps = soundEffects.First(x => x.Name == KnightSoundEffectGroups.STEPS);
-            playerState.BallHitVector = Player.calculateHitVector(playerState.side, input.MovementStick);
+            playerState.BallHitVector = Player.CalculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
             {
                 case KnightStates.Idle:
@@ -46,16 +47,25 @@ namespace Orbsmash.Player
                     break;
                 case KnightStates.Swing:
                     break;
-                case KnightStates.Dead:
+                case KnightStates.KO:
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.KO_BOUNCE))
+                    {
+                        playerState.HasKOBounced = true;
+                    }
+                    var deadVelocity = entity.getComponent<VelocityComponent>();
+                    var speed = playerState.HasKOBounced ? -50 : -300;
+                    deadVelocity.Velocity = new Vector2(Player.SignForSide(playerState.side) * speed, 0);
                     break;
                 case KnightStates.Block:
                     playerState.BallHitVector = new Vector2(1, 0);
                     playerState.BallHitBoost = 1.0f;
                     break;
                 case KnightStates.BlockHit:
-                    var velocity = entity.getComponent<VelocityComponent>();
-                    velocity.Velocity = state.BlockHitVector * (state.BlockHitTimeRemaining / 0.3f);
+                    var blockVelocity = entity.getComponent<VelocityComponent>();
+                    blockVelocity.Velocity = state.BlockHitVector * (state.BlockHitTimeRemaining / 0.3f);
                     state.BlockHitTimeRemaining -= Time.deltaTime;
+                    break;
+                case KnightStates.Eliminated:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -69,9 +79,9 @@ namespace Orbsmash.Player
             var events = entity.getComponent<EventComponent>();
             var playerState = entity.getComponent<PlayerStateComponent>();
             var knightState = stateMachine.State;
-            if (knightState.StateEnum != KnightStates.Dead && playerState.IsKilled)
+            if (knightState.StateEnum != KnightStates.KO && knightState.StateEnum != KnightStates.Eliminated && playerState.IsKilled)
             {
-                return StateMachineTransition<KnightStates>.Replace(KnightStates.Dead);
+                return StateMachineTransition<KnightStates>.Replace(KnightStates.KO);
             }
             
             switch (knightState.StateEnum)
@@ -142,7 +152,13 @@ namespace Orbsmash.Player
                         playerState.HitActive = false;
                     }
                     break;
-                case KnightStates.Dead:
+                case KnightStates.KO:
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.KO_END))
+                    {
+                        return StateMachineTransition<KnightStates>.Replace(KnightStates.Eliminated);
+                    }
+                    break;
+                case KnightStates.Eliminated:
                     if (!playerState.IsKilled)
                     {
                         return StateMachineTransition<KnightStates>.Replace(KnightStates.Idle);
@@ -192,7 +208,10 @@ namespace Orbsmash.Player
                     swipes.Play();
                     playerState.SwingFinished = false;
                     break;
-                case KnightStates.Dead:
+                case KnightStates.KO:
+                    playerState.HasKOBounced = false;
+                    break;
+                case KnightStates.Eliminated:
                     break;
                 case KnightStates.Block:
                     playerState.HitActive = true;
@@ -226,7 +245,9 @@ namespace Orbsmash.Player
                 case KnightStates.Swing:
                     playerState.SwingFinished = false;
                     break;
-                case KnightStates.Dead:
+                case KnightStates.KO:
+                    break;
+                case KnightStates.Eliminated:
                     break;
                 case KnightStates.Block:
                     playerState.HitActive = false;
