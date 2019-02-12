@@ -23,7 +23,7 @@ namespace Orbsmash.Player
             state.GlideCooldown -= Time.deltaTime;
             state.ImmaterialCooldown -= Time.deltaTime;
             playerState.BallHitBoost = 1.0f;
-            playerState.BallHitVector = Player.calculateHitVector(playerState.side, input.MovementStick);
+            playerState.BallHitVector = Player.CalculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
             {
                 case WizardStates.Idle:

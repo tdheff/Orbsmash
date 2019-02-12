@@ -46,7 +46,9 @@ namespace Orbsmash.Player
                         break;
                     case KnightStates.Swing:
                         break;
-                    case KnightStates.Dead:
+                    case KnightStates.KO:
+                        break;
+                    case KnightStates.Eliminated:
                         break;
                     case KnightStates.Block:
                         break;

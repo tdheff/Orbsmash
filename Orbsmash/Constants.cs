@@ -180,6 +180,7 @@ namespace Orbsmash.Constants
         public static readonly string ATTACK = "ATTACK";
         public static readonly string BLOCK = "BLOCK";
         public static readonly string BLOCK_HIT = "BLOCK_HIT";
+        public static readonly string KO = "KO";
     }
     
     public sealed class WizardAnimations
@@ -203,6 +204,8 @@ namespace Orbsmash.Constants
         public static readonly string BLOCK_END = "BLOCK_END";
         public static readonly string BLOCK_HIT = "BLOCK_HIT";
         public static readonly string BLOCK_HIT_END = "BLOCK_HIT_END";
+        public static readonly string KO_BOUNCE = "KO_BOUNCE";
+        public static readonly string KO_END = "KO_END";
     }
 
     

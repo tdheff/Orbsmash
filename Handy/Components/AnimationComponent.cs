@@ -22,6 +22,7 @@ namespace Handy.Components
         public float CurrentFrameElapsedTime;
         public int CurrentAnimationFrame = 0;
         public float PlaybackSpeed = 1.0f;
+        public bool Paused = false;
         public AnimationComponent(IAnimatable animationTarget, AnimationDefinition animationDefinition, string startingAnimation)
         {
             AnimationDefinition = animationDefinition;

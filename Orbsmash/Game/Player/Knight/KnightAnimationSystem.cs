@@ -68,7 +68,11 @@ namespace Orbsmash.Player
                     case KnightStates.BlockHit:
                         mainBodyAnimation.SetAnimation(KnightAnimations.BLOCK_HIT);
                         break;
-                    case KnightStates.Dead:
+                    case KnightStates.KO:
+                        mainBodyAnimation.SetAnimation(KnightAnimations.KO);
+                        break;
+                    case KnightStates.Eliminated:
+                        mainBodyAnimation.Paused = true;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

@@ -12,6 +12,7 @@ namespace Orbsmash.Player
         // STATE
         public KnightStates StateEnum { get; set; } = KnightStates.Idle;
         public bool IsKilled = false;
+        public bool HasKOBounced = false;
         
         // IDENTIFICATION
         public int playerId { get; private set; }

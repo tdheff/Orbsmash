@@ -95,7 +95,7 @@ namespace Orbsmash.Game
             foreach (var player in players)
             {
                 var state = player.getComponent<PlayerStateComponent>();
-                if (state.StateEnum != KnightStates.Dead)
+                if (state.StateEnum != KnightStates.KO || state.StateEnum == KnightStates.Eliminated)
                 {
                     if (state.side == Gameplay.Side.LEFT)
                     {
