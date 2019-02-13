@@ -70,6 +70,10 @@ namespace Orbsmash.Game
                 new WizardMovementSystem(),
                 new WizardStateMachineSystem(),
                 new WizardAnimationSystem(),
+                // SPACEMAN
+                new SpacemanMovementSystem(),
+                new SpacemanStateMachineSystem(),
+                new SpacemanAnimationSystem(),
                 // EFFECTS
                 new HitEffectSystem(),
                 AnimationSystem
@@ -83,12 +87,14 @@ namespace Orbsmash.Game
                 BallSprites.DEFAULT,
                 PlayerSprites.KNIGHT,
                 PlayerSprites.WIZARD,
+                PlayerSprites.SPACEMAN,
                 Sprites.HitEffect
             });
             LoadAnimationDefinitions(new []
             {
                 AsepriteFiles.KNIGHT,
                 AsepriteFiles.WIZARD,
+                AsepriteFiles.SPACEMAN,
                 AsepriteFiles.HIT_EFFECT
             });
 

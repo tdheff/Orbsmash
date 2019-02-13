@@ -105,12 +105,14 @@ namespace Orbsmash.Constants
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/Knight";
         public static readonly string WIZARD = "Sprites/Characters/Wizard/Wizard";
+        public static readonly string SPACEMAN = "Sprites/Characters/Spaceman/Spaceman";
     }
     
     public sealed class AsepriteFiles
     {
         public static readonly string KNIGHT = "Sprites/Characters/Knight/KnightJson";
         public static readonly string WIZARD = "Sprites/Characters/Wizard/WizardJson";
+        public static readonly string SPACEMAN = "Sprites/Characters/Spaceman/SpacemanJson";
         public static readonly string HIT_EFFECT = "Sprites/Effects/HitEffectJson";
     }
 
@@ -181,6 +183,17 @@ namespace Orbsmash.Constants
         public static readonly string BLOCK = "BLOCK";
         public static readonly string BLOCK_HIT = "BLOCK_HIT";
         public static readonly string KO = "KO";
+    }
+    
+    public sealed class SpacemanAnimations
+    {
+        public static readonly string IDLE_VERTICAL = "IDLE_VERTICAL";
+        public static readonly string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
+        public static readonly string WALK_UP = "WALK_UP";
+        public static readonly string WALK_DOWN = "WALK_DOWN";
+        public static readonly string WALK_BACKWARD = "WALK_BACKWARD";
+        public static readonly string WALK_FORWARD = "WALK_FORWARD";
+        public static readonly string ATTACK = "ATTACK";
     }
     
     public sealed class WizardAnimations

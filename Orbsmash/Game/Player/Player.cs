@@ -38,6 +38,13 @@ namespace Orbsmash.Player
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 1 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
         };
+        
+        private static Dictionary<string, HashSet<string>> _spacemanEventTriggers = new Dictionary<string, HashSet<string>>
+        {
+            { EventComponent.BuildKey(SpacemanAnimations.ATTACK, 19 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 9 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+        };
 
         public PlayerSettings Settings;
         private PlayerStateComponent _stateComponent;
@@ -90,7 +97,10 @@ namespace Orbsmash.Player
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.WIZARD];
                     break;
                 case Gameplay.Character.SPACEMAN:
-                    throw new NotImplementedException();
+                    _state = new SpacemanStateMachineComponent(new SpacemanState());
+                    _events.SetTriggers(_spacemanEventTriggers);
+                    animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.SPACEMAN];
+                    break;
                 case Gameplay.Character.ALIEN:
                     throw new NotImplementedException();
                 case Gameplay.Character.PIRATE:

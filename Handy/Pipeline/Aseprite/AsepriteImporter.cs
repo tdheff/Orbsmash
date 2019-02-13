@@ -10,7 +10,7 @@ namespace Handy.Pipeline.PhysicsEditor
     {
         public override string Import(string filename, ContentImporterContext context)
         {
-            context.Logger.LogMessage("Importing VPNC file: {0}", filename);
+            context.Logger.LogMessage("Importing Aseprite JSON file: {0}", filename);
 
             return File.ReadAllText(filename);
         }
