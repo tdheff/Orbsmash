@@ -93,6 +93,11 @@
     <Compile Include="Game\Player\PlayerInputSystem.cs" />
     <Compile Include="Game\Player\PlayerSettings.cs" />
     <Compile Include="Game\Player\PlayerStateComponent.cs" />
+    <Compile Include="Game\Player\Spaceman\SpacemanAnimationSystem.cs" />
+    <Compile Include="Game\Player\Spaceman\SpacemanMovementSystem.cs" />
+    <Compile Include="Game\Player\Spaceman\SpacemanState.cs" />
+    <Compile Include="Game\Player\Spaceman\SpacemanStateMachineComponent.cs" />
+    <Compile Include="Game\Player\Spaceman\SpacemanStateMachineSystem.cs" />
     <Compile Include="Game\Player\Wizard\WizardAnimationSystem.cs" />
     <Compile Include="Game\Player\Wizard\WizardMovementSystem.cs" />
     <Compile Include="Game\Player\Wizard\WizardState.cs" />

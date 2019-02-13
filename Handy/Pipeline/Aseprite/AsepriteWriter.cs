@@ -1,3 +1,4 @@
+using System;
 using Handy.Animation;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
@@ -28,7 +29,7 @@ namespace Handy.Pipeline.PhysicsEditor
                 output.Write(frame.Trimmed);
                 output.Write(frame.Duration);
             }
-            
+
             // WRITE META
             output.Write(value.Meta.App);
             output.Write(value.Meta.Version);

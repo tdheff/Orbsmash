@@ -183,6 +183,11 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Characters/Spaceman/Spaceman.png
 
+#begin Sprites/Characters/Spaceman/SpacemanJson.json
+/importer:AsepriteImporter
+/processor:AsepriteProcessor
+/build:Sprites/Characters/Spaceman/SpacemanJson.json
+
 #begin Sprites/Characters/Wizard/Wizard.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -1,3 +1,4 @@
+using System;
 using Handy.Animation;
 using Microsoft.Xna.Framework.Content;
 
@@ -43,6 +44,7 @@ namespace Handy.Pipeline.PhysicsEditor
                 json.Meta.FrameTags[i].Direction = input.ReadString();
                 
             }
+            
 
             return json;
         }
