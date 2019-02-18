@@ -26,8 +26,8 @@ namespace Orbsmash.Game
     {
         public PracticeGameStates StateEnum { get; set; }
         // we just hide show the chooser or the player depending on what mode they are in
-        public Player.Player[] Players;
-        public Player.CharacterChoice[] Choosers;
+        public Player.Player[] Players = new Player.Player[4];
+        public Player.CharacterChoice[] Choosers = new Player.CharacterChoice[4];
         // by default all 4 players are choosing when they start
         public PracticeGamePlayerReadyState[] PlayerStates = new PracticeGamePlayerReadyState[]
         {

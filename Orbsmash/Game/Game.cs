@@ -64,26 +64,6 @@ namespace Orbsmash.Game
             };
         }
 
-        private void LoadContent()
-        {
-            LoadTextures(new []
-            {
-                BallSprites.DEFAULT,
-                PlayerSprites.KNIGHT,
-                PlayerSprites.WIZARD,
-                PlayerSprites.SPACEMAN,
-                Sprites.HitEffect
-            });
-            LoadAnimationDefinitions(new []
-            {
-                AsepriteFiles.KNIGHT,
-                AsepriteFiles.WIZARD,
-                AsepriteFiles.SPACEMAN,
-                AsepriteFiles.HIT_EFFECT
-            });
-        }
-
-
         // plan to add complexity here in terms of picking the correct song, etc once I have a better
         // system in place for starting this scene from  amenu scene
         private void SetupAudio()
@@ -104,7 +84,6 @@ namespace Orbsmash.Game
         private void SetMusicVolume()
         {
             MediaPlayer.Volume = _settings.MusicVolume;
-
         }
 
         private void CreateEntities()

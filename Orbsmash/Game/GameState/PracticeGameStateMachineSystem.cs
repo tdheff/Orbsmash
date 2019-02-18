@@ -11,7 +11,7 @@ using Random = Nez.Random;
 
 namespace Orbsmash.Game
 {
-    public class PracticeGameStateMachineSystem : StateMachineSystem<PracticeGameStates, PracticeGameState, PracticeGameStateComponent>
+    public class PracticeGameStateMachineSystem : PushdownAutomatonSystem<PracticeGameStates, PracticeGameState, PracticeGameStateComponent>
     {
         public PracticeGameStateMachineSystem() : base(new Matcher().all(typeof(PracticeGameStateComponent))) { }
         
@@ -26,13 +26,21 @@ namespace Orbsmash.Game
                 var playerState = state.PlayerStates[i];
                 if(playerState == PracticeGamePlayerReadyState.NotJoined)
                 {
-                    if (gamePad.isButtonDown(Buttons.A))
+                    if (gamePad.isButtonPressed(Buttons.A))
                     {
                         state.PlayerStates[i] = PracticeGamePlayerReadyState.Choosing;
                         AddChooser(i, state);
                     }
+                } else if (playerState == PracticeGamePlayerReadyState.Choosing)
+                {
+                    if (gamePad.isButtonPressed(Buttons.A))
+                    {
+                        state.PlayerStates[i] = PracticeGamePlayerReadyState.HangingOut;
+                        AddPlayer(i, state);
+                    }
                 }
             }
+            // TODO - add "backing out" on a per player basis (e.g. press B to go back to chooser)
         }
 
         public void AddChooser(int id, PracticeGameState state)
@@ -45,9 +53,21 @@ namespace Orbsmash.Game
             practiceGame.addEntity(chooser);
         }
 
-        public void PlayerLeave(int id)
+        public void AddPlayer(int id, PracticeGameState state)
         {
-
+            var practiceGame = (PracticeGame)scene;
+            var chooser = state.Choosers[id];
+            var choice = chooser._stateComponent.State.CurrentChoice;
+            var player = new Player.Player(new PlayerSettings
+            {
+                Id = id,
+                Side = Gameplay.Side.LEFT, // doesn't matter!
+                Speed = 300f,
+                StartingPosition = chooser.position,
+                Character = choice
+            });
+            practiceGame.addEntity(player);
+            chooser.destroy();
         }
 
         protected override StateMachineTransition<PracticeGameStates> Transition(Entity entity, PracticeGameStateComponent stateMachine)

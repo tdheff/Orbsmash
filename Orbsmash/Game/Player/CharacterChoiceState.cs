@@ -11,21 +11,21 @@ namespace Orbsmash.Player
     public class CharacterChoiceState : IStateMachineState<CharacterChoiceStates>
     {
         // CONSTANTS
-        public const float ROTATION_SPEED = 0.1f;
-        public const int DistanceFromCenter = 100;
+        public const float ROTATION_TIME = 0.5f; // 500 ms
+        public const int DistanceFromCenter = 80;
+        public const float MOVEMENT_THRESHOLD = 0.1f;
         public List<Gameplay.Character> CharacterOrder = new List<Gameplay.Character>()
-        { Gameplay.Character.KNIGHT, Gameplay.Character.WIZARD };
+        { Gameplay.Character.KNIGHT, Gameplay.Character.WIZARD, Gameplay.Character.SPACEMAN };
 
         // STATE
         public CharacterChoiceStates StateEnum { get; set; } = CharacterChoiceStates.Idle;
         public int playerId;
-        public Vector2 CenterPosition;
-        public Gameplay.Character CurrentChoice;
+        public Gameplay.Character CurrentChoice { get; set; }
+        public float LastRotatedTime = 0f;
         
-        public CharacterChoiceState(int playerId, Gameplay.Character initialCharacter, Vector2 position)
+        public CharacterChoiceState(int playerId, Gameplay.Character initialCharacter)
         {
             this.playerId = playerId;
-            CenterPosition = position;
             CurrentChoice = initialCharacter;
         }
 

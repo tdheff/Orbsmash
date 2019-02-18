@@ -13,49 +13,65 @@ namespace Orbsmash.Player
     {
         public CharacterChoiceStateMachineSystem() : base(new Matcher().all(
             typeof(CharacterChoiceStateMachineComponent),
-            typeof(PlayerInputComponent),
-            typeof(EventComponent)
+            typeof(PlayerInputComponent)
         )) { }
 
         protected override void Update(Entity entity, CharacterChoiceStateMachineComponent stateMachine)
         {
-            
+            var choice = (CharacterChoice)entity;
+            choice.SetSpritePositionsFromCurrentState();
         }
 
         protected override StateMachineTransition<CharacterChoiceStates> Transition(Entity entity, CharacterChoiceStateMachineComponent stateMachine)
         {
+            var input = entity.getComponent<PlayerInputComponent>();
+            var state = stateMachine.State;
+            if (state.StateEnum == CharacterChoiceStates.Idle && Math.Abs(input.MovementStick.X) > CharacterChoiceState.MOVEMENT_THRESHOLD)
+            {
+                if(input.MovementStick.X > 0)
+                {
+                    Console.WriteLine($"rotating right!");
+                    return StateMachineTransition<CharacterChoiceStates>.Replace(CharacterChoiceStates.RotatingRight);
+
+                } else
+                {
+                    Console.WriteLine($"rotating left!");
+                    return StateMachineTransition<CharacterChoiceStates>.Replace(CharacterChoiceStates.RotatingLeft);
+                }
+            } else if (state.StateEnum == CharacterChoiceStates.RotatingLeft || state.StateEnum == CharacterChoiceStates.RotatingRight)
+            {
+                if(Time.time - state.LastRotatedTime > CharacterChoiceState.ROTATION_TIME)
+                {
+                    Console.WriteLine($"done rotating!! back to idle");
+                    return StateMachineTransition<CharacterChoiceStates>.Replace(CharacterChoiceStates.Idle); // back into idle
+                }
+            }
             return StateMachineTransition<CharacterChoiceStates>.None();
         }
 
         protected override void OnEnter(Entity entity, CharacterChoiceStateMachineComponent stateMachine)
         {
-            var state = stateMachine.State;
-            switch (state.StateEnum)
-            {
-                case CharacterChoiceStates.Idle:
-                    SetSpritePositions(entity, state, 0);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void SetSpritePositions(Entity entity, CharacterChoiceState state, int percentAway)
-        {
             var choice = (CharacterChoice)entity;
-            var numChoices = state.CharacterOrder.Count;
-            var gapBetween = 360f / numChoices;
-            var positionOfChoice = state.CharacterOrder.FindIndex(c => c == state.CurrentChoice);
-            for(var i = 0; i < numChoices; i++)
+            var state = stateMachine.State;
+            var input = entity.getComponent<PlayerInputComponent>();
+            var indexOfCurrentChoice = state.CharacterOrder.FindIndex(c => c == state.CurrentChoice);
+            Console.WriteLine($"setting next choice: current choice: {indexOfCurrentChoice}");
+
+            if (state.StateEnum == CharacterChoiceStates.RotatingLeft || state.StateEnum == CharacterChoiceStates.RotatingRight)
             {
-                var character = state.CharacterOrder[i];
-                var diff = i - positionOfChoice; // if you are to the left it's negative
-                // 270 is pointing down
-                var angle = 270 + (diff * gapBetween);
-                var vector = HandyMath.MakeNormalizedVectorFromAngleDegrees(angle);
-                vector = vector * CharacterChoiceState.DistanceFromCenter;
-                var sprite = choice.CharacterChoiceSprites[character];
-                sprite.setOrigin(choice.position + vector);
+                indexOfCurrentChoice = state.StateEnum == CharacterChoiceStates.RotatingRight ? indexOfCurrentChoice + 1 : indexOfCurrentChoice - 1;
+                if (indexOfCurrentChoice < 0)
+                {
+                    indexOfCurrentChoice = state.CharacterOrder.Count - 1;
+                }
+                else if (indexOfCurrentChoice == state.CharacterOrder.Count)
+                {
+                    indexOfCurrentChoice = 0;
+                }
+                Console.WriteLine($"setting next choice: NEXT choice: {indexOfCurrentChoice}");
+                state.CurrentChoice = state.CharacterOrder[indexOfCurrentChoice];
+                state.LastRotatedTime = Time.time;
+                choice.SetRotationAngleToMoveTowardsCurrentChoice();
             }
         }
 

@@ -33,36 +33,40 @@ namespace Orbsmash.Game
         {
             return new EntitySystem[]
             {
-                //new HitStopSystem(),
-                //new TimerSystem(),
-                //new CameraShakeSystem(),
-                //new ParticleEmitterSystem(),
+                new AnimatingPropertySystem(),
+                new HitStopSystem(),
+                new TimerSystem(),
+                new CameraShakeSystem(),
+                new ParticleEmitterSystem(),
                 new PlayerInputSystem(),
                 new PracticeGameStateMachineSystem(),
                 new CharacterChoiceStateMachineSystem(),
-                //new BallHitSystem(),
-                //new KnockoutSystem(),
-                //new KinematicSystem(),
-                //new KinematicSystem(),
+                new BallHitSystem(),
+                new KnockoutSystem(),
+                new KinematicSystem(),
+                new KinematicSystem(),
                 //// BALL
-                //new BallStateSystem(),
+                new BallStateSystem(),
                 //// KNIGHT
-                //new KnightMovementSystem(),
-                //new KnightStateMachineSystem(),
-                //new KnightAnimationSystem(),
+                new KnightMovementSystem(),
+                new KnightStateMachineSystem(),
+                new KnightAnimationSystem(),
                 //// WIZARD
-                //new WizardMovementSystem(),
-                //new WizardStateMachineSystem(),
-                //new WizardAnimationSystem(),
+                new WizardMovementSystem(),
+                new WizardStateMachineSystem(),
+                new WizardAnimationSystem(),
+                // SPACEMAN
+                new SpacemanMovementSystem(),
+                new SpacemanStateMachineSystem(),
+                new SpacemanAnimationSystem(),
                 //// EFFECTS
-                //new HitEffectSystem(),
-                //new AnimationSystem()
+                new HitEffectSystem(),
+                new AnimationSystem()
             };
         }
 
         private void CreateEntities()
         {
-            
             var gameState = new PracticeGameState();
             gameState.StateEnum = PracticeGameStates.WaitingForPlayersToJoin;
             // to start we don't have any choosers or players!
