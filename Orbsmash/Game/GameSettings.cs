@@ -48,7 +48,7 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.LEFT,
                     Speed = 300f,
                     StartingPosition = new Vector2(575, 450),
-                    Character = Gameplay.Character.WIZARD
+                    Character = Gameplay.Character.SPACEMAN
                 });
                 
                 Players.Add(new PlayerSettings

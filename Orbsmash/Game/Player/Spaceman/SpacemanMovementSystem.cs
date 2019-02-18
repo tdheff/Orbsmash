@@ -8,14 +8,14 @@ using Orbsmash.Constants;
 
 namespace Orbsmash.Player
 {
-    public class KnightMovementSystem : EntitySystem
+    public class SpacemanMovementSystem : EntitySystem
     {
-        public KnightMovementSystem(Matcher matcher) : base(matcher) { }
-        public KnightMovementSystem() : base(new Matcher().all(
+        public SpacemanMovementSystem(Matcher matcher) : base(matcher) { }
+        public SpacemanMovementSystem() : base(new Matcher().all(
             typeof(PlayerStateComponent),
             typeof(PlayerInputComponent),
             typeof(VelocityComponent),
-            typeof(KnightStateMachineComponent)
+            typeof(SpacemanStateMachineComponent)
         )) { }
 
         protected override void process(List<Entity> entities)
@@ -24,7 +24,7 @@ namespace Orbsmash.Player
             {
                 var input = entity.getComponent<PlayerInputComponent>();
                 var velocity = entity.getComponent<VelocityComponent>();
-                var knightState = entity.getComponent<KnightStateMachineComponent>().State;
+                var knightState = entity.getComponent<SpacemanStateMachineComponent>().State;
                 var playerState = entity.getComponent<PlayerStateComponent>();
 
                 velocity.Velocity = input.MovementStick * playerState.Speed;
@@ -32,27 +32,17 @@ namespace Orbsmash.Player
                 var movementMultipler = 1.0f;
                 switch (knightState.StateEnum)
                 {
-                    case KnightStates.Idle:
+                    case SpacemanStates.Idle:
                         allowMovement = true; // like if they're just starting to press it i guess we allow it
                         break;
-                    case KnightStates.Walk:
+                    case SpacemanStates.Walk:
                         allowMovement = true;
                         break;
-                    case KnightStates.Dash:
-                        allowMovement = true;
-                        movementMultipler = 1.2f;
+                    case SpacemanStates.Attack:
                         break;
-                    case KnightStates.Charge:
+                    case SpacemanStates.KO:
                         break;
-                    case KnightStates.Swing:
-                        break;
-                    case KnightStates.KO:
-                        break;
-                    case KnightStates.Eliminated:
-                        break;
-                    case KnightStates.Block:
-                        break;
-                    case KnightStates.BlockHit:
+                    case SpacemanStates.Eliminated:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

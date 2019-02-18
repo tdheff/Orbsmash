@@ -27,7 +27,9 @@ namespace Orbsmash.Player
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
             { EventComponent.BuildKey(KnightAnimations.CHARGE, 4 ), new HashSet<string> { PlayerEvents.CHARGE_WINDUP_END }},
             { EventComponent.BuildKey(KnightAnimations.BLOCK, 5 ), new HashSet<string> { PlayerEvents.BLOCK_END }},
-            { EventComponent.BuildKey(KnightAnimations.BLOCK_HIT, 5 ), new HashSet<string> { PlayerEvents.BLOCK_HIT_END }}
+            { EventComponent.BuildKey(KnightAnimations.BLOCK_HIT, 5 ), new HashSet<string> { PlayerEvents.BLOCK_HIT_END }},
+            { EventComponent.BuildKey(KnightAnimations.KO, 6 ), new HashSet<string> { PlayerEvents.KO_BOUNCE }},
+            { EventComponent.BuildKey(KnightAnimations.KO, 10 ), new HashSet<string> { PlayerEvents.KO_END }},
         };
         
         private static Dictionary<string, HashSet<string>> _wizardEventTriggers = new Dictionary<string, HashSet<string>>
@@ -35,6 +37,13 @@ namespace Orbsmash.Player
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 8 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 1 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+        };
+        
+        private static Dictionary<string, HashSet<string>> _spacemanEventTriggers = new Dictionary<string, HashSet<string>>
+        {
+            { EventComponent.BuildKey(SpacemanAnimations.ATTACK, 19 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 9 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
         };
 
         public PlayerSettings Settings;
@@ -88,7 +97,10 @@ namespace Orbsmash.Player
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.WIZARD];
                     break;
                 case Gameplay.Character.SPACEMAN:
-                    throw new NotImplementedException();
+                    _state = new SpacemanStateMachineComponent(new SpacemanState());
+                    _events.SetTriggers(_spacemanEventTriggers);
+                    animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.SPACEMAN];
+                    break;
                 case Gameplay.Character.ALIEN:
                     throw new NotImplementedException();
                 case Gameplay.Character.PIRATE:
@@ -165,7 +177,7 @@ namespace Orbsmash.Player
             addComponent(_hits);
         }
 
-        public static Vector2 calculateHitVector(Gameplay.Side side, Vector2 input)
+        public static Vector2 CalculateHitVector(Gameplay.Side side, Vector2 input)
         {
             if (input.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
             {
@@ -196,6 +208,11 @@ namespace Orbsmash.Player
             }
             hitVector.Normalize();
             return hitVector;
+        }
+
+        public static float SignForSide(Gameplay.Side side)
+        {
+            return side == Gameplay.Side.LEFT ? 1.0f : -1.0f;
         }
     }
 }
