@@ -135,6 +135,19 @@ namespace Orbsmash.Game.Interactions
                     {
                         hitStop.Freeze(ballState.HitBoost / 8.0f);
                     }
+                    
+                    // change possesion colors
+                    var particles = neighbor.getComponent<ParticleEmitterComponent>();
+                    if (playerState.side == Gameplay.Side.LEFT)
+                    {
+                        particles._emitterConfig.startColor = Color.Red;
+                        particles._emitterConfig.finishColor = Color.Orange;
+                    }
+                    else
+                    {
+                        particles._emitterConfig.startColor = Color.Blue;
+                        particles._emitterConfig.finishColor = Color.DarkCyan;
+                    }
                 }
             }
         }
