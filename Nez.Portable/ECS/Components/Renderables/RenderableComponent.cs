@@ -80,8 +80,37 @@ namespace Nez
 		/// <value>The local position.</value>
 		public Vector2 localOffset
 		{
-			get { return _localOffset; }
-			set { setLocalOffset( value ); }
+			get => _localOffset;
+			set => setLocalOffset( value );
+		}
+
+		private bool _flipX;
+		private bool _flipY;
+
+		public bool FlipX
+		{
+			get => _flipX;
+			set
+			{
+				if (value != _flipX)
+				{
+					_localOffset.X = _localOffset.X * -1;
+				}
+				_flipX = value;
+			}
+		}
+		
+		public bool FlipY
+		{
+			get => _flipY;
+			set
+			{
+				if (value != _flipY)
+				{
+					_localOffset.Y = _localOffset.Y * -1;
+				}
+				_flipY = value;
+			}
 		}
 
 		/// <summary>

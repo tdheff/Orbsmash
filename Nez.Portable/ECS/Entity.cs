@@ -481,6 +481,25 @@ namespace Nez
 			return components.getComponent<T>( onlyReturnInitializedComponents );
 		}
 
+		/// <summary>
+		/// Gets the first component of type T with matching name and returns it
+		/// </summary>
+		/// <returns>The component.</returns>
+		/// <param name="componentName">Name of component to match</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public T getComponent<T>( string componentName ) where T : Component
+		{
+			var componentList = components.getComponents<T>();
+			foreach (var comp in componentList)
+			{
+				if (comp.name == componentName)
+				{
+					return comp;
+				}
+			}
+
+			return null;
+		}
 
 		/// <summary>
 		/// Gets all the components of type T without a List allocation

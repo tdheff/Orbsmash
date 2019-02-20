@@ -1,12 +1,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
+using Orbsmash.Constants;
 
 namespace Orbsmash.Player
 {
     public class PlayerInputComponent : Component
     {
-        public const float STICK_THRESHOLD_SQUARED = 0.01f;
+        public const float STICK_THRESHOLD_SQUARED = 0.001f;
         
         public int DeviceId;
 
