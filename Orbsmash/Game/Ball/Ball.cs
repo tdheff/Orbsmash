@@ -76,12 +76,19 @@ namespace Orbsmash.Ball
         private ParticleEmitterConfig generateParticleEmitterConfig()
         {
             var config = scene.content.Load<ParticleEmitterConfig>("Particles/Test_Particles");
-            config.subtexture = null;
             config.startColor = Color.Red;
             config.finishColor = Color.Orange;
             config.startColorVariance = Color.Black;
             config.finishColorVariance = Color.Black;
             config.speed = 500.0f;
+            config.speedVariance = 200.0f;
+            config.angle = 0;
+            config.angleVariance = 360.0f;
+            config.tangentialAcceleration = 0;
+            config.tangentialAccelVariance = 0;
+            config.particleLifespan = 0.2f;
+            config.particleLifespanVariance = 0.0f;
+            config.startParticleSize = 200.0f;
             return config;
         }
     }
