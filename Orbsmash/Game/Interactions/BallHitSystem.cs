@@ -146,7 +146,7 @@ namespace Orbsmash.Game.Interactions
                     else
                     {
                         particles._emitterConfig.startColor = Color.Blue;
-                        particles._emitterConfig.finishColor = Color.DarkCyan;
+                        particles._emitterConfig.finishColor = Color.DarkBlue;
                     }
                 }
             }
