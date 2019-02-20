@@ -56,6 +56,7 @@ namespace Orbsmash.Constants
     {
         public static readonly string HITBOX_COLLIDER = "HITBOX_COLLIDER";
         public static readonly string PLAYER_COLLIDER = "PLAYER_COLLIDER";
+        public static readonly string AIM_INDICATOR = "AIM_INDICATOR";
     }
 
     public sealed class AnimationContexts
@@ -99,6 +100,7 @@ namespace Orbsmash.Constants
     public sealed class Sprites
     {
         public static readonly string HitEffect = "Sprites/Effects/HitEffect";
+        public static readonly string AimIndicator = "Sprites/Indicators/AimIndicator";
     }
 
     public sealed class PlayerSprites
