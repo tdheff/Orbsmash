@@ -44,7 +44,6 @@ namespace Orbsmash.Game
                 new BallHitSystem(),
                 new KnockoutSystem(),
                 new KinematicSystem(),
-                new KinematicSystem(),
                 //// BALL
                 new BallStateSystem(),
                 //// KNIGHT

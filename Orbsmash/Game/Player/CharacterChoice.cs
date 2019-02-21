@@ -79,10 +79,6 @@ namespace Orbsmash.Player
                 angle = angle - RotationAngle.GetCurrentValue();
                 // now subtract 90 cuz the bottom is "selected"
                 angle = angle - 90;
-                if(i == 0)
-                {
-                    Console.WriteLine($"angle: {angle}, {RotationAngle.GetCurrentValue()}");
-                }
                 var vector = HandyMath.MakeNormalizedVectorFromAngleDegrees(angle);
                 vector = vector * CharacterChoiceState.DistanceFromCenter;
                 var sprite = CharacterChoiceSprites[character];

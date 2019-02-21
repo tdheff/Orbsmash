@@ -30,8 +30,8 @@ namespace Orbsmash
             debugRenderEnabled = true;
 
             var settings = new GameSettings();
-            // var gameScene = new Game.Game(settings);
-            var gameScene = new PracticeGame();
+            var gameScene = new Game.Game(settings);
+            // var gameScene = new PracticeGame();
             scene = gameScene;
             
             // set the scene so Nez can take over
