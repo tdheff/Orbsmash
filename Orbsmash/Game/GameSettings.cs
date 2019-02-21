@@ -53,7 +53,7 @@ namespace Orbsmash.Game
                 
                 Players.Add(new PlayerSettings
                 {
-                    Id = 0,
+                    Id = 1,
                     Side = Gameplay.Side.RIGHT,
                     Speed = 300f,
                     StartingPosition = new Vector2(1345, 450),

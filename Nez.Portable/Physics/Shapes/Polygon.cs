@@ -254,7 +254,8 @@ namespace Nez.PhysicsShapes
 
 		public override Shape CloneFlipX()
 		{
-			return new Polygon(points.Reverse().Select(point => new Vector2(-point.X, point.Y)).ToArray());
+			var p = points.Reverse().Select(point => new Vector2(-point.X, point.Y)).ToArray();
+			return new Polygon(p);
 		}
 
 		public override Shape CloneFlipY()

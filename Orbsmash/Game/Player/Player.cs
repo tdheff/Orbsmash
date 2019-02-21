@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Handy.Components;
 using HandyScene = Handy.Scene;
 
@@ -124,27 +125,31 @@ namespace Orbsmash.Player
             Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.SIDE_WALLS);
             Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.ENVIRONMENT);
             Flags.setFlag(ref _collider.collidesWithLayers, PhysicsLayers.NET);
-            _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
-            _hitbox.isTrigger = true;
-            _hitbox.name = ComponentNames.HITBOX_COLLIDER;
+            
             
             // Aim Indicator
             var aimIndicator = new AimIndicator(this);
             scene.addEntity(aimIndicator);
 
             addComponent(_state);
-            addComponent(_hitbox);
             // _hitbox = new PolygonCollider([]);
             addComponent(_mainPlayerBodySprite);
             addComponent(_mainBodyAnimation);
-            addComponent(_collider);
-            
+
+            var points = scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points;
             if (_stateComponent.side == Gameplay.Side.RIGHT)
             {
                 _mainPlayerBodySprite.flipX = true;
-                _collider.FlipX = true;
-                _hitbox.FlipX = true;
+                // TODO - this is horrible but it's the only solution that worked
+                points = points.Reverse().Select(point => new Vector2(-point.X - 8.5f, point.Y - 2.5f)).ToArray();
             }
+            _hitbox = new PolygonCollider(points);
+            _hitbox.isTrigger = true;
+            _hitbox.name = ComponentNames.HITBOX_COLLIDER;
+            addComponent(_collider);
+            addComponent(_hitbox);
+
+
 
             SetupSound();
         }

@@ -14,7 +14,7 @@ namespace Nez
 		/// If the points are not centered they will be centered with the difference being applied to the localOffset.
 		/// </summary>
 		/// <param name="points">Points.</param>
-		public PolygonCollider( Vector2[] points )
+		public PolygonCollider( Vector2[] points, bool recenter = true)
 		{
 			// first and last point must not be the same. we want an open polygon
 			var isPolygonClosed = points[0] == points[points.Length - 1];
@@ -22,9 +22,13 @@ namespace Nez
 			if( isPolygonClosed )
 				Array.Resize( ref points, points.Length - 1 );
 
-			var center = Polygon.findPolygonCenter( points );
-			setLocalOffset( center );
-			Polygon.recenterPolygonVerts( points );
+			if (recenter)
+			{
+				var center = Polygon.findPolygonCenter(points);
+				setLocalOffset(center);
+				Polygon.recenterPolygonVerts(points);
+			}
+
 			shape = new Polygon( points );
 		}
 
