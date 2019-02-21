@@ -40,7 +40,7 @@ namespace Orbsmash.Player
                         break;
                     case KnightStates.Dash:
                         allowMovement = true;
-                        movementMultipler = 1.2f;
+                        movementMultipler = 1.6f;
                         break;
                     case KnightStates.Charge:
                         break;

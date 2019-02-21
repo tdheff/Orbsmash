@@ -18,10 +18,10 @@ namespace Handy.Systems
                 var hitstop = entity.getComponent<HitStopComponent>();
                 if (hitstop.Remaining <= 0)
                 {
-                    entity.scene.Paused = false;
+                    Time.timeScale = 1.0f;
                 }
 
-                hitstop.Remaining -= Time.deltaTime;
+                hitstop.Remaining -= Time.altDeltaTime;
             }
         }
     }

@@ -149,8 +149,28 @@ namespace Orbsmash.Player
             addComponent(_collider);
             addComponent(_hitbox);
 
-
-
+            // Circle and cooldowns
+            var subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.CharacterCircle], 1, 1);
+            var circle = new SpritesheetComponent(subtextures);
+            circle.name = ComponentNames.CHARACTER_CIRCLE;
+            circle.renderLayer = RenderLayers.BACKGROUND;
+            circle.localOffset = new Vector2(0, 15);
+            addComponent(circle);
+            
+            subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.LeftCooldown], 1, 15);
+            var left = new SpritesheetComponent(subtextures);
+            left.name = ComponentNames.LEFT_COOLDOWN;
+            left.renderLayer = RenderLayers.BACKGROUND;
+            left.localOffset = new Vector2(0, 15);
+            addComponent(left);
+            
+            subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.RightCooldown], 1, 15);
+            var right = new SpritesheetComponent(subtextures);
+            right.name = ComponentNames.RIGHT_COOLDOWN;
+            right.renderLayer = RenderLayers.BACKGROUND;
+            right.localOffset = new Vector2(0, 15);
+            addComponent(right);
+            
             SetupSound();
         }
 

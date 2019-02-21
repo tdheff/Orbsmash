@@ -45,7 +45,10 @@ namespace Orbsmash.Game
                 PlayerSprites.WIZARD,
                 PlayerSprites.SPACEMAN,
                 Sprites.HitEffect,
-                Sprites.AimIndicator
+                Sprites.AimIndicator,
+                Sprites.CharacterCircle,
+                Sprites.LeftCooldown,
+                Sprites.RightCooldown
             });
             LoadAnimationDefinitions(new[]
             {
