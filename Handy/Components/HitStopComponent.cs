@@ -13,7 +13,7 @@ namespace Handy.Components
         {
             Duration = duration;
             Remaining = Duration;
-            entity.scene.Paused = true;
+            Time.timeScale = 0.05f;
         }
         
         public float Duration;

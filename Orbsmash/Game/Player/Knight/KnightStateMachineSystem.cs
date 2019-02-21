@@ -27,6 +27,12 @@ namespace Orbsmash.Player
             var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
             var steps = soundEffects.First(x => x.Name == KnightSoundEffectGroups.STEPS);
             playerState.BallHitVector = Player.CalculateHitVector(playerState.side, input.MovementStick);
+            if (state.StateEnum != KnightStates.Dash)
+            {
+                state.SprintRemaining = Math.Min(state.SprintRemaining + Time.deltaTime * KnightState.SPRINT_RECOVERY_MULTIPLIER, KnightState.MAX_SPRINT);
+            }
+
+            state.BlockCooldown = Math.Min(state.BlockCooldown + Time.deltaTime, KnightState.BLOCK_COOLDOWN);
             switch (state.StateEnum)
             {
                 case KnightStates.Idle:
@@ -35,6 +41,7 @@ namespace Orbsmash.Player
                     steps.Play();
                     break;
                 case KnightStates.Dash:
+                    state.SprintRemaining = Math.Max(state.SprintRemaining - Time.deltaTime, 0);
                     break;
                 case KnightStates.Charge:
                     playerState.ChargeTime += Time.deltaTime;
@@ -70,7 +77,19 @@ namespace Orbsmash.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-//            stateMachine.UpdateState(state);
+
+            var rightCooldown = entity.getComponent<SpritesheetComponent>(ComponentNames.RIGHT_COOLDOWN);
+            var leftCooldown = entity.getComponent<SpritesheetComponent>(ComponentNames.LEFT_COOLDOWN);
+
+            var cooldownFrames = rightCooldown.Subtextures.Length;
+            
+            var sprintFraction = state.SprintRemaining / KnightState.MAX_SPRINT;
+            var rightFrame = (int)Mathf.round((cooldownFrames - 1) * sprintFraction);
+            rightCooldown.Frame = cooldownFrames - rightFrame - 1;
+            
+            var blockFraction = state.BlockCooldown / KnightState.BLOCK_COOLDOWN;
+            var leftFrame = (int)Mathf.round((cooldownFrames - 1) * blockFraction);
+            leftCooldown.Frame = cooldownFrames - leftFrame - 1;
         }
 
         protected override StateMachineTransition<KnightStates> Transition(Entity entity, KnightStateMachineComponent stateMachine)
@@ -90,10 +109,10 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.DefensePressed && knightState.BlockCooldown >= KnightState.BLOCK_COOLDOWN)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Block);
-                    } else if (input.DashPressed)
+                    } else if (input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Dash);
                     } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
@@ -105,10 +124,10 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.DefensePressed && knightState.BlockCooldown >= KnightState.BLOCK_COOLDOWN)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Block);
-                    } else if (input.DashPressed)
+                    } else if (input.DashPressed && input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Dash);
                     } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
@@ -117,13 +136,13 @@ namespace Orbsmash.Player
                     }
                     break;
                 case KnightStates.Dash:
-                    if (!input.DashPressed)
+                    if (!input.DashPressed || knightState.SprintRemaining <= 0.01)
                     {
                         return StateMachineTransition<KnightStates>.Pop();
                     } else if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.DefensePressed && knightState.BlockCooldown >= KnightState.BLOCK_COOLDOWN)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Block);
                     } else if (playerState.DashFinished)
@@ -215,6 +234,7 @@ namespace Orbsmash.Player
                     break;
                 case KnightStates.Block:
                     playerState.HitActive = true;
+                    state.BlockCooldown = 0;
                     break;
                 case KnightStates.BlockHit:
                     state.BlockHitTimeRemaining = 0.3f;

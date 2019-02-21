@@ -44,6 +44,11 @@ namespace Handy.Components
             return _states.Pop();
         }
 
+        public TState PeekState()
+        {
+            return _states.Peek();
+        }
+
         public void PushState(TStateEnum newState)
         {
             var next = State.Clone();

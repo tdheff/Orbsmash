@@ -37,7 +37,10 @@ namespace Handy.Systems
                         break;
                     case TransitionTypes.Pop:
                         OnExit(entity, stateMachine);
-                        stateMachine.PopState();
+                        var current = stateMachine.PopState();
+                        var nextEnum = stateMachine.PeekState().StateEnum;
+                        current.StateEnum = nextEnum;
+                        stateMachine.UpdateState(current);
                         OnWakeup(entity, stateMachine);
                         break;
                     default:
