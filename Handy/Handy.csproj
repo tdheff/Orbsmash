@@ -57,8 +57,10 @@
     <Compile Include="Animation\Aseprite\AsepriteJson.cs" />
     <Compile Include="Animation\Aseprite\AsepriteMeta.cs" />
     <Compile Include="Animation\Aseprite\AsepriteRect.cs" />
+    <Compile Include="Components\AnimatableSpritePositioner.cs" />
     <Compile Include="Components\AnimatableSprite.cs" />
     <Compile Include="Animation\IAnimatable.cs" />
+    <Compile Include="Components\AnimatingPropertyComponent.cs" />
     <Compile Include="Components\AnimationComponent.cs" />
     <Compile Include="Components\CameraShakeComponent.cs" />
     <Compile Include="Components\EventComponent.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TiledMapComponent.cs" />
     <Compile Include="Components\TimerComponent.cs" />
+    <Compile Include="Math\HandyMath.cs" />
     <Compile Include="Pipeline\Aseprite\AsepriteImporter.cs" />
     <Compile Include="Pipeline\Aseprite\AsepriteProcessor.cs" />
     <Compile Include="Pipeline\Aseprite\AsepriteReader.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Pipeline\PhysicsEditor\PolygonWriter.cs" />
     <Compile Include="Sound\HandySoundEffect.cs" />
     <Compile Include="Sound\SoundEffectGroupComponent.cs" />
+    <Compile Include="Systems\AnimatingPropertySystem.cs" />
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Animation\AnimationDefinition.cs" />
     <Compile Include="Animation\Util.cs" />

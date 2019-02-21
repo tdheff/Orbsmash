@@ -10,7 +10,7 @@ using Nez;
 namespace Handy.Components
 {
     // <summary>
-    // Component for a body that uses simple kinematic physics
+    // A hopefully generic component for managing animation
     // </summary>
     public class AnimationComponent : Component
     {

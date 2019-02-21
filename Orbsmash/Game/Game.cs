@@ -1,14 +1,10 @@
 using Handy.Systems;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Nez;
 using Nez.Tiled;
 using Orbsmash.Player;
-using Scene = Handy.Scene;
-using Handy.Animation;
 using System;
-using System.Collections.Generic;
 using Handy.Components;
 using Orbsmash.Ball;
 using Orbsmash.Constants;
@@ -18,36 +14,24 @@ using Orbsmash.Game.Interactions;
 namespace Orbsmash.Game
 {
     /// <summary>
-    /// A scene representing an actual instance of the game, once play has been selected in the menu
+    /// A scene representing an actual instance of the competitive game, once players have selected their characters and sides of the arena
     /// </summary>
-    public class Game : Scene
+    public class Game : ArenaScene
     {
         private readonly GameSettings _settings;
-        private AnimationSystem AnimationSystem;
         public Entity GameStateEntity;
         private Song song;
-        public Entity CameraEntity = new Entity();
         
-        public Game(GameSettings settings) : base(5)
+        public Game(GameSettings settings) : base()
         {
-            Console.WriteLine("###### GAME START ######");
-            setDesignResolution(1920, 1080, SceneResolutionPolicy.BestFit);
+            Console.WriteLine("###### Competitive Game Start ######");
             _settings = settings;
-            LoadContent();
             SetupAudio();
             CreateEntities();
         }
 
-        protected override void SetupRenderer()
-        {
-            var gameRenderer = new RenderLayerRenderer(-1, new[] { 1, 2, 3 });
-            clearColor = new Color(0.1f, 0.1f, 0.1f);
-            addRenderer(gameRenderer);
-        }
-
         protected override EntitySystem[] Systems()
         {
-            AnimationSystem = new AnimationSystem();
             return new EntitySystem[]
             {
                 new HitStopSystem(),
@@ -75,44 +59,16 @@ namespace Orbsmash.Game
                 new SpacemanAnimationSystem(),
                 // EFFECTS
                 new HitEffectSystem(),
+                new AnimationSystem(),
                 new AimIndicatorSystem(),
-                AnimationSystem
             };
         }
-
-        private void LoadContent()
-        {
-            LoadTextures(new []
-            {
-                BallSprites.DEFAULT,
-                PlayerSprites.KNIGHT,
-                PlayerSprites.WIZARD,
-                PlayerSprites.SPACEMAN,
-                Sprites.HitEffect,
-                Sprites.AimIndicator
-            });
-            LoadAnimationDefinitions(new []
-            {
-                AsepriteFiles.KNIGHT,
-                AsepriteFiles.WIZARD,
-                AsepriteFiles.SPACEMAN,
-                AsepriteFiles.HIT_EFFECT
-            });
-
-            var soundsToLoad = new List<string>()
-            {
-                SoundEffects.FOOTSTEPS_1,
-            };
-            soundsToLoad.AddRange(KnightSoundEffects.AllEffects);
-            LoadSounds(soundsToLoad.ToArray());
-        }
-
 
         // plan to add complexity here in terms of picking the correct song, etc once I have a better
         // system in place for starting this scene from  amenu scene
         private void SetupAudio()
         {
-            this.song = content.Load<Song>(Constants.SoundEffects.MENU_MUSIC);
+            song = content.Load<Song>(SoundEffects.MENU_MUSIC);
             MediaPlayer.Play(song);
             SetMusicVolume();
             MediaPlayer.IsRepeating = true;
@@ -128,7 +84,6 @@ namespace Orbsmash.Game
         private void SetMusicVolume()
         {
             MediaPlayer.Volume = _settings.MusicVolume;
-
         }
 
         private void CreateEntities()

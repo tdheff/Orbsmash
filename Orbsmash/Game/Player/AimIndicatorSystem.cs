@@ -25,8 +25,8 @@ namespace Orbsmash.Player
                 entity.transform.localRotation = Mathf.atan2(hitVector.Y, hitVector.X);
                 
                 var sprite = entity.getComponent<SpriteComponent>();
-                sprite.localOffset =
-                    state.side == Gameplay.Side.LEFT ? new Vector2(14 * 5, 0) : new Vector2(-14 * 5, 0);
+                sprite.localOffset = new Vector2(0, 0);
+                    // state.side == Gameplay.Side.LEFT ? new Vector2(14 * 5, 0) : new Vector2(-14 * 5, 0);
             }
         }
     }
