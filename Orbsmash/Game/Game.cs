@@ -138,7 +138,7 @@ namespace Orbsmash.Game
 
         public override void onStart()
         {
-            findEntity("Map").transform.position = new Vector2(-80, -40);
+            findEntity("Map").transform.position = new Vector2(-232, -40);
             findEntity(EntityNames.BALL).transform.position = new Vector2(400, 400);
             camera = CameraEntity.getComponent<Camera>();
         }
