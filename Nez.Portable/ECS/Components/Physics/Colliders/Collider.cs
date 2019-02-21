@@ -166,7 +166,7 @@ namespace Nez
 		{
 			if (flipX != _flipX)
 			{
-				shape = shape.CloneFlipX();
+				shape = shape.CloneFlipX();				
 				_localOffset = new Vector2(-_localOffset.X, _localOffset.Y);
 			}
 		}
