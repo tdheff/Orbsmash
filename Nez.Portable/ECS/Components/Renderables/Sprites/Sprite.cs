@@ -58,6 +58,7 @@ namespace Nez.Sprites
 			set
 			{
 				spriteEffects = value ? ( spriteEffects | SpriteEffects.FlipHorizontally ) : ( spriteEffects & ~SpriteEffects.FlipHorizontally );
+				FlipX = value;
 			}
 		}
 
@@ -74,6 +75,7 @@ namespace Nez.Sprites
 			set
 			{
 				spriteEffects = value ? ( spriteEffects | SpriteEffects.FlipVertically ) : ( spriteEffects & ~SpriteEffects.FlipVertically );
+				FlipY = value;
 			}
 		}
 

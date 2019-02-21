@@ -44,7 +44,8 @@ namespace Orbsmash.Game
                 PlayerSprites.KNIGHT,
                 PlayerSprites.WIZARD,
                 PlayerSprites.SPACEMAN,
-                Sprites.HitEffect
+                Sprites.HitEffect,
+                Sprites.AimIndicator
             });
             LoadAnimationDefinitions(new[]
             {

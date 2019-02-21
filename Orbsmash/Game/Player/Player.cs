@@ -60,6 +60,7 @@ namespace Orbsmash.Player
         private SoundEffectGroupComponent _swipes;
         private SoundEffectGroupComponent _hits;
         private SoundEffectGroupComponent _steps;
+        private SpriteComponent _aimIndicator;
 
         public Player(PlayerSettings settings)
         {
@@ -126,6 +127,10 @@ namespace Orbsmash.Player
             _hitbox = new PolygonCollider(scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points);
             _hitbox.isTrigger = true;
             _hitbox.name = ComponentNames.HITBOX_COLLIDER;
+            
+            // Aim Indicator
+            var aimIndicator = new AimIndicator(this);
+            scene.addEntity(aimIndicator);
 
             addComponent(_state);
             addComponent(_hitbox);
@@ -179,40 +184,65 @@ namespace Orbsmash.Player
 
         public static Vector2 CalculateHitVector(Gameplay.Side side, Vector2 input)
         {
-            if (input.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+            Console.WriteLine(input);
+            if (input.LengthSquared() <= PlayerInputComponent.STICK_THRESHOLD_SQUARED)
             {
-                return side == Gameplay.Side.LEFT ? new Vector2(1, 0) : new Vector2(-1, 0);
+                return side == Gameplay.Side.LEFT
+                    ? new Vector2(1, 0)
+                    : new Vector2(-1, 0); 
             }
 
-            var hitVector = new Vector2(input.X, input.Y);
-            if (side == Gameplay.Side.LEFT)
+            var angle = Mathf.atan2(input.Y, side == Gameplay.Side.LEFT ? input.X : -input.X);
+            if (angle > (float) Math.PI / 4)
             {
-                if (hitVector.X < 0)
-                {
-                    hitVector.X *= -1;
-                }
-            }
-            else
+                angle = (float) Math.PI / 4;
+            } else if (angle < -(float) Math.PI / 4)
             {
-                if (hitVector.X > 0)
-                {
-                    hitVector.X *= -1;
-                }
+                angle = -(float) Math.PI / 4;
             }
 
-            if (Math.Abs(hitVector.Y) > Math.Abs(hitVector.X))
-            {
-                var x = Math.Sign(hitVector.X) * MathUtil.SQRT_ONE_HALF;
-                var y = Math.Sign(hitVector.Y) * MathUtil.SQRT_ONE_HALF;
-                hitVector = new Vector2(x, y);
-            }
-            hitVector.Normalize();
-            return hitVector;
+            return side == Gameplay.Side.LEFT
+                ? new Vector2(Mathf.cos(angle), Mathf.sin(angle))
+                : new Vector2(-Mathf.cos(angle), Mathf.sin(angle));
         }
 
         public static float SignForSide(Gameplay.Side side)
         {
             return side == Gameplay.Side.LEFT ? 1.0f : -1.0f;
         }
+    }
+
+    public class AimIndicator : Entity
+    {
+        private Player _player;
+
+        public AimIndicator(Player player)
+        {
+            _player = player;
+        }
+
+        public override void onAddedToScene()
+        {
+            name = $"AimIndicator_{_player.name}";
+            
+            var gameScene = (HandyScene)scene;
+            var aimIndicatorSprite = gameScene.Textures[Sprites.AimIndicator];
+            var subtex = Util.ExtractSubtextures(aimIndicatorSprite, 1, 1);
+            var spriteComponent = new SpriteComponent(subtex[0]);
+            spriteComponent.renderLayer = RenderLayers.PRIMARY;
+            spriteComponent.localOffset = new Vector2(16*5, 0);
+            spriteComponent.name = ComponentNames.AIM_INDICATOR;
+            addComponent(spriteComponent);
+
+            addComponent(new AimIndicatorComponent
+            {
+                player = _player
+            });
+        }
+    }
+
+    public class AimIndicatorComponent : Component
+    {
+        public Player player;
     }
 }

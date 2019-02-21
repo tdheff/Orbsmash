@@ -222,6 +222,21 @@
 /processor:AsepriteProcessor
 /build:Sprites/Effects/HitEffectJson.json
 
+#begin Sprites/Indicators/AimIndicator.aseprite
+/copy:Sprites/Indicators/AimIndicator.aseprite
+
+#begin Sprites/Indicators/AimIndicator.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Indicators/AimIndicator.png
+
 #begin Sprites/Maps/Medeival.png
 /importer:TextureImporter
 /processor:TextureProcessor

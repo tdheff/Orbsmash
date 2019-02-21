@@ -88,6 +88,7 @@
     <Compile Include="Game\Interactions\BallHitSystem.cs" />
     <Compile Include="Game\Interactions\KnockoutSystem.cs" />
     <Compile Include="Game\Player\CharacterChoice.cs" />
+    <Compile Include="Game\Player\AimIndicatorSystem.cs" />
     <Compile Include="Game\Player\Knight\KnightState.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineComponent.cs" />
     <Compile Include="Game\Player\Knight\KnightStateMachineSystem.cs" />

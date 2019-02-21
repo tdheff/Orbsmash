@@ -42,8 +42,7 @@ namespace Orbsmash.Game
                 new GameStateMachineSystem(),
                 new BallHitSystem(),
                 new KnockoutSystem(),
-                new KinematicSystem(),
-                new KinematicSystem(),
+                new KinematicSystem(), 
                 // BALL
                 new BallStateSystem(),
                 // KNIGHT
@@ -60,7 +59,8 @@ namespace Orbsmash.Game
                 new SpacemanAnimationSystem(),
                 // EFFECTS
                 new HitEffectSystem(),
-                new AnimationSystem()
+                new AnimationSystem(),
+                new AimIndicatorSystem(),
             };
         }
 
