@@ -44,190 +44,198 @@ namespace Orbsmash.Constants
     
     public sealed class Timers
     {
-        public static readonly float POINT_SCORED_TIMER = 1.5f;
+        public const float POINT_SCORED_TIMER = 1.5f;
     }
 
     public sealed class EntityNames
     {
-        public static readonly string BALL = "BALL";
+        public const string BALL = "BALL";
     }
     
     public sealed class ComponentNames
     {
-        public static readonly string HITBOX_COLLIDER = "HITBOX_COLLIDER";
-        public static readonly string PLAYER_COLLIDER = "PLAYER_COLLIDER";
-        public static readonly string AIM_INDICATOR = "AIM_INDICATOR";
-        public static readonly string CHARACTER_CIRCLE = "CHARACTER_CIRCLE";
-        public static readonly string RIGHT_COOLDOWN = "RIGHT_COOLDOWN";
-        public static readonly string LEFT_COOLDOWN = "LEFT_COOLDOWN";
+        public const string HITBOX_COLLIDER = "HITBOX_COLLIDER";
+        public const string PLAYER_COLLIDER = "PLAYER_COLLIDER";
+        public const string AIM_INDICATOR = "AIM_INDICATOR";
+        public const string CHARACTER_CIRCLE = "CHARACTER_CIRCLE";
+        public const string RIGHT_COOLDOWN = "RIGHT_COOLDOWN";
+        public const string LEFT_COOLDOWN = "LEFT_COOLDOWN";
     }
 
     public sealed class AnimationContexts
     {
-        public static readonly string PLAYER_SPRITE_ANIMATIONS = "PLAYER_SPRITE_ANIMATIONS";
-        public static readonly string BALL_SPRITE_ANIMATIONS = "BALL_SPRITE_ANIMATIONS";
+        public const string PLAYER_SPRITE_ANIMATIONS = "PLAYER_SPRITE_ANIMATIONS";
+        public const string BALL_SPRITE_ANIMATIONS = "BALL_SPRITE_ANIMATIONS";
     }
 
     public sealed class TiledImportCollisionLayers
     {
-        public static readonly string BACK_WALLS = "BACK_WALLS";
-        public static readonly string SIDE_WALLS = "SIDE_WALLS";
-        public static readonly string ENVIRONMENT = "ENVIRONMENT";
-        public static readonly string NET = "NET";
+        public const string BACK_WALLS = "BACK_WALLS";
+        public const string SIDE_WALLS = "SIDE_WALLS";
+        public const string ENVIRONMENT = "ENVIRONMENT";
+        public const string NET = "NET";
     }
 
     public sealed class MapTiles
     {
-        public static readonly string DUNGEON = "Tiles/DungeonMap";
-        public static readonly string MEDIEVAL = "Tiles/MedievalMap";
-        public static readonly string MEDIEVAL2 = "Tiles/MedievalMap2";
+        public const string DUNGEON = "Tiles/DungeonMap";
+        public const string MEDIEVAL = "Tiles/MedievalMap";
+        public const string MEDIEVAL2 = "Tiles/MedievalMap2";
     }
     
     public sealed class PhysicsLayers
     {
-        public static readonly int ENVIRONMENT = 1;
-        public static readonly int BACK_WALLS = 2;
-        public static readonly int SIDE_WALLS = 3;
-        public static readonly int NET = 4;
-        public static readonly int PLAYER = 5;
-        public static readonly int BALL = 6;
+        public const int ENVIRONMENT = 1;
+        public const int BACK_WALLS = 2;
+        public const int SIDE_WALLS = 3;
+        public const int NET = 4;
+        public const int PLAYER = 5;
+        public const int BALL = 6;
     }
 
     public sealed class RenderLayers
     {
-        public static readonly int BACKGROUND = 3;
-        public static readonly int PRIMARY = 2;
-        public static readonly int FOREGROUND = 1;
+        public const int BACKGROUND = 3;
+        public const int PRIMARY = 2;
+        public const int FOREGROUND = 1;
     }
 
     public sealed class Sprites
     {
-        public static readonly string HitEffect = "Sprites/Effects/HitEffect";
-        public static readonly string AimIndicator = "Sprites/Indicators/AimIndicator";
-        public static readonly string CharacterCircle = "Sprites/Indicators/CharacterCircle";
-        public static readonly string LeftCooldown = "Sprites/Indicators/LeftCooldown";
-        public static readonly string RightCooldown = "Sprites/Indicators/RightCooldown";
+        public const string HIT_EFFECT = "Sprites/Effects/HitEffect";
+        public const string AIM_INDICATOR = "Sprites/Indicators/AimIndicator";
+        public const string CHARACTER_CIRCLE = "Sprites/Indicators/CharacterCircle";
+        public const string LEFT_COOLDOWN = "Sprites/Indicators/LeftCooldown";
+        public const string RIGHT_COOLDOWN = "Sprites/Indicators/RightCooldown";
     }
 
     public sealed class PlayerSprites
     {
-        public static readonly string KNIGHT = "Sprites/Characters/Knight/Knight";
-        public static readonly string WIZARD = "Sprites/Characters/Wizard/Wizard";
-        public static readonly string SPACEMAN = "Sprites/Characters/Spaceman/Spaceman";
+        public const string KNIGHT = "Sprites/Characters/Knight/Knight";
+        public const string WIZARD = "Sprites/Characters/Wizard/Wizard";
+        public const string SPACEMAN = "Sprites/Characters/Spaceman/Spaceman";
     }
     
     public sealed class AsepriteFiles
     {
-        public static readonly string KNIGHT = "Sprites/Characters/Knight/KnightJson";
-        public static readonly string WIZARD = "Sprites/Characters/Wizard/WizardJson";
-        public static readonly string SPACEMAN = "Sprites/Characters/Spaceman/SpacemanJson";
-        public static readonly string HIT_EFFECT = "Sprites/Effects/HitEffectJson";
+        public const string KNIGHT = "Sprites/Characters/Knight/KnightJson";
+        public const string WIZARD = "Sprites/Characters/Wizard/WizardJson";
+        public const string SPACEMAN = "Sprites/Characters/Spaceman/SpacemanJson";
+        public const string HIT_EFFECT = "Sprites/Effects/HitEffectJson";
     }
 
     public sealed class SoundEffects
     {
-        public static readonly string MENU_MUSIC = "audio/music/bumpin_eighties";
-        public static readonly string FOOTSTEPS_1 = "audio/character/footsteps_1";
+        public const string MENU_MUSIC = "audio/music/bumpin_eighties";
+        public const string FOOTSTEPS_1 = "audio/character/footsteps_1";
     }
 
     public sealed class KnightSoundEffects
     {
-        public static readonly string BOOT_1 = "audio/character/knight/footsteps/boot_1";
-        public static readonly string BOOT_2 = "audio/character/knight/footsteps/boot_2";
-        public static readonly string BOOT_3 = "audio/character/knight/footsteps/boot_3";
-        public static readonly string BOOT_4 = "audio/character/knight/footsteps/boot_4";
-        public static readonly string BOOT_5 = "audio/character/knight/footsteps/boot_5";
-        public static readonly string BOOT_6 = "audio/character/knight/footsteps/boot_6";
-        public static readonly string SWIPE_1 = "audio/character/knight/sword/swipe_1";
-        public static readonly string SWIPE_2 = "audio/character/knight/sword/swipe_2";
-        public static readonly string SWIPE_3 = "audio/character/knight/sword/swipe_3";
-        public static readonly string SWIPE_4 = "audio/character/knight/sword/swipe_4";
-        public static readonly string HIT_1 = "audio/character/knight/sword/hit_1";
+        public const string BOOT_1 = "audio/character/knight/footsteps/boot_1";
+        public const string BOOT_2 = "audio/character/knight/footsteps/boot_2";
+        public const string BOOT_3 = "audio/character/knight/footsteps/boot_3";
+        public const string BOOT_4 = "audio/character/knight/footsteps/boot_4";
+        public const string BOOT_5 = "audio/character/knight/footsteps/boot_5";
+        public const string BOOT_6 = "audio/character/knight/footsteps/boot_6";
+        public const string SWIPE_1 = "audio/character/knight/sword/swipe_1";
+        public const string SWIPE_2 = "audio/character/knight/sword/swipe_2";
+        public const string SWIPE_3 = "audio/character/knight/sword/swipe_3";
+        public const string SWIPE_4 = "audio/character/knight/sword/swipe_4";
+        public const string HIT_1 = "audio/character/knight/sword/hit_1";
         public static List<string> AllEffects = new List<string>() { BOOT_1, BOOT_2, BOOT_3, BOOT_4, BOOT_5, BOOT_6, SWIPE_1, SWIPE_2, SWIPE_3, SWIPE_4, HIT_1 };
     }
 
     public sealed class KnightSoundEffectGroups
     {
-        public static readonly string STEPS = "STEPS";
-        public static readonly string HITS = "HITS";
-        public static readonly string SWIPES = "SWIPES";
+        public const string STEPS = "STEPS";
+        public const string HITS = "HITS";
+        public const string SWIPES = "SWIPES";
     }
 
 
     public sealed class BallSprites
     {
-        public static readonly string DEFAULT = "Sprites/Ball/Ball";
+        public const string DEFAULT = "Sprites/Ball/Ball";
     }
 
     public sealed class Hitboxes
     {
-        public static readonly string KNIGHT_HITBOX = "Sprites/Characters/Knight/Knight_Hitbox";
-        public static readonly string KNIGHT_SWING_HITBOX = "Sprites/Characters/Knight/Knight_Hitbox";
-        public static readonly List<string> HitboxesToLoad;
+        public const string KNIGHT_HITBOX = "Sprites/Characters/Knight/Knight_Hitbox";
+        public const string WIZARD_HITBOX = "Sprites/Characters/Wizard/Wizard_Hitbox";
+        public static readonly List<string> HITBOXES_TO_LOAD;
         static Hitboxes()
         {
-            HitboxesToLoad = new List<string>() { KNIGHT_HITBOX };
+            HITBOXES_TO_LOAD = new List<string> { KNIGHT_HITBOX, WIZARD_HITBOX };
         }
     }
 
 
     public sealed class BallAnimations
     {
-        public static readonly string IDLE = "IDLE";
+        public const string IDLE = "IDLE";
     }
 
     public sealed class KnightAnimations
     {
-        public static readonly string IDLE_VERTICAL = "IDLE_VERTICAL";
-        public static readonly string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
-        public static readonly string WALK_UP = "WALK_UP";
-        public static readonly string WALK_DOWN = "WALK_DOWN";
-        public static readonly string WALK_BACKWARD = "WALK_BACKWARD";
-        public static readonly string WALK_FORWARD = "WALK_FORWARD";
-        public static readonly string CHARGE_IDLE = "CHARGE_IDLE";
-        public static readonly string CHARGE_FULL = "CHARGE_FULL";
-        public static readonly string CHARGE = "CHARGE";
-        public static readonly string ATTACK = "ATTACK";
-        public static readonly string BLOCK = "BLOCK";
-        public static readonly string BLOCK_HIT = "BLOCK_HIT";
-        public static readonly string KO = "KO";
+        public const string IDLE_VERTICAL = "IDLE_VERTICAL";
+        public const string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
+        public const string WALK_UP = "WALK_UP";
+        public const string WALK_DOWN = "WALK_DOWN";
+        public const string WALK_BACKWARD = "WALK_BACKWARD";
+        public const string WALK_FORWARD = "WALK_FORWARD";
+        public const string CHARGE_IDLE = "CHARGE_IDLE";
+        public const string CHARGE_FULL = "CHARGE_FULL";
+        public const string CHARGE = "CHARGE";
+        public const string ATTACK = "ATTACK";
+        public const string BLOCK = "BLOCK";
+        public const string BLOCK_HIT = "BLOCK_HIT";
+        public const string KO = "KO";
     }
     
     public sealed class SpacemanAnimations
     {
-        public static readonly string IDLE_VERTICAL = "IDLE_VERTICAL";
-        public static readonly string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
-        public static readonly string WALK_UP = "WALK_UP";
-        public static readonly string WALK_DOWN = "WALK_DOWN";
-        public static readonly string WALK_BACKWARD = "WALK_BACKWARD";
-        public static readonly string WALK_FORWARD = "WALK_FORWARD";
-        public static readonly string ATTACK = "ATTACK";
+        public const string IDLE_VERTICAL = "IDLE_VERTICAL";
+        public const string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
+        public const string WALK_UP = "WALK_UP";
+        public const string WALK_DOWN = "WALK_DOWN";
+        public const string WALK_BACKWARD = "WALK_BACKWARD";
+        public const string WALK_FORWARD = "WALK_FORWARD";
+        public const string ATTACK = "ATTACK";
     }
     
     public sealed class WizardAnimations
     {
-        public static readonly string IDLE_VERTICAL = "IDLE_VERTICAL";
-        public static readonly string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
-        public static readonly string WALK_DOWN = "WALK_DOWN";
-        public static readonly string WALK_FORWARD = "WALK_FORWARD";
-        public static readonly string ATTACK = "ATTACK";
-        public static readonly string GLIDE = "GLIDE";
-        public static readonly string IMMATERIAL = "IMMATERIAL";
+        public const string IDLE_VERTICAL = "IDLE_VERTICAL";
+        public const string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
+        public const string WALK_DOWN = "WALK_DOWN";
+        public const string WALK_FORWARD = "WALK_FORWARD";
+        public const string ATTACK = "ATTACK";
+        public const string GLIDE = "GLIDE";
+        public const string IMMATERIAL = "IMMATERIAL";
     }
 
     public sealed class PlayerEvents
     {
-        public static readonly string PLAYER_HIT_START = "PLAYER_HIT_START";
-        public static readonly string PLAYER_HIT_END = "PLAYER_HIT_END";
-        public static readonly string PLAYER_SWING_END = "PLAYER_SWING_END";
-        public static readonly string PLAYER_DASH_END = "PLAYER_DASH_END";
-        public static readonly string CHARGE_WINDUP_END = "CHARGE_WINDUP_END";
-        public static readonly string BLOCK_END = "BLOCK_END";
-        public static readonly string BLOCK_HIT = "BLOCK_HIT";
-        public static readonly string BLOCK_HIT_END = "BLOCK_HIT_END";
-        public static readonly string KO_BOUNCE = "KO_BOUNCE";
-        public static readonly string KO_END = "KO_END";
+        public const string PLAYER_HIT_START = "PLAYER_HIT_START";
+        public const string PLAYER_HIT_END = "PLAYER_HIT_END";
+        public const string PLAYER_SWING_END = "PLAYER_SWING_END";
+        public const string PLAYER_DASH_END = "PLAYER_DASH_END";
+        public const string CHARGE_WINDUP_END = "CHARGE_WINDUP_END";
+        public const string BLOCK_END = "BLOCK_END";
+        public const string BLOCK_HIT = "BLOCK_HIT";
+        public const string BLOCK_HIT_END = "BLOCK_HIT_END";
+        public const string KO_BOUNCE = "KO_BOUNCE";
+        public const string KO_END = "KO_END";
     }
 
+    public sealed class MovementSpeeds
+    {
+        public const float VERY_LOW = 250.0f;
+        public const float LOW = 300.0f;
+        public const float MEDIUM = 350.0f;
+        public const float HIGH = 400.0f;
+        public const float VERY_HIGH = 450.0f;
+    }
     
 }

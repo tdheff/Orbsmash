@@ -34,7 +34,6 @@ namespace Orbsmash.Game
         {
             return new EntitySystem[]
             {
-                new HitStopSystem(),
                 new TimerSystem(),
                 new CameraShakeSystem(),
                 new ParticleEmitterSystem(),
@@ -61,6 +60,7 @@ namespace Orbsmash.Game
                 new HitEffectSystem(),
                 new AnimationSystem(),
                 new AimIndicatorSystem(),
+                new HitStopSystem(),
             };
         }
 

@@ -200,6 +200,11 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Characters/Wizard/Wizard.png
 
+#begin Sprites/Characters/Wizard/Wizard_Hitbox.xml
+/importer:PolygonImporter
+/processor:PolygonProcessor
+/build:Sprites/Characters/Wizard/Wizard_Hitbox.xml
+
 #begin Sprites/Characters/Wizard/WizardJson.json
 /importer:AsepriteImporter
 /processor:AsepriteProcessor

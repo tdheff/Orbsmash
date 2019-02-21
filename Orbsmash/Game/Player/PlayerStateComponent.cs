@@ -19,7 +19,6 @@ namespace Orbsmash.Player
         public Gameplay.Side side { get; private set; }
         
         // MOVEMENT
-        public float Speed;
         public bool CanMove = true;
         public bool DashFinished = false;
         public Vector2 LastVector = new Vector2();
@@ -42,7 +41,6 @@ namespace Orbsmash.Player
         {
             this.playerId = playerId;
             this.side = side;
-            Speed = speed;
             ResetPosition = resetPosition;
         }
     }

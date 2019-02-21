@@ -20,8 +20,8 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
-            state.GlideCooldown -= Time.deltaTime;
-            state.ImmaterialCooldown -= Time.deltaTime;
+            state.GlideCooldown = Math.Min(state.GlideCooldown + Time.deltaTime, WizardState.GLIDE_COOLDOWN);
+            state.ImmaterialCooldown = Math.Min(state.ImmaterialCooldown+ Time.deltaTime, WizardState.IMMATERIAL_COOLDOWN);
             playerState.BallHitBoost = 1.0f;
             playerState.BallHitVector = Player.CalculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
@@ -43,7 +43,19 @@ namespace Orbsmash.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-//            stateMachine.UpdateState(state);
+            
+            var rightCooldown = entity.getComponent<SpritesheetComponent>(ComponentNames.RIGHT_COOLDOWN);
+            var leftCooldown = entity.getComponent<SpritesheetComponent>(ComponentNames.LEFT_COOLDOWN);
+
+            var cooldownFrames = rightCooldown.Subtextures.Length;
+            
+            var sprintFraction = state.GlideCooldown / WizardState.GLIDE_COOLDOWN;
+            var rightFrame = (int)Mathf.round((cooldownFrames - 1) * sprintFraction);
+            rightCooldown.Frame = cooldownFrames - rightFrame - 1;
+            
+            var blockFraction = state.ImmaterialCooldown / WizardState.IMMATERIAL_COOLDOWN;
+            var leftFrame = (int)Mathf.round((cooldownFrames - 1) * blockFraction);
+            leftCooldown.Frame = cooldownFrames - leftFrame - 1;
         }
 
         protected override StateMachineTransition<WizardStates> Transition(Entity entity, WizardStateMachineComponent stateMachine)
@@ -63,10 +75,10 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown < 0)
+                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
-                    } else if (input.DashPressed && state.GlideCooldown < 0)
+                    } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
                     } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
@@ -78,10 +90,10 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown < 0)
+                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
-                    } else if (input.DashPressed && state.GlideCooldown < 0)
+                    } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
                     } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
@@ -108,8 +120,9 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown < 0)
+                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
                     {
+                        state.LastGlideTime = state.GlideTime;
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
                     } else if (!input.DashPressed || state.GlideTime >= WizardState.MAX_GLIDE_TIME)
                     {
@@ -151,12 +164,14 @@ namespace Orbsmash.Player
                     playerState.SwingFinished = false;
                     break;
                 case WizardStates.Glide:
+                    state.GlideCooldown = 0;
                     state.GlideDirection = input.MovementStick;
                     break;
                 case WizardStates.Dead:
                     break;
                 case WizardStates.Immaterial:
-                    playerState.BallHitBoost = WizardState.IMMATERIAL_HIT_BOOST;
+                    state.ImmaterialCooldown = 0;
+                    playerState.BallHitBoost = WizardState.IMMATERIAL_MAX_HIT_BOOST + WizardState.IMMATERIAL_BOOST_RANGE * (state.LastGlideTime / WizardState.MAX_GLIDE_TIME);
                     playerState.HitActive = true;
                     break;
                 default:
@@ -180,7 +195,6 @@ namespace Orbsmash.Player
                     break;
                 case WizardStates.Glide:
                     state.GlideTime = 0;
-                    state.GlideCooldown = WizardState.GLIDE_COOLDOWN;
                     break;
                 case WizardStates.Dead:
                     break;
@@ -188,7 +202,7 @@ namespace Orbsmash.Player
                     playerState.HitActive = false;
                     playerState.BallHitBoost = 1.0f;
                     state.ImmaterialTime = 0;
-                    state.ImmaterialCooldown = WizardState.IMMATERIAL_COOLDOWN;
+                    state.LastGlideTime = 0;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

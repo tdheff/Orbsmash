@@ -27,7 +27,6 @@ namespace Orbsmash.Player
                 var knightState = entity.getComponent<KnightStateMachineComponent>().State;
                 var playerState = entity.getComponent<PlayerStateComponent>();
 
-                velocity.Velocity = input.MovementStick * playerState.Speed;
                 var allowMovement = false;
                 var movementMultipler = 1.0f;
                 switch (knightState.StateEnum)
@@ -59,7 +58,7 @@ namespace Orbsmash.Player
                 }
                 if (allowMovement)
                 {
-                    velocity.Velocity = input.MovementStick * playerState.Speed * movementMultipler;
+                    velocity.Velocity = input.MovementStick * MovementSpeeds.MEDIUM * movementMultipler;
                     if (input.MovementStick.LengthSquared() >= PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         playerState.LastVector = Vector2.Normalize(input.MovementStick);
