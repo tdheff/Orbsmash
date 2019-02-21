@@ -49,6 +49,9 @@ namespace Orbsmash.Player
                     case SpacemanStates.Eliminated:
                         mainBodyAnimation.Paused = true;
                         break;
+                    case SpacemanStates.Shield:
+                        mainBodyAnimation.SetAnimation(SpacemanAnimations.SHIELD);
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

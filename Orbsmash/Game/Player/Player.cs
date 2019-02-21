@@ -44,8 +44,9 @@ namespace Orbsmash.Player
         private static Dictionary<string, HashSet<string>> _spacemanEventTriggers = new Dictionary<string, HashSet<string>>
         {
             { EventComponent.BuildKey(SpacemanAnimations.ATTACK, 19 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 9 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            { EventComponent.BuildKey(SpacemanAnimations.ATTACK, 9 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(SpacemanAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            { EventComponent.BuildKey(SpacemanAnimations.SHIELD, 4 ), new HashSet<string> { PlayerEvents.BLOCK_END }},
         };
 
         public PlayerSettings Settings;
@@ -159,6 +160,7 @@ namespace Orbsmash.Player
             circle.name = ComponentNames.CHARACTER_CIRCLE;
             circle.renderLayer = RenderLayers.BACKGROUND;
             circle.localOffset = new Vector2(0, 15);
+            circle.renderOffset = 1;
             addComponent(circle);
             
             subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.LEFT_COOLDOWN], 1, 15);
@@ -166,6 +168,7 @@ namespace Orbsmash.Player
             left.name = ComponentNames.LEFT_COOLDOWN;
             left.renderLayer = RenderLayers.BACKGROUND;
             left.localOffset = new Vector2(0, 15);
+            left.renderOffset = 1;
             addComponent(left);
             
             subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.RIGHT_COOLDOWN], 1, 15);
@@ -173,7 +176,10 @@ namespace Orbsmash.Player
             right.name = ComponentNames.RIGHT_COOLDOWN;
             right.renderLayer = RenderLayers.BACKGROUND;
             right.localOffset = new Vector2(0, 15);
+            right.renderOffset = 1;
             addComponent(right);
+
+            addComponent(new SpriteDepthComponent { BaseRenderLayer = RenderLayers.PRIMARY});
             
             SetupSound();
         }

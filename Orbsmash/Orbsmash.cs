@@ -27,7 +27,7 @@ namespace Orbsmash
         {
             base.Initialize();
             Window.AllowUserResizing = true;
-            //debugRenderEnabled = true;
+            // debugRenderEnabled = true;
 
             var settings = new GameSettings();
             var gameScene = new Game.Game(settings);

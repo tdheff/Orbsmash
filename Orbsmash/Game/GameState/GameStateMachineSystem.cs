@@ -27,8 +27,12 @@ namespace Orbsmash.Game
                 case GameStates.Ready:
                     return StateMachineTransition<GameStates>.Replace(GameStates.Service);
                 case GameStates.Service:
-                    if (!state.Ball.getComponent<VelocityComponent>().Freeze)
+                    var ballVelocity = state.Ball.getComponent<VelocityComponent>();
+                    var ballState = state.Ball.getComponent<BallStateComponent>();
+                    if (!ballVelocity.Freeze)
                     {
+                        ballVelocity.Velocity = ballVelocity.Velocity / ballState.HitBoost;
+                        ballState.HitBoost = 1.0f;
                         return StateMachineTransition<GameStates>.Replace(GameStates.Play);
                     }
                     break;
@@ -68,8 +72,9 @@ namespace Orbsmash.Game
         private void ResetBall(Ball.Ball ball,  Gameplay.Side side)
         {
             var ballState = ball.getComponent<BallStateComponent>();
+            ballState.LastHitSide = Gameplay.Side.NONE;
+            ballState.HitBoost = 1.0f;
             ballState.IsDeadly = false;
-            ballState.LastHitSide = side;
             ballState.BaseSpeed = ballState.BaseSpeedInitial;
             if (side == Gameplay.Side.LEFT ||
                 (side == Gameplay.Side.NONE )) // && Random.chance(0.5f)

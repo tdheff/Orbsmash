@@ -9,6 +9,7 @@ using Scene = Handy.Scene;
 using Handy.Animation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Handy.Components;
 using Orbsmash.Ball;
 using Orbsmash.Constants;
@@ -29,7 +30,7 @@ namespace Orbsmash.Game
 
         protected override void SetupRenderer()
         {
-            var gameRenderer = new RenderLayerRenderer(-1, new[] { 1, 2, 3 });
+            var gameRenderer = new RenderLayerRenderer(-1, Enumerable.Range(1, 10000).ToArray());
             clearColor = new Color(0.1f, 0.1f, 0.1f);
             addRenderer(gameRenderer);
         }
@@ -49,14 +50,16 @@ namespace Orbsmash.Game
                 Sprites.AIM_INDICATOR,
                 Sprites.CHARACTER_CIRCLE,
                 Sprites.LEFT_COOLDOWN,
-                Sprites.RIGHT_COOLDOWN
+                Sprites.RIGHT_COOLDOWN,
+                Sprites.SPACEMAN_SHIELD
             });
             LoadAnimationDefinitions(new[]
             {
                 AsepriteFiles.KNIGHT,
                 AsepriteFiles.WIZARD,
                 AsepriteFiles.SPACEMAN,
-                AsepriteFiles.HIT_EFFECT
+                AsepriteFiles.HIT_EFFECT,
+                AsepriteFiles.SPACEMAN_SHIELD
             });
 
             var soundsToLoad = new List<string>(KnightSoundEffects.AllEffects);

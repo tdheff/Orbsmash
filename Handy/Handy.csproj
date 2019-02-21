@@ -69,6 +69,7 @@
     <Compile Include="Components\Physics\KinematicComponent.cs" />
     <Compile Include="Components\Physics\VelocityComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
+    <Compile Include="Components\SpriteDepthComponent.cs" />
     <Compile Include="Components\SpritesheetComponent.cs" />
     <Compile Include="Components\TiledMapComponent.cs" />
     <Compile Include="Components\TimerComponent.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Systems\Physics\KinematicSystem.cs" />
     <Compile Include="Systems\PushdownAutomatonSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
+    <Compile Include="Systems\SpriteDepthSystem.cs" />
     <Compile Include="Systems\StateMachineSystem.cs" />
     <Compile Include="Systems\TimerSystem.cs" />
     <Compile Include="Tiled.cs" />

@@ -95,9 +95,9 @@ namespace Orbsmash.Constants
 
     public sealed class RenderLayers
     {
-        public const int BACKGROUND = 3;
-        public const int PRIMARY = 2;
-        public const int FOREGROUND = 1;
+        public const int BACKGROUND = 3*2000;
+        public const int PRIMARY = 2*2000;
+        public const int FOREGROUND = 1*2000;
     }
 
     public sealed class Sprites
@@ -107,6 +107,7 @@ namespace Orbsmash.Constants
         public const string CHARACTER_CIRCLE = "Sprites/Indicators/CharacterCircle";
         public const string LEFT_COOLDOWN = "Sprites/Indicators/LeftCooldown";
         public const string RIGHT_COOLDOWN = "Sprites/Indicators/RightCooldown";
+        public const string SPACEMAN_SHIELD = "Sprites/Characters/Spaceman/SpacemanShield";
     }
 
     public sealed class PlayerSprites
@@ -121,6 +122,7 @@ namespace Orbsmash.Constants
         public const string KNIGHT = "Sprites/Characters/Knight/KnightJson";
         public const string WIZARD = "Sprites/Characters/Wizard/WizardJson";
         public const string SPACEMAN = "Sprites/Characters/Spaceman/SpacemanJson";
+        public const string SPACEMAN_SHIELD = "Sprites/Characters/Spaceman/SpacemanShieldJson";
         public const string HIT_EFFECT = "Sprites/Effects/HitEffectJson";
     }
 
@@ -226,6 +228,7 @@ namespace Orbsmash.Constants
         public const string WALK_BACKWARD = "WALK_BACKWARD";
         public const string WALK_FORWARD = "WALK_FORWARD";
         public const string ATTACK = "ATTACK";
+        public const string SHIELD = "SHIELD";
     }
     
     public sealed class WizardAnimations

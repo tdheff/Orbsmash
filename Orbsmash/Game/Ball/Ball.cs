@@ -30,6 +30,7 @@ namespace Orbsmash.Ball
             _velocity = new VelocityComponent(new Vector2(300, 300));
             
             addComponent(_velocity);
+            addComponent(new SpriteDepthComponent { BaseRenderLayer = RenderLayers.PRIMARY});
         }
 
         public override void onAddedToScene()

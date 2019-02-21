@@ -248,6 +248,23 @@
 /processor:AsepriteProcessor
 /build:Sprites/Characters/Spaceman/SpacemanJson.json
 
+#begin Sprites/Characters/Spaceman/SpacemanShield.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Characters/Spaceman/SpacemanShield.png
+
+#begin Sprites/Characters/Spaceman/SpacemanShieldJson.json
+/importer:AsepriteImporter
+/processor:AsepriteProcessor
+/build:Sprites/Characters/Spaceman/SpacemanShieldJson.json
+
 #begin Sprites/Characters/Wizard/Wizard.png
 /importer:TextureImporter
 /processor:TextureProcessor
