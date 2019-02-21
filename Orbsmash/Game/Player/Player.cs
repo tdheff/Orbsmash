@@ -35,8 +35,8 @@ namespace Orbsmash.Player
         
         private static Dictionary<string, HashSet<string>> _wizardEventTriggers = new Dictionary<string, HashSet<string>>
         {
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 8 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 1 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
         };
         
@@ -86,22 +86,26 @@ namespace Orbsmash.Player
         {
             var gameScene = (HandyScene)scene;
             AnimationDefinition animationDefinition;
+            Vector2[] points;
             switch (Settings.Character)
             {
                 case Gameplay.Character.KNIGHT:
                     _state = new KnightStateMachineComponent(new KnightState());
                     _events.SetTriggers(_knightEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.KNIGHT];
+                    points = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX).points;
                     break;
                 case Gameplay.Character.WIZARD:
                     _state = new WizardStateMachineComponent(new WizardState());
                     _events.SetTriggers(_wizardEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.WIZARD];
+                    points = scene.content.Load<Polygon>(Hitboxes.WIZARD_HITBOX).points;
                     break;
                 case Gameplay.Character.SPACEMAN:
                     _state = new SpacemanStateMachineComponent(new SpacemanState());
                     _events.SetTriggers(_spacemanEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.SPACEMAN];
+                    points = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX).points;
                     break;
                 case Gameplay.Character.ALIEN:
                     throw new NotImplementedException();
@@ -136,7 +140,6 @@ namespace Orbsmash.Player
             addComponent(_mainPlayerBodySprite);
             addComponent(_mainBodyAnimation);
 
-            var points = scene.content.Load<Polygon>(Hitboxes.KNIGHT_SWING_HITBOX).points;
             if (_stateComponent.side == Gameplay.Side.RIGHT)
             {
                 _mainPlayerBodySprite.flipX = true;
@@ -150,21 +153,21 @@ namespace Orbsmash.Player
             addComponent(_hitbox);
 
             // Circle and cooldowns
-            var subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.CharacterCircle], 1, 1);
+            var subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.CHARACTER_CIRCLE], 1, 1);
             var circle = new SpritesheetComponent(subtextures);
             circle.name = ComponentNames.CHARACTER_CIRCLE;
             circle.renderLayer = RenderLayers.BACKGROUND;
             circle.localOffset = new Vector2(0, 15);
             addComponent(circle);
             
-            subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.LeftCooldown], 1, 15);
+            subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.LEFT_COOLDOWN], 1, 15);
             var left = new SpritesheetComponent(subtextures);
             left.name = ComponentNames.LEFT_COOLDOWN;
             left.renderLayer = RenderLayers.BACKGROUND;
             left.localOffset = new Vector2(0, 15);
             addComponent(left);
             
-            subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.RightCooldown], 1, 15);
+            subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.RIGHT_COOLDOWN], 1, 15);
             var right = new SpritesheetComponent(subtextures);
             right.name = ComponentNames.RIGHT_COOLDOWN;
             right.renderLayer = RenderLayers.BACKGROUND;
@@ -251,7 +254,7 @@ namespace Orbsmash.Player
             name = $"AimIndicator_{_player.name}";
             
             var gameScene = (HandyScene)scene;
-            var aimIndicatorSprite = gameScene.Textures[Sprites.AimIndicator];
+            var aimIndicatorSprite = gameScene.Textures[Sprites.AIM_INDICATOR];
             var subtex = Util.ExtractSubtextures(aimIndicatorSprite, 1, 1);
             var spriteComponent = new SpriteComponent(subtex[0]);
             spriteComponent.renderLayer = RenderLayers.PRIMARY;

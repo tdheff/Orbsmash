@@ -44,11 +44,11 @@ namespace Orbsmash.Game
                 PlayerSprites.KNIGHT,
                 PlayerSprites.WIZARD,
                 PlayerSprites.SPACEMAN,
-                Sprites.HitEffect,
-                Sprites.AimIndicator,
-                Sprites.CharacterCircle,
-                Sprites.LeftCooldown,
-                Sprites.RightCooldown
+                Sprites.HIT_EFFECT,
+                Sprites.AIM_INDICATOR,
+                Sprites.CHARACTER_CIRCLE,
+                Sprites.LEFT_COOLDOWN,
+                Sprites.RIGHT_COOLDOWN
             });
             LoadAnimationDefinitions(new[]
             {

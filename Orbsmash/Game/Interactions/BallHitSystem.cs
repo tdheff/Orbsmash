@@ -96,6 +96,7 @@ namespace Orbsmash.Game.Interactions
 
                     var camera = handyScene.findEntity("Camera");
                     var shake = camera.getComponent<CameraShakeComponent>();
+                    var cam = camera.getComponent<Camera>();
                     if (ballState.HitBoost > 1.5f)
                     {
                         shake.Shake(0.3f, ballState.HitBoost * 15);

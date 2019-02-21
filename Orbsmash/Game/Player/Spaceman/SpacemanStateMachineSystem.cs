@@ -132,6 +132,7 @@ namespace Orbsmash.Player
                 case SpacemanStates.Attack:
                     swipes.Play();
                     playerState.SwingFinished = false;
+                    playerState.BallHitBoost = 2.5f;
                     break;
                 case SpacemanStates.KO:
                     playerState.HasKOBounced = false;

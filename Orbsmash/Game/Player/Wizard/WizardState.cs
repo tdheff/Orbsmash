@@ -15,16 +15,19 @@ namespace Orbsmash.Player
         public Vector2 GlideDirection = new Vector2(1, 0);
         public const float MAX_GLIDE_TIME = 0.4f;
         public const float GLIDE_COOLDOWN = 2.0f;
-        public const float GLIDE_SPEED = 700.0f;
+        public const float GLIDE_SPEED = 1000.0f;
         public float GlideTime = 0;
-        public float GlideCooldown = 0;
+        public float LastGlideTime = 0;
+        public float GlideCooldown = GLIDE_COOLDOWN;
         
         // IMMATERIAL
-        public const float IMMATERIAL_TIME = 0.2f;
+        public const float IMMATERIAL_TIME = 0.25f;
         public const float IMMATERIAL_COOLDOWN = 2.0f;
-        public const float IMMATERIAL_HIT_BOOST = 2.0f;
+        public const float IMMATERIAL_MIN_HIT_BOOST = 1.3f;
+        public const float IMMATERIAL_MAX_HIT_BOOST = 2.5f;
+        public const float IMMATERIAL_BOOST_RANGE = IMMATERIAL_MAX_HIT_BOOST - IMMATERIAL_MIN_HIT_BOOST;
         public float ImmaterialTime = 0;
-        public float ImmaterialCooldown = 0;
+        public float ImmaterialCooldown = IMMATERIAL_COOLDOWN;
 
         public IStateMachineState<WizardStates> Clone()
         {

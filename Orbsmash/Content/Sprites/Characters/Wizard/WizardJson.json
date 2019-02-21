@@ -754,6 +754,51 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
     "sourceSize": { "w": 64, "h": 48 },
     "duration": 50
+   },
+   {
+    "filename": "Wizard 84.aseprite",
+    "frame": { "x": 5376, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 85.aseprite",
+    "frame": { "x": 5440, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 86.aseprite",
+    "frame": { "x": 5504, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 87.aseprite",
+    "frame": { "x": 5568, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 88.aseprite",
+    "frame": { "x": 5632, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
    }
  ],
  "meta": {
@@ -761,7 +806,7 @@
   "version": "1.2.10-beta2-x64",
   "image": "/home/tommy/dev/Orbsmash/Orbsmash/Content/Sprites/Characters/Wizard/Wizard.png",
   "format": "RGBA8888",
-  "size": { "w": 5376, "h": 48 },
+  "size": { "w": 5696, "h": 48 },
   "scale": "1",
   "frameTags": [
    { "name": "IDLE_HORIZONTAL", "from": 0, "to": 0, "direction": "forward" },
@@ -770,17 +815,15 @@
    { "name": "WALK_BACKWARD", "from": 18, "to": 33, "direction": "forward" },
    { "name": "WALK_DOWN", "from": 34, "to": 49, "direction": "forward" },
    { "name": "WALK_UP", "from": 50, "to": 65, "direction": "forward" },
-   { "name": "ATTACK", "from": 66, "to": 74, "direction": "forward" },
-   { "name": "GLIDE", "from": 75, "to": 79, "direction": "forward" },
-   { "name": "IMMATERIAL", "from": 80, "to": 83, "direction": "forward" }
+   { "name": "ATTACK", "from": 66, "to": 79, "direction": "forward" },
+   { "name": "GLIDE", "from": 80, "to": 84, "direction": "forward" },
+   { "name": "IMMATERIAL", "from": 85, "to": 88, "direction": "forward" }
   ],
   "layers": [
-   { "name": "legs", "opacity": 255, "blendMode": "normal" },
-   { "name": "body", "opacity": 255, "blendMode": "normal" },
+   { "name": "Flattened", "opacity": 255, "blendMode": "normal" },
    { "name": "robe", "opacity": 255, "blendMode": "normal" },
-   { "name": "front_arm", "opacity": 255, "blendMode": "normal" },
-   { "name": "attack", "opacity": 255, "blendMode": "normal" },
-   { "name": "head", "opacity": 255, "blendMode": "normal" }
+   { "name": "head", "opacity": 255, "blendMode": "normal" },
+   { "name": "attack", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
