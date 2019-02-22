@@ -59,17 +59,13 @@ namespace Orbsmash.Game
             return StateMachineTransition<GameStates>.None();
         }
 
-        private void ResetPlayers(Player.Player[] players)
+        private void ResetForService(Ball.Ball ball, Player.Player[] players, Gameplay.Side side)
         {
-            foreach (var player in players)
-            {
-                var state = player.getComponent<PlayerStateComponent>();
-                state.IsKilled = false;
-                player.position = state.ResetPosition;
-            }
+            ResetBall(ball, side);
+            ResetPlayers(players);
         }
 
-        private void ResetBall(Ball.Ball ball, Gameplay.Side side)
+        private void ResetBall(Ball.Ball ball,  Gameplay.Side side)
         {
             var ballState = ball.getComponent<BallStateComponent>();
             ballState.IsDeadly = false;
@@ -86,7 +82,17 @@ namespace Orbsmash.Game
 
             ball.getComponent<VelocityComponent>().Freeze = true;
         }
-        
+
+        private void ResetPlayers(Player.Player[] players)
+        {
+            foreach (var player in players)
+            {
+                var state = player.getComponent<PlayerStateComponent>();
+                state.IsKilled = false;
+                player.position = state.ResetPosition;
+            }
+        }
+
         private Gameplay.Side isOneTeamKnockedOut(Player.Player[] players)
         {
             int rightAlive = 0;
@@ -94,10 +100,33 @@ namespace Orbsmash.Game
 
             foreach (var player in players)
             {
-                var state = player.getComponent<PlayerStateComponent>();
-                if (state.StateEnum != KnightStates.KO || state.StateEnum == KnightStates.Eliminated)
+                var isAlive = false;
+                switch (player.Settings.Character)
                 {
-                    if (state.side == Gameplay.Side.LEFT)
+                    case Gameplay.Character.KNIGHT:
+                        var knightState = player.getComponent<KnightStateMachineComponent>().State.StateEnum;
+                        isAlive = knightState != KnightStates.KO && knightState != KnightStates.Eliminated;
+                        break;
+                    case Gameplay.Character.WIZARD:
+                        var wizardState = player.getComponent<WizardStateMachineComponent>().State.StateEnum;
+                        isAlive = wizardState == WizardStates.Dead;
+                        break;
+                    case Gameplay.Character.SPACEMAN:
+                        var spacemanState = player.getComponent<SpacemanStateMachineComponent>().State.StateEnum;
+                        isAlive = spacemanState == SpacemanStates.KO;
+                        break;
+                    case Gameplay.Character.ALIEN:
+                        throw new NotImplementedException();
+                    case Gameplay.Character.PIRATE:
+                        throw new NotImplementedException();
+                    case Gameplay.Character.SKELETON:
+                        throw new NotImplementedException();
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                if (isAlive)
+                {
+                    if (player.Settings.Side == Gameplay.Side.LEFT)
                     {
                         leftAlive++;
                     }
@@ -127,17 +156,14 @@ namespace Orbsmash.Game
             switch (state.StateEnum)
             {
                 case GameStates.Ready:
-                    ResetBall(state.Ball, Gameplay.Side.NONE);
                     break;
                 case GameStates.Service:
                     break;
                 case GameStates.Play:
                     break;
                 case GameStates.PointScoredLeft:
-                    ResetBall(state.Ball, Gameplay.Side.LEFT);
                     break;
                 case GameStates.PointScoredRight:
-                    ResetBall(state.Ball, Gameplay.Side.LEFT);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -153,17 +179,17 @@ namespace Orbsmash.Game
                 case GameStates.Ready:
                     break;
                 case GameStates.Service:
-                    ResetPlayers(state.Players);
+                    ResetForService(state.Ball, state.Players, Gameplay.Side.NONE);
                     break;
                 case GameStates.Play:
                     break;
                 case GameStates.PointScoredRight:
                     gameStateTimer.Set(Timers.POINT_SCORED_TIMER);
-                    state.LeftPoints++;
+                    state.RightPoints++;
                     break;
                 case GameStates.PointScoredLeft:
                     gameStateTimer.Set(Timers.POINT_SCORED_TIMER);
-                    state.RightPoints++;
+                    state.LeftPoints++;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

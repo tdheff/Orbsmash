@@ -1,6 +1,7 @@
 using Handy.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using PubSub;
 using Nez;
 using Nez.Tiled;
 using Orbsmash.Player;
@@ -10,6 +11,7 @@ using Orbsmash.Ball;
 using Orbsmash.Constants;
 using Orbsmash.Game.Effects;
 using Orbsmash.Game.Interactions;
+
 
 namespace Orbsmash.Game
 {
@@ -42,6 +44,8 @@ namespace Orbsmash.Game
                 new BallHitSystem(),
                 new KnockoutSystem(),
                 new KinematicSystem(), 
+                //SCOREBOARD
+                new ScoreboardSystem(),
                 // BALL
                 new BallStateSystem(),
                 // KNIGHT
@@ -61,6 +65,7 @@ namespace Orbsmash.Game
                 new AnimationSystem(),
                 new AimIndicatorSystem(),
                 new HitStopSystem(),
+
             };
         }
 
@@ -125,6 +130,10 @@ namespace Orbsmash.Game
             GameStateEntity.addComponent(new GameStateComponent(gameState));
             GameStateEntity.addComponent(new TimerComponent());
             GameStateEntity.addComponent(new HitStopComponent());
+            var scoreboard = new UICanvas();
+            scoreboard.name = "scoreboard";
+            scoreboard.renderLayer = RenderLayers.FOREGROUND;
+            GameStateEntity.addComponent(scoreboard);
             addEntity(GameStateEntity);
             
             // add camera

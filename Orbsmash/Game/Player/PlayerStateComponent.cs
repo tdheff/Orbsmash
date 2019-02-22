@@ -10,7 +10,7 @@ namespace Orbsmash.Player
         public const float MOVEMENT_THRESHOLD_SQUARED = 0.01f;
         
         // STATE
-        public KnightStates StateEnum { get; set; } = KnightStates.Idle;
+        // we don't actually update a single global state enum....
         public bool IsKilled = false;
         public bool HasKOBounced = false;
         

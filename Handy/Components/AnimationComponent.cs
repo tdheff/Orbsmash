@@ -34,6 +34,7 @@ namespace Handy.Components
         public void SetAnimation(string newAnimation, float playbackSpeed = 1.0f)
         {
             if (newAnimation == CurrentAnimation) return;
+            Console.WriteLine($"setting animation to: {newAnimation}");
             CurrentAnimationElapsedTime = 0;
             CurrentFrameElapsedTime = 0;
             CurrentAnimationFrame = 0;

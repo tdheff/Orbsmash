@@ -211,6 +211,7 @@ namespace Orbsmash.Player
             var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
             var swipes = soundEffects.First(x => x.Name == KnightSoundEffectGroups.SWIPES);
             var state = stateMachine.State;
+            Console.WriteLine($"Player {playerState.playerId} is entering state: {state.StateEnum}");
             switch (state.StateEnum)
             {
                 case KnightStates.Idle:
@@ -248,7 +249,7 @@ namespace Orbsmash.Player
         {
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
-
+            Console.WriteLine($"Player {playerState.playerId} is exiting state: {state.StateEnum}");
             switch (state.StateEnum)
             {
                 case KnightStates.Idle:
