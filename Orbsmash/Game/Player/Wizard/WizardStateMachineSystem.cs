@@ -151,6 +151,7 @@ namespace Orbsmash.Player
 
         protected override void OnEnter(Entity entity, WizardStateMachineComponent stateMachine)
         {
+            var handyScene = (Handy.Scene)scene;
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
@@ -168,6 +169,9 @@ namespace Orbsmash.Player
                     state.GlideDirection = input.MovementStick;
                     break;
                 case WizardStates.Dead:
+                    var gameState = handyScene.findEntity("Game");
+                    var hitStop = gameState.getComponent<HitStopComponent>();
+                    hitStop.Freeze(0.3f);
                     break;
                 case WizardStates.Immaterial:
                     state.ImmaterialCooldown = 0;

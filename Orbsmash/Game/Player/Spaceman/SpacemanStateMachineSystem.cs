@@ -119,6 +119,7 @@ namespace Orbsmash.Player
 
         protected override void OnEnter(Entity entity, SpacemanStateMachineComponent stateMachine)
         {
+            var handyScene = (Handy.Scene)scene;
             var playerState = entity.getComponent<PlayerStateComponent>();
             var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
             var swipes = soundEffects.First(x => x.Name == KnightSoundEffectGroups.SWIPES);
@@ -135,6 +136,9 @@ namespace Orbsmash.Player
                     playerState.BallHitBoost = 2.5f;
                     break;
                 case SpacemanStates.KO:
+                    var gameState = handyScene.findEntity("Game");
+                    var hitStop = gameState.getComponent<HitStopComponent>();
+                    hitStop.Freeze(0.3f);
                     playerState.HasKOBounced = false;
                     break;
                 case SpacemanStates.Eliminated:

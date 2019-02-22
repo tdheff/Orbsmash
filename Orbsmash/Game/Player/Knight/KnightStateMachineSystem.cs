@@ -211,6 +211,7 @@ namespace Orbsmash.Player
             var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
             var swipes = soundEffects.First(x => x.Name == KnightSoundEffectGroups.SWIPES);
             var state = stateMachine.State;
+            var handyScene = (Handy.Scene) scene;
             switch (state.StateEnum)
             {
                 case KnightStates.Idle:
@@ -229,6 +230,9 @@ namespace Orbsmash.Player
                     break;
                 case KnightStates.KO:
                     playerState.HasKOBounced = false;
+                    var gameState = handyScene.findEntity("Game");
+                    var hitStop = gameState.getComponent<HitStopComponent>();
+                     hitStop.Freeze(0.3f);
                     break;
                 case KnightStates.Eliminated:
                     break;

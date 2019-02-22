@@ -12,6 +12,8 @@ namespace Orbsmash.Game
     {
         public ScoreboardSystem() : base(new Matcher().all(typeof(UICanvas), typeof(GameStateComponent))) { }
 
+        private List<string> WinMessages = new List<string>() { "OUCH!", "OOOO THAT'S ROUGH!", "BETTER LUCK NEXT TIME!", "TRY PLAYING BETTER!" };
+
         protected override void process(List<Entity> entities)
         {
             foreach(var entity in entities)
@@ -26,10 +28,23 @@ namespace Orbsmash.Game
                     gameState.ScoreboardSetup = true;
                 }
                 // keep the scores up to date
-                if(gameState.StateEnum == GameStates.Service)
+                switch(gameState.StateEnum)
                 {
-                    gameState.RightScore.setText(gameState.RightPoints.ToString());
-                    gameState.LeftScore.setText(gameState.LeftPoints.ToString());
+                    case GameStates.Service:
+                        gameState.RightScore.setText(gameState.RightPoints.ToString());
+                        gameState.LeftScore.setText(gameState.LeftPoints.ToString());
+                        gameState.MainLabel.setText("SERVICE");
+                        break;
+                    case GameStates.Play:
+                        gameState.MainLabel.setText("");
+                        break;
+                    case GameStates.PointScoredLeft:
+                    case GameStates.PointScoredRight:
+                        if(gameState.MainLabel.getText()== "")
+                        {
+                            gameState.MainLabel.setText(WinMessages.randomItem());
+                        }
+                        break;
                 }
                 
             }
@@ -37,18 +52,18 @@ namespace Orbsmash.Game
 
         private void FirstTimeSetup(Stage stage, GameState state)
         {
-            state.MainLabel = new Label("Let's Roll!").setFontScale(8);
+            state.MainLabel = new Label("Let's Roll!").setFontScale(10);
             var table = stage.addElement(new Table());
             state.Table = table;
             table.setFillParent(true).top().padTop(30);
             table.add(state.MainLabel).center();
-            table.row().center().setPadTop(20);
+            table.row().center().setPadTop(-40);
             var scoreTable = new Table();
             table.add(scoreTable);
-            state.LeftScore = new Label("0").setFontScale(5);
+            state.LeftScore = new Label("0").setFontScale(15);
             scoreTable.add(state.LeftScore);
-            state.RightScore = new Label("0").setFontScale(5);
-            scoreTable.add(state.RightScore).setPadLeft(200);
+            state.RightScore = new Label("0").setFontScale(15);
+            scoreTable.add(state.RightScore).setPadLeft(1200);
         }
     }
 }
