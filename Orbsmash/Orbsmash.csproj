@@ -85,6 +85,7 @@
     <Compile Include="Game\GameState\GameStateComponent.cs" />
     <Compile Include="Game\GameState\GameStateMachineSystem.cs" />
     <Compile Include="Game\GameState\PracticeGameState.cs" />
+    <Compile Include="Game\GameState\ScoreboardSystem.cs" />
     <Compile Include="Game\Interactions\BallHitSystem.cs" />
     <Compile Include="Game\Interactions\KnockoutSystem.cs" />
     <Compile Include="Game\Player\CharacterChoice.cs" />
@@ -123,6 +124,9 @@
   <ItemGroup>
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PubSub, Version=3.0.0.0, Culture=neutral, PublicKeyToken=fe4ede83ff72b2e0, processorArchitecture=MSIL">
+      <HintPath>..\packages\PubSub.3.0.0\lib\netstandard2.0\PubSub.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections" />

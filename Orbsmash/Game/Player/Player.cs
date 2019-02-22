@@ -212,7 +212,6 @@ namespace Orbsmash.Player
 
         public static Vector2 CalculateHitVector(Gameplay.Side side, Vector2 input)
         {
-            Console.WriteLine(input);
             if (input.LengthSquared() <= PlayerInputComponent.STICK_THRESHOLD_SQUARED)
             {
                 return side == Gameplay.Side.LEFT

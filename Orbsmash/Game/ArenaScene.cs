@@ -22,6 +22,7 @@ namespace Orbsmash.Game
 
         public ArenaScene() : base(5)
         {
+            Input.maxSupportedGamePads = 4; // jesus
             setDesignResolution(1920, 1080, SceneResolutionPolicy.BestFit);
             LoadContent();
         }

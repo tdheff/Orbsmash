@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Orbsmash.Constants;
 using Orbsmash.Player;
+using Nez.UI;
 
 namespace Orbsmash.Game
 {
@@ -25,7 +26,15 @@ namespace Orbsmash.Game
         public Ball.Ball Ball;
         public int RightPoints = 0;
         public int LeftPoints = 0;
-        
+
+        // scoreboard obects
+        public bool ScoreboardSetup = false;
+        public Table Table;
+        public Label MainLabel;
+        public Label RightScore;
+        public Label LeftScore;
+
+
         public IStateMachineState<GameStates> Clone()
         {
             return MemberwiseClone() as IStateMachineState<GameStates>;
