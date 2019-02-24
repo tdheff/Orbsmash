@@ -41,6 +41,9 @@ namespace Orbsmash.Player
                     case WizardStates.Attack:
                         lockMovement = true;
                         break;
+                    case WizardStates.PreGlide:
+                        lockMovement = true;
+                        break;
                     case WizardStates.Glide:
                         velocity.Velocity = wizardState.GlideDirection * WizardState.GLIDE_SPEED;
                         break;
