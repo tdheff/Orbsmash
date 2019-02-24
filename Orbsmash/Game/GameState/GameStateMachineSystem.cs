@@ -109,11 +109,11 @@ namespace Orbsmash.Game
                         break;
                     case Gameplay.Character.WIZARD:
                         var wizardState = player.getComponent<WizardStateMachineComponent>().State.StateEnum;
-                        isAlive = wizardState == WizardStates.Dead;
+                        isAlive = wizardState != WizardStates.Dead;
                         break;
                     case Gameplay.Character.SPACEMAN:
                         var spacemanState = player.getComponent<SpacemanStateMachineComponent>().State.StateEnum;
-                        isAlive = spacemanState == SpacemanStates.KO;
+                        isAlive = spacemanState != SpacemanStates.KO && spacemanState != SpacemanStates.Eliminated;
                         break;
                     case Gameplay.Character.ALIEN:
                         throw new NotImplementedException();

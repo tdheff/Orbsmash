@@ -22,6 +22,7 @@ namespace Orbsmash.Player
                 var playerState = entity.getComponent<PlayerStateComponent>();
                 var player = (Player)entity;
                 var mainBodyAnimation = player.getComponent<AnimationComponent>();
+                mainBodyAnimation.Paused = false; // that way it's "sticky" on false so the anims don't get stuck
                 var eventComponent = player.getComponent<EventComponent>();
 
                 switch (knightState.StateEnum)
