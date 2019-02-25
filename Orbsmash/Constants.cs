@@ -153,6 +153,30 @@ namespace Orbsmash.Constants
         public const string SWIPES = "SWIPES";
     }
 
+    public sealed class WizardSoundEffects
+    {
+        public const string STEP_1 = "audio/character/wizard/footsteps/step_1";
+        public const string STEP_2 = "audio/character/wizard/footsteps/step_2";
+        public const string STEP_3 = "audio/character/wizard/footsteps/step_3";
+        public const string STEP_4 = "audio/character/wizard/footsteps/step_4";
+        public const string STEP_5 = "audio/character/wizard/footsteps/step_5";
+        public const string STEP_6 = "audio/character/wizard/footsteps/step_6";
+        public const string FLAME_LIGHT_1 = "audio/character/wizard/flame/flame_light_1";
+        public const string FLAME_LIGHT_2 = "audio/character/wizard/flame/flame_light_2";
+        public const string FLAME_LIGHT_3 = "audio/character/wizard/flame/flame_light_3";
+        public const string FLAME_HIT = "audio/character/wizard/flame/flame_hit";
+
+        public static List<string> AllEffects = new List<string>() { STEP_1, STEP_2, STEP_3, STEP_4, STEP_5, STEP_6, FLAME_LIGHT_1, FLAME_LIGHT_2, FLAME_LIGHT_3, FLAME_HIT };
+    }
+
+    public sealed class WizardSoundEffectGroups
+    {
+        public const string STEPS = "STEPS";
+        public const string HITS = "HITS";
+        public const string SWIPES = "SWIPES";
+        public const string IMMATERIAL = "IMMATERIAL";
+    }
+
 
     public sealed class BallSprites
     {

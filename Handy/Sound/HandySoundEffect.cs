@@ -20,9 +20,10 @@ namespace Handy.Sound
             Instance = Effect.CreateInstance();
         }
 
-        public void Play()
+        public void Play(float pitchAdustment = 0)
         {
             Instance.Play();
+            Instance.Pitch = pitchAdustment;
         }
 
         public void Stop()

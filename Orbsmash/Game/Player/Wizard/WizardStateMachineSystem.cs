@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Handy.Components;
+using Handy.Sound;
 using Handy.Systems;
 using Nez;
 using Orbsmash.Constants;
@@ -20,6 +21,8 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
+            var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
+            var steps = soundEffects.First(x => x.Name == KnightSoundEffectGroups.STEPS);
             state.GlideCooldown = Math.Min(state.GlideCooldown + Time.deltaTime, WizardState.GLIDE_COOLDOWN);
             state.ImmaterialCooldown = Math.Min(state.ImmaterialCooldown+ Time.deltaTime, WizardState.IMMATERIAL_COOLDOWN);
             playerState.BallHitBoost = 1.0f;
@@ -29,6 +32,7 @@ namespace Orbsmash.Player
                 case WizardStates.Idle:
                     break;
                 case WizardStates.Walk:
+                    steps.Play();
                     break;
                 case WizardStates.Attack:
                     break;
@@ -163,6 +167,8 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
+            var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
+            var swipes = soundEffects.First(x => x.Name == KnightSoundEffectGroups.SWIPES);
             switch (state.StateEnum)
             {
                 case WizardStates.Idle:
@@ -170,6 +176,7 @@ namespace Orbsmash.Player
                 case WizardStates.Walk:
                     break;
                 case WizardStates.Attack:
+                    swipes.Play();
                     playerState.SwingFinished = false;
                     break;
                 case WizardStates.PreGlide:

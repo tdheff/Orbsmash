@@ -90,6 +90,66 @@
 /processorParam:Quality=Best
 /build:audio/character/knight/sword/swipe_4.wav
 
+#begin audio/character/wizard/flame/flame_hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/flame/flame_hit.wav
+
+#begin audio/character/wizard/flame/flame_light_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/flame/flame_light_1.wav
+
+#begin audio/character/wizard/flame/flame_light_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/flame/flame_light_2.wav
+
+#begin audio/character/wizard/flame/flame_light_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/flame/flame_light_3.wav
+
+#begin audio/character/wizard/footsteps/step_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/footsteps/step_1.wav
+
+#begin audio/character/wizard/footsteps/step_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/footsteps/step_2.wav
+
+#begin audio/character/wizard/footsteps/step_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/footsteps/step_3.wav
+
+#begin audio/character/wizard/footsteps/step_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/footsteps/step_4.wav
+
+#begin audio/character/wizard/footsteps/step_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/footsteps/step_5.wav
+
+#begin audio/character/wizard/footsteps/step_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/character/wizard/footsteps/step_6.wav
+
 #begin audio/music/bumpin_eighties.wav
 /importer:WavImporter
 /processor:SongProcessor

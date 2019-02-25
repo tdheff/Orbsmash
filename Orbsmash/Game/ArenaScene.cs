@@ -60,6 +60,7 @@ namespace Orbsmash.Game
             });
 
             var soundsToLoad = new List<string>(KnightSoundEffects.AllEffects);
+            soundsToLoad.AddRange(WizardSoundEffects.AllEffects);
             LoadSounds(soundsToLoad.ToArray());
         }
     }
