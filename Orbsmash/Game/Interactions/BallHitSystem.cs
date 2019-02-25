@@ -27,7 +27,7 @@ namespace Orbsmash.Game.Interactions
             {
                 var playerState = entity.getComponent<PlayerStateComponent>();
                 var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
-                var hits = soundEffects.First(x => x.Name == KnightSoundEffectGroups.HITS); // wizard is named the same
+                var hits = soundEffects.First(x => x.Name == KnightSoundEffectGroups.HITS);
                 var colliders = entity.getComponents<PolygonCollider>();
                 Collider collider = null;
                 foreach (var polygonCollider in colliders)

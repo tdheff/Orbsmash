@@ -36,7 +36,8 @@ namespace Orbsmash.Player
         private static Dictionary<string, HashSet<string>> _wizardEventTriggers = new Dictionary<string, HashSet<string>>
         {
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            // for the wizard, 4 was consistenly feeling "late" in terms of when the hit should happen
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 3 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
         };
         
