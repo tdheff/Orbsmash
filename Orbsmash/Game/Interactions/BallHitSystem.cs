@@ -72,8 +72,9 @@ namespace Orbsmash.Game.Interactions
                     ballVelocityComponent.Freeze = false;
                     ballState.BaseSpeed *= 1.05f;
                     ballState.HitBoost = playerState.BallHitBoost;
+                    ballState.DirectionVector = playerState.BallHitVector;
                     ballVelocityComponent.Velocity = ballState.BaseSpeed * ballState.HitBoost *
-                                                     playerState.BallHitVector;
+                                                     ballState.DirectionVector;
 
                     ballState.LastHitPlayerId = playerState.playerId;
                     ballState.LastHitSide = playerState.side;

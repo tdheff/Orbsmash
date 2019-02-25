@@ -48,7 +48,7 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.LEFT,
                     Speed = 300f,
                     StartingPosition = new Vector2(575, 450),
-                    Character = Gameplay.Character.SPACEMAN
+                    Character = Gameplay.Character.KNIGHT
                 });
                 
                 Players.Add(new PlayerSettings
@@ -57,7 +57,7 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.RIGHT,
                     Speed = 300f,
                     StartingPosition = new Vector2(1345, 450),
-                    Character = Gameplay.Character.SPACEMAN
+                    Character = Gameplay.Character.KNIGHT
                 });
                 
                 BallSprite = BallSprites.DEFAULT;
