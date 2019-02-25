@@ -48,7 +48,7 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.LEFT,
                     Speed = 300f,
                     StartingPosition = new Vector2(575, 450),
-                    Character = Gameplay.Character.WIZARD
+                    Character = Gameplay.Character.KNIGHT
                 });
                 
                 Players.Add(new PlayerSettings
@@ -57,13 +57,13 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.RIGHT,
                     Speed = 300f,
                     StartingPosition = new Vector2(1345, 450),
-                    Character = Gameplay.Character.KNIGHT
+                    Character = Gameplay.Character.WIZARD
                 });
                 
                 BallSprite = BallSprites.DEFAULT;
                 MapTile = MapTiles.MEDIEVAL2;
                 MasterVolume = 1;
-                MusicVolume = 0f;
+                MusicVolume = 0.2f;
                 SfxVolume = 1;
             }
         }
