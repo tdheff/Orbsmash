@@ -250,7 +250,12 @@ namespace Orbsmash.Constants
         public const string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
         public const string WALK_DOWN = "WALK_DOWN";
         public const string WALK_FORWARD = "WALK_FORWARD";
+        public const string CHARGE_IDLE = "CHARGE_IDLE";
+        public const string CHARGE_FULL = "CHARGE_FULL";
         public const string ATTACK = "ATTACK";
+        public const string CHARGE_HEAVY_IDLE = "CHARGE_HEAVY_IDLE";
+        public const string CHARGE_HEAVY_FULL = "CHARGE_HEAVY_FULL";
+        public const string ATTACK_HEAVY = "ATTACK_HEAVY";
         public const string GLIDE = "GLIDE";
         public const string IMMATERIAL = "IMMATERIAL";
     }

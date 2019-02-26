@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Player
 {
-    public enum WizardStates { Idle, Walk, Glide, PreGlide, Immaterial, Attack, Dead }
+    public enum WizardStates { Idle, Walk, Glide, PreGlide, Charge, Attack, ChargeHeavy, AttackHeavy, Dead }
     
     public class WizardState : IStateMachineState<WizardStates>
     {

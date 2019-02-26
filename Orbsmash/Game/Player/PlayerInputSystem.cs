@@ -25,7 +25,7 @@ namespace Orbsmash.Player
                 input.MovementStick = new Vector2(input.MovementStick.X, -input.MovementStick.Y);
                 input.DashPressed = gamePad.isButtonDown(Buttons.A);
                 input.AttackPressed = gamePad.isButtonDown(Buttons.X) || gamePad.isRightTriggerDown() || gamePad.isButtonDown(Buttons.RightShoulder);
-                input.DefensePressed = gamePad.isButtonDown(Buttons.B)|| gamePad.isLeftTriggerDown() || gamePad.isButtonDown(Buttons.LeftShoulder);
+                input.HeavyAttackPressed = gamePad.isButtonDown(Buttons.B)|| gamePad.isLeftTriggerDown() || gamePad.isButtonDown(Buttons.LeftShoulder);
             }
             
         }

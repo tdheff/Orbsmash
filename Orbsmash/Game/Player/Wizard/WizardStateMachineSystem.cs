@@ -40,9 +40,6 @@ namespace Orbsmash.Player
                 case WizardStates.Glide:
                     state.GlideTime += Time.deltaTime;
                     break;
-                case WizardStates.Immaterial:
-                    state.ImmaterialTime += Time.deltaTime;
-                    break;
                 case WizardStates.Dead:
                     break;
                 default:
@@ -79,10 +76,10 @@ namespace Orbsmash.Player
                 case WizardStates.Idle:
                     if (input.AttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Charge);
+                    } else if (input.HeavyAttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.ChargeHeavy);
                     } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.PreGlide);
@@ -94,10 +91,10 @@ namespace Orbsmash.Player
                 case WizardStates.Walk:
                     if (input.AttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Charge);
+                    } else if (input.HeavyAttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.ChargeHeavy);
                     } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.PreGlide);
@@ -106,6 +103,19 @@ namespace Orbsmash.Player
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
                     }
                     break;
+                case WizardStates.Charge:
+                    if (!input.AttackPressed)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Attack);
+                    }
+                    break;
+                case WizardStates.ChargeHeavy:
+                    if (!input.HeavyAttackPressed)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.AttackHeavy);
+                    }
+                    break;
+                case WizardStates.AttackHeavy:
                 case WizardStates.Attack:
                     playerState.SwingFinished = events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_SWING_END);
                     if (playerState.SwingFinished)
@@ -131,19 +141,12 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         state.GlideTime = 10000; // kill the glide so it pops back to glide -> instantly to ilde
-                        return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Charge);
+                    } else if (input.HeavyAttackPressed)
                     {
                         state.LastGlideTime = state.GlideTime;
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.ChargeHeavy);
                     } else if (state.GlideTime >= WizardState.MAX_GLIDE_TIME)
-                    {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
-                    }
-
-                    break;
-                case WizardStates.Immaterial:
-                    if (state.ImmaterialTime >= WizardState.IMMATERIAL_TIME)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
                     }
@@ -190,10 +193,11 @@ namespace Orbsmash.Player
                     var hitStop = gameState.getComponent<HitStopComponent>();
                     hitStop.Freeze(0.3f);
                     break;
-                case WizardStates.Immaterial:
-                    state.ImmaterialCooldown = 0;
-                    playerState.BallHitBoost = WizardState.IMMATERIAL_MAX_HIT_BOOST + WizardState.IMMATERIAL_BOOST_RANGE * (state.LastGlideTime / WizardState.MAX_GLIDE_TIME);
-                    playerState.HitActive = true;
+                case WizardStates.Charge:
+                    break;
+                case WizardStates.ChargeHeavy:
+                    break;
+                case WizardStates.AttackHeavy:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -221,11 +225,11 @@ namespace Orbsmash.Player
                     break;
                 case WizardStates.Dead:
                     break;
-                case WizardStates.Immaterial:
-                    playerState.HitActive = false;
-                    playerState.BallHitBoost = 1.0f;
-                    state.ImmaterialTime = 0;
-                    state.LastGlideTime = 0;
+                case WizardStates.Charge:
+                    break;
+                case WizardStates.ChargeHeavy:
+                    break;
+                case WizardStates.AttackHeavy:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

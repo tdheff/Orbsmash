@@ -112,7 +112,7 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
@@ -127,7 +127,7 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (input.DashPressed && input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
@@ -145,7 +145,7 @@ namespace Orbsmash.Player
                     } else if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (playerState.DashFinished)
@@ -187,7 +187,7 @@ namespace Orbsmash.Player
                     }
                     break;
                 case KnightStates.ChargeHeavy:
-                    if (!input.DefensePressed)
+                    if (!input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Replace(KnightStates.SwingHeavy);
                     }
