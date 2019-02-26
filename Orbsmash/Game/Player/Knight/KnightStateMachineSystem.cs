@@ -71,7 +71,7 @@ namespace Orbsmash.Player
                         playerState.ChargeFinished = true;
                     }
 
-                    playerState.BallHitBoost = 1.0f + 2.0f * playerState.ChargeTime / PlayerStateComponent.MAX_HEAVY_CHARGE_TIME;
+                    playerState.BallHitBoost = 2.0f + playerState.ChargeTime / PlayerStateComponent.MAX_HEAVY_CHARGE_TIME;
                     break;
                 case KnightStates.SwingHeavy:
                     break;
@@ -112,13 +112,13 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Dash);
-                    } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.DEAD_ZONE)
                     {
                         return StateMachineTransition<KnightStates>.Replace(KnightStates.Walk);
                     }
@@ -127,13 +127,13 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (input.DashPressed && input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Dash);
-                    } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.DEAD_ZONE)
                     {
                         return StateMachineTransition<KnightStates>.Replace(KnightStates.Idle);
                     }
@@ -145,7 +145,7 @@ namespace Orbsmash.Player
                     } else if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed)
+                    } else if (input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (playerState.DashFinished)
@@ -187,7 +187,7 @@ namespace Orbsmash.Player
                     }
                     break;
                 case KnightStates.ChargeHeavy:
-                    if (!input.DefensePressed)
+                    if (!input.HeavyAttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Replace(KnightStates.SwingHeavy);
                     }

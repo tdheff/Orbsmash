@@ -86,10 +86,10 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<SpacemanStates>.Push(SpacemanStates.Attack);
-                    } else if (input.DefensePressed && spacemanState.ShieldCooldown >= SpacemanState.SHIELD_COOLDOWN)
+                    } else if (input.HeavyAttackPressed && spacemanState.ShieldCooldown >= SpacemanState.SHIELD_COOLDOWN)
                     {
                         return StateMachineTransition<SpacemanStates>.Push(SpacemanStates.Shield);
-                    } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.DEAD_ZONE)
                     {
                         return StateMachineTransition<SpacemanStates>.Replace(SpacemanStates.Walk);
                     }
@@ -98,10 +98,10 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<SpacemanStates>.Push(SpacemanStates.Attack);
-                    } else if (input.DefensePressed && spacemanState.ShieldCooldown >= SpacemanState.SHIELD_COOLDOWN)
+                    } else if (input.HeavyAttackPressed && spacemanState.ShieldCooldown >= SpacemanState.SHIELD_COOLDOWN)
                     {
                         return StateMachineTransition<SpacemanStates>.Push(SpacemanStates.Shield);
-                    } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.DEAD_ZONE)
                     {
                         return StateMachineTransition<SpacemanStates>.Replace(SpacemanStates.Idle);
                     }

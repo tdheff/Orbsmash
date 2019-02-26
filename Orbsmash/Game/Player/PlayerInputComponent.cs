@@ -34,7 +34,7 @@ namespace Orbsmash.Player
         private Vector2 _movementStick = Vector2.Zero;
         public bool DashPressed = false;
         public bool AttackPressed = false;
-        public bool DefensePressed = false;
+        public bool HeavyAttackPressed = false;
         
         public PlayerInputComponent(int deviceId) : base()
         {

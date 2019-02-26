@@ -191,11 +191,12 @@ namespace Orbsmash.Constants
     {
         public const string KNIGHT_HITBOX_LIGHT = "Sprites/Characters/Knight/Knight_Hitbox_Light";
         public const string KNIGHT_HITBOX_HEAVY = "Sprites/Characters/Knight/Knight_Hitbox_Heavy";
-        public const string WIZARD_HITBOX = "Sprites/Characters/Wizard/Wizard_Hitbox";
+        public const string WIZARD_HITBOX_HEAVY = "Sprites/Characters/Wizard/Wizard_Hitbox_Heavy";
+        public const string WIZARD_HITBOX_LIGHT = "Sprites/Characters/Wizard/Wizard_Hitbox_Light";
         public static readonly List<string> HITBOXES_TO_LOAD;
         static Hitboxes()
         {
-            HITBOXES_TO_LOAD = new List<string> { KNIGHT_HITBOX_LIGHT, KNIGHT_HITBOX_HEAVY, WIZARD_HITBOX };
+            HITBOXES_TO_LOAD = new List<string> { KNIGHT_HITBOX_LIGHT, KNIGHT_HITBOX_HEAVY, WIZARD_HITBOX_HEAVY, WIZARD_HITBOX_LIGHT };
         }
     }
 
@@ -250,9 +251,14 @@ namespace Orbsmash.Constants
         public const string IDLE_HORIZONTAL = "IDLE_HORIZONTAL";
         public const string WALK_DOWN = "WALK_DOWN";
         public const string WALK_FORWARD = "WALK_FORWARD";
+        public const string CHARGE_IDLE = "CHARGE_IDLE";
+        public const string CHARGE_FULL = "CHARGE_FULL";
         public const string ATTACK = "ATTACK";
+        public const string CHARGE_HEAVY_IDLE = "CHARGE_HEAVY_IDLE";
+        public const string CHARGE_HEAVY_FULL = "CHARGE_HEAVY_FULL";
+        public const string ATTACK_HEAVY = "ATTACK_HEAVY";
         public const string GLIDE = "GLIDE";
-        public const string IMMATERIAL = "IMMATERIAL";
+        public const string KO = "KO";
     }
 
     public sealed class PlayerEvents
@@ -271,11 +277,8 @@ namespace Orbsmash.Constants
 
     public sealed class MovementSpeeds
     {
-        public const float VERY_LOW = 250.0f;
-        public const float LOW = 300.0f;
-        public const float MEDIUM = 350.0f;
-        public const float HIGH = 400.0f;
-        public const float VERY_HIGH = 450.0f;
+        public const float LOW = 525.0f;
+        public const float MEDIUM = 650.0f;
     }
     
 }

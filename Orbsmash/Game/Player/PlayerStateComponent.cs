@@ -7,7 +7,7 @@ namespace Orbsmash.Player
     public class PlayerStateComponent : Component
     {
         // CONSTANTS
-        public const float MOVEMENT_THRESHOLD_SQUARED = 0.01f;
+        public const float DEAD_ZONE = 0.001f;
         
         // STATE
         // we don't actually update a single global state enum....
@@ -27,8 +27,8 @@ namespace Orbsmash.Player
 
         // SWINGING
         public float ChargeTime;
-        public const float MAX_CHARGE_TIME = 1.0f;
-        public const float MAX_HEAVY_CHARGE_TIME = 2.0f;
+        public const float MAX_CHARGE_TIME = 0.6f;
+        public const float MAX_HEAVY_CHARGE_TIME = 1.5f;
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
         public bool HitActive = false;

@@ -22,10 +22,19 @@ namespace Orbsmash.Player
                 
                 var gamePad = Input.gamePads[input.DeviceId];
                 input.MovementStick = gamePad.getLeftStick();
+                Console.WriteLine(input.MovementStick.Y);
                 input.MovementStick = new Vector2(input.MovementStick.X, -input.MovementStick.Y);
+                if (Math.Abs(input.MovementStick.X) < PlayerStateComponent.DEAD_ZONE)
+                {
+                    input.MovementStick = new Vector2(0, input.MovementStick.Y);
+                }
+                if (Math.Abs(input.MovementStick.Y) < PlayerStateComponent.DEAD_ZONE)
+                {
+                    input.MovementStick = new Vector2(input.MovementStick.X, 0);
+                }
                 input.DashPressed = gamePad.isButtonDown(Buttons.A);
                 input.AttackPressed = gamePad.isButtonDown(Buttons.X) || gamePad.isRightTriggerDown() || gamePad.isButtonDown(Buttons.RightShoulder);
-                input.DefensePressed = gamePad.isButtonDown(Buttons.B)|| gamePad.isLeftTriggerDown() || gamePad.isButtonDown(Buttons.LeftShoulder);
+                input.HeavyAttackPressed = gamePad.isButtonDown(Buttons.B)|| gamePad.isLeftTriggerDown() || gamePad.isButtonDown(Buttons.LeftShoulder);
             }
             
         }

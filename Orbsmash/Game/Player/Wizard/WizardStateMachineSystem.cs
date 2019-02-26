@@ -21,11 +21,11 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
+            var events = entity.getComponent<EventComponent>();
             var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
-            var steps = soundEffects.First(x => x.Name == KnightSoundEffectGroups.STEPS);
+            var steps = soundEffects.First(x => x.Name == WizardSoundEffectGroups.STEPS);
             state.GlideCooldown = Math.Min(state.GlideCooldown + Time.deltaTime, WizardState.GLIDE_COOLDOWN);
             state.ImmaterialCooldown = Math.Min(state.ImmaterialCooldown+ Time.deltaTime, WizardState.IMMATERIAL_COOLDOWN);
-            playerState.BallHitBoost = 1.0f;
             playerState.BallHitVector = Player.CalculateHitVector(playerState.side, input.MovementStick);
             switch (state.StateEnum)
             {
@@ -40,10 +40,36 @@ namespace Orbsmash.Player
                 case WizardStates.Glide:
                     state.GlideTime += Time.deltaTime;
                     break;
-                case WizardStates.Immaterial:
-                    state.ImmaterialTime += Time.deltaTime;
+                case WizardStates.KO:
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.KO_BOUNCE))
+                    {
+                        playerState.HasKOBounced = true;
+                    }
+                    var deadVelocity = entity.getComponent<VelocityComponent>();
+                    var speed = playerState.HasKOBounced ? playerState.KnockoutVector / 2 : playerState.KnockoutVector;
+                    deadVelocity.Velocity = speed;
                     break;
-                case WizardStates.Dead:
+                case WizardStates.Charge:
+                    playerState.ChargeTime += Time.deltaTime;
+                    if (playerState.ChargeTime >= PlayerStateComponent.MAX_CHARGE_TIME)
+                    {
+                        playerState.ChargeFinished = true;
+                    }
+
+                    playerState.BallHitBoost = 1.0f + playerState.ChargeTime / PlayerStateComponent.MAX_CHARGE_TIME;
+                    break;
+                case WizardStates.ChargeHeavy:
+                    playerState.ChargeTime += Time.deltaTime;
+                    if (playerState.ChargeTime >= PlayerStateComponent.MAX_HEAVY_CHARGE_TIME)
+                    {
+                        playerState.ChargeFinished = true;
+                    }
+
+                    playerState.BallHitBoost = 2.0f + playerState.ChargeTime / PlayerStateComponent.MAX_HEAVY_CHARGE_TIME;
+                    break;
+                case WizardStates.AttackHeavy:
+                    break;
+                case WizardStates.Eliminated:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -67,26 +93,26 @@ namespace Orbsmash.Player
         {
             var input = entity.getComponent<PlayerInputComponent>();
             var events = entity.getComponent<EventComponent>();
-            var state = stateMachine.State;
+            var wizardState = stateMachine.State;
             var playerState = entity.getComponent<PlayerStateComponent>();
-            if (state.StateEnum != WizardStates.Dead && playerState.IsKilled)
+            if (wizardState.StateEnum != WizardStates.KO && wizardState.StateEnum != WizardStates.Eliminated && playerState.IsKilled)
             {
-                return StateMachineTransition<WizardStates>.Replace(WizardStates.Dead);
+                return StateMachineTransition<WizardStates>.Replace(WizardStates.KO);
             }
             
-            switch (state.StateEnum)
+            switch (wizardState.StateEnum)
             {
                 case WizardStates.Idle:
                     if (input.AttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Charge);
+                    } else if (input.HeavyAttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
-                    } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.ChargeHeavy);
+                    } else if (input.DashPressed && wizardState.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.PreGlide);
-                    } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.DEAD_ZONE)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Walk);
                     }
@@ -94,23 +120,36 @@ namespace Orbsmash.Player
                 case WizardStates.Walk:
                     if (input.AttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Charge);
+                    } else if (input.HeavyAttackPressed)
                     {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
-                    } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.ChargeHeavy);
+                    } else if (input.DashPressed && wizardState.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.PreGlide);
-                    } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.DEAD_ZONE)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
                     }
                     break;
+                case WizardStates.Charge:
+                    if (!input.AttackPressed)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Attack);
+                    }
+                    break;
+                case WizardStates.ChargeHeavy:
+                    if (!input.HeavyAttackPressed)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.AttackHeavy);
+                    }
+                    break;
+                case WizardStates.AttackHeavy:
                 case WizardStates.Attack:
                     playerState.SwingFinished = events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_SWING_END);
                     if (playerState.SwingFinished)
                     {
-                        return StateMachineTransition<WizardStates>.Pop();
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
                     }
                     if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_HIT_START))
                     {
@@ -122,7 +161,7 @@ namespace Orbsmash.Player
                     }
                     break;
                 case WizardStates.PreGlide:
-                    if(state.GlideTime>= WizardState.GLIDE_DELAY)
+                    if(wizardState.GlideTime>= WizardState.GLIDE_DELAY)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
                     }
@@ -130,26 +169,25 @@ namespace Orbsmash.Player
                 case WizardStates.Glide:
                     if (input.AttackPressed)
                     {
-                        state.GlideTime = 10000; // kill the glide so it pops back to glide -> instantly to ilde
-                        return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
-                    } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
+                        wizardState.GlideTime = 10000; // kill the glide so it pops back to glide -> instantly to ilde
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Charge);
+                    } else if (input.HeavyAttackPressed)
                     {
-                        state.LastGlideTime = state.GlideTime;
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
-                    } else if (state.GlideTime >= WizardState.MAX_GLIDE_TIME)
-                    {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
-                    }
-
-                    break;
-                case WizardStates.Immaterial:
-                    if (state.ImmaterialTime >= WizardState.IMMATERIAL_TIME)
+                        wizardState.LastGlideTime = wizardState.GlideTime;
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.ChargeHeavy);
+                    } else if (wizardState.GlideTime >= WizardState.MAX_GLIDE_TIME)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
                     }
 
                     break;
-                case WizardStates.Dead:
+                case WizardStates.KO:
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.KO_END))
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Eliminated);
+                    }
+                    break;
+                case WizardStates.Eliminated:
                     if (!playerState.IsKilled)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
@@ -168,7 +206,7 @@ namespace Orbsmash.Player
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
             var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
-            var swipes = soundEffects.First(x => x.Name == KnightSoundEffectGroups.SWIPES);
+            var swipes = soundEffects.First(x => x.Name == WizardSoundEffectGroups.SWIPES);
             switch (state.StateEnum)
             {
                 case WizardStates.Idle:
@@ -185,15 +223,20 @@ namespace Orbsmash.Player
                     state.GlideCooldown = 0;
                     state.GlideDirection = input.MovementStick;
                     break;
-                case WizardStates.Dead:
+                case WizardStates.KO:
+                    playerState.IsInvulnerable = true;
+                    playerState.HasKOBounced = false;
                     var gameState = handyScene.findEntity("Game");
                     var hitStop = gameState.getComponent<HitStopComponent>();
                     hitStop.Freeze(0.3f);
                     break;
-                case WizardStates.Immaterial:
-                    state.ImmaterialCooldown = 0;
-                    playerState.BallHitBoost = WizardState.IMMATERIAL_MAX_HIT_BOOST + WizardState.IMMATERIAL_BOOST_RANGE * (state.LastGlideTime / WizardState.MAX_GLIDE_TIME);
-                    playerState.HitActive = true;
+                case WizardStates.Eliminated:
+                    break;
+                case WizardStates.Charge:
+                    break;
+                case WizardStates.ChargeHeavy:
+                    break;
+                case WizardStates.AttackHeavy:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -212,20 +255,30 @@ namespace Orbsmash.Player
                 case WizardStates.Walk:
                     break;
                 case WizardStates.Attack:
-                    playerState.SwingFinished = false;
+                    
+                    playerState.BallHitBoost = 1.0f;
                     break;
                 case WizardStates.PreGlide:
                     break;
                 case WizardStates.Glide:
                     state.GlideTime = 0;
                     break;
-                case WizardStates.Dead:
+                case WizardStates.KO:
                     break;
-                case WizardStates.Immaterial:
-                    playerState.HitActive = false;
+                case WizardStates.Eliminated:
+                    playerState.IsInvulnerable = false;
+                    break;
+                case WizardStates.Charge:
+                    playerState.ChargeTime = 0;
+                    playerState.ChargeFinished = false;
+                    break;
+                case WizardStates.ChargeHeavy:
+                    playerState.ChargeTime = 0;
+                    playerState.ChargeFinished = false;
+                    break;
+                case WizardStates.AttackHeavy:
                     playerState.BallHitBoost = 1.0f;
-                    state.ImmaterialTime = 0;
-                    state.LastGlideTime = 0;
+                    playerState.SwingFinished = false;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
