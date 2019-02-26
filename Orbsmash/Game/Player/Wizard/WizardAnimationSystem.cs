@@ -42,6 +42,7 @@ namespace Orbsmash.Player
                     case WizardStates.Attack:
                         mainBodyAnimation.SetAnimation(WizardAnimations.ATTACK);
                         break;
+                    case WizardStates.PreGlide:
                     case WizardStates.Glide:
                         mainBodyAnimation.SetAnimation(WizardAnimations.GLIDE);
                         break;

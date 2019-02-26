@@ -69,6 +69,7 @@ namespace Orbsmash.Game
         {
             var ballState = ball.getComponent<BallStateComponent>();
             ballState.IsDeadly = false;
+            ballState.LastHitSide = side;
             ballState.BaseSpeed = ballState.BaseSpeedInitial;
             if (side == Gameplay.Side.LEFT ||
                 (side == Gameplay.Side.NONE )) // && Random.chance(0.5f)
@@ -109,11 +110,11 @@ namespace Orbsmash.Game
                         break;
                     case Gameplay.Character.WIZARD:
                         var wizardState = player.getComponent<WizardStateMachineComponent>().State.StateEnum;
-                        isAlive = wizardState == WizardStates.Dead;
+                        isAlive = wizardState != WizardStates.Dead;
                         break;
                     case Gameplay.Character.SPACEMAN:
                         var spacemanState = player.getComponent<SpacemanStateMachineComponent>().State.StateEnum;
-                        isAlive = spacemanState == SpacemanStates.KO;
+                        isAlive = spacemanState != SpacemanStates.KO && spacemanState != SpacemanStates.Eliminated;
                         break;
                     case Gameplay.Character.ALIEN:
                         throw new NotImplementedException();
@@ -180,7 +181,15 @@ namespace Orbsmash.Game
                 case GameStates.Ready:
                     break;
                 case GameStates.Service:
-                    ResetForService(state.Ball, state.Players, Gameplay.Side.NONE);
+                    var knockedOutTeam = isOneTeamKnockedOut(state.Players);
+                    if (knockedOutTeam == Gameplay.Side.NONE)
+                    {
+                        ResetForService(state.Ball, state.Players, Gameplay.Side.NONE);
+                    }
+                    else
+                    {
+                        ResetForService(state.Ball, state.Players, knockedOutTeam == Gameplay.Side.LEFT ? Gameplay.Side.RIGHT : Gameplay.Side.LEFT);
+                    }
                     break;
                 case GameStates.Play:
                     break;

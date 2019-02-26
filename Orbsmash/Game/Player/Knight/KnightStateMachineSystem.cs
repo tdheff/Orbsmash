@@ -41,6 +41,7 @@ namespace Orbsmash.Player
                     steps.Play();
                     break;
                 case KnightStates.Dash:
+                    steps.Play(0.7f);
                     state.SprintRemaining = Math.Max(state.SprintRemaining - Time.deltaTime, 0);
                     break;
                 case KnightStates.Charge:

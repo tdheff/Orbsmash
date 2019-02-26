@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Handy.Components;
+using Handy.Sound;
 using Handy.Systems;
 using Nez;
 using Orbsmash.Constants;
@@ -20,6 +21,8 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
+            var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
+            var steps = soundEffects.First(x => x.Name == KnightSoundEffectGroups.STEPS);
             state.GlideCooldown = Math.Min(state.GlideCooldown + Time.deltaTime, WizardState.GLIDE_COOLDOWN);
             state.ImmaterialCooldown = Math.Min(state.ImmaterialCooldown+ Time.deltaTime, WizardState.IMMATERIAL_COOLDOWN);
             playerState.BallHitBoost = 1.0f;
@@ -29,9 +32,11 @@ namespace Orbsmash.Player
                 case WizardStates.Idle:
                     break;
                 case WizardStates.Walk:
+                    steps.Play();
                     break;
                 case WizardStates.Attack:
                     break;
+                case WizardStates.PreGlide:
                 case WizardStates.Glide:
                     state.GlideTime += Time.deltaTime;
                     break;
@@ -80,7 +85,7 @@ namespace Orbsmash.Player
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
                     } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.PreGlide);
                     } else if (input.MovementStick.LengthSquared() > PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Walk);
@@ -95,7 +100,7 @@ namespace Orbsmash.Player
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
                     } else if (input.DashPressed && state.GlideCooldown >= WizardState.GLIDE_COOLDOWN)
                     {
-                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.PreGlide);
                     } else if (input.MovementStick.LengthSquared() < PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
@@ -116,15 +121,22 @@ namespace Orbsmash.Player
                         playerState.HitActive = false;
                     }
                     break;
+                case WizardStates.PreGlide:
+                    if(state.GlideTime>= WizardState.GLIDE_DELAY)
+                    {
+                        return StateMachineTransition<WizardStates>.Replace(WizardStates.Glide);
+                    }
+                    break;
                 case WizardStates.Glide:
                     if (input.AttackPressed)
                     {
+                        state.GlideTime = 10000; // kill the glide so it pops back to glide -> instantly to ilde
                         return StateMachineTransition<WizardStates>.Push(WizardStates.Attack);
                     } else if (input.DefensePressed && state.ImmaterialCooldown >= WizardState.IMMATERIAL_COOLDOWN)
                     {
                         state.LastGlideTime = state.GlideTime;
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Immaterial);
-                    } else if (!input.DashPressed || state.GlideTime >= WizardState.MAX_GLIDE_TIME)
+                    } else if (state.GlideTime >= WizardState.MAX_GLIDE_TIME)
                     {
                         return StateMachineTransition<WizardStates>.Replace(WizardStates.Idle);
                     }
@@ -155,6 +167,8 @@ namespace Orbsmash.Player
             var playerState = entity.getComponent<PlayerStateComponent>();
             var state = stateMachine.State;
             var input = entity.getComponent<PlayerInputComponent>();
+            var soundEffects = entity.getComponents<SoundEffectGroupComponent>();
+            var swipes = soundEffects.First(x => x.Name == KnightSoundEffectGroups.SWIPES);
             switch (state.StateEnum)
             {
                 case WizardStates.Idle:
@@ -162,7 +176,10 @@ namespace Orbsmash.Player
                 case WizardStates.Walk:
                     break;
                 case WizardStates.Attack:
+                    swipes.Play();
                     playerState.SwingFinished = false;
+                    break;
+                case WizardStates.PreGlide:
                     break;
                 case WizardStates.Glide:
                     state.GlideCooldown = 0;
@@ -196,6 +213,8 @@ namespace Orbsmash.Player
                     break;
                 case WizardStates.Attack:
                     playerState.SwingFinished = false;
+                    break;
+                case WizardStates.PreGlide:
                     break;
                 case WizardStates.Glide:
                     state.GlideTime = 0;

@@ -58,13 +58,13 @@ namespace Orbsmash.Player
             var input = entity.getComponent<PlayerInputComponent>();
             var events = entity.getComponent<EventComponent>();
             var playerState = entity.getComponent<PlayerStateComponent>();
-            var knightState = stateMachine.State;
-            if (knightState.StateEnum != SpacemanStates.KO && knightState.StateEnum != SpacemanStates.Eliminated && playerState.IsKilled)
+            var spacemanState = stateMachine.State;
+            if (spacemanState.StateEnum != SpacemanStates.KO && spacemanState.StateEnum != SpacemanStates.Eliminated && playerState.IsKilled)
             {
                 return StateMachineTransition<SpacemanStates>.Replace(SpacemanStates.KO);
             }
             
-            switch (knightState.StateEnum)
+            switch (spacemanState.StateEnum)
             {
                 case SpacemanStates.Idle:
                     if (input.AttackPressed)
@@ -100,7 +100,7 @@ namespace Orbsmash.Player
                     }
                     break;
                 case SpacemanStates.KO:
-                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.KO_END))
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.KO_END) || Time.time - spacemanState.KoTime > SpacemanState.KO_ANIM_PLACEHOLDER_LENGTH)
                     {
                         return StateMachineTransition<SpacemanStates>.Replace(SpacemanStates.Eliminated);
                     }
@@ -139,6 +139,7 @@ namespace Orbsmash.Player
                     var gameState = handyScene.findEntity("Game");
                     var hitStop = gameState.getComponent<HitStopComponent>();
                     hitStop.Freeze(0.3f);
+                    state.KoTime = Time.time;
                     playerState.HasKOBounced = false;
                     break;
                 case SpacemanStates.Eliminated:

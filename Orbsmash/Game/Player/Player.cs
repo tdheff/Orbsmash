@@ -36,7 +36,8 @@ namespace Orbsmash.Player
         private static Dictionary<string, HashSet<string>> _wizardEventTriggers = new Dictionary<string, HashSet<string>>
         {
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            // for the wizard, 4 was consistenly feeling "late" in terms of when the hit should happen
+            { EventComponent.BuildKey(KnightAnimations.ATTACK, 3 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
         };
         
@@ -182,32 +183,76 @@ namespace Orbsmash.Player
             // at this point mostly for knight, will make a switch statement at some point
             var gameScene = (HandyScene)scene;
             var sounds = gameScene.Sounds;
-            var stepEffects = new List<HandySoundEffect>()
+            switch (Settings.Character)
             {
-                sounds[KnightSoundEffects.BOOT_1],
-                sounds[KnightSoundEffects.BOOT_2],
-                sounds[KnightSoundEffects.BOOT_3],
-                sounds[KnightSoundEffects.BOOT_4],
-                sounds[KnightSoundEffects.BOOT_5],
-                sounds[KnightSoundEffects.BOOT_6],
-            };
-            _steps = new SoundEffectGroupComponent(KnightSoundEffectGroups.STEPS, stepEffects, 0.3f, 0.5f * gameScene.SfxVolume);
-            var swipeEffects = new List<HandySoundEffect>()
-            {
-                sounds[KnightSoundEffects.SWIPE_1],
-                sounds[KnightSoundEffects.SWIPE_2],
-                sounds[KnightSoundEffects.SWIPE_3],
-                sounds[KnightSoundEffects.SWIPE_4],
-            };
-            _swipes = new SoundEffectGroupComponent(KnightSoundEffectGroups.SWIPES, swipeEffects, 2f, 0.5f * gameScene.SfxVolume, true);
-            var hitEffects = new List<HandySoundEffect>()
-            {
-                sounds[KnightSoundEffects.HIT_1],
-            };
-            _hits = new SoundEffectGroupComponent(KnightSoundEffectGroups.HITS, hitEffects, 2f, 0.5f * gameScene.SfxVolume, true);
-            addComponent(_steps);
-            addComponent(_swipes);
-            addComponent(_hits);
+                case Gameplay.Character.KNIGHT:
+                    var stepEffects = new List<HandySoundEffect>()
+                    {
+                        sounds[KnightSoundEffects.BOOT_1],
+                        sounds[KnightSoundEffects.BOOT_2],
+                        sounds[KnightSoundEffects.BOOT_3],
+                        sounds[KnightSoundEffects.BOOT_4],
+                        sounds[KnightSoundEffects.BOOT_5],
+                        sounds[KnightSoundEffects.BOOT_6],
+                    };
+                    _steps = new SoundEffectGroupComponent(KnightSoundEffectGroups.STEPS, stepEffects, 0.3f, 0.5f * gameScene.SfxVolume);
+                    var swipeEffects = new List<HandySoundEffect>()
+                    {
+                        sounds[KnightSoundEffects.SWIPE_1],
+                        sounds[KnightSoundEffects.SWIPE_2],
+                        sounds[KnightSoundEffects.SWIPE_3],
+                        sounds[KnightSoundEffects.SWIPE_4],
+                    };
+                    _swipes = new SoundEffectGroupComponent(KnightSoundEffectGroups.SWIPES, swipeEffects, 2f, 0.5f * gameScene.SfxVolume, true);
+                    var hitEffects = new List<HandySoundEffect>()
+                    {
+                        sounds[KnightSoundEffects.HIT_1],
+                    };
+                    _hits = new SoundEffectGroupComponent(KnightSoundEffectGroups.HITS, hitEffects, 2f, 0.5f * gameScene.SfxVolume, true);
+                    addComponent(_steps);
+                    addComponent(_swipes);
+                    addComponent(_hits);
+                    break;
+                case Gameplay.Character.WIZARD:
+                    var wizardStepEffects = new List<HandySoundEffect>()
+                    {
+                        sounds[WizardSoundEffects.STEP_1],
+                        sounds[WizardSoundEffects.STEP_2],
+                        sounds[WizardSoundEffects.STEP_3],
+                        sounds[WizardSoundEffects.STEP_4],
+                        sounds[WizardSoundEffects.STEP_5],
+                        sounds[WizardSoundEffects.STEP_6],
+                    };
+                    // 0.1f volume cuz i exported these guys pretty loud
+                    _steps = new SoundEffectGroupComponent(WizardSoundEffectGroups.STEPS, wizardStepEffects, 0.3f, 0.1f * gameScene.SfxVolume);
+                    var wizardFireEffects = new List<HandySoundEffect>()
+                    {
+                        sounds[WizardSoundEffects.FLAME_LIGHT_1],
+                        sounds[WizardSoundEffects.FLAME_LIGHT_2],
+                        sounds[WizardSoundEffects.FLAME_LIGHT_3]
+                    };
+                    _swipes = new SoundEffectGroupComponent(WizardSoundEffectGroups.SWIPES, wizardFireEffects, 2f, 0.5f * gameScene.SfxVolume, true);
+                    var wizardHitEffects = new List<HandySoundEffect>()
+                    {
+                        sounds[WizardSoundEffects.FLAME_HIT],
+                    };
+                    _hits = new SoundEffectGroupComponent(WizardSoundEffectGroups.HITS, wizardHitEffects, 2f, 0.5f * gameScene.SfxVolume, true);
+                    addComponent(_steps);
+                    addComponent(_swipes);
+                    addComponent(_hits);
+                    break;
+                case Gameplay.Character.SPACEMAN:
+                    break;
+                case Gameplay.Character.ALIEN:
+                    throw new NotImplementedException();
+                case Gameplay.Character.PIRATE:
+                    throw new NotImplementedException();
+                case Gameplay.Character.SKELETON:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
         }
 
         public static Vector2 CalculateHitVector(Gameplay.Side side, Vector2 input)

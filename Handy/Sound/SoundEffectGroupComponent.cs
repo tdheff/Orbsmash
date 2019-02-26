@@ -53,7 +53,7 @@ namespace Handy.Sound
             TimeLastPlayed = Time.time;
         }
 
-        public void Play()
+        public void Play(float pitchAdjustment = 0)
         {
             var timeDiff = Time.time - TimeLastPlayed;
             // there has to be some limit to the madness
@@ -69,7 +69,7 @@ namespace Handy.Sound
             {
                 PickNextEffect();
             }
-            CurrentEffect.Play();
+            CurrentEffect.Play(pitchAdjustment);
         }
     }
 }

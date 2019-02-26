@@ -63,7 +63,7 @@ namespace Orbsmash.Game
                 BallSprite = BallSprites.DEFAULT;
                 MapTile = MapTiles.MEDIEVAL2;
                 MasterVolume = 1;
-                MusicVolume = .3f;
+                MusicVolume = 0.2f;
                 SfxVolume = 1;
             }
         }

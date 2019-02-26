@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Player
 {
-    public enum WizardStates { Idle, Walk, Glide, Immaterial, Attack, Dead }
+    public enum WizardStates { Idle, Walk, Glide, PreGlide, Immaterial, Attack, Dead }
     
     public class WizardState : IStateMachineState<WizardStates>
     {
@@ -13,6 +13,7 @@ namespace Orbsmash.Player
 
         // GLIDE
         public Vector2 GlideDirection = new Vector2(1, 0);
+        public const float GLIDE_DELAY = 0.05f;
         public const float MAX_GLIDE_TIME = 0.4f;
         public const float GLIDE_COOLDOWN = 2.0f;
         public const float GLIDE_SPEED = 1000.0f;
