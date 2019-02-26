@@ -1330,6 +1330,123 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
     "sourceSize": { "w": 64, "h": 48 },
     "duration": 50
+   },
+   {
+    "filename": "Wizard 148.aseprite",
+    "frame": { "x": 9472, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 149.aseprite",
+    "frame": { "x": 9536, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 150.aseprite",
+    "frame": { "x": 9600, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 151.aseprite",
+    "frame": { "x": 9664, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 152.aseprite",
+    "frame": { "x": 9728, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 153.aseprite",
+    "frame": { "x": 9792, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 154.aseprite",
+    "frame": { "x": 9856, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 155.aseprite",
+    "frame": { "x": 9920, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 156.aseprite",
+    "frame": { "x": 9984, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 157.aseprite",
+    "frame": { "x": 10048, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 158.aseprite",
+    "frame": { "x": 10112, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 159.aseprite",
+    "frame": { "x": 10176, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "Wizard 160.aseprite",
+    "frame": { "x": 10240, "y": 0, "w": 64, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 48 },
+    "sourceSize": { "w": 64, "h": 48 },
+    "duration": 50
    }
  ],
  "meta": {
@@ -1337,7 +1454,7 @@
   "version": "1.2.9",
   "image": "/home/tommy/dev/Orbsmash/Orbsmash/Content/Sprites/Characters/Wizard/Wizard.png",
   "format": "RGBA8888",
-  "size": { "w": 9472, "h": 48 },
+  "size": { "w": 10304, "h": 48 },
   "scale": "1",
   "frameTags": [
    { "name": "IDLE_HORIZONTAL", "from": 0, "to": 0, "direction": "forward" },
@@ -1353,9 +1470,11 @@
    { "name": "IMMATERIAL", "from": 105, "to": 108, "direction": "forward" },
    { "name": "CHARGE_HEAVY_IDLE", "from": 109, "to": 118, "direction": "forward" },
    { "name": "CHARGE_HEAVY_FULL", "from": 119, "to": 128, "direction": "forward" },
-   { "name": "ATTACK_HEAVY", "from": 129, "to": 147, "direction": "forward" }
+   { "name": "ATTACK_HEAVY", "from": 129, "to": 149, "direction": "forward" },
+   { "name": "KO", "from": 150, "to": 160, "direction": "forward" }
   ],
   "layers": [
+   { "name": "outline", "opacity": 255, "blendMode": "normal" },
    { "name": "robe", "opacity": 255, "blendMode": "normal" },
    { "name": "head", "opacity": 255, "blendMode": "normal" },
    { "name": "attack", "opacity": 255, "blendMode": "normal" }

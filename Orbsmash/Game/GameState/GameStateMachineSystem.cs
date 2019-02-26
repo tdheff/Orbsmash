@@ -76,6 +76,7 @@ namespace Orbsmash.Game
             ballState.HitBoost = 1.0f;
             ballState.IsDeadly = false;
             ballState.BaseSpeed = ballState.BaseSpeedInitial;
+            ballState.IsBeingServed = true;
             if (side == Gameplay.Side.LEFT ||
                 (side == Gameplay.Side.NONE )) // && Random.chance(0.5f)
             {
@@ -111,11 +112,11 @@ namespace Orbsmash.Game
                 {
                     case Gameplay.Character.KNIGHT:
                         var knightState = player.getComponent<KnightStateMachineComponent>().State.StateEnum;
-                        isAlive = knightState != KnightStates.KO && knightState != KnightStates.Eliminated;
+                        isAlive = knightState != KnightStates.Eliminated;
                         break;
                     case Gameplay.Character.WIZARD:
                         var wizardState = player.getComponent<WizardStateMachineComponent>().State.StateEnum;
-                        isAlive = wizardState != WizardStates.Dead;
+                        isAlive = wizardState != WizardStates.Eliminated;
                         break;
                     case Gameplay.Character.SPACEMAN:
                         var spacemanState = player.getComponent<SpacemanStateMachineComponent>().State.StateEnum;

@@ -58,14 +58,16 @@ namespace Orbsmash.Player
                 }
                 if (allowMovement)
                 {
-                    velocity.Velocity = input.MovementStick * MovementSpeeds.MEDIUM * movementMultipler;
-                    if (input.MovementStick.LengthSquared() >= PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    var targetVelocity = input.MovementStick * MovementSpeeds.MEDIUM * movementMultipler;
+                    if (targetVelocity.LengthSquared() > 0.01)
                     {
-                        playerState.LastVector = Vector2.Normalize(input.MovementStick);
+                        velocity.Velocity = Vector2.Lerp(velocity.Velocity, targetVelocity,
+                            0.08f);
                     }
                     else
                     {
-                        playerState.LastVector = Vector2.Zero;
+                        velocity.Velocity = Vector2.Lerp(velocity.Velocity, Vector2.Zero,
+                            0.08f);
                     }
 
                     var up = new Vector2(0, 1);

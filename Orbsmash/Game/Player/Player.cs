@@ -39,10 +39,16 @@ namespace Orbsmash.Player
         
         private static Dictionary<string, HashSet<string>> _wizardEventTriggers = new Dictionary<string, HashSet<string>>
         {
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
-            // for the wizard, 4 was consistenly feeling "late" in terms of when the hit should happen
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 3 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
-            { EventComponent.BuildKey(KnightAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            // LIGHT ATTACK
+            { EventComponent.BuildKey(WizardAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(WizardAnimations.ATTACK, 3 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(WizardAnimations.ATTACK, 7 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            // HEAVY ATTACK
+            { EventComponent.BuildKey(WizardAnimations.ATTACK_HEAVY, 20 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(WizardAnimations.ATTACK_HEAVY, 8 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(WizardAnimations.ATTACK_HEAVY, 11 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            { EventComponent.BuildKey(WizardAnimations.KO, 6 ), new HashSet<string> { PlayerEvents.KO_BOUNCE }},
+            { EventComponent.BuildKey(WizardAnimations.KO, 9 ), new HashSet<string> { PlayerEvents.KO_END }},
         };
         
         private static Dictionary<string, HashSet<string>> _spacemanEventTriggers = new Dictionary<string, HashSet<string>>
@@ -108,8 +114,8 @@ namespace Orbsmash.Player
                     _state = new WizardStateMachineComponent(new WizardState());
                     _events.SetTriggers(_wizardEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.WIZARD];
-                    lightPoints = scene.content.Load<Polygon>(Hitboxes.WIZARD_HITBOX).points;
-                    heavyPoints = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX_HEAVY).points;
+                    lightPoints = scene.content.Load<Polygon>(Hitboxes.WIZARD_HITBOX_LIGHT).points;
+                    heavyPoints = scene.content.Load<Polygon>(Hitboxes.WIZARD_HITBOX_HEAVY).points;
 
                     break;
                 case Gameplay.Character.SPACEMAN:

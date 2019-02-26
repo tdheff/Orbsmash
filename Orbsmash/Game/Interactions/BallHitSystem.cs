@@ -96,48 +96,27 @@ namespace Orbsmash.Game.Interactions
                         Debug.warn("Entity {} has no scene", this);
                     }
 
-                    var camera = handyScene.findEntity("Camera");
-                    var shake = camera.getComponent<CameraShakeComponent>();
-                    var cam = camera.getComponent<Camera>();
-                    if (ballState.HitBoost > 1.5f)
+
+                    if (!ballState.IsBeingServed)
                     {
-                        shake.Shake(0.3f, ballState.HitBoost * 15);
+                        var camera = handyScene.findEntity("Camera");
+                        var shake = camera.getComponent<CameraShakeComponent>();
+                        var cam = camera.getComponent<Camera>();
+                        if (ballState.HitBoost > 1.5f)
+                        {
+                            shake.Shake(0.3f, ballState.HitBoost * 15);
+                        }
+
+                        var gameState = handyScene.findEntity("Game");
+                        var hitStop = gameState.getComponent<HitStopComponent>();
+                        if (ballState.HitBoost > 1.5f)
+                        {
+                            hitStop.Freeze(ballState.HitBoost / 8.0f);
+                        }
                     }
-                    
+
                     // sound
                     hits.Play();
-                    
-                    //
-                    // CHARACTER SPECIFIC HIT ELEMENTS
-                    //
-                    
-                    // KNIGHT
-                    var player = (Player.Player)entity;
-                    switch (player.Settings.Character)
-                    {
-                        case Gameplay.Character.KNIGHT:
-                            knightHit(player, ballVelocityComponent);
-                            break;
-                        case Gameplay.Character.WIZARD:
-                            break;
-                        case Gameplay.Character.SPACEMAN:
-                            break;
-                        case Gameplay.Character.ALIEN:
-                            break;
-                        case Gameplay.Character.PIRATE:
-                            break;
-                        case Gameplay.Character.SKELETON:
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                    
-                    var gameState = handyScene.findEntity("Game");
-                    var hitStop = gameState.getComponent<HitStopComponent>();
-                    if (ballState.HitBoost > 1.5f)
-                    {
-                        hitStop.Freeze(ballState.HitBoost / 8.0f);
-                    }
                     
                     // change possesion colors
                     var particles = neighbor.getComponent<ParticleEmitterComponent>();
@@ -151,14 +130,10 @@ namespace Orbsmash.Game.Interactions
                         particles._emitterConfig.startColor = Color.Blue;
                         particles._emitterConfig.finishColor = Color.DarkBlue;
                     }
+
+                    ballState.IsBeingServed = false;
                 }
             }
-        }
-
-        private void knightHit(Player.Player player, VelocityComponent ballVelocity)
-        {
-            var events = player.getComponent<EventComponent>();
-            var knightState = player.getComponent<KnightStateMachineComponent>();
         }
     }
 }

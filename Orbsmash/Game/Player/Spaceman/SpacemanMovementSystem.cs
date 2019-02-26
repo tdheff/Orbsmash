@@ -50,16 +50,6 @@ namespace Orbsmash.Player
                 }
                 if (allowMovement)
                 {
-                    velocity.Velocity = input.MovementStick * MovementSpeeds.VERY_LOW * movementMultipler;
-                    if (input.MovementStick.LengthSquared() >= PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
-                    {
-                        playerState.LastVector = Vector2.Normalize(input.MovementStick);
-                    }
-                    else
-                    {
-                        playerState.LastVector = Vector2.Zero;
-                    }
-
                     var up = new Vector2(0, 1);
                     var down = new Vector2(0, -1);
                     var left = new Vector2(-1, 0);

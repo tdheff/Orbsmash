@@ -47,10 +47,18 @@ namespace Orbsmash.Player
                     case WizardStates.Glide:
                         velocity.Velocity = wizardState.GlideDirection * WizardState.GLIDE_SPEED;
                         break;
-                    case WizardStates.Dead:
+                    case WizardStates.Eliminated:
                         lockMovement = true;
                         break;
-                    case WizardStates.Immaterial:
+                    case WizardStates.KO:
+                        break;
+                    case WizardStates.Charge:
+                        lockMovement = true;
+                        break;
+                    case WizardStates.ChargeHeavy:
+                        lockMovement = true;
+                        break;
+                    case WizardStates.AttackHeavy:
                         lockMovement = true;
                         break;
                     default:
@@ -58,14 +66,16 @@ namespace Orbsmash.Player
                 }
                 if (freeMovement)
                 {
-                    velocity.Velocity = input.MovementStick * MovementSpeeds.LOW * movementMultipler;
-                    if (input.MovementStick.LengthSquared() >= PlayerStateComponent.MOVEMENT_THRESHOLD_SQUARED)
+                    var targetVelocity = input.MovementStick * MovementSpeeds.LOW * movementMultipler;
+                    if (targetVelocity.LengthSquared() > 0.01)
                     {
-                        playerState.LastVector = Vector2.Normalize(input.MovementStick);
+                        velocity.Velocity = Vector2.Lerp(velocity.Velocity, targetVelocity,
+                            0.08f);
                     }
                     else
                     {
-                        playerState.LastVector = Vector2.Zero;
+                        velocity.Velocity = Vector2.Lerp(velocity.Velocity, Vector2.Zero,
+                            0.08f);
                     }
 
                     var up = new Vector2(0, 1);

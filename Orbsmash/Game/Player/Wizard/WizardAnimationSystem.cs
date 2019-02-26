@@ -23,6 +23,7 @@ namespace Orbsmash.Player
                 var player = (Player)entity;
                 var mainBodyAnimation = player.getComponent<AnimationComponent>();
                 var eventComponent = player.getComponent<EventComponent>();
+                mainBodyAnimation.Paused = false;
 
                 switch (wizardState.StateEnum)
                 {
@@ -46,10 +47,42 @@ namespace Orbsmash.Player
                     case WizardStates.Glide:
                         mainBodyAnimation.SetAnimation(WizardAnimations.GLIDE);
                         break;
-                    case WizardStates.Dead:
+                    case WizardStates.Charge:
+                        if (mainBodyAnimation.CurrentAnimation != WizardAnimations.CHARGE_IDLE &&
+                            mainBodyAnimation.CurrentAnimation != WizardAnimations.CHARGE_FULL)
+                        {
+                            mainBodyAnimation.SetAnimation(WizardAnimations.CHARGE_IDLE);
+                        }
+
+                        if (playerState.ChargeFinished)
+                        {
+                            var frame = mainBodyAnimation.CurrentAnimationFrame;
+                            mainBodyAnimation.SetAnimation(WizardAnimations.CHARGE_FULL);
+                            mainBodyAnimation.CurrentAnimationFrame = frame;
+                        }
                         break;
-                    case WizardStates.Immaterial:
-                        mainBodyAnimation.SetAnimation(WizardAnimations.IMMATERIAL);
+                    case WizardStates.ChargeHeavy:
+                        if (mainBodyAnimation.CurrentAnimation != WizardAnimations.CHARGE_HEAVY_IDLE &&
+                            mainBodyAnimation.CurrentAnimation != WizardAnimations.CHARGE_HEAVY_FULL)
+                        {
+                            mainBodyAnimation.SetAnimation(WizardAnimations.CHARGE_HEAVY_IDLE);
+                        }
+
+                        if (playerState.ChargeFinished)
+                        {
+                            var frame = mainBodyAnimation.CurrentAnimationFrame;
+                            mainBodyAnimation.SetAnimation(WizardAnimations.CHARGE_HEAVY_FULL);
+                            mainBodyAnimation.CurrentAnimationFrame = frame;
+                        }
+                        break;
+                    case WizardStates.AttackHeavy:
+                        mainBodyAnimation.SetAnimation(WizardAnimations.ATTACK_HEAVY);
+                        break;
+                    case WizardStates.KO:
+                        mainBodyAnimation.SetAnimation(WizardAnimations.KO);
+                        break;
+                    case WizardStates.Eliminated:
+                        mainBodyAnimation.Paused = true;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

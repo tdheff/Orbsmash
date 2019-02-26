@@ -292,6 +292,16 @@
 /processor:PolygonProcessor
 /build:Sprites/Characters/Wizard/Wizard_Hitbox.xml
 
+#begin Sprites/Characters/Wizard/Wizard_Hitbox_Heavy.xml
+/importer:PolygonImporter
+/processor:PolygonProcessor
+/build:Sprites/Characters/Wizard/Wizard_Hitbox_Heavy.xml
+
+#begin Sprites/Characters/Wizard/Wizard_Hitbox_Light.xml
+/importer:PolygonImporter
+/processor:PolygonProcessor
+/build:Sprites/Characters/Wizard/Wizard_Hitbox_Light.xml
+
 #begin Sprites/Characters/Wizard/WizardJson.json
 /importer:AsepriteImporter
 /processor:AsepriteProcessor

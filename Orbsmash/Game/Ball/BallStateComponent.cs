@@ -6,6 +6,7 @@ namespace Orbsmash.Ball
 {
     public class BallStateComponent : Component
     {
+        public bool IsBeingServed = true;
         public int LastHitPlayerId = -1;
         public Gameplay.Side LastHitSide = Gameplay.Side.NONE;
         public bool IsDeadly = false;
