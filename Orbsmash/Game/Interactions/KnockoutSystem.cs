@@ -52,8 +52,10 @@ namespace Orbsmash.Game.Interactions
                     {
                         continue;
                     }
+                    var ballVelocityComponent = neighbor.entity.getComponent<VelocityComponent>();
 
                     playerStateMachineComponent.IsKilled = true;
+                    playerStateMachineComponent.KnockoutVector = ballVelocityComponent.Velocity / 2;
 
                 }
             }

@@ -61,8 +61,8 @@ namespace Orbsmash.Player
                         playerState.HasKOBounced = true;
                     }
                     var deadVelocity = entity.getComponent<VelocityComponent>();
-                    var speed = playerState.HasKOBounced ? -50 : -300;
-                    deadVelocity.Velocity = new Vector2(Player.SignForSide(playerState.side) * speed, 0);
+                    var speed = playerState.HasKOBounced ? playerState.KnockoutVector / 2 : playerState.KnockoutVector;
+                    deadVelocity.Velocity = speed;
                     break;
                 case KnightStates.ChargeHeavy:
                     playerState.ChargeTime += Time.deltaTime;

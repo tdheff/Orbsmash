@@ -36,6 +36,9 @@ namespace Orbsmash.Player
         public float BallHitBoost = 1.0f;
         public AttackTypes AttackType = AttackTypes.Light;
         
+        // KO
+        public Vector2 KnockoutVector;
+        
         // OTHER
         public bool IsInvulnerable = false;
         
