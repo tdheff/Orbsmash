@@ -32,7 +32,8 @@ namespace Orbsmash.Game.Interactions
                 Collider collider = null;
                 foreach (var polygonCollider in colliders)
                 {
-                    if (polygonCollider.name != ComponentNames.HITBOX_COLLIDER) continue;
+                    if (playerState.AttackType == AttackTypes.Light && polygonCollider.name != ComponentNames.HITBOX_COLLIDER_LIGHT) continue;
+                    if (playerState.AttackType == AttackTypes.Heavy && polygonCollider.name != ComponentNames.HITBOX_COLLIDER_HEAVY) continue;
                     collider = polygonCollider;
                     break;
                 }
@@ -158,12 +159,6 @@ namespace Orbsmash.Game.Interactions
         {
             var events = player.getComponent<EventComponent>();
             var knightState = player.getComponent<KnightStateMachineComponent>();
-
-            if (knightState.State.StateEnum == KnightStates.Block)
-            {
-                events.FireEvent(PlayerEvents.BLOCK_HIT);
-                knightState.State.BlockHitVector = -ballVelocity.Velocity / 2;
-            }
         }
     }
 }

@@ -63,11 +63,25 @@ namespace Orbsmash.Player
                     case KnightStates.Swing:
                         mainBodyAnimation.SetAnimation(KnightAnimations.ATTACK);
                         break;
-                    case KnightStates.Block:
-                        mainBodyAnimation.SetAnimation(KnightAnimations.BLOCK);
+                    case KnightStates.ChargeHeavy:
+                        if (mainBodyAnimation.CurrentAnimation != KnightAnimations.CHARGE_HEAVY_IDLE &&
+                            mainBodyAnimation.CurrentAnimation != KnightAnimations.CHARGE_HEAVY_FULL)
+                        {
+                            mainBodyAnimation.SetAnimation(KnightAnimations.CHARGE_HEAVY);
+                        }
+
+                        if (eventComponent.ConsumeEventAndReturnIfPresent(PlayerEvents.CHARGE_WINDUP_END))
+                        {
+                            mainBodyAnimation.SetAnimation(KnightAnimations.CHARGE_HEAVY_IDLE);
+                        }
+
+                        if (playerState.ChargeFinished)
+                        {
+                            mainBodyAnimation.SetAnimation(KnightAnimations.CHARGE_HEAVY_FULL);
+                        }
                         break;
-                    case KnightStates.BlockHit:
-                        mainBodyAnimation.SetAnimation(KnightAnimations.BLOCK_HIT);
+                    case KnightStates.SwingHeavy:
+                        mainBodyAnimation.SetAnimation(KnightAnimations.ATTACK_HEAVY);
                         break;
                     case KnightStates.KO:
                         mainBodyAnimation.SetAnimation(KnightAnimations.KO);

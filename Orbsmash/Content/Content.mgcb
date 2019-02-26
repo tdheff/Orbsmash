@@ -214,6 +214,16 @@
 /processor:PolygonProcessor
 /build:Sprites/Characters/Knight/Knight_Hitbox.xml
 
+#begin Sprites/Characters/Knight/Knight_Hitbox_Heavy.xml
+/importer:PolygonImporter
+/processor:PolygonProcessor
+/build:Sprites/Characters/Knight/Knight_Hitbox_Heavy.xml
+
+#begin Sprites/Characters/Knight/Knight_Hitbox_Light.xml
+/importer:PolygonImporter
+/processor:PolygonProcessor
+/build:Sprites/Characters/Knight/Knight_Hitbox_Light.xml
+
 #begin Sprites/Characters/Knight/KnightJson.json
 /importer:AsepriteImporter
 /processor:AsepriteProcessor
