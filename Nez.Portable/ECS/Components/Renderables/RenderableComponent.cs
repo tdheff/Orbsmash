@@ -65,6 +65,12 @@ namespace Nez
 		}
 
 		/// <summary>
+		/// /// Semi hack to set component render order with the sprite render orderer
+		/// </summary>
+		/// <value>The render layer.</value>
+		public int renderOffset = 0;
+
+		/// <summary>
 		/// color passed along to the Batcher when rendering
 		/// </summary>
 		public Color color = Color.White;

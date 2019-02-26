@@ -105,6 +105,8 @@
     <Compile Include="Game\Player\CharacterChoiceStateMachineComponent.cs" />
     <Compile Include="Game\Player\Spaceman\SpacemanAnimationSystem.cs" />
     <Compile Include="Game\Player\Spaceman\SpacemanMovementSystem.cs" />
+    <Compile Include="Game\Player\Spaceman\SpacemanShield.cs" />
+    <Compile Include="Game\Player\Spaceman\SpacemanShieldSpawnSystem.cs" />
     <Compile Include="Game\Player\Spaceman\SpacemanState.cs" />
     <Compile Include="Game\Player\Spaceman\SpacemanStateMachineComponent.cs" />
     <Compile Include="Game\Player\Spaceman\SpacemanStateMachineSystem.cs" />
@@ -124,6 +126,10 @@
   <ItemGroup>
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Optional, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Optional.4.0.0\lib\net45\Optional.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PubSub, Version=3.0.0.0, Culture=neutral, PublicKeyToken=fe4ede83ff72b2e0, processorArchitecture=MSIL">
       <HintPath>..\packages\PubSub.3.0.0\lib\netstandard2.0\PubSub.dll</HintPath>

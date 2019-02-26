@@ -60,12 +60,15 @@ namespace Orbsmash.Game
                 new SpacemanMovementSystem(),
                 new SpacemanStateMachineSystem(),
                 new SpacemanAnimationSystem(),
+                new SpacemanShieldSpawnSystem(),
+                new SpacemanShieldSystem(),
                 // EFFECTS
                 new HitEffectSystem(),
                 new AnimationSystem(),
                 new AimIndicatorSystem(),
                 new HitStopSystem(),
-
+                // RENDERING
+                new SpriteDepthSystem()
             };
         }
 

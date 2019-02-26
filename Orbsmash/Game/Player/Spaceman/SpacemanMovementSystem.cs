@@ -43,6 +43,8 @@ namespace Orbsmash.Player
                         break;
                     case SpacemanStates.Eliminated:
                         break;
+                    case SpacemanStates.Shield:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

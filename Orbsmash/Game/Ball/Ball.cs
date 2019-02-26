@@ -30,6 +30,7 @@ namespace Orbsmash.Ball
             _velocity = new VelocityComponent(new Vector2(300, 300));
             
             addComponent(_velocity);
+            addComponent(new SpriteDepthComponent { BaseRenderLayer = RenderLayers.PRIMARY});
         }
 
         public override void onAddedToScene()
@@ -71,6 +72,8 @@ namespace Orbsmash.Ball
             addComponent(_collider);
             addComponent(_ballStateComponent);
             addComponent(_particleEmitter);
+            
+            scale = new Vector2(3, 3);
         }
 
         private ParticleEmitterConfig generateParticleEmitterConfig()

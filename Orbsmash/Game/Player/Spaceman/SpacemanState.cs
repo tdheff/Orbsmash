@@ -1,10 +1,11 @@
 using Handy.Components;
 using Orbsmash.Constants;
 using Microsoft.Xna.Framework;
+using Optional;
 
 namespace Orbsmash.Player
 {
-    public enum SpacemanStates { Idle, Walk, Attack, KO, Eliminated }
+    public enum SpacemanStates { Idle, Walk, Attack, KO, Eliminated, Shield }
     
     public class SpacemanState : IStateMachineState<SpacemanStates>
     {
@@ -14,6 +15,10 @@ namespace Orbsmash.Player
         public Vector2 BlockHitVector = new Vector2();
         public float BlockHitTimeRemaining = 0;
         public float KoTime = 0;
+
+        public const float SHIELD_COOLDOWN = 3.0f;
+        public float ShieldCooldown = SHIELD_COOLDOWN;
+        public Option<Vector2> ShieldSpawn = Option.None<Vector2>();
 
         public IStateMachineState<SpacemanStates> Clone()
         {
