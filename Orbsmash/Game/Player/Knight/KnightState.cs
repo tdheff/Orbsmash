@@ -4,8 +4,19 @@ using Microsoft.Xna.Framework;
 
 namespace Orbsmash.Player
 {
-    public enum KnightStates { Idle, Walk, Dash, Charge, Swing, KO, Eliminated, Block, BlockHit }
-    
+    public enum KnightStates
+    {
+        Idle,
+        Walk,
+        Dash,
+        Charge,
+        Swing,
+        ChargeHeavy,
+        SwingHeavy,
+        KO,
+        Eliminated
+    }
+
     public class KnightState : IStateMachineState<KnightStates>
     {
         public KnightStates StateEnum { get; set; } = KnightStates.Idle;

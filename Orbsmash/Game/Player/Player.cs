@@ -23,12 +23,16 @@ namespace Orbsmash.Player
     {
         private static Dictionary<string, HashSet<string>> _knightEventTriggers = new Dictionary<string, HashSet<string>>
         {
+            // LIGHT ATTACK
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 11 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 2 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
             { EventComponent.BuildKey(KnightAnimations.ATTACK, 4 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
             { EventComponent.BuildKey(KnightAnimations.CHARGE, 4 ), new HashSet<string> { PlayerEvents.CHARGE_WINDUP_END }},
-            { EventComponent.BuildKey(KnightAnimations.BLOCK, 5 ), new HashSet<string> { PlayerEvents.BLOCK_END }},
-            { EventComponent.BuildKey(KnightAnimations.BLOCK_HIT, 5 ), new HashSet<string> { PlayerEvents.BLOCK_HIT_END }},
+            // HEAVY ATTACK
+            { EventComponent.BuildKey(KnightAnimations.ATTACK_HEAVY, 12 ), new HashSet<string> { PlayerEvents.PLAYER_SWING_END }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK_HEAVY, 1 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_START }},
+            { EventComponent.BuildKey(KnightAnimations.ATTACK_HEAVY, 3 ), new HashSet<string> { PlayerEvents.PLAYER_HIT_END }},
+            { EventComponent.BuildKey(KnightAnimations.CHARGE_HEAVY, 3 ), new HashSet<string> { PlayerEvents.CHARGE_WINDUP_END }},
             { EventComponent.BuildKey(KnightAnimations.KO, 6 ), new HashSet<string> { PlayerEvents.KO_BOUNCE }},
             { EventComponent.BuildKey(KnightAnimations.KO, 10 ), new HashSet<string> { PlayerEvents.KO_END }},
         };
@@ -55,7 +59,8 @@ namespace Orbsmash.Player
         private PlayerInputComponent _input;
         private VelocityComponent _velocity;
         private BoxCollider _collider;
-        private PolygonCollider _hitbox;
+        private PolygonCollider _lightHitbox;
+        private PolygonCollider _heavyHitbox;
         private KinematicComponent _kinematic = new KinematicComponent();
         private AnimationComponent _mainBodyAnimation;
         private AnimatableSprite _mainPlayerBodySprite;
@@ -88,26 +93,32 @@ namespace Orbsmash.Player
         {
             var gameScene = (HandyScene)scene;
             AnimationDefinition animationDefinition;
-            Vector2[] points;
+            Vector2[] lightPoints;
+            Vector2[] heavyPoints;
             switch (Settings.Character)
             {
                 case Gameplay.Character.KNIGHT:
                     _state = new KnightStateMachineComponent(new KnightState());
                     _events.SetTriggers(_knightEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.KNIGHT];
-                    points = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX).points;
+                    lightPoints = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX_LIGHT).points;
+                    heavyPoints = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX_HEAVY).points;
                     break;
                 case Gameplay.Character.WIZARD:
                     _state = new WizardStateMachineComponent(new WizardState());
                     _events.SetTriggers(_wizardEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.WIZARD];
-                    points = scene.content.Load<Polygon>(Hitboxes.WIZARD_HITBOX).points;
+                    lightPoints = scene.content.Load<Polygon>(Hitboxes.WIZARD_HITBOX).points;
+                    heavyPoints = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX_HEAVY).points;
+
                     break;
                 case Gameplay.Character.SPACEMAN:
                     _state = new SpacemanStateMachineComponent(new SpacemanState());
                     _events.SetTriggers(_spacemanEventTriggers);
                     animationDefinition = gameScene.AnimationDefinitions[AsepriteFiles.SPACEMAN];
-                    points = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX).points;
+                    lightPoints = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX_LIGHT).points;
+                    heavyPoints = scene.content.Load<Polygon>(Hitboxes.KNIGHT_HITBOX_HEAVY).points;
+
                     break;
                 case Gameplay.Character.ALIEN:
                     throw new NotImplementedException();
@@ -142,17 +153,22 @@ namespace Orbsmash.Player
             addComponent(_mainPlayerBodySprite);
             addComponent(_mainBodyAnimation);
 
+            addComponent(_collider);
             if (_stateComponent.side == Gameplay.Side.RIGHT)
             {
                 _mainPlayerBodySprite.flipX = true;
                 // TODO - this is horrible but it's the only solution that worked
-                points = points.Reverse().Select(point => new Vector2(-point.X - 8.5f, point.Y - 2.5f)).ToArray();
+                lightPoints = lightPoints.Reverse().Select(point => new Vector2(-point.X - 8.5f, point.Y - 2.5f)).ToArray();
+                heavyPoints = heavyPoints.Reverse().Select(point => new Vector2(-point.X - 8.5f, point.Y - 2.5f)).ToArray();
             }
-            _hitbox = new PolygonCollider(points);
-            _hitbox.isTrigger = true;
-            _hitbox.name = ComponentNames.HITBOX_COLLIDER;
-            addComponent(_collider);
-            addComponent(_hitbox);
+            _lightHitbox = new PolygonCollider(lightPoints);
+            _lightHitbox.isTrigger = true;
+            _lightHitbox.name = ComponentNames.HITBOX_COLLIDER_LIGHT;
+            addComponent(_lightHitbox);
+            _heavyHitbox = new PolygonCollider(heavyPoints);
+            _heavyHitbox.isTrigger = true;
+            _heavyHitbox.name = ComponentNames.HITBOX_COLLIDER_HEAVY;
+            addComponent(_heavyHitbox);
 
             // Circle and cooldowns
             var subtextures = Util.ExtractSubtextures(gameScene.Textures[Sprites.CHARACTER_CIRCLE], 1, 1);

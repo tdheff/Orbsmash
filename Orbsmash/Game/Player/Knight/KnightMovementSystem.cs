@@ -49,9 +49,9 @@ namespace Orbsmash.Player
                         break;
                     case KnightStates.Eliminated:
                         break;
-                    case KnightStates.Block:
+                    case KnightStates.ChargeHeavy:
                         break;
-                    case KnightStates.BlockHit:
+                    case KnightStates.SwingHeavy:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

@@ -27,12 +27,14 @@ namespace Orbsmash.Player
 
         // SWINGING
         public float ChargeTime;
-        public const float MAX_CHARGE_TIME = 2.0f;
+        public const float MAX_CHARGE_TIME = 1.0f;
+        public const float MAX_HEAVY_CHARGE_TIME = 2.0f;
         public bool ChargeFinished = false;
         public bool SwingFinished = false;
         public bool HitActive = false;
         public Vector2 BallHitVector = new Vector2(0, 0);
         public float BallHitBoost = 1.0f;
+        public AttackTypes AttackType = AttackTypes.Light;
         
         // OTHER
         public bool IsInvulnerable = false;

@@ -64,14 +64,16 @@ namespace Orbsmash.Player
                     var speed = playerState.HasKOBounced ? -50 : -300;
                     deadVelocity.Velocity = new Vector2(Player.SignForSide(playerState.side) * speed, 0);
                     break;
-                case KnightStates.Block:
-                    playerState.BallHitVector = new Vector2(1, 0);
-                    playerState.BallHitBoost = 1.0f;
+                case KnightStates.ChargeHeavy:
+                    playerState.ChargeTime += Time.deltaTime;
+                    if (playerState.ChargeTime >= PlayerStateComponent.MAX_HEAVY_CHARGE_TIME)
+                    {
+                        playerState.ChargeFinished = true;
+                    }
+
+                    playerState.BallHitBoost = 1.0f + 2.0f * playerState.ChargeTime / PlayerStateComponent.MAX_HEAVY_CHARGE_TIME;
                     break;
-                case KnightStates.BlockHit:
-                    var blockVelocity = entity.getComponent<VelocityComponent>();
-                    blockVelocity.Velocity = state.BlockHitVector * (state.BlockHitTimeRemaining / 0.3f);
-                    state.BlockHitTimeRemaining -= Time.deltaTime;
+                case KnightStates.SwingHeavy:
                     break;
                 case KnightStates.Eliminated:
                     break;
@@ -110,9 +112,9 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed && knightState.BlockCooldown >= KnightState.BLOCK_COOLDOWN)
+                    } else if (input.DefensePressed)
                     {
-                        return StateMachineTransition<KnightStates>.Push(KnightStates.Block);
+                        return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Dash);
@@ -125,9 +127,9 @@ namespace Orbsmash.Player
                     if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed && knightState.BlockCooldown >= KnightState.BLOCK_COOLDOWN)
+                    } else if (input.DefensePressed)
                     {
-                        return StateMachineTransition<KnightStates>.Push(KnightStates.Block);
+                        return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (input.DashPressed && input.DashPressed && knightState.SprintRemaining >= KnightState.MIN_START_SPRINT)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Dash);
@@ -143,9 +145,9 @@ namespace Orbsmash.Player
                     } else if (input.AttackPressed)
                     {
                         return StateMachineTransition<KnightStates>.Push(KnightStates.Charge);
-                    } else if (input.DefensePressed && knightState.BlockCooldown >= KnightState.BLOCK_COOLDOWN)
+                    } else if (input.DefensePressed)
                     {
-                        return StateMachineTransition<KnightStates>.Push(KnightStates.Block);
+                        return StateMachineTransition<KnightStates>.Push(KnightStates.ChargeHeavy);
                     } else if (playerState.DashFinished)
                     {
                         return StateMachineTransition<KnightStates>.Pop();
@@ -184,20 +186,25 @@ namespace Orbsmash.Player
                         return StateMachineTransition<KnightStates>.Replace(KnightStates.Idle);
                     }
                     break;
-                case KnightStates.Block:
-                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_HIT))
+                case KnightStates.ChargeHeavy:
+                    if (!input.DefensePressed)
                     {
-                        return StateMachineTransition<KnightStates>.Replace(KnightStates.BlockHit);
-                    }
-                    else if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_END))
-                    {
-                        return StateMachineTransition<KnightStates>.Pop();
+                        return StateMachineTransition<KnightStates>.Replace(KnightStates.SwingHeavy);
                     }
                     break;
-                case KnightStates.BlockHit:
-                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.BLOCK_HIT_END))
+                case KnightStates.SwingHeavy:
+                    playerState.SwingFinished = events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_SWING_END);
+                    if (playerState.SwingFinished)
                     {
                         return StateMachineTransition<KnightStates>.Pop();
+                    }
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_HIT_START))
+                    {
+                        playerState.HitActive = true;
+                    }
+                    if (events.ConsumeEventAndReturnIfPresent(PlayerEvents.PLAYER_HIT_END))
+                    {
+                        playerState.HitActive = false;
                     }
                     break;
                 default:
@@ -228,6 +235,7 @@ namespace Orbsmash.Player
                 case KnightStates.Swing:
                     swipes.Play();
                     playerState.SwingFinished = false;
+                    playerState.AttackType = AttackTypes.Light;
                     break;
                 case KnightStates.KO:
                     playerState.HasKOBounced = false;
@@ -237,12 +245,13 @@ namespace Orbsmash.Player
                     break;
                 case KnightStates.Eliminated:
                     break;
-                case KnightStates.Block:
-                    playerState.HitActive = true;
-                    state.BlockCooldown = 0;
+                case KnightStates.ChargeHeavy:
+                    playerState.ChargeFinished = false;
                     break;
-                case KnightStates.BlockHit:
-                    state.BlockHitTimeRemaining = 0.3f;
+                case KnightStates.SwingHeavy:
+                    swipes.Play();
+                    playerState.SwingFinished = false;
+                    playerState.AttackType = AttackTypes.Heavy;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -273,10 +282,12 @@ namespace Orbsmash.Player
                     break;
                 case KnightStates.Eliminated:
                     break;
-                case KnightStates.Block:
-                    playerState.HitActive = false;
+                case KnightStates.ChargeHeavy:
+                    playerState.ChargeTime = 0;
+                    playerState.ChargeFinished = false;
                     break;
-                case KnightStates.BlockHit:
+                case KnightStates.SwingHeavy:
+                    playerState.SwingFinished = false;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Nez.DeferredLighting;
 
 namespace Orbsmash.Constants
 {
@@ -54,7 +55,8 @@ namespace Orbsmash.Constants
     
     public sealed class ComponentNames
     {
-        public const string HITBOX_COLLIDER = "HITBOX_COLLIDER";
+        public const string HITBOX_COLLIDER_LIGHT = "HITBOX_COLLIDER_LIGHT";
+        public const string HITBOX_COLLIDER_HEAVY = "HITBOX_COLLIDER_HEAVY";
         public const string PLAYER_COLLIDER = "PLAYER_COLLIDER";
         public const string AIM_INDICATOR = "AIM_INDICATOR";
         public const string CHARACTER_CIRCLE = "CHARACTER_CIRCLE";
@@ -187,12 +189,13 @@ namespace Orbsmash.Constants
 
     public sealed class Hitboxes
     {
-        public const string KNIGHT_HITBOX = "Sprites/Characters/Knight/Knight_Hitbox";
+        public const string KNIGHT_HITBOX_LIGHT = "Sprites/Characters/Knight/Knight_Hitbox_Light";
+        public const string KNIGHT_HITBOX_HEAVY = "Sprites/Characters/Knight/Knight_Hitbox_Heavy";
         public const string WIZARD_HITBOX = "Sprites/Characters/Wizard/Wizard_Hitbox";
         public static readonly List<string> HITBOXES_TO_LOAD;
         static Hitboxes()
         {
-            HITBOXES_TO_LOAD = new List<string> { KNIGHT_HITBOX, WIZARD_HITBOX };
+            HITBOXES_TO_LOAD = new List<string> { KNIGHT_HITBOX_LIGHT, KNIGHT_HITBOX_HEAVY, WIZARD_HITBOX };
         }
     }
 
@@ -200,6 +203,12 @@ namespace Orbsmash.Constants
     public sealed class BallAnimations
     {
         public const string IDLE = "IDLE";
+    }
+    
+    public enum AttackTypes
+    {
+        Light,
+        Heavy
     }
 
     public sealed class KnightAnimations
@@ -214,6 +223,10 @@ namespace Orbsmash.Constants
         public const string CHARGE_FULL = "CHARGE_FULL";
         public const string CHARGE = "CHARGE";
         public const string ATTACK = "ATTACK";
+        public const string CHARGE_HEAVY_IDLE = "CHARGE_HEAVY_IDLE";
+        public const string CHARGE_HEAVY_FULL = "CHARGE_HEAVY_FULL";
+        public const string CHARGE_HEAVY = "CHARGE_HEAVY";
+        public const string ATTACK_HEAVY = "ATTACK_HEAVY";
         public const string BLOCK = "BLOCK";
         public const string BLOCK_HIT = "BLOCK_HIT";
         public const string KO = "KO";

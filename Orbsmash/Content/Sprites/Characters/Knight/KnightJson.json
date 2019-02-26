@@ -880,14 +880,257 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
     "sourceSize": { "w": 64, "h": 34 },
     "duration": 50
+   },
+   {
+    "filename": "Knight 98.aseprite",
+    "frame": { "x": 6272, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 99.aseprite",
+    "frame": { "x": 6336, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 100.aseprite",
+    "frame": { "x": 6400, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 101.aseprite",
+    "frame": { "x": 6464, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 102.aseprite",
+    "frame": { "x": 6528, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 103.aseprite",
+    "frame": { "x": 6592, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 104.aseprite",
+    "frame": { "x": 6656, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 105.aseprite",
+    "frame": { "x": 6720, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 106.aseprite",
+    "frame": { "x": 6784, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 107.aseprite",
+    "frame": { "x": 6848, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 108.aseprite",
+    "frame": { "x": 6912, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 109.aseprite",
+    "frame": { "x": 6976, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 110.aseprite",
+    "frame": { "x": 7040, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 111.aseprite",
+    "frame": { "x": 7104, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 112.aseprite",
+    "frame": { "x": 7168, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 113.aseprite",
+    "frame": { "x": 7232, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 114.aseprite",
+    "frame": { "x": 7296, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 115.aseprite",
+    "frame": { "x": 7360, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 116.aseprite",
+    "frame": { "x": 7424, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 117.aseprite",
+    "frame": { "x": 7488, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 118.aseprite",
+    "frame": { "x": 7552, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 119.aseprite",
+    "frame": { "x": 7616, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 120.aseprite",
+    "frame": { "x": 7680, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 121.aseprite",
+    "frame": { "x": 7744, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 122.aseprite",
+    "frame": { "x": 7808, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 123.aseprite",
+    "frame": { "x": 7872, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
+   },
+   {
+    "filename": "Knight 124.aseprite",
+    "frame": { "x": 7936, "y": 0, "w": 64, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 34 },
+    "sourceSize": { "w": 64, "h": 34 },
+    "duration": 50
    }
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.10-beta2-x64",
+  "version": "1.2.9",
   "image": "/home/tommy/dev/Orbsmash/Orbsmash/Content/Sprites/Characters/Knight/Knight.png",
   "format": "RGBA8888",
-  "size": { "w": 6272, "h": 34 },
+  "size": { "w": 8000, "h": 34 },
   "scale": "1",
   "frameTags": [
    { "name": "IDLE_HORIZONTAL", "from": 0, "to": 0, "direction": "forward" },
@@ -902,10 +1145,14 @@
    { "name": "ATTACK", "from": 63, "to": 74, "direction": "forward" },
    { "name": "BLOCK", "from": 75, "to": 80, "direction": "forward" },
    { "name": "BLOCK_HIT", "from": 81, "to": 86, "direction": "forward" },
-   { "name": "KO", "from": 87, "to": 97, "direction": "forward" }
+   { "name": "KO", "from": 87, "to": 97, "direction": "forward" },
+   { "name": "CHARGE_HEAVY", "from": 98, "to": 101, "direction": "forward" },
+   { "name": "CHARGE_HEAVY_IDLE", "from": 102, "to": 106, "direction": "forward" },
+   { "name": "CHARGE_HEAVY_FULL", "from": 107, "to": 111, "direction": "forward" },
+   { "name": "ATTACK_HEAVY", "from": 112, "to": 124, "direction": "forward" }
   ],
   "layers": [
-   { "name": "Flattened", "opacity": 255, "blendMode": "normal" },
+   { "name": "OUTLINE", "opacity": 255, "blendMode": "normal" },
    { "name": "legs", "opacity": 255, "blendMode": "normal" },
    { "name": "shield", "opacity": 255, "blendMode": "normal" },
    { "name": "body", "opacity": 255, "blendMode": "normal" },
