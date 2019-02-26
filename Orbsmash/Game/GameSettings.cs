@@ -57,7 +57,7 @@ namespace Orbsmash.Game
                     Side = Gameplay.Side.RIGHT,
                     Speed = 300f,
                     StartingPosition = new Vector2(1345, 450),
-                    Character = Gameplay.Character.WIZARD
+                    Character = Gameplay.Character.KNIGHT
                 });
                 
                 BallSprite = BallSprites.DEFAULT;

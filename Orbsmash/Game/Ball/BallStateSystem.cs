@@ -16,11 +16,15 @@ namespace Orbsmash.Ball
         {
             foreach (var ball in entities)
             {
+                var ballState = ball.getComponent<BallStateComponent>();
+                var ballVelocityComponent = ball.getComponent<VelocityComponent>();
                 var kinematicComponent = ball.getComponent<KinematicComponent>();
                 if (kinematicComponent.LastCollision != null && Flags.isUnshiftedFlagSet(kinematicComponent.LastCollision.physicsLayer, PhysicsLayers.BACK_WALLS))
                 {
-                    var ballStateComponent = ball.getComponent<BallStateComponent>();
-                    ballStateComponent.LastHitPlayerId = -1;
+                    ballState.LastHitPlayerId = -1;
+                    // TODO - this seems vaguely dangerous?
+                    ballVelocityComponent.Velocity = ballVelocityComponent.Velocity / ballState.HitBoost;
+                    ballState.HitBoost = 1.0f;
                 }
             }
         }
