@@ -72,6 +72,8 @@ namespace Orbsmash.Ball
             addComponent(_collider);
             addComponent(_ballStateComponent);
             addComponent(_particleEmitter);
+            
+            scale = new Vector2(3, 3);
         }
 
         private ParticleEmitterConfig generateParticleEmitterConfig()
