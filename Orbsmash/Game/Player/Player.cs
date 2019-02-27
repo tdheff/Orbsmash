@@ -164,8 +164,32 @@ namespace Orbsmash.Player
             {
                 _mainPlayerBodySprite.flipX = true;
                 // TODO - this is horrible but it's the only solution that worked
-                lightPoints = lightPoints.Reverse().Select(point => new Vector2(-point.X - 8.5f, point.Y - 2.5f)).ToArray();
-                heavyPoints = heavyPoints.Reverse().Select(point => new Vector2(-point.X - 8.5f, point.Y - 2.5f)).ToArray();
+                Vector2 lightOffset = new Vector2();
+                Vector2 heavyOffset = new Vector2();
+                switch (Settings.Character)
+                {
+                    case Gameplay.Character.KNIGHT:
+                        lightOffset = new Vector2(-8.5f, -1.5f);
+                        heavyOffset = new Vector2(-25, 2.5f);
+                        break;
+                    case Gameplay.Character.WIZARD:
+                        lightOffset = new Vector2(0.333f, 1f);
+                        heavyOffset = new Vector2(-.286f, 0.429f);
+                        break;
+                    case Gameplay.Character.SPACEMAN:
+                        break;
+                    case Gameplay.Character.ALIEN:
+                        break;
+                    case Gameplay.Character.PIRATE:
+                        break;
+                    case Gameplay.Character.SKELETON:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                lightPoints = lightPoints.Reverse().Select(point => new Vector2(-point.X + lightOffset.X, point.Y + lightOffset.Y)).ToArray();
+                heavyPoints = heavyPoints.Reverse().Select(point => new Vector2(-point.X + heavyOffset.X, point.Y + heavyOffset.Y)).ToArray();
             }
             _lightHitbox = new PolygonCollider(lightPoints);
             _lightHitbox.isTrigger = true;

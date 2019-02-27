@@ -26,6 +26,10 @@ namespace Orbsmash.Ball
                     ballVelocityComponent.Velocity = ballVelocityComponent.Velocity / ballState.HitBoost;
                     ballState.HitBoost = 1.0f;
                 }
+
+                var particles = ball.getComponent<ParticleEmitterComponent>();
+                particles._emitterConfig.startParticleSize = 5.0f + ballVelocityComponent.Velocity.Length() / 8;
+                
             }
         }
     }
